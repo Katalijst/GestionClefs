@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="MySQL_Database" Type="System.String" Scope="User">
+      <Value Profile="(Default)">key_manager</Value>
+    </Setting>
+    <Setting Name="MySQL_ID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">keymanager</Value>
+    </Setting>
+    <Setting Name="MySQL_Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C0utras33</Value>
+    </Setting>
+    <Setting Name="MySQL_Serveur" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.0.244</Value>
+    </Setting>
+    <Setting Name="ShowAlert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
