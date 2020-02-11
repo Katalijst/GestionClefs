@@ -8,7 +8,7 @@ Public Class frmConnexion
         txtPassword.SetWaterMark("Mot de passe")
         lblVersion.Text = "Version " & My.Application.Info.Version.ToString
         txtID.Focus()
-        checkAccount()
+        checkTableAndAccount()
     End Sub
 
     Private Sub tmrFondu_Tick(sender As Object, e As EventArgs) Handles tmrFondu.Tick
@@ -24,7 +24,7 @@ Public Class frmConnexion
         End
     End Sub
 
-    Public Sub checkAccount()
+    Public Sub checkTableAndAccount()
         'Vérifier si compte admin existe
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
