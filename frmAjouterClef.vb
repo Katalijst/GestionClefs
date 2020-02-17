@@ -176,6 +176,7 @@ Public Class frmAjouterClef
             MsgBox(ex.Message)
         End Try
     End Sub
+
     Public Sub RefreshBatiment()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
@@ -428,14 +429,6 @@ Public Class frmAjouterClef
         End If
     End Sub
 
-    Private Sub btnAddSelBatiment_Click(sender As Object, e As EventArgs) Handles btnAddSelBatiment.Click
-        addToSel()
-    End Sub
-
-    Private Sub btnRemSelBatiment_Click(sender As Object, e As EventArgs) Handles btnRemSelBatiment.Click
-        removeFromSel()
-    End Sub
-
     Private Sub dgvListBatiment_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListBatiment.CellDoubleClick
         addToSel()
     End Sub
@@ -519,5 +512,17 @@ Public Class frmAjouterClef
 
     Private Sub btnNewLoc_Click(sender As Object, e As EventArgs) Handles btnNewLoc.Click
         frmGestionPosition.ShowDialog()
+    End Sub
+
+    Private Sub pbRemSelBatiment_Click(sender As Object, e As EventArgs) Handles pbRemSelBatiment.Click
+        removeFromSel()
+    End Sub
+
+    Private Sub pbAddSelBatiment_Click(sender As Object, e As EventArgs) Handles pbAddSelBatiment.Click
+        addToSel()
+    End Sub
+
+    Private Sub pbAddPersonne_Click(sender As Object, e As EventArgs) Handles pbAddPersonne.Click
+        frmGestionPersonnes.ShowDialog()
     End Sub
 End Class

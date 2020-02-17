@@ -24,12 +24,12 @@ Partial Class frmConnexion
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnQuitter = New System.Windows.Forms.Button()
-        Me.btnValider = New System.Windows.Forms.Button()
         Me.tmrFondu = New System.Windows.Forms.Timer(Me.components)
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.lblVersion = New System.Windows.Forms.Label()
+        Me.btnValider = New System.Windows.Forms.Button()
+        Me.btnQuitter = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -42,29 +42,6 @@ Partial Class frmConnexion
         Me.Label1.Size = New System.Drawing.Size(217, 37)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "GestionClefs"
-        '
-        'btnQuitter
-        '
-        Me.btnQuitter.BackColor = System.Drawing.Color.IndianRed
-        Me.btnQuitter.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnQuitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnQuitter.Location = New System.Drawing.Point(128, 133)
-        Me.btnQuitter.Name = "btnQuitter"
-        Me.btnQuitter.Size = New System.Drawing.Size(101, 23)
-        Me.btnQuitter.TabIndex = 9
-        Me.btnQuitter.Text = "Quitter"
-        Me.btnQuitter.UseVisualStyleBackColor = False
-        '
-        'btnValider
-        '
-        Me.btnValider.BackColor = System.Drawing.Color.PaleGreen
-        Me.btnValider.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnValider.Location = New System.Drawing.Point(12, 133)
-        Me.btnValider.Name = "btnValider"
-        Me.btnValider.Size = New System.Drawing.Size(110, 23)
-        Me.btnValider.TabIndex = 8
-        Me.btnValider.Text = "Valider"
-        Me.btnValider.UseVisualStyleBackColor = False
         '
         'tmrFondu
         '
@@ -104,6 +81,32 @@ Partial Class frmConnexion
         Me.lblVersion.Text = "Version"
         Me.lblVersion.TextAlign = System.Drawing.ContentAlignment.BottomRight
         '
+        'btnValider
+        '
+        Me.btnValider.BackColor = System.Drawing.Color.Green
+        Me.btnValider.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnValider.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnValider.ForeColor = System.Drawing.Color.White
+        Me.btnValider.Location = New System.Drawing.Point(128, 133)
+        Me.btnValider.Name = "btnValider"
+        Me.btnValider.Size = New System.Drawing.Size(101, 23)
+        Me.btnValider.TabIndex = 9
+        Me.btnValider.Text = "Connexion"
+        Me.btnValider.UseVisualStyleBackColor = False
+        '
+        'btnQuitter
+        '
+        Me.btnQuitter.BackColor = System.Drawing.Color.DarkRed
+        Me.btnQuitter.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnQuitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnQuitter.ForeColor = System.Drawing.Color.White
+        Me.btnQuitter.Location = New System.Drawing.Point(12, 133)
+        Me.btnQuitter.Name = "btnQuitter"
+        Me.btnQuitter.Size = New System.Drawing.Size(101, 23)
+        Me.btnQuitter.TabIndex = 14
+        Me.btnQuitter.Text = "Quitter"
+        Me.btnQuitter.UseVisualStyleBackColor = False
+        '
         'frmConnexion
         '
         Me.AcceptButton = Me.btnValider
@@ -112,9 +115,9 @@ Partial Class frmConnexion
         Me.BackColor = System.Drawing.SystemColors.WindowFrame
         Me.CancelButton = Me.btnQuitter
         Me.ClientSize = New System.Drawing.Size(238, 181)
+        Me.Controls.Add(Me.btnQuitter)
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnQuitter)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtID)
@@ -133,10 +136,10 @@ Partial Class frmConnexion
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents btnQuitter As Button
-    Friend WithEvents btnValider As Button
     Friend WithEvents tmrFondu As Timer
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents txtID As TextBox
     Friend WithEvents lblVersion As Label
+    Friend WithEvents btnValider As Button
+    Friend WithEvents btnQuitter As Button
 End Class

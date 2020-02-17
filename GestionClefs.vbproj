@@ -14,7 +14,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Utilisateur\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,8 +27,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,6 +65,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>icons8-key-64.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F3B09D9CA14702CA1FA6439C56624F17CBB713BF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GestionClefs_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
@@ -219,6 +232,7 @@
     <Compile Include="frmSettings.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="modAES.vb" />
     <Compile Include="modShare.vb" />
     <Compile Include="modFunction.vb" />
     <Compile Include="frmMain.vb">
@@ -335,6 +349,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="GestionClefs_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -348,6 +363,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
+    <None Include="Resources\clear-button.png" />
+    <None Include="Resources\close-button.png" />
+    <None Include="Resources\play-arrow.png" />
+    <None Include="Resources\add-user-button.png" />
+    <None Include="Resources\left-arrow-key.png" />
+    <None Include="Resources\keyboard-right-arrow-button.png" />
+    <None Include="Resources\round-error-symbol.png" />
+    <None Include="Resources\report-symbol.png" />
+    <None Include="Resources\refresh-button.png" />
+    <None Include="Resources\city-buildings-silhouette.png" />
+    <None Include="Resources\two-men.png" />
+    <None Include="Resources\web-server.png" />
+    <None Include="Resources\user-shape.png" />
+    <None Include="Resources\settings-cogwheel-button.png" />
     <None Include="Resources\key1.png" />
     <None Include="Resources\writing.png" />
     <None Include="Resources\name.png" />

@@ -19,11 +19,6 @@ Public Class frmConnexion
         End If
     End Sub
 
-    Private Sub btnQuitter_Click(sender As Object, e As EventArgs) Handles btnQuitter.Click
-        Application.Exit()
-        End
-    End Sub
-
     Public Sub checkTableAndAccount()
         'Vérifier si compte admin existe
         Dim cmd As New MySqlCommand
@@ -50,7 +45,7 @@ Public Class frmConnexion
 
     End Sub
 
-    Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click
+    Public Sub Valider()
         Dim stgID As String = txtID.Text
         Dim stgPassword As String = txtPassword.Text
 
@@ -124,4 +119,12 @@ Public Class frmConnexion
 
     End Sub
 
+    Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click
+        Valider()
+    End Sub
+
+    Private Sub btnQuitter_Click(sender As Object, e As EventArgs) Handles btnQuitter.Click
+        Application.Exit()
+        End
+    End Sub
 End Class

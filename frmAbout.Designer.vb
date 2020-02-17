@@ -32,6 +32,9 @@ Partial Class frmAbout
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblPixel = New System.Windows.Forms.LinkLabel()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ContextMenuStrip1
@@ -115,11 +118,42 @@ Partial Class frmAbout
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "Icon made by"
         '
+        'LinkLabel2
+        '
+        Me.LinkLabel2.AutoSize = True
+        Me.LinkLabel2.Location = New System.Drawing.Point(80, 41)
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.Size = New System.Drawing.Size(41, 13)
+        Me.LinkLabel2.TabIndex = 12
+        Me.LinkLabel2.TabStop = True
+        Me.LinkLabel2.Text = "Google"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(12, 41)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(71, 13)
+        Me.Label6.TabIndex = 11
+        Me.Label6.Text = "Icon made by"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(116, 42)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(193, 13)
+        Me.Label5.TabIndex = 13
+        Me.Label5.Text = "(Material Design Icon Pack, CC BY 3.0)"
+        '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(785, 304)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.LinkLabel2)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lblFlaticon2)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblPixel)
@@ -147,4 +181,7 @@ Partial Class frmAbout
     Friend WithEvents Label3 As Label
     Friend WithEvents lblPixel As LinkLabel
     Friend WithEvents Label4 As Label
+    Friend WithEvents LinkLabel2 As LinkLabel
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
 End Class

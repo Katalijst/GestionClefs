@@ -43,33 +43,33 @@ Partial Class frmMain
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.SupprimerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.menAlertes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RafraichirLaPageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OutilsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GestionDesPersonnesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDesTableauxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GestionDesBâtimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaisieÀLaVoléToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.AProposToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.pbPersonnes = New System.Windows.Forms.PictureBox()
+        Me.pbEditer = New System.Windows.Forms.PictureBox()
+        Me.pbAttribuer = New System.Windows.Forms.PictureBox()
+        Me.pbSupprimer = New System.Windows.Forms.PictureBox()
         Me.pbEmprunter = New System.Windows.Forms.PictureBox()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.menAlertes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RafraichirLaPageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestionDesPersonnesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestionDesBâtimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.gbRechercher.SuspendLayout()
         Me.gbFilter.SuspendLayout()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuGrid.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbPersonnes, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbEditer, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbAttribuer, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbSupprimer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbEmprunter, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'chkDisponibles
@@ -198,46 +198,47 @@ Partial Class frmMain
         '
         Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmprunterToolStripMenuItem, Me.AttribuerToolStripMenuItem, Me.ToolStripSeparator1, Me.EditerToolStripMenuItem, Me.PropriétésToolStripMenuItem, Me.ToolStripSeparator2, Me.SupprimerToolStripMenuItem})
         Me.menuGrid.Name = "menuGrid"
-        Me.menuGrid.Size = New System.Drawing.Size(140, 126)
+        Me.menuGrid.Size = New System.Drawing.Size(181, 148)
         '
         'EmprunterToolStripMenuItem
         '
         Me.EmprunterToolStripMenuItem.Name = "EmprunterToolStripMenuItem"
-        Me.EmprunterToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.EmprunterToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.EmprunterToolStripMenuItem.Text = "Emprunter..."
         '
         'AttribuerToolStripMenuItem
         '
         Me.AttribuerToolStripMenuItem.Name = "AttribuerToolStripMenuItem"
-        Me.AttribuerToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.AttribuerToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AttribuerToolStripMenuItem.Text = "Attribuer..."
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(136, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'EditerToolStripMenuItem
         '
         Me.EditerToolStripMenuItem.Name = "EditerToolStripMenuItem"
-        Me.EditerToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.EditerToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.EditerToolStripMenuItem.Text = "Editer"
         '
         'PropriétésToolStripMenuItem
         '
         Me.PropriétésToolStripMenuItem.Name = "PropriétésToolStripMenuItem"
-        Me.PropriétésToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.PropriétésToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PropriétésToolStripMenuItem.Text = "Propriétés"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(136, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'SupprimerToolStripMenuItem
         '
+        Me.SupprimerToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.clear_button
         Me.SupprimerToolStripMenuItem.Name = "SupprimerToolStripMenuItem"
-        Me.SupprimerToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.SupprimerToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SupprimerToolStripMenuItem.Text = "Supprimer"
         '
         'MenuStrip1
@@ -249,20 +250,6 @@ Partial Class frmMain
         Me.MenuStrip1.TabIndex = 100
         Me.MenuStrip1.Text = "MenuStrip1"
         '
-        'menAlertes
-        '
-        Me.menAlertes.Name = "menAlertes"
-        Me.menAlertes.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
-        Me.menAlertes.Size = New System.Drawing.Size(55, 20)
-        Me.menAlertes.Text = "&Alertes"
-        '
-        'RafraichirLaPageToolStripMenuItem
-        '
-        Me.RafraichirLaPageToolStripMenuItem.Name = "RafraichirLaPageToolStripMenuItem"
-        Me.RafraichirLaPageToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5
-        Me.RafraichirLaPageToolStripMenuItem.Size = New System.Drawing.Size(110, 20)
-        Me.RafraichirLaPageToolStripMenuItem.Text = "&Rafraichir la page"
-        '
         'OutilsToolStripMenuItem
         '
         Me.OutilsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDesPersonnesToolStripMenuItem, Me.GestionDesTableauxToolStripMenuItem, Me.GestionDesBâtimentsToolStripMenuItem, Me.ToolStripSeparator3, Me.SaisieÀLaVoléToolStripMenuItem, Me.ToolStripSeparator4, Me.SettingsToolStripMenuItem, Me.AProposToolStripMenuItem})
@@ -270,23 +257,11 @@ Partial Class frmMain
         Me.OutilsToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.OutilsToolStripMenuItem.Text = "&Outils"
         '
-        'GestionDesPersonnesToolStripMenuItem
-        '
-        Me.GestionDesPersonnesToolStripMenuItem.Name = "GestionDesPersonnesToolStripMenuItem"
-        Me.GestionDesPersonnesToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.GestionDesPersonnesToolStripMenuItem.Text = "Gestion des personnes"
-        '
         'GestionDesTableauxToolStripMenuItem
         '
         Me.GestionDesTableauxToolStripMenuItem.Name = "GestionDesTableauxToolStripMenuItem"
         Me.GestionDesTableauxToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.GestionDesTableauxToolStripMenuItem.Text = "Gestion des tableaux"
-        '
-        'GestionDesBâtimentsToolStripMenuItem
-        '
-        Me.GestionDesBâtimentsToolStripMenuItem.Name = "GestionDesBâtimentsToolStripMenuItem"
-        Me.GestionDesBâtimentsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.GestionDesBâtimentsToolStripMenuItem.Text = "Gestion des bâtiments"
         '
         'ToolStripSeparator3
         '
@@ -304,11 +279,11 @@ Partial Class frmMain
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(189, 6)
         '
-        'SettingsToolStripMenuItem
+        'AProposToolStripMenuItem
         '
-        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.SettingsToolStripMenuItem.Text = "&Paramètres"
+        Me.AProposToolStripMenuItem.Name = "AProposToolStripMenuItem"
+        Me.AProposToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AProposToolStripMenuItem.Text = "A propos..."
         '
         'StatusStrip1
         '
@@ -318,41 +293,45 @@ Partial Class frmMain
         Me.StatusStrip1.TabIndex = 101
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'AProposToolStripMenuItem
+        'pbPersonnes
         '
-        Me.AProposToolStripMenuItem.Name = "AProposToolStripMenuItem"
-        Me.AProposToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.AProposToolStripMenuItem.Text = "A propos..."
+        Me.pbPersonnes.Image = Global.GestionClefs.My.Resources.Resources.name
+        Me.pbPersonnes.Location = New System.Drawing.Point(523, 37)
+        Me.pbPersonnes.Name = "pbPersonnes"
+        Me.pbPersonnes.Size = New System.Drawing.Size(31, 30)
+        Me.pbPersonnes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbPersonnes.TabIndex = 106
+        Me.pbPersonnes.TabStop = False
         '
-        'PictureBox3
+        'pbEditer
         '
-        Me.PictureBox3.Image = Global.GestionClefs.My.Resources.Resources.writing
-        Me.PictureBox3.Location = New System.Drawing.Point(560, 73)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(31, 30)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox3.TabIndex = 105
-        Me.PictureBox3.TabStop = False
+        Me.pbEditer.Image = Global.GestionClefs.My.Resources.Resources.writing
+        Me.pbEditer.Location = New System.Drawing.Point(523, 73)
+        Me.pbEditer.Name = "pbEditer"
+        Me.pbEditer.Size = New System.Drawing.Size(31, 30)
+        Me.pbEditer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbEditer.TabIndex = 105
+        Me.pbEditer.TabStop = False
         '
-        'PictureBox2
+        'pbAttribuer
         '
-        Me.PictureBox2.Image = Global.GestionClefs.My.Resources.Resources.login
-        Me.PictureBox2.Location = New System.Drawing.Point(560, 37)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(31, 30)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 104
-        Me.PictureBox2.TabStop = False
+        Me.pbAttribuer.Image = Global.GestionClefs.My.Resources.Resources.login
+        Me.pbAttribuer.Location = New System.Drawing.Point(560, 37)
+        Me.pbAttribuer.Name = "pbAttribuer"
+        Me.pbAttribuer.Size = New System.Drawing.Size(31, 30)
+        Me.pbAttribuer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbAttribuer.TabIndex = 104
+        Me.pbAttribuer.TabStop = False
         '
-        'PictureBox1
+        'pbSupprimer
         '
-        Me.PictureBox1.Image = Global.GestionClefs.My.Resources.Resources.name
-        Me.PictureBox1.Location = New System.Drawing.Point(523, 73)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(31, 30)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 103
-        Me.PictureBox1.TabStop = False
+        Me.pbSupprimer.Image = Global.GestionClefs.My.Resources.Resources.name
+        Me.pbSupprimer.Location = New System.Drawing.Point(560, 73)
+        Me.pbSupprimer.Name = "pbSupprimer"
+        Me.pbSupprimer.Size = New System.Drawing.Size(31, 30)
+        Me.pbSupprimer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbSupprimer.TabIndex = 103
+        Me.pbSupprimer.TabStop = False
         '
         'pbEmprunter
         '
@@ -364,25 +343,52 @@ Partial Class frmMain
         Me.pbEmprunter.TabIndex = 102
         Me.pbEmprunter.TabStop = False
         '
-        'PictureBox4
+        'menAlertes
         '
-        Me.PictureBox4.Image = Global.GestionClefs.My.Resources.Resources.name
-        Me.PictureBox4.Location = New System.Drawing.Point(523, 37)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(31, 30)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox4.TabIndex = 106
-        Me.PictureBox4.TabStop = False
+        Me.menAlertes.Image = Global.GestionClefs.My.Resources.Resources.round_error_symbol
+        Me.menAlertes.Name = "menAlertes"
+        Me.menAlertes.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.A), System.Windows.Forms.Keys)
+        Me.menAlertes.Size = New System.Drawing.Size(71, 20)
+        Me.menAlertes.Text = "&Alertes"
+        '
+        'RafraichirLaPageToolStripMenuItem
+        '
+        Me.RafraichirLaPageToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.refresh_button
+        Me.RafraichirLaPageToolStripMenuItem.Name = "RafraichirLaPageToolStripMenuItem"
+        Me.RafraichirLaPageToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5
+        Me.RafraichirLaPageToolStripMenuItem.Size = New System.Drawing.Size(126, 20)
+        Me.RafraichirLaPageToolStripMenuItem.Text = "&Rafraichir la page"
+        '
+        'GestionDesPersonnesToolStripMenuItem
+        '
+        Me.GestionDesPersonnesToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.two_men
+        Me.GestionDesPersonnesToolStripMenuItem.Name = "GestionDesPersonnesToolStripMenuItem"
+        Me.GestionDesPersonnesToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.GestionDesPersonnesToolStripMenuItem.Text = "Gestion des personnes"
+        '
+        'GestionDesBâtimentsToolStripMenuItem
+        '
+        Me.GestionDesBâtimentsToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.web_server
+        Me.GestionDesBâtimentsToolStripMenuItem.Name = "GestionDesBâtimentsToolStripMenuItem"
+        Me.GestionDesBâtimentsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.GestionDesBâtimentsToolStripMenuItem.Text = "Gestion des bâtiments"
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.settings_cogwheel_button
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.SettingsToolStripMenuItem.Text = "&Paramètres"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 561)
-        Me.Controls.Add(Me.PictureBox4)
-        Me.Controls.Add(Me.PictureBox3)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.pbPersonnes)
+        Me.Controls.Add(Me.pbEditer)
+        Me.Controls.Add(Me.pbAttribuer)
+        Me.Controls.Add(Me.pbSupprimer)
         Me.Controls.Add(Me.pbEmprunter)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.dgvResultats)
@@ -400,11 +406,11 @@ Partial Class frmMain
         Me.menuGrid.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbPersonnes, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbEditer, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbAttribuer, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbSupprimer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbEmprunter, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -442,8 +448,8 @@ Partial Class frmMain
     Friend WithEvents RafraichirLaPageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AProposToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents pbEmprunter As PictureBox
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents PictureBox3 As PictureBox
-    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents pbSupprimer As PictureBox
+    Friend WithEvents pbAttribuer As PictureBox
+    Friend WithEvents pbEditer As PictureBox
+    Friend WithEvents pbPersonnes As PictureBox
 End Class

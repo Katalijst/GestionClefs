@@ -236,14 +236,6 @@ Public Class frmGestionTrousseau
         End If
     End Sub
 
-    Private Sub btnAddSelBatiment_Click(sender As Object, e As EventArgs) Handles btnAddSelBatiment.Click
-        addToSel()
-    End Sub
-
-    Private Sub btnRemSelBatiment_Click(sender As Object, e As EventArgs) Handles btnRemSelBatiment.Click
-        removeFromSel()
-    End Sub
-
     Private Sub dgvListBatiment_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListClefs.CellDoubleClick
         addToSel()
     End Sub
@@ -332,5 +324,13 @@ Public Class frmGestionTrousseau
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
+    End Sub
+
+    Private Sub pbAddSelBatiment_Click(sender As Object, e As EventArgs) Handles pbAddSelBatiment.Click
+        addToSel()
+    End Sub
+
+    Private Sub pbRemSelBatiment_Click(sender As Object, e As EventArgs) Handles pbRemSelBatiment.Click
+        removeFromSel()
     End Sub
 End Class

@@ -31,22 +31,24 @@ Partial Class frmGestionTrousseau
         Me.gbRechercher = New System.Windows.Forms.GroupBox()
         Me.txtRechercher = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.lblTrousseauAfficher = New System.Windows.Forms.Label()
         Me.btnAfficher = New System.Windows.Forms.Button()
         Me.cmbTrousseauListe = New System.Windows.Forms.ComboBox()
         Me.btnSupprimerTrousseau = New System.Windows.Forms.Button()
         Me.btnCreerTrousseau = New System.Windows.Forms.Button()
-        Me.btnAddSelBatiment = New System.Windows.Forms.Button()
-        Me.btnRemSelBatiment = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.chkKeepOpen = New System.Windows.Forms.CheckBox()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.lblTrousseauAfficher = New System.Windows.Forms.Label()
+        Me.pbRemSelBatiment = New System.Windows.Forms.PictureBox()
+        Me.pbAddSelBatiment = New System.Windows.Forms.PictureBox()
         Me.gbListeClefs.SuspendLayout()
         CType(Me.dgvListClefs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbTrousseau.SuspendLayout()
         CType(Me.dgvSelTrousseau, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbRechercher.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.pbRemSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbAddSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'gbListeClefs
@@ -160,6 +162,15 @@ Partial Class frmGestionTrousseau
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Trousseau"
         '
+        'lblTrousseauAfficher
+        '
+        Me.lblTrousseauAfficher.AutoSize = True
+        Me.lblTrousseauAfficher.Location = New System.Drawing.Point(7, 48)
+        Me.lblTrousseauAfficher.Name = "lblTrousseauAfficher"
+        Me.lblTrousseauAfficher.Size = New System.Drawing.Size(104, 13)
+        Me.lblTrousseauAfficher.TabIndex = 27
+        Me.lblTrousseauAfficher.Text = "Trousseau afficher : "
+        '
         'btnAfficher
         '
         Me.btnAfficher.Location = New System.Drawing.Point(235, 19)
@@ -197,26 +208,6 @@ Partial Class frmGestionTrousseau
         Me.btnCreerTrousseau.Text = "Créer un nouveau trousseau"
         Me.btnCreerTrousseau.UseVisualStyleBackColor = True
         '
-        'btnAddSelBatiment
-        '
-        Me.btnAddSelBatiment.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddSelBatiment.Location = New System.Drawing.Point(373, 227)
-        Me.btnAddSelBatiment.Name = "btnAddSelBatiment"
-        Me.btnAddSelBatiment.Size = New System.Drawing.Size(42, 29)
-        Me.btnAddSelBatiment.TabIndex = 48
-        Me.btnAddSelBatiment.Text = "→"
-        Me.btnAddSelBatiment.UseVisualStyleBackColor = True
-        '
-        'btnRemSelBatiment
-        '
-        Me.btnRemSelBatiment.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRemSelBatiment.Location = New System.Drawing.Point(373, 262)
-        Me.btnRemSelBatiment.Name = "btnRemSelBatiment"
-        Me.btnRemSelBatiment.Size = New System.Drawing.Size(42, 29)
-        Me.btnRemSelBatiment.TabIndex = 47
-        Me.btnRemSelBatiment.Text = "←"
-        Me.btnRemSelBatiment.UseVisualStyleBackColor = True
-        '
         'btnSave
         '
         Me.btnSave.Location = New System.Drawing.Point(397, 433)
@@ -246,14 +237,27 @@ Partial Class frmGestionTrousseau
         Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'lblTrousseauAfficher
+        'pbRemSelBatiment
         '
-        Me.lblTrousseauAfficher.AutoSize = True
-        Me.lblTrousseauAfficher.Location = New System.Drawing.Point(7, 48)
-        Me.lblTrousseauAfficher.Name = "lblTrousseauAfficher"
-        Me.lblTrousseauAfficher.Size = New System.Drawing.Size(104, 13)
-        Me.lblTrousseauAfficher.TabIndex = 27
-        Me.lblTrousseauAfficher.Text = "Trousseau afficher : "
+        Me.pbRemSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pbRemSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.left_arrow_key
+        Me.pbRemSelBatiment.Location = New System.Drawing.Point(373, 273)
+        Me.pbRemSelBatiment.Name = "pbRemSelBatiment"
+        Me.pbRemSelBatiment.Size = New System.Drawing.Size(42, 42)
+        Me.pbRemSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbRemSelBatiment.TabIndex = 53
+        Me.pbRemSelBatiment.TabStop = False
+        '
+        'pbAddSelBatiment
+        '
+        Me.pbAddSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pbAddSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.keyboard_right_arrow_button
+        Me.pbAddSelBatiment.Location = New System.Drawing.Point(373, 222)
+        Me.pbAddSelBatiment.Name = "pbAddSelBatiment"
+        Me.pbAddSelBatiment.Size = New System.Drawing.Size(42, 42)
+        Me.pbAddSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbAddSelBatiment.TabIndex = 52
+        Me.pbAddSelBatiment.TabStop = False
         '
         'frmGestionTrousseau
         '
@@ -262,14 +266,14 @@ Partial Class frmGestionTrousseau
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(780, 471)
+        Me.Controls.Add(Me.pbRemSelBatiment)
+        Me.Controls.Add(Me.pbAddSelBatiment)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.chkKeepOpen)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnCreerTrousseau)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.gbRechercher)
-        Me.Controls.Add(Me.btnAddSelBatiment)
-        Me.Controls.Add(Me.btnRemSelBatiment)
         Me.Controls.Add(Me.gbTrousseau)
         Me.Controls.Add(Me.gbListeClefs)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -287,6 +291,8 @@ Partial Class frmGestionTrousseau
         Me.gbRechercher.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.pbRemSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbAddSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -302,10 +308,10 @@ Partial Class frmGestionTrousseau
     Friend WithEvents btnAfficher As Button
     Friend WithEvents dgvListClefs As DataGridView
     Friend WithEvents dgvSelTrousseau As DataGridView
-    Friend WithEvents btnAddSelBatiment As Button
-    Friend WithEvents btnRemSelBatiment As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents chkKeepOpen As CheckBox
     Friend WithEvents btnCancel As Button
     Friend WithEvents lblTrousseauAfficher As Label
+    Friend WithEvents pbRemSelBatiment As PictureBox
+    Friend WithEvents pbAddSelBatiment As PictureBox
 End Class

@@ -22,8 +22,8 @@ Partial Class frmAjouterClef
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.udQuantity = New System.Windows.Forms.NumericUpDown()
@@ -45,22 +45,22 @@ Partial Class frmAjouterClef
         Me.btnNewTrousseau = New System.Windows.Forms.Button()
         Me.txtRechercher = New System.Windows.Forms.TextBox()
         Me.btnRechercher = New System.Windows.Forms.Button()
-        Me.btnAddSelBatiment = New System.Windows.Forms.Button()
         Me.gbRechercher = New System.Windows.Forms.GroupBox()
         Me.btnAddBatiment = New System.Windows.Forms.Button()
-        Me.btnRemSelBatiment = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.dgvSelBatiment = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dgvListBatiment = New System.Windows.Forms.DataGridView()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.pbRemSelBatiment = New System.Windows.Forms.PictureBox()
+        Me.pbAddSelBatiment = New System.Windows.Forms.PictureBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.gbEmprunteur = New System.Windows.Forms.GroupBox()
+        Me.pbAddPersonne = New System.Windows.Forms.PictureBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.dtpFinEmprunt = New System.Windows.Forms.DateTimePicker()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dtpDebutEmprunt = New System.Windows.Forms.DateTimePicker()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.cmbNomEmprunteur = New System.Windows.Forms.ComboBox()
         CType(Me.udQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbRechercher.SuspendLayout()
@@ -69,8 +69,11 @@ Partial Class frmAjouterClef
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.pbRemSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbAddSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
         Me.gbEmprunteur.SuspendLayout()
+        CType(Me.pbAddPersonne, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtID
@@ -266,16 +269,6 @@ Partial Class frmAjouterClef
         Me.btnRechercher.Text = "Rechercher"
         Me.btnRechercher.UseVisualStyleBackColor = True
         '
-        'btnAddSelBatiment
-        '
-        Me.btnAddSelBatiment.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddSelBatiment.Location = New System.Drawing.Point(249, 190)
-        Me.btnAddSelBatiment.Name = "btnAddSelBatiment"
-        Me.btnAddSelBatiment.Size = New System.Drawing.Size(42, 29)
-        Me.btnAddSelBatiment.TabIndex = 41
-        Me.btnAddSelBatiment.Text = "→"
-        Me.btnAddSelBatiment.UseVisualStyleBackColor = True
-        '
         'gbRechercher
         '
         Me.gbRechercher.Controls.Add(Me.txtRechercher)
@@ -297,16 +290,6 @@ Partial Class frmAjouterClef
         Me.btnAddBatiment.Text = "Gérer ou ajouter un bâtiment"
         Me.btnAddBatiment.UseVisualStyleBackColor = True
         '
-        'btnRemSelBatiment
-        '
-        Me.btnRemSelBatiment.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRemSelBatiment.Location = New System.Drawing.Point(249, 225)
-        Me.btnRemSelBatiment.Name = "btnRemSelBatiment"
-        Me.btnRemSelBatiment.Size = New System.Drawing.Size(42, 29)
-        Me.btnRemSelBatiment.TabIndex = 40
-        Me.btnRemSelBatiment.Text = "←"
-        Me.btnRemSelBatiment.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.dgvSelBatiment)
@@ -327,14 +310,14 @@ Partial Class frmAjouterClef
         Me.dgvSelBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSelBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvSelBatiment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSelBatiment.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSelBatiment.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvSelBatiment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvSelBatiment.Location = New System.Drawing.Point(6, 21)
         Me.dgvSelBatiment.MultiSelect = False
@@ -366,14 +349,14 @@ Partial Class frmAjouterClef
         Me.dgvListBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListBatiment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvListBatiment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListBatiment.Location = New System.Drawing.Point(6, 21)
         Me.dgvListBatiment.MultiSelect = False
@@ -387,10 +370,11 @@ Partial Class frmAjouterClef
         '
         'GroupBox3
         '
+        Me.GroupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.GroupBox3.Controls.Add(Me.pbRemSelBatiment)
+        Me.GroupBox3.Controls.Add(Me.pbAddSelBatiment)
         Me.GroupBox3.Controls.Add(Me.GroupBox1)
-        Me.GroupBox3.Controls.Add(Me.btnAddSelBatiment)
         Me.GroupBox3.Controls.Add(Me.gbRechercher)
-        Me.GroupBox3.Controls.Add(Me.btnRemSelBatiment)
         Me.GroupBox3.Controls.Add(Me.GroupBox2)
         Me.GroupBox3.Location = New System.Drawing.Point(274, 12)
         Me.GroupBox3.Name = "GroupBox3"
@@ -398,6 +382,28 @@ Partial Class frmAjouterClef
         Me.GroupBox3.TabIndex = 43
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Bâtiments"
+        '
+        'pbRemSelBatiment
+        '
+        Me.pbRemSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pbRemSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.left_arrow_key
+        Me.pbRemSelBatiment.Location = New System.Drawing.Point(249, 235)
+        Me.pbRemSelBatiment.Name = "pbRemSelBatiment"
+        Me.pbRemSelBatiment.Size = New System.Drawing.Size(42, 42)
+        Me.pbRemSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbRemSelBatiment.TabIndex = 44
+        Me.pbRemSelBatiment.TabStop = False
+        '
+        'pbAddSelBatiment
+        '
+        Me.pbAddSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pbAddSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.keyboard_right_arrow_button
+        Me.pbAddSelBatiment.Location = New System.Drawing.Point(249, 184)
+        Me.pbAddSelBatiment.Name = "pbAddSelBatiment"
+        Me.pbAddSelBatiment.Size = New System.Drawing.Size(42, 42)
+        Me.pbAddSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbAddSelBatiment.TabIndex = 43
+        Me.pbAddSelBatiment.TabStop = False
         '
         'GroupBox4
         '
@@ -427,11 +433,11 @@ Partial Class frmAjouterClef
         '
         'gbEmprunteur
         '
+        Me.gbEmprunteur.Controls.Add(Me.pbAddPersonne)
         Me.gbEmprunteur.Controls.Add(Me.Label10)
         Me.gbEmprunteur.Controls.Add(Me.dtpFinEmprunt)
         Me.gbEmprunteur.Controls.Add(Me.Label9)
         Me.gbEmprunteur.Controls.Add(Me.dtpDebutEmprunt)
-        Me.gbEmprunteur.Controls.Add(Me.Button5)
         Me.gbEmprunteur.Controls.Add(Me.cmbNomEmprunteur)
         Me.gbEmprunteur.Enabled = False
         Me.gbEmprunteur.Location = New System.Drawing.Point(0, 259)
@@ -440,6 +446,16 @@ Partial Class frmAjouterClef
         Me.gbEmprunteur.TabIndex = 49
         Me.gbEmprunteur.TabStop = False
         Me.gbEmprunteur.Text = "Emprunteur"
+        '
+        'pbAddPersonne
+        '
+        Me.pbAddPersonne.Image = Global.GestionClefs.My.Resources.Resources.add_user_button
+        Me.pbAddPersonne.Location = New System.Drawing.Point(223, 19)
+        Me.pbAddPersonne.Name = "pbAddPersonne"
+        Me.pbAddPersonne.Size = New System.Drawing.Size(23, 23)
+        Me.pbAddPersonne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbAddPersonne.TabIndex = 45
+        Me.pbAddPersonne.TabStop = False
         '
         'Label10
         '
@@ -472,15 +488,6 @@ Partial Class frmAjouterClef
         Me.dtpDebutEmprunt.Name = "dtpDebutEmprunt"
         Me.dtpDebutEmprunt.Size = New System.Drawing.Size(208, 20)
         Me.dtpDebutEmprunt.TabIndex = 45
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(223, 18)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(23, 23)
-        Me.Button5.TabIndex = 40
-        Me.Button5.Text = "+"
-        Me.Button5.UseVisualStyleBackColor = True
         '
         'cmbNomEmprunteur
         '
@@ -518,10 +525,13 @@ Partial Class frmAjouterClef
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
+        CType(Me.pbRemSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbAddSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.gbEmprunteur.ResumeLayout(False)
         Me.gbEmprunteur.PerformLayout()
+        CType(Me.pbAddPersonne, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -548,10 +558,8 @@ Partial Class frmAjouterClef
     Friend WithEvents btnNewTrousseau As Button
     Friend WithEvents txtRechercher As TextBox
     Friend WithEvents btnRechercher As Button
-    Friend WithEvents btnAddSelBatiment As Button
     Friend WithEvents gbRechercher As GroupBox
     Friend WithEvents btnAddBatiment As Button
-    Friend WithEvents btnRemSelBatiment As Button
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
@@ -561,8 +569,10 @@ Partial Class frmAjouterClef
     Friend WithEvents dtpFinEmprunt As DateTimePicker
     Friend WithEvents Label9 As Label
     Friend WithEvents dtpDebutEmprunt As DateTimePicker
-    Friend WithEvents Button5 As Button
     Friend WithEvents cmbNomEmprunteur As ComboBox
     Friend WithEvents dgvListBatiment As DataGridView
     Friend WithEvents dgvSelBatiment As DataGridView
+    Friend WithEvents pbAddSelBatiment As PictureBox
+    Friend WithEvents pbRemSelBatiment As PictureBox
+    Friend WithEvents pbAddPersonne As PictureBox
 End Class
