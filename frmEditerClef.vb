@@ -150,7 +150,7 @@ Public Class frmEditerClef
                 .ExecuteNonQuery()
             End With
             connecter().Close()
-            frmMain.SearchAndRefresh()
+            frmMain.FillDataSource()
             Me.Close()
         Catch ex As Exception
             MsgBox(ex.Message)

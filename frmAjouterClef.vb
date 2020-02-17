@@ -93,7 +93,7 @@ Public Class frmAjouterClef
                 End If
 
             Next
-            frmMain.SearchAndRefresh()
+            frmMain.FillDataSource()
             frmMain.SetAutocomplete()
             If chkKeepOpen.Checked = False Then
                 Me.Close()

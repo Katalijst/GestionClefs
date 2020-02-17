@@ -2,8 +2,9 @@
 
 'Formulaire principal, peut être optimisé
 Public Class frmMain
-    Dim dtByKey As DataTable
-    Dim dtByOwner As DataTable
+    'Déclaration des sources de données pour la DataGridView
+    Dim srcKeyList As New BindingSource()
+    Dim srcOwner As New BindingSource()
     'Booléeen pour l'affichage des alertes seulement une fois
     Public blnAlertes As Boolean = True
     'Booléeen pour savoir si c'est un emprunt ou une attribution
@@ -28,9 +29,7 @@ Public Class frmMain
         'Initialiser l'index du menu déroulant de sélection du type de recherche
         cbRechercher.SelectedIndex = 1
         'Sub d'actualisation et de recherche (Ctrl + clic sur le nom pour y accèder rapidement)
-        SearchAndRefresh()
-        'Sub du remplissage de l'autocomplétion
-        SetAutocomplete()
+        FillDataSource()
         'Désactivation des fonctions administrateur
         If userType <> "Administrateur" Then
             btnAddClef.Enabled = False
@@ -40,6 +39,8 @@ Public Class frmMain
             SupprimerToolStripMenuItem.Enabled = False
             EditerToolStripMenuItem.Enabled = False
         End If
+        'Sub du remplissage de l'autocomplétion
+        SetAutocomplete()
         'Check des alertes
         CheckAlerts()
     End Sub
@@ -122,69 +123,29 @@ Public Class frmMain
     End Sub
 
     Public Sub SetAutocomplete()
-        'Sub de remplissage de l'autocomplétion
-        Dim cmd As New MySqlCommand
-        Dim dtPredict As New DataTable
-        Dim daPredict As New MySqlDataAdapter
-        'Déclaration des pré-requetes MySQL
-        Dim stgPredict As String = "Select * from Clefs"
-        Dim stgStatus As String = "CStatus=*"
-
-        Dim chkNumber As Integer = 0
-        'Création de tout les cas possible de filtre pour les cases à cochées
-        '(utilisation d'une sorte de "table de Karnaugh")
-        If chkDisponibles.Checked = True Then
-            chkNumber += 4
-        End If
-        If chkEmpruntees.Checked = True Then
-            chkNumber += 2
-        End If
-        If chkAttribuees.Checked = True Then
-            chkNumber += 1
-        End If
-
-        Select Case chkNumber
-            Case 1
-                stgStatus = "CStatus=""Attribuée"""
-            Case 2
-                stgStatus = "CStatus=""Empruntée"""
-            Case 3
-                stgStatus = "CStatus=""Attribuée"" OR CStatus= ""Empruntée"""
-            Case 4
-                stgStatus = "CStatus=""Disponible"""
-            Case 5
-                stgStatus = "CStatus=""Attribuée"" OR CStatus= ""Disponible"""
-            Case 6
-                stgStatus = "CStatus=""Disponible"" OR CStatus= ""Empruntée"""
-            Case Else
-                stgStatus = "CStatus like ""%"""
-        End Select
+        Dim stgPredict As String = ""
+        Dim dtPredictSource As DataTable = CType(srcKeyList.DataSource, DataTable)
 
         'Filtres du type de recherche
-        If cbRechercher.Text = "ID" Then
-            stgPredict = "Select CID from Clefs where CID <> ""0"""
-        ElseIf cbRechercher.Text = "Nom" Then
-            stgPredict = "Select CNom from Clefs where CID <> ""0"""
+
+        If cbRechercher.Text = "Nom" Then
+            stgPredict = "Nom"
         ElseIf cbRechercher.Text = "Emprunteur" Then
-            stgPredict = "Select ENomPersonne from Emprunts"
+            dtPredictSource = CType(srcOwner.DataSource, DataTable)
+            stgPredict = "NomPersonne"
         ElseIf cbRechercher.Text = "Lieu" Then
-            stgPredict = "Select CPosition from Clefs where CID <> ""0"""
+            stgPredict = "Position"
+        Else
+            stgPredict = "ID"
         End If
         'Requetes et remplissage de l'autocomplétion
         Try
-            With cmd
-                .Connection = connecter()
-                .CommandText = stgPredict
-            End With
-            daPredict.SelectCommand = cmd
-            daPredict.Fill(dtPredict)
-            Dim r As DataRow
             'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
             txtRechercher.AutoCompleteCustomSource.Clear()
             'LOOPING THE ROW OF DATA IN THE DATATABLE
-            For Each r In dtPredict.Rows
+            For Each r In dtPredictSource.Rows
                 'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
-                txtRechercher.AutoCompleteCustomSource.Add(r.Item(0).ToString)
+                txtRechercher.AutoCompleteCustomSource.Add(r.Item(stgPredict).ToString)
             Next
             connecter().Close()
         Catch ex As Exception
@@ -193,19 +154,60 @@ Public Class frmMain
 
     End Sub
 
-    Public Sub LoadData()
-        'Faire pré chargement des données
+    Public Sub FillDataSource()
+        Dim cmd As New MySqlCommand
+        Dim da As New MySqlDataAdapter
+        Dim dtKeyList As DataTable = New DataTable()
+        Dim dtOwner As DataTable = New DataTable()
+        Dim sql As String
+
+        Try
+
+            sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> ""0"""
+
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtKeyList)
+            For i As Integer = 0 To dtKeyList.Columns.Count - 1
+                dtKeyList.Columns(i).ColumnName = dtKeyList.Columns(i).ColumnName.ToString().Remove(0, 1)
+            Next
+            srcKeyList.DataSource = dtKeyList
+
+            For Each column In dgvResultats.Columns
+                column.SortMode = DataGridViewColumnSortMode.NotSortable
+            Next
+
+            sql = "SELECT CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef AND CStatus like ""%"" and CID <> ""0"""
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtOwner)
+            For i As Integer = 0 To dtOwner.Columns.Count - 1
+                dtOwner.Columns(i).ColumnName = dtOwner.Columns(i).ColumnName.ToString().Remove(0, 1)
+            Next
+            srcOwner.DataSource = dtOwner
+
+            If cbRechercher.Text = "Emprunteur" Then
+                dgvResultats.DataSource = srcOwner
+            Else
+                dgvResultats.DataSource = srcKeyList
+            End If
+
+            dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+            connecter().Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
-    Public Sub SearchAndRefresh()
-        'Sub de recherche
-        Dim cmd As New MySqlCommand
-        Dim dt As New DataTable
-        Dim da As New MySqlDataAdapter
-        'Déclaration des pré-requetes MySQL
-        Dim sql As String = "Select CID, CNom, Cposition, CStatus, CTrousseau, CBatiment from Clefs"
-        Dim stgStatus As String = "CStatus=*"
-
+    Private Sub Filter()
         Dim chkNumber As Integer = 0
         'Création de tout les cas possible de filtre pour les cases à cochées
         '(utilisation d'une sorte de "table de Karnaugh")
@@ -218,53 +220,63 @@ Public Class frmMain
         If chkAttribuees.Checked = True Then
             chkNumber += 1
         End If
-        Select Case chkNumber
-            Case 1
-                stgStatus = "CStatus=""Attribuée"""
-            Case 2
-                stgStatus = "CStatus=""Empruntée"""
-            Case 3
-                stgStatus = "CStatus=""Attribuée"" OR CStatus= ""Empruntée"""
-            Case 4
-                stgStatus = "CStatus=""Disponible"""
-            Case 5
-                stgStatus = "CStatus=""Attribuée"" OR CStatus= ""Disponible"""
-            Case 6
-                stgStatus = "CStatus=""Disponible"" OR CStatus= ""Empruntée"""
-            Case Else
-                stgStatus = "CStatus like ""%"""
-        End Select
-        'Filtres du type de recherche
-        If cbRechercher.Text = "ID" Then
-            sql = "Select CID, CNom, Cposition, CStatus, CTrousseau, CBatiment from Clefs Where " & stgStatus & " and CID <> ""0"""
-        ElseIf cbRechercher.Text = "Nom" Then
-            sql = "Select CID, CNom, Cposition, CStatus, CTrousseau, CBatiment from Clefs Where " & stgStatus & " and CID <> ""0"""
-        ElseIf cbRechercher.Text = "Emprunteur" Then
-            sql = "SELECT CTrousseau, CID, CNom, CPosition, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef AND " & stgStatus & " and CID <> ""0"""
-        ElseIf cbRechercher.Text = "Lieu" Then
-            sql = "SELECT CID, CNom, Cposition, CStatus, CTrousseau, CBatiment FROM Clefs WHERE " & stgStatus & " and CID <> ""0"""
+        If cbRechercher.Text <> "Emprunteur" Then
+            Select Case chkNumber
+                Case 1
+                    srcKeyList.Filter = "Status='Attribuée'"
+                Case 2
+                    srcKeyList.Filter = "Status='Empruntée'"
+                Case 3
+                    srcKeyList.Filter = "Status='Attribuée' OR Status= 'Empruntée'"
+                Case 4
+                    srcKeyList.Filter = "Status='Disponible'"
+                Case 5
+                    srcKeyList.Filter = "Status='Attribuée' OR Status= 'Disponible'"
+                Case 6
+                    srcKeyList.Filter = "Status='Disponible' OR Status= 'Empruntée'"
+                Case Else
+                    srcKeyList.Filter = ""
+            End Select
+        Else
+            Select Case chkNumber
+                Case 1
+                    srcOwner.Filter = "Status='Attribuée'"
+                Case 2
+                    srcOwner.Filter = "Status='Empruntée'"
+                Case 3
+                    srcOwner.Filter = "Status='Attribuée' OR Status= 'Empruntée'"
+                Case 4
+                    srcOwner.Filter = "Status='Disponible'"
+                Case 5
+                    srcOwner.Filter = "Status='Attribuée' OR Status= 'Disponible'"
+                Case 6
+                    srcOwner.Filter = "Status='Disponible' OR Status= 'Empruntée'"
+                Case Else
+                    srcOwner.Filter = ""
+            End Select
         End If
-        'Requetes et recherche
-        Try
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            dt.Clear()
-            da.Fill(dt)
-            da = Nothing
+    End Sub
 
-            For i As Integer = 0 To dt.Columns.Count - 1
-                dt.Columns(i).ColumnName = dt.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+    Private Sub chkDisponibles_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
+        SetAutocomplete()
+    End Sub
 
-            dgvResultats.DataSource = dt
-            connecter().Close()
-            Search()
-        Catch ex As Exception
-        End Try
+    Private Sub chkEmpruntees_CheckedChanged(sender As Object, e As EventArgs) Handles chkEmpruntees.CheckedChanged
+        SetAutocomplete()
+    End Sub
 
+    Private Sub chkAttribuees_CheckedChanged(sender As Object, e As EventArgs) Handles chkAttribuees.CheckedChanged
+        SetAutocomplete()
+    End Sub
+
+    Private Sub cbRechercher_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRechercher.SelectedIndexChanged
+        'Filtres du type de recherche
+        If cbRechercher.Text = "Emprunteur" Then
+            dgvResultats.DataSource = srcOwner
+        Else
+            dgvResultats.DataSource = srcKeyList
+        End If
+        SetAutocomplete()
     End Sub
 
     Public Sub DeleteKey(stgKeyID As String)
@@ -298,7 +310,7 @@ Public Class frmMain
                 da.SelectCommand = cmd
                 connecter().Close()
                 'actualisation du tableau
-                SearchAndRefresh()
+                'RefreshData()
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
@@ -337,30 +349,6 @@ Public Class frmMain
         Search()
     End Sub
 
-    Private Sub chkDisponibles_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
-        'Actualisation au changement des filtres à cochés
-        SearchAndRefresh()
-        SetAutocomplete()
-    End Sub
-
-    Private Sub chkEmpruntees_CheckedChanged(sender As Object, e As EventArgs) Handles chkEmpruntees.CheckedChanged
-        'Actualisation au changement des filtres à cochés
-        SearchAndRefresh()
-        SetAutocomplete()
-    End Sub
-
-    Private Sub chkAttribuees_CheckedChanged(sender As Object, e As EventArgs) Handles chkAttribuees.CheckedChanged
-        'Actualisation au changement des filtres à cochés
-        SearchAndRefresh()
-        SetAutocomplete()
-    End Sub
-
-    Private Sub cbRechercher_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRechercher.SelectedIndexChanged
-        'Actualisation au changement du type de recherche
-        SearchAndRefresh()
-        SetAutocomplete()
-    End Sub
-
     Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
         'Récupération de l'id de la ligne cliquée
         Dim intIndexNom As Integer = dgvResultats.Columns("Nom").Index
@@ -380,7 +368,7 @@ Public Class frmMain
 
     Private Sub ActualiserToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         'Menu actualiser
-        SearchAndRefresh()
+        FillDataSource()
     End Sub
 
     Private Sub GestionDesPersonnesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionDesPersonnesToolStripMenuItem.Click

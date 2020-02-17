@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -208,6 +208,12 @@
     <Compile Include="frmGestionUtilisateur.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPrincipale.Designer.vb">
+      <DependentUpon>frmPrincipale.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipale.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPropAlertes.Designer.vb">
       <DependentUpon>frmPropAlertes.vb</DependentUpon>
     </Compile>
@@ -322,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipale.resx">
+      <DependentUpon>frmPrincipale.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPropAlertes.resx">
       <DependentUpon>frmPropAlertes.vb</DependentUpon>

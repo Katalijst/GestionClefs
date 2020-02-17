@@ -145,7 +145,7 @@ Public Class frmEditerPosition
                     .ExecuteNonQuery()
                 End With
                 connecter().Close()
-                frmMain.SearchAndRefresh()
+                frmMain.FillDataSource()
                 Me.Close()
             Else
                 MsgBox("Veuillez remplir tout les champs !")

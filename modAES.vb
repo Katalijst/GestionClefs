@@ -1,4 +1,7 @@
-﻿Module modAES
+﻿Imports System.IO
+Imports System.Security.Cryptography
+
+Module modAES
     Public Function EncryptStringToBytes_Aes(ByVal plainText As String, ByVal Key() As Byte, ByVal IV() As Byte) As Byte()
         ' Check arguments.
         If plainText Is Nothing OrElse plainText.Length <= 0 Then
