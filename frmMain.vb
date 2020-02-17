@@ -2,6 +2,8 @@
 
 'Formulaire principal, peut être optimisé
 Public Class frmMain
+    Dim dtByKey As DataTable
+    Dim dtByOwner As DataTable
     'Booléeen pour l'affichage des alertes seulement une fois
     Public blnAlertes As Boolean = True
     'Booléeen pour savoir si c'est un emprunt ou une attribution
@@ -191,6 +193,10 @@ Public Class frmMain
 
     End Sub
 
+    Public Sub LoadData()
+        'Faire pré chargement des données
+    End Sub
+
     Public Sub SearchAndRefresh()
         'Sub de recherche
         Dim cmd As New MySqlCommand
@@ -230,13 +236,13 @@ Public Class frmMain
         End Select
         'Filtres du type de recherche
         If cbRechercher.Text = "ID" Then
-            sql = "Select CID, CNom, Cposition, CStatus, CTrousseau, CBatiment from Clefs Where CID like ""%" & txtRechercher.Text & "%"" And " & stgStatus & " and CID <> ""0"""
+            sql = "Select CID, CNom, Cposition, CStatus, CTrousseau, CBatiment from Clefs Where " & stgStatus & " and CID <> ""0"""
         ElseIf cbRechercher.Text = "Nom" Then
-            sql = "Select CID, CNom, Cposition, CStatus, CTrousseau, CBatiment from Clefs Where CNom like ""%" & txtRechercher.Text & "%"" And " & stgStatus & " and CID <> ""0"""
+            sql = "Select CID, CNom, Cposition, CStatus, CTrousseau, CBatiment from Clefs Where " & stgStatus & " and CID <> ""0"""
         ElseIf cbRechercher.Text = "Emprunteur" Then
-            sql = "SELECT CTrousseau, CID, CNom, CPosition, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef AND ENomPersonne LIKE ""%" & txtRechercher.Text & "%"" And " & stgStatus & " and CID <> ""0"""
+            sql = "SELECT CTrousseau, CID, CNom, CPosition, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef AND " & stgStatus & " and CID <> ""0"""
         ElseIf cbRechercher.Text = "Lieu" Then
-            sql = "SELECT CID, CNom, Cposition, CStatus, CTrousseau, CBatiment FROM Clefs WHERE CPosition LIKE ""%" & txtRechercher.Text & "%"" And " & stgStatus & " and CID <> ""0"""
+            sql = "SELECT CID, CNom, Cposition, CStatus, CTrousseau, CBatiment FROM Clefs WHERE " & stgStatus & " and CID <> ""0"""
         End If
         'Requetes et recherche
         Try
@@ -252,9 +258,10 @@ Public Class frmMain
             For i As Integer = 0 To dt.Columns.Count - 1
                 dt.Columns(i).ColumnName = dt.Columns(i).ColumnName.ToString().Remove(0, 1)
             Next
-            dgvResultats.DataSource = dt
 
+            dgvResultats.DataSource = dt
             connecter().Close()
+            Search()
         Catch ex As Exception
         End Try
 
@@ -297,9 +304,37 @@ Public Class frmMain
             End Try
         End If
     End Sub
+    Private Sub Search()
+        Dim searchValue As String = txtRechercher.Text
+        Dim intColumnNb As Integer = 1
+        'Filtres du type de recherche
+        If cbRechercher.Text = "ID" Then
+            intColumnNb = dgvResultats.Columns("ID").Index
+        ElseIf cbRechercher.Text = "Nom" Then
+            intColumnNb = dgvResultats.Columns("Nom").Index
+        ElseIf cbRechercher.Text = "Emprunteur" Then
+            intColumnNb = dgvResultats.Columns("NomPersonne").Index
+        ElseIf cbRechercher.Text = "Lieu" Then
+            intColumnNb = dgvResultats.Columns("Position").Index
+        End If
+
+        Try
+            For i = 0 To dgvResultats.RowCount - 1
+                If dgvResultats.Rows(i).Cells(intColumnNb).Value.ToString.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
+                    dgvResultats.Rows(i).Selected = True
+                    dgvResultats.FirstDisplayedScrollingRowIndex = i
+                    Exit For
+                    MsgBox("found on row " & i)
+                End If
+            Next
+        Catch exc As Exception
+            MessageBox.Show(exc.Message)
+        End Try
+    End Sub
+
     Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
         'recherche à chaque caractère entré dans le champ de recherche
-        SearchAndRefresh()
+        Search()
     End Sub
 
     Private Sub chkDisponibles_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
@@ -389,5 +424,9 @@ Public Class frmMain
     Private Sub menAlertes_Click(sender As Object, e As EventArgs) Handles menAlertes.Click
         'ouverture du menu d'alerte
         frmAlertes.ShowDialog()
+    End Sub
+
+    Private Sub AProposToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AProposToolStripMenuItem.Click
+        frmAbout.ShowDialog()
     End Sub
 End Class

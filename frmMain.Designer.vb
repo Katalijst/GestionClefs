@@ -54,11 +54,22 @@ Partial Class frmMain
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.AProposToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.pbEmprunter = New System.Windows.Forms.PictureBox()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.gbRechercher.SuspendLayout()
         Me.gbFilter.SuspendLayout()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuGrid.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbEmprunter, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'chkDisponibles
@@ -254,7 +265,7 @@ Partial Class frmMain
         '
         'OutilsToolStripMenuItem
         '
-        Me.OutilsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDesPersonnesToolStripMenuItem, Me.GestionDesTableauxToolStripMenuItem, Me.GestionDesBâtimentsToolStripMenuItem, Me.ToolStripSeparator3, Me.SaisieÀLaVoléToolStripMenuItem, Me.ToolStripSeparator4, Me.SettingsToolStripMenuItem})
+        Me.OutilsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDesPersonnesToolStripMenuItem, Me.GestionDesTableauxToolStripMenuItem, Me.GestionDesBâtimentsToolStripMenuItem, Me.ToolStripSeparator3, Me.SaisieÀLaVoléToolStripMenuItem, Me.ToolStripSeparator4, Me.SettingsToolStripMenuItem, Me.AProposToolStripMenuItem})
         Me.OutilsToolStripMenuItem.Name = "OutilsToolStripMenuItem"
         Me.OutilsToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.OutilsToolStripMenuItem.Text = "&Outils"
@@ -307,11 +318,72 @@ Partial Class frmMain
         Me.StatusStrip1.TabIndex = 101
         Me.StatusStrip1.Text = "StatusStrip1"
         '
+        'AProposToolStripMenuItem
+        '
+        Me.AProposToolStripMenuItem.Name = "AProposToolStripMenuItem"
+        Me.AProposToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AProposToolStripMenuItem.Text = "A propos..."
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = Global.GestionClefs.My.Resources.Resources.writing
+        Me.PictureBox3.Location = New System.Drawing.Point(560, 73)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(31, 30)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox3.TabIndex = 105
+        Me.PictureBox3.TabStop = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.GestionClefs.My.Resources.Resources.login
+        Me.PictureBox2.Location = New System.Drawing.Point(560, 37)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(31, 30)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 104
+        Me.PictureBox2.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.GestionClefs.My.Resources.Resources.name
+        Me.PictureBox1.Location = New System.Drawing.Point(523, 73)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(31, 30)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 103
+        Me.PictureBox1.TabStop = False
+        '
+        'pbEmprunter
+        '
+        Me.pbEmprunter.Image = Global.GestionClefs.My.Resources.Resources.key1
+        Me.pbEmprunter.Location = New System.Drawing.Point(597, 37)
+        Me.pbEmprunter.Name = "pbEmprunter"
+        Me.pbEmprunter.Size = New System.Drawing.Size(59, 66)
+        Me.pbEmprunter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbEmprunter.TabIndex = 102
+        Me.pbEmprunter.TabStop = False
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Image = Global.GestionClefs.My.Resources.Resources.name
+        Me.PictureBox4.Location = New System.Drawing.Point(523, 37)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(31, 30)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox4.TabIndex = 106
+        Me.PictureBox4.TabStop = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 561)
+        Me.Controls.Add(Me.PictureBox4)
+        Me.Controls.Add(Me.PictureBox3)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.pbEmprunter)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.dgvResultats)
         Me.Controls.Add(Me.gbRechercher)
@@ -328,6 +400,11 @@ Partial Class frmMain
         Me.menuGrid.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbEmprunter, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -363,4 +440,10 @@ Partial Class frmMain
     Friend WithEvents AttribuerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents RafraichirLaPageToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AProposToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents pbEmprunter As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents PictureBox4 As PictureBox
 End Class
