@@ -25,12 +25,12 @@ Partial Class frmEditerPosition
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblPBatiment = New System.Windows.Forms.Label()
         Me.dgvListBatiment = New System.Windows.Forms.DataGridView()
         Me.btnAddPersonne = New System.Windows.Forms.Button()
         Me.cmbResponsable = New System.Windows.Forms.ComboBox()
-        Me.lblNom = New System.Windows.Forms.Label()
-        Me.lbmType = New System.Windows.Forms.Label()
+        Me.lblPNom = New System.Windows.Forms.Label()
+        Me.lblPResponsable = New System.Windows.Forms.Label()
         Me.txtNom = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
@@ -49,12 +49,12 @@ Partial Class frmEditerPosition
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.lblPBatiment)
         Me.GroupBox2.Controls.Add(Me.dgvListBatiment)
         Me.GroupBox2.Controls.Add(Me.btnAddPersonne)
         Me.GroupBox2.Controls.Add(Me.cmbResponsable)
-        Me.GroupBox2.Controls.Add(Me.lblNom)
-        Me.GroupBox2.Controls.Add(Me.lbmType)
+        Me.GroupBox2.Controls.Add(Me.lblPNom)
+        Me.GroupBox2.Controls.Add(Me.lblPResponsable)
         Me.GroupBox2.Controls.Add(Me.txtNom)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox2.Name = "GroupBox2"
@@ -63,14 +63,14 @@ Partial Class frmEditerPosition
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Ajouter une personne"
         '
-        'Label1
+        'lblPBatiment
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 96)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(54, 13)
-        Me.Label1.TabIndex = 64
-        Me.Label1.Text = "Batiment :"
+        Me.lblPBatiment.AutoSize = True
+        Me.lblPBatiment.Location = New System.Drawing.Point(6, 96)
+        Me.lblPBatiment.Name = "lblPBatiment"
+        Me.lblPBatiment.Size = New System.Drawing.Size(54, 13)
+        Me.lblPBatiment.TabIndex = 64
+        Me.lblPBatiment.Text = "Batiment :"
         '
         'dgvListBatiment
         '
@@ -119,23 +119,23 @@ Partial Class frmEditerPosition
         Me.cmbResponsable.Size = New System.Drawing.Size(234, 21)
         Me.cmbResponsable.TabIndex = 57
         '
-        'lblNom
+        'lblPNom
         '
-        Me.lblNom.AutoSize = True
-        Me.lblNom.Location = New System.Drawing.Point(6, 57)
-        Me.lblNom.Name = "lblNom"
-        Me.lblNom.Size = New System.Drawing.Size(35, 13)
-        Me.lblNom.TabIndex = 54
-        Me.lblNom.Text = "Nom :"
+        Me.lblPNom.AutoSize = True
+        Me.lblPNom.Location = New System.Drawing.Point(6, 57)
+        Me.lblPNom.Name = "lblPNom"
+        Me.lblPNom.Size = New System.Drawing.Size(35, 13)
+        Me.lblPNom.TabIndex = 54
+        Me.lblPNom.Text = "Nom :"
         '
-        'lbmType
+        'lblPResponsable
         '
-        Me.lbmType.AutoSize = True
-        Me.lbmType.Location = New System.Drawing.Point(6, 17)
-        Me.lbmType.Name = "lbmType"
-        Me.lbmType.Size = New System.Drawing.Size(75, 13)
-        Me.lbmType.TabIndex = 53
-        Me.lbmType.Text = "Responsable :"
+        Me.lblPResponsable.AutoSize = True
+        Me.lblPResponsable.Location = New System.Drawing.Point(6, 17)
+        Me.lblPResponsable.Name = "lblPResponsable"
+        Me.lblPResponsable.Size = New System.Drawing.Size(75, 13)
+        Me.lblPResponsable.TabIndex = 53
+        Me.lblPResponsable.Text = "Responsable :"
         '
         'txtNom
         '
@@ -169,7 +169,7 @@ Partial Class frmEditerPosition
         Me.MinimizeBox = False
         Me.Name = "frmEditerPosition"
         Me.ShowIcon = False
-        Me.Text = "Editer un tablau..."
+        Me.Text = "Editer un tableau..."
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
@@ -179,12 +179,12 @@ Partial Class frmEditerPosition
 
     Friend WithEvents btnCancel As Button
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblPBatiment As Label
     Friend WithEvents dgvListBatiment As DataGridView
     Friend WithEvents btnAddPersonne As Button
     Friend WithEvents cmbResponsable As ComboBox
-    Friend WithEvents lblNom As Label
-    Friend WithEvents lbmType As Label
+    Friend WithEvents lblPNom As Label
+    Friend WithEvents lblPResponsable As Label
     Friend WithEvents txtNom As TextBox
     Friend WithEvents btnSave As Button
 End Class

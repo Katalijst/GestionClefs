@@ -3,12 +3,22 @@
 Public Class frmProprietes
     Dim stgKeyID As String
     Private Sub frmProprietes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblCID.Text = strTitleCID & " :"
+        lblCNom.Text = strTitleCNom & " :"
+        lblCPosition.Text = strTitleCPosition & " :"
+        lblCStatus.Text = strTitleCStatus & " :"
+        lblCTrousseau.Text = strTitleCTrousseau & " :"
+        lblCDate.Text = strTitleCDate & " :"
+        lblENomPersonne.Text = strTitleENomPersonne & " :"
+        lblNTelephone.Text = strTitleNNom & " :"
+        lblNAutre.Text = strTitleNAutre & " :"
+
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         Dim sql As String
 
-        Dim intIndex As Integer = frmMain.dgvResultats.Columns("ID").Index
+        Dim intIndex As Integer = frmMain.dgvResultats.Columns(strTitleCID).Index
         stgKeyID = frmMain.dgvResultats.SelectedRows(0).Cells(intIndex).Value.ToString()
         lblID.Text = stgKeyID
 

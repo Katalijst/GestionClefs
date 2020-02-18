@@ -95,8 +95,8 @@ Public Class frmEditerClef
         Dim da As New MySqlDataAdapter
         Dim sql As String
 
-        Dim intIndexNom As Integer = frmMain.dgvResultats.Columns("Nom").Index
-        stgKeyId = frmMain.dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString()
+        Dim intIndexID As Integer = frmMain.dgvResultats.Columns(strTitleCID).Index
+        stgKeyId = frmMain.dgvResultats.SelectedRows(0).Cells(intIndexID).Value.ToString()
         txtID.Text = stgKeyId
 
         RefreshTrousseau()
@@ -132,6 +132,12 @@ Public Class frmEditerClef
 
     End Sub
     Private Sub frmEditKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblCID.Text = strTitleCID & " :"
+        lblCNom.Text = strTitleCNom & " :"
+        lblCPosition.Text = strTitleCPosition & " :"
+        lblCStatus.Text = strTitleCStatus & " :"
+        lblCTrousseau.Text = strTitleCTrousseau & " :"
+        lblCDate.Text = strTitleCDate & " :"
         LoadAndRefresh()
     End Sub
 

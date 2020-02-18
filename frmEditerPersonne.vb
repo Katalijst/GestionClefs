@@ -3,7 +3,12 @@ Public Class frmEditerPersonne
     Shared stgPersonne As String
 
     Private Sub frmEditerPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim intIndexNom As Integer = frmGestionPersonnes.dgvListPersonne.Columns("Nom").Index
+        lblType.Text = strTitleNGenre & " :"
+        lblNom.Text = strTitleNNom & " :"
+        lblTelephone.Text = strTitleNTelephone & " :"
+        lblAutre.Text = strTitleNAutre & " :"
+
+        Dim intIndexNom As Integer = frmGestionPersonnes.dgvListPersonne.Columns(strTitleNNom).Index
         stgPersonne = frmGestionPersonnes.dgvListPersonne.SelectedRows(0).Cells(intIndexNom).Value.ToString()
         txtNom.Text = stgPersonne
         RefreshGenre()

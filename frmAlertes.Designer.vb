@@ -83,7 +83,6 @@ Partial Class frmAlertes
         '
         'cbRechercher
         '
-        Me.cbRechercher.AutoCompleteCustomSource.AddRange(New String() {"ID", "Nom", "Emprunteur"})
         Me.cbRechercher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRechercher.FormattingEnabled = True
         Me.cbRechercher.Items.AddRange(New Object() {"ID", "Nom", "Emprunteur", "Lieu"})

@@ -3,6 +3,11 @@
 Public Class frmEditerBatiment
     Shared stgBatID
     Private Sub frmEditerBatiment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblID.Text = strTitleBNum & " :"
+        lblAdresse.Text = strTitleBAdresse & " :"
+        lblFonction.Text = strTitleBFonction & " :"
+        lblNom.Text = strTitleBNom & " :"
+
         Dim intIndexNom As Integer = frmGestionBatiments.dgvListBatiment.Columns("Num").Index
         stgBatID = frmGestionBatiments.dgvListBatiment.SelectedRows(0).Cells(intIndexNom).Value.ToString()
         txtID.Text = stgBatID

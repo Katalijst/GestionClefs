@@ -195,9 +195,9 @@ Public Class frmAjouterClef
             da.SelectCommand = cmd
             da.Fill(dtBatiments)
 
-            For i As Integer = 0 To dtBatiments.Columns.Count - 1
-                dtBatiments.Columns(i).ColumnName = dtBatiments.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+            dtBatiments.Columns("BNum").ColumnName = strTitleBNum
+            dtBatiments.Columns("BNom").ColumnName = strTitleBNom
+
             dgvListBatiment.DataSource = dtBatiments
             dgvListBatiment.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             dgvListBatiment.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -320,6 +320,13 @@ Public Class frmAjouterClef
     End Sub
 
     Private Sub frmAjoutClef_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblCID.Text = strTitleCID & " :"
+        lblCNom.Text = strTitleCNom & " :"
+        lblCPosition.Text = strTitleCPosition & " :"
+        lblCStatus.Text = strTitleCStatus & " :"
+        lblCTrousseau.Text = strTitleCTrousseau & " :"
+        lblCDate.Text = strTitleCDate & " :"
+
         LoadAndRefresh()
         SetAutocomplete()
         RefreshBatiment()

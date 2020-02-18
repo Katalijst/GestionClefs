@@ -18,7 +18,7 @@ Public Class frmEmprunterClef
         Dim stgPredict As String = "Select * from NomPersonne"
 
 
-        sql = "Select * from NomPersonne Where NNom like ""%" & txtRechercher.Text & "%"""
+        'sql = "Select * from NomPersonne Where NNom like ""%" & txtRechercher.Text & "%"""
         stgPredict = "Select NNom from NomPersonne"
         Try
             With cmd
@@ -28,10 +28,13 @@ Public Class frmEmprunterClef
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            For i As Integer = 0 To dt.Columns.Count - 1
-                dt.Columns(i).ColumnName = dt.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
-            dgvResultats.DataSource = dt
+            dt.Columns("NNom").ColumnName = strTitleNNom
+            dt.Columns("NGenre").ColumnName = strTitleNGenre
+            dt.Columns("NTelephone").ColumnName = strTitleNTelephone
+            dt.Columns("NAutre").ColumnName = strTitleNAutre
+
+            srcPersonnes.DataSource = dt
+            dgvResultats.DataSource = srcPersonnes
 
             With cmd
                 .Connection = connecter()
@@ -54,6 +57,7 @@ Public Class frmEmprunterClef
         End Try
     End Sub
     Private Sub frmEmpruntClef_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtRechercher.Text = ""
         LoadPersonnes()
         blnEmprunt = frmMain.blnEmprunt
         If frmMain.blnEmprunt = False Then
@@ -71,8 +75,8 @@ Public Class frmEmprunterClef
             lblAu.Visible = True
             dtpFinEmprunt.Visible = True
         End If
-        Dim intIndexNom As Integer = frmMain.dgvResultats.Columns("Nom").Index
-        Dim intIndexID As Integer = frmMain.dgvResultats.Columns("ID").Index
+        Dim intIndexNom As Integer = frmMain.dgvResultats.Columns(strTitleCNom).Index
+        Dim intIndexID As Integer = frmMain.dgvResultats.Columns(strTitleCID).Index
         Dim stgKeyName = frmMain.dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString()
         stgKeyId = frmMain.dgvResultats.SelectedRows(0).Cells(intIndexID).Value.ToString()
         txtKeyID.Text = stgKeyId
@@ -115,13 +119,7 @@ Public Class frmEmprunterClef
 
     Private Sub Rechercher()
         Try
-            For i = 0 To dgvResultats.RowCount - 1
-                If dgvResultats.Rows(i).Cells(1).Value.ToString.IndexOf(txtRechercher.Text, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
-                    dgvResultats.Rows(i).Selected = True
-                    dgvResultats.FirstDisplayedScrollingRowIndex = i
-                    Exit For
-                End If
-            Next
+            srcPersonnes.Filter = "Nom like '%" & txtRechercher.Text & "%'"
         Catch exc As Exception
             MessageBox.Show(exc.Message)
         End Try
@@ -151,8 +149,8 @@ Public Class frmEmprunterClef
                     .ExecuteNonQuery()
                 End With
 
-                Dim intIndexGenre As Integer = dgvResultats.Columns("Genre").Index
-                Dim intIndexPersonne As Integer = dgvResultats.Columns("Nom").Index
+                Dim intIndexGenre As Integer = dgvResultats.Columns(strTitleNGenre).Index
+                Dim intIndexPersonne As Integer = dgvResultats.Columns(strTitleENomPersonne).Index
                 Dim stgGenre = dgvResultats.SelectedRows(0).Cells(intIndexGenre).Value.ToString()
                 Dim stgPersonne = dgvResultats.SelectedRows(0).Cells(intIndexPersonne).Value.ToString()
                 Dim cmdEmprunt As String
@@ -235,7 +233,7 @@ Public Class frmEmprunterClef
                     'Faire Emprunt pour chaque clef du trousseau
                     If dtClefDuTrousseau.Rows.Count > 0 Then
                         For Each r In dtClefDuTrousseau.Rows
-                            Dim stgKeyFromTrousseau As String = r.item("CID").ToString
+                            Dim stgKeyFromTrousseau As String = r.item(strTitleCID).ToString
                             Dim cmd As New MySqlCommand
                             Dim dt As New DataTable
                             Dim da As New MySqlDataAdapter
@@ -251,8 +249,8 @@ Public Class frmEmprunterClef
                                 .ExecuteNonQuery()
                             End With
 
-                            Dim intIndexGenre As Integer = dgvResultats.Columns("Genre").Index
-                            Dim intIndexPersonne As Integer = dgvResultats.Columns("Nom").Index
+                            Dim intIndexGenre As Integer = dgvResultats.Columns(strTitleEGenre).Index
+                            Dim intIndexPersonne As Integer = dgvResultats.Columns(strTitleENomPersonne).Index
                             Dim stgGenre = dgvResultats.SelectedRows(0).Cells(intIndexGenre).Value.ToString()
                             Dim stgPersonne = dgvResultats.SelectedRows(0).Cells(intIndexPersonne).Value.ToString()
                             Dim cmdEmprunt As String
@@ -332,8 +330,8 @@ Public Class frmEmprunterClef
                         .ExecuteNonQuery()
                     End With
 
-                    Dim intIndexGenre As Integer = dgvResultats.Columns("Genre").Index
-                    Dim intIndexPersonne As Integer = dgvResultats.Columns("Nom").Index
+                    Dim intIndexGenre As Integer = dgvResultats.Columns(strTitleEGenre).Index
+                    Dim intIndexPersonne As Integer = dgvResultats.Columns(strTitleENomPersonne).Index
                     Dim stgGenre = dgvResultats.SelectedRows(0).Cells(intIndexGenre).Value.ToString()
                     Dim stgPersonne = dgvResultats.SelectedRows(0).Cells(intIndexPersonne).Value.ToString()
                     Dim cmdEmprunt As String

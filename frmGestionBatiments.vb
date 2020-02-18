@@ -2,12 +2,17 @@
 Imports System.Text.RegularExpressions
 Public Class frmGestionBatiments
     Private Sub frmAjouterBatiment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblID.Text = strTitleBNum & " :"
+        lblAdresse.Text = strTitleBAdresse & " :"
+        lblFonction.Text = strTitleBFonction & " :"
+        lblNom.Text = strTitleBNom & " :"
+
         RefreshList()
     End Sub
     Public Sub RefreshList()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
-        Dim dtPersonnes As New DataTable
+        Dim dtBatiments As New DataTable
         Dim sql As String
 
         Try
@@ -19,12 +24,15 @@ Public Class frmGestionBatiments
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
-            da.Fill(dtPersonnes)
+            da.Fill(dtBatiments)
 
-            For i As Integer = 0 To dtPersonnes.Columns.Count - 1
-                dtPersonnes.Columns(i).ColumnName = dtPersonnes.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
-            dgvListBatiment.DataSource = dtPersonnes
+            dtBatiments.Columns("BNum").ColumnName = strTitleBNum
+            dtBatiments.Columns("BNom").ColumnName = strTitleBNom
+            dtBatiments.Columns("BAdresse").ColumnName = strTitleBAdresse
+            dtBatiments.Columns("BFonction").ColumnName = strTitleBFonction
+
+
+            dgvListBatiment.DataSource = dtBatiments
 
             For i = 0 To dgvListBatiment.ColumnCount - 2
                 dgvListBatiment.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -36,8 +44,8 @@ Public Class frmGestionBatiments
             'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
             txtRechercher.AutoCompleteCustomSource.Clear()
             'LOOPING THE ROW OF DATA IN THE DATATABLE
-            Dim intIndexNomBat As Integer = dgvListBatiment.Columns("Nom").Index
-            For Each r In dtPersonnes.Rows
+            Dim intIndexNomBat As Integer = dgvListBatiment.Columns(strTitleBNom).Index
+            For Each r In dtBatiments.Rows
                 'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
                 txtRechercher.AutoCompleteCustomSource.Add(r.Item(intIndexNomBat).ToString)
             Next
@@ -61,7 +69,7 @@ Public Class frmGestionBatiments
     End Sub
     Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
         Dim searchValue As String = txtRechercher.Text
-        Dim intIndexNomBat As Integer = dgvListBatiment.Columns("Nom").Index
+        Dim intIndexNomBat As Integer = dgvListBatiment.Columns(strTitleBNom).Index
 
         Try
             For i = 0 To dgvListBatiment.RowCount - 1
@@ -77,9 +85,9 @@ Public Class frmGestionBatiments
     End Sub
 
     Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
-        Dim intIndexBat As Integer = dgvListBatiment.Columns("Num").Index
+        Dim intIndexBat As Integer = dgvListBatiment.Columns(strTitleBNum).Index
         Dim stgToDelete As String = dgvListBatiment.SelectedRows(0).Cells(intIndexBat).Value.ToString()
-        Dim intIndexNomBat As Integer = dgvListBatiment.Columns("Nom").Index
+        Dim intIndexNomBat As Integer = dgvListBatiment.Columns(strTitleBNom).Index
         Dim stgNameToDelete As String = dgvListBatiment.SelectedRows(0).Cells(intIndexNomBat).Value.ToString()
         ' Initializes variables to pass to the MessageBox.Show method.
         Dim Message As String = "Voulez vous vraiment supprimer """ & stgNameToDelete & """ ?"

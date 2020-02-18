@@ -2,6 +2,7 @@
 'Imports utilisés pour la création de watermarks dans les textbox :
 Imports System.Runtime.InteropServices
 Imports System.Runtime.CompilerServices
+Imports System.Drawing.Imaging
 
 Module modFunction
     'Fonction de connection à la BDD
@@ -69,6 +70,26 @@ Module modFunction
             connecter.Close()
         End Try
         Return Success
+    End Function
+
+    Public Function TintBitmap(b As Bitmap, color As Color, intensity As Single) As Bitmap
+        Dim b2 As New Bitmap(b.Width, b.Height)
+
+        Dim ia As New ImageAttributes
+
+        Dim m As ColorMatrix
+        m = New ColorMatrix(New Single()() _
+            {New Single() {1, 0, 0, 0, 0},
+             New Single() {0, 1, 0, 0, 0},
+             New Single() {0, 0, 1, 0, 0},
+             New Single() {0, 0, 0, 1, 0},
+             New Single() {color.R / 255 * intensity, color.G / 255 * intensity, color.B / 255 * intensity, 0, 1}})
+
+        ia.SetColorMatrix(m)
+        Dim g As Graphics = Graphics.FromImage(b2)
+        g.DrawImage(b, New Rectangle(0, 0, b.Width, b.Height), 0, 0, b.Width, b.Height, GraphicsUnit.Pixel, ia)
+        Return b2
+
     End Function
 
 End Module

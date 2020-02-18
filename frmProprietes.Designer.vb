@@ -24,13 +24,13 @@ Partial Class frmProprietes
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblCID = New System.Windows.Forms.Label()
+        Me.lblCNom = New System.Windows.Forms.Label()
+        Me.lblCPosition = New System.Windows.Forms.Label()
+        Me.lblCStatus = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblCTrousseau = New System.Windows.Forms.Label()
+        Me.lblCDate = New System.Windows.Forms.Label()
         Me.lblID = New System.Windows.Forms.Label()
         Me.lblLoc = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
@@ -38,63 +38,63 @@ Partial Class frmProprietes
         Me.lblTrousseau = New System.Windows.Forms.Label()
         Me.lblNom = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblNbClef = New System.Windows.Forms.Label()
         Me.btnGrpBatiment = New System.Windows.Forms.Button()
         Me.lblBatiment = New System.Windows.Forms.Label()
         Me.gbEmprunt = New System.Windows.Forms.GroupBox()
         Me.txtAutres = New System.Windows.Forms.TextBox()
         Me.lblDateFin = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblENomPersonne = New System.Windows.Forms.Label()
         Me.lblPersonne = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblNTelephone = New System.Windows.Forms.Label()
+        Me.lblNAutre = New System.Windows.Forms.Label()
         Me.lblDateDebut = New System.Windows.Forms.Label()
         Me.lblTitleDateDebut = New System.Windows.Forms.Label()
         Me.lblTitleDateFin = New System.Windows.Forms.Label()
         Me.lblTel = New System.Windows.Forms.Label()
         Me.lblGenre = New System.Windows.Forms.Label()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.lblNbClef = New System.Windows.Forms.Label()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.gbEmprunt.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblCID
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(24, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "ID :"
+        Me.lblCID.AutoSize = True
+        Me.lblCID.Location = New System.Drawing.Point(6, 16)
+        Me.lblCID.Name = "lblCID"
+        Me.lblCID.Size = New System.Drawing.Size(24, 13)
+        Me.lblCID.TabIndex = 1
+        Me.lblCID.Text = "ID :"
         '
-        'Label2
+        'lblCNom
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 42)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(35, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Nom :"
+        Me.lblCNom.AutoSize = True
+        Me.lblCNom.Location = New System.Drawing.Point(6, 42)
+        Me.lblCNom.Name = "lblCNom"
+        Me.lblCNom.Size = New System.Drawing.Size(35, 13)
+        Me.lblCNom.TabIndex = 3
+        Me.lblCNom.Text = "Nom :"
         '
-        'Label3
+        'lblCPosition
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 130)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(69, 13)
-        Me.Label3.TabIndex = 7
-        Me.Label3.Text = "Localisation :"
+        Me.lblCPosition.AutoSize = True
+        Me.lblCPosition.Location = New System.Drawing.Point(6, 130)
+        Me.lblCPosition.Name = "lblCPosition"
+        Me.lblCPosition.Size = New System.Drawing.Size(69, 13)
+        Me.lblCPosition.TabIndex = 7
+        Me.lblCPosition.Text = "Localisation :"
         '
-        'Label4
+        'lblCStatus
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 156)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 13)
-        Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Status :"
+        Me.lblCStatus.AutoSize = True
+        Me.lblCStatus.Location = New System.Drawing.Point(6, 156)
+        Me.lblCStatus.Name = "lblCStatus"
+        Me.lblCStatus.Size = New System.Drawing.Size(43, 13)
+        Me.lblCStatus.TabIndex = 8
+        Me.lblCStatus.Text = "Status :"
         '
         'Label6
         '
@@ -105,23 +105,23 @@ Partial Class frmProprietes
         Me.Label6.TabIndex = 15
         Me.Label6.Text = "Utilisable dans :"
         '
-        'Label7
+        'lblCTrousseau
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 208)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(63, 13)
-        Me.Label7.TabIndex = 11
-        Me.Label7.Text = "Trousseau :"
+        Me.lblCTrousseau.AutoSize = True
+        Me.lblCTrousseau.Location = New System.Drawing.Point(6, 208)
+        Me.lblCTrousseau.Name = "lblCTrousseau"
+        Me.lblCTrousseau.Size = New System.Drawing.Size(63, 13)
+        Me.lblCTrousseau.TabIndex = 11
+        Me.lblCTrousseau.Text = "Trousseau :"
         '
-        'Label8
+        'lblCDate
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 182)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(70, 13)
-        Me.Label8.TabIndex = 10
-        Me.Label8.Text = "Date d'ajout :"
+        Me.lblCDate.AutoSize = True
+        Me.lblCDate.Location = New System.Drawing.Point(6, 182)
+        Me.lblCDate.Name = "lblCDate"
+        Me.lblCDate.Size = New System.Drawing.Size(70, 13)
+        Me.lblCDate.TabIndex = 10
+        Me.lblCDate.Text = "Date d'ajout :"
         '
         'lblID
         '
@@ -182,17 +182,17 @@ Partial Class frmProprietes
         Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.lblNbClef)
         Me.GroupBox1.Controls.Add(Me.btnGrpBatiment)
-        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.lblCID)
         Me.GroupBox1.Controls.Add(Me.lblNom)
-        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.lblCNom)
         Me.GroupBox1.Controls.Add(Me.lblBatiment)
-        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.lblCPosition)
         Me.GroupBox1.Controls.Add(Me.lblTrousseau)
-        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.lblCStatus)
         Me.GroupBox1.Controls.Add(Me.lblDateAjout)
-        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.lblCDate)
         Me.GroupBox1.Controls.Add(Me.lblStatus)
-        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.lblCTrousseau)
         Me.GroupBox1.Controls.Add(Me.lblLoc)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.lblID)
@@ -202,6 +202,23 @@ Partial Class frmProprietes
         Me.GroupBox1.TabIndex = 23
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Identité de la clefs"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 68)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(53, 13)
+        Me.Label9.TabIndex = 27
+        Me.Label9.Text = "Quantité :"
+        '
+        'lblNbClef
+        '
+        Me.lblNbClef.Location = New System.Drawing.Point(93, 68)
+        Me.lblNbClef.Name = "lblNbClef"
+        Me.lblNbClef.Size = New System.Drawing.Size(171, 62)
+        Me.lblNbClef.TabIndex = 28
+        Me.lblNbClef.Text = "x exemplaires disponibles"
         '
         'btnGrpBatiment
         '
@@ -224,10 +241,10 @@ Partial Class frmProprietes
         '
         Me.gbEmprunt.Controls.Add(Me.txtAutres)
         Me.gbEmprunt.Controls.Add(Me.lblDateFin)
-        Me.gbEmprunt.Controls.Add(Me.Label5)
+        Me.gbEmprunt.Controls.Add(Me.lblENomPersonne)
         Me.gbEmprunt.Controls.Add(Me.lblPersonne)
-        Me.gbEmprunt.Controls.Add(Me.Label12)
-        Me.gbEmprunt.Controls.Add(Me.Label14)
+        Me.gbEmprunt.Controls.Add(Me.lblNTelephone)
+        Me.gbEmprunt.Controls.Add(Me.lblNAutre)
         Me.gbEmprunt.Controls.Add(Me.lblDateDebut)
         Me.gbEmprunt.Controls.Add(Me.lblTitleDateDebut)
         Me.gbEmprunt.Controls.Add(Me.lblTitleDateFin)
@@ -257,14 +274,14 @@ Partial Class frmProprietes
         Me.lblDateFin.Size = New System.Drawing.Size(0, 13)
         Me.lblDateFin.TabIndex = 23
         '
-        'Label5
+        'lblENomPersonne
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 16)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(58, 13)
-        Me.Label5.TabIndex = 1
-        Me.Label5.Text = "Personne :"
+        Me.lblENomPersonne.AutoSize = True
+        Me.lblENomPersonne.Location = New System.Drawing.Point(6, 16)
+        Me.lblENomPersonne.Name = "lblENomPersonne"
+        Me.lblENomPersonne.Size = New System.Drawing.Size(58, 13)
+        Me.lblENomPersonne.TabIndex = 1
+        Me.lblENomPersonne.Text = "Personne :"
         '
         'lblPersonne
         '
@@ -274,23 +291,23 @@ Partial Class frmProprietes
         Me.lblPersonne.Size = New System.Drawing.Size(0, 13)
         Me.lblPersonne.TabIndex = 22
         '
-        'Label12
+        'lblNTelephone
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(6, 68)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(64, 13)
-        Me.Label12.TabIndex = 7
-        Me.Label12.Text = "Téléphone :"
+        Me.lblNTelephone.AutoSize = True
+        Me.lblNTelephone.Location = New System.Drawing.Point(6, 68)
+        Me.lblNTelephone.Name = "lblNTelephone"
+        Me.lblNTelephone.Size = New System.Drawing.Size(64, 13)
+        Me.lblNTelephone.TabIndex = 7
+        Me.lblNTelephone.Text = "Téléphone :"
         '
-        'Label14
+        'lblNAutre
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(7, 146)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(102, 13)
-        Me.Label14.TabIndex = 8
-        Me.Label14.Text = "Autres informations :"
+        Me.lblNAutre.AutoSize = True
+        Me.lblNAutre.Location = New System.Drawing.Point(7, 146)
+        Me.lblNAutre.Name = "lblNAutre"
+        Me.lblNAutre.Size = New System.Drawing.Size(102, 13)
+        Me.lblNAutre.TabIndex = 8
+        Me.lblNAutre.Text = "Autres informations :"
         '
         'lblDateDebut
         '
@@ -314,9 +331,9 @@ Partial Class frmProprietes
         Me.lblTitleDateFin.AutoSize = True
         Me.lblTitleDateFin.Location = New System.Drawing.Point(7, 120)
         Me.lblTitleDateFin.Name = "lblTitleDateFin"
-        Me.lblTitleDateFin.Size = New System.Drawing.Size(84, 13)
+        Me.lblTitleDateFin.Size = New System.Drawing.Size(81, 13)
         Me.lblTitleDateFin.TabIndex = 11
-        Me.lblTitleDateFin.Text = "Date de remise :"
+        Me.lblTitleDateFin.Text = "Date de retour :"
         '
         'lblTel
         '
@@ -343,23 +360,6 @@ Partial Class frmProprietes
         Me.btnOK.TabIndex = 25
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 68)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(53, 13)
-        Me.Label9.TabIndex = 27
-        Me.Label9.Text = "Quantité :"
-        '
-        'lblNbClef
-        '
-        Me.lblNbClef.Location = New System.Drawing.Point(93, 68)
-        Me.lblNbClef.Name = "lblNbClef"
-        Me.lblNbClef.Size = New System.Drawing.Size(171, 62)
-        Me.lblNbClef.TabIndex = 28
-        Me.lblNbClef.Text = "x exemplaires disponibles"
         '
         'frmProprietes
         '
@@ -388,13 +388,13 @@ Partial Class frmProprietes
     End Sub
 
     Friend WithEvents BindingSource1 As BindingSource
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblCID As Label
+    Friend WithEvents lblCNom As Label
+    Friend WithEvents lblCPosition As Label
+    Friend WithEvents lblCStatus As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label8 As Label
+    Friend WithEvents lblCTrousseau As Label
+    Friend WithEvents lblCDate As Label
     Friend WithEvents lblID As Label
     Friend WithEvents lblLoc As Label
     Friend WithEvents lblStatus As Label
@@ -405,10 +405,10 @@ Partial Class frmProprietes
     Friend WithEvents gbEmprunt As GroupBox
     Friend WithEvents txtAutres As TextBox
     Friend WithEvents lblDateFin As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblENomPersonne As Label
     Friend WithEvents lblPersonne As Label
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label14 As Label
+    Friend WithEvents lblNTelephone As Label
+    Friend WithEvents lblNAutre As Label
     Friend WithEvents lblDateDebut As Label
     Friend WithEvents lblTitleDateDebut As Label
     Friend WithEvents lblTitleDateFin As Label

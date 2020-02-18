@@ -32,4 +32,9 @@ Public Class frmAjouterGenre
             valider()
         End If
     End Sub
+
+    Private Sub frmAjouterGenre_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Ajouter une " & strTitleGGenre & "..."
+        lblGenre.Text = strTitleGGenre & " :"
+    End Sub
 End Class

@@ -22,25 +22,25 @@ Partial Class frmAjouterClef
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtID = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblCID = New System.Windows.Forms.Label()
         Me.udQuantity = New System.Windows.Forms.NumericUpDown()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblCNom = New System.Windows.Forms.Label()
         Me.txtNom = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblQuantité = New System.Windows.Forms.Label()
+        Me.lblCStatus = New System.Windows.Forms.Label()
         Me.cmbStatus = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblCTrousseau = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.chkKeepOpen = New System.Windows.Forms.CheckBox()
         Me.cmbTrousseauListe = New System.Windows.Forms.ComboBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblCDate = New System.Windows.Forms.Label()
         Me.cmbLoc = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblCPosition = New System.Windows.Forms.Label()
         Me.btnNewLoc = New System.Windows.Forms.Button()
         Me.btnNewTrousseau = New System.Windows.Forms.Button()
         Me.txtRechercher = New System.Windows.Forms.TextBox()
@@ -85,14 +85,14 @@ Partial Class frmAjouterClef
         Me.txtID.Size = New System.Drawing.Size(71, 20)
         Me.txtID.TabIndex = 1
         '
-        'Label1
+        'lblCID
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(18, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "ID"
+        Me.lblCID.AutoSize = True
+        Me.lblCID.Location = New System.Drawing.Point(6, 16)
+        Me.lblCID.Name = "lblCID"
+        Me.lblCID.Size = New System.Drawing.Size(18, 13)
+        Me.lblCID.TabIndex = 0
+        Me.lblCID.Text = "ID"
         '
         'udQuantity
         '
@@ -104,14 +104,14 @@ Partial Class frmAjouterClef
         Me.udQuantity.TabIndex = 4
         Me.udQuantity.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'Label2
+        'lblCNom
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 56)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(29, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Nom"
+        Me.lblCNom.AutoSize = True
+        Me.lblCNom.Location = New System.Drawing.Point(6, 56)
+        Me.lblCNom.Name = "lblCNom"
+        Me.lblCNom.Size = New System.Drawing.Size(29, 13)
+        Me.lblCNom.TabIndex = 2
+        Me.lblCNom.Text = "Nom"
         '
         'txtNom
         '
@@ -121,23 +121,23 @@ Partial Class frmAjouterClef
         Me.txtNom.Size = New System.Drawing.Size(208, 20)
         Me.txtNom.TabIndex = 2
         '
-        'Label3
+        'lblQuantité
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(86, 17)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(47, 13)
-        Me.Label3.TabIndex = 4
-        Me.Label3.Text = "Quantité"
+        Me.lblQuantité.AutoSize = True
+        Me.lblQuantité.Location = New System.Drawing.Point(86, 17)
+        Me.lblQuantité.Name = "lblQuantité"
+        Me.lblQuantité.Size = New System.Drawing.Size(47, 13)
+        Me.lblQuantité.TabIndex = 4
+        Me.lblQuantité.Text = "Quantité"
         '
-        'Label5
+        'lblCStatus
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 174)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(37, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Status"
+        Me.lblCStatus.AutoSize = True
+        Me.lblCStatus.Location = New System.Drawing.Point(6, 174)
+        Me.lblCStatus.Name = "lblCStatus"
+        Me.lblCStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblCStatus.TabIndex = 11
+        Me.lblCStatus.Text = "Status"
         '
         'cmbStatus
         '
@@ -149,14 +149,14 @@ Partial Class frmAjouterClef
         Me.cmbStatus.Size = New System.Drawing.Size(208, 21)
         Me.cmbStatus.TabIndex = 5
         '
-        'Label6
+        'lblCTrousseau
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 134)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(57, 13)
-        Me.Label6.TabIndex = 14
-        Me.Label6.Text = "Trousseau"
+        Me.lblCTrousseau.AutoSize = True
+        Me.lblCTrousseau.Location = New System.Drawing.Point(6, 134)
+        Me.lblCTrousseau.Name = "lblCTrousseau"
+        Me.lblCTrousseau.Size = New System.Drawing.Size(57, 13)
+        Me.lblCTrousseau.TabIndex = 14
+        Me.lblCTrousseau.Text = "Trousseau"
         '
         'btnSave
         '
@@ -204,14 +204,14 @@ Partial Class frmAjouterClef
         Me.DateTimePicker1.Size = New System.Drawing.Size(208, 20)
         Me.DateTimePicker1.TabIndex = 25
         '
-        'Label7
+        'lblCDate
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 217)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(64, 13)
-        Me.Label7.TabIndex = 26
-        Me.Label7.Text = "Date d'ajout"
+        Me.lblCDate.AutoSize = True
+        Me.lblCDate.Location = New System.Drawing.Point(6, 217)
+        Me.lblCDate.Name = "lblCDate"
+        Me.lblCDate.Size = New System.Drawing.Size(64, 13)
+        Me.lblCDate.TabIndex = 26
+        Me.lblCDate.Text = "Date d'ajout"
         '
         'cmbLoc
         '
@@ -223,14 +223,14 @@ Partial Class frmAjouterClef
         Me.cmbLoc.Size = New System.Drawing.Size(208, 21)
         Me.cmbLoc.TabIndex = 31
         '
-        'Label4
+        'lblCPosition
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 96)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(109, 13)
-        Me.Label4.TabIndex = 30
-        Me.Label4.Text = "Localisation de la clef"
+        Me.lblCPosition.AutoSize = True
+        Me.lblCPosition.Location = New System.Drawing.Point(6, 96)
+        Me.lblCPosition.Name = "lblCPosition"
+        Me.lblCPosition.Size = New System.Drawing.Size(109, 13)
+        Me.lblCPosition.TabIndex = 30
+        Me.lblCPosition.Text = "Localisation de la clef"
         '
         'btnNewLoc
         '
@@ -310,14 +310,14 @@ Partial Class frmAjouterClef
         Me.dgvSelBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSelBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvSelBatiment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSelBatiment.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSelBatiment.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvSelBatiment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvSelBatiment.Location = New System.Drawing.Point(6, 21)
         Me.dgvSelBatiment.MultiSelect = False
@@ -349,14 +349,14 @@ Partial Class frmAjouterClef
         Me.dgvListBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListBatiment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvListBatiment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListBatiment.Location = New System.Drawing.Point(6, 21)
         Me.dgvListBatiment.MultiSelect = False
@@ -409,21 +409,21 @@ Partial Class frmAjouterClef
         '
         Me.GroupBox4.Controls.Add(Me.gbEmprunteur)
         Me.GroupBox4.Controls.Add(Me.btnNewLoc)
-        Me.GroupBox4.Controls.Add(Me.Label7)
+        Me.GroupBox4.Controls.Add(Me.lblCDate)
         Me.GroupBox4.Controls.Add(Me.btnNewTrousseau)
         Me.GroupBox4.Controls.Add(Me.cmbLoc)
         Me.GroupBox4.Controls.Add(Me.DateTimePicker1)
-        Me.GroupBox4.Controls.Add(Me.Label4)
+        Me.GroupBox4.Controls.Add(Me.lblCPosition)
         Me.GroupBox4.Controls.Add(Me.cmbTrousseauListe)
-        Me.GroupBox4.Controls.Add(Me.Label6)
+        Me.GroupBox4.Controls.Add(Me.lblCTrousseau)
         Me.GroupBox4.Controls.Add(Me.cmbStatus)
-        Me.GroupBox4.Controls.Add(Me.Label5)
+        Me.GroupBox4.Controls.Add(Me.lblCStatus)
         Me.GroupBox4.Controls.Add(Me.txtID)
         Me.GroupBox4.Controls.Add(Me.udQuantity)
-        Me.GroupBox4.Controls.Add(Me.Label2)
-        Me.GroupBox4.Controls.Add(Me.Label1)
+        Me.GroupBox4.Controls.Add(Me.lblCNom)
+        Me.GroupBox4.Controls.Add(Me.lblCID)
         Me.GroupBox4.Controls.Add(Me.txtNom)
-        Me.GroupBox4.Controls.Add(Me.Label3)
+        Me.GroupBox4.Controls.Add(Me.lblQuantité)
         Me.GroupBox4.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(256, 386)
@@ -538,22 +538,22 @@ Partial Class frmAjouterClef
     End Sub
 
     Friend WithEvents txtID As TextBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblCID As Label
     Friend WithEvents udQuantity As NumericUpDown
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblCNom As Label
     Friend WithEvents txtNom As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents lblQuantité As Label
+    Friend WithEvents lblCStatus As Label
     Friend WithEvents cmbStatus As ComboBox
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblCTrousseau As Label
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents chkKeepOpen As CheckBox
     Friend WithEvents cmbTrousseauListe As ComboBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblCDate As Label
     Friend WithEvents cmbLoc As ComboBox
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblCPosition As Label
     Friend WithEvents btnNewLoc As Button
     Friend WithEvents btnNewTrousseau As Button
     Friend WithEvents txtRechercher As TextBox

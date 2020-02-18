@@ -35,10 +35,10 @@ Partial Class frmGestionBatiments
         Me.txtNom = New System.Windows.Forms.TextBox()
         Me.txtAdresse = New System.Windows.Forms.TextBox()
         Me.txtFonction = New System.Windows.Forms.TextBox()
-        Me.lbmID = New System.Windows.Forms.Label()
+        Me.lblID = New System.Windows.Forms.Label()
         Me.lblNom = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblAdresse = New System.Windows.Forms.Label()
+        Me.lblFonction = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EditerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -170,14 +170,14 @@ Partial Class frmGestionBatiments
         Me.txtFonction.Size = New System.Drawing.Size(335, 20)
         Me.txtFonction.TabIndex = 51
         '
-        'lbmID
+        'lblID
         '
-        Me.lbmID.AutoSize = True
-        Me.lbmID.Location = New System.Drawing.Point(6, 17)
-        Me.lbmID.Name = "lbmID"
-        Me.lbmID.Size = New System.Drawing.Size(25, 13)
-        Me.lbmID.TabIndex = 53
-        Me.lbmID.Text = "N° :"
+        Me.lblID.AutoSize = True
+        Me.lblID.Location = New System.Drawing.Point(6, 17)
+        Me.lblID.Name = "lblID"
+        Me.lblID.Size = New System.Drawing.Size(25, 13)
+        Me.lblID.TabIndex = 53
+        Me.lblID.Text = "N° :"
         '
         'lblNom
         '
@@ -188,33 +188,33 @@ Partial Class frmGestionBatiments
         Me.lblNom.TabIndex = 54
         Me.lblNom.Text = "Dénomination :"
         '
-        'Label3
+        'lblAdresse
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 103)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(51, 13)
-        Me.Label3.TabIndex = 55
-        Me.Label3.Text = "Adresse :"
+        Me.lblAdresse.AutoSize = True
+        Me.lblAdresse.Location = New System.Drawing.Point(6, 103)
+        Me.lblAdresse.Name = "lblAdresse"
+        Me.lblAdresse.Size = New System.Drawing.Size(51, 13)
+        Me.lblAdresse.TabIndex = 55
+        Me.lblAdresse.Text = "Adresse :"
         '
-        'Label4
+        'lblFonction
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 146)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(54, 13)
-        Me.Label4.TabIndex = 56
-        Me.Label4.Text = "Fonction :"
+        Me.lblFonction.AutoSize = True
+        Me.lblFonction.Location = New System.Drawing.Point(6, 146)
+        Me.lblFonction.Name = "lblFonction"
+        Me.lblFonction.Size = New System.Drawing.Size(54, 13)
+        Me.lblFonction.TabIndex = 56
+        Me.lblFonction.Text = "Fonction :"
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.lblFonction)
         Me.GroupBox2.Controls.Add(Me.chkKeepOpen)
         Me.GroupBox2.Controls.Add(Me.btnSave)
         Me.GroupBox2.Controls.Add(Me.btnCancel)
-        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.lblAdresse)
         Me.GroupBox2.Controls.Add(Me.lblNom)
-        Me.GroupBox2.Controls.Add(Me.lbmID)
+        Me.GroupBox2.Controls.Add(Me.lblID)
         Me.GroupBox2.Controls.Add(Me.txtFonction)
         Me.GroupBox2.Controls.Add(Me.txtAdresse)
         Me.GroupBox2.Controls.Add(Me.txtNom)
@@ -254,7 +254,10 @@ Partial Class frmGestionBatiments
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbRechercher)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmGestionBatiments"
+        Me.ShowIcon = False
         Me.Text = "Gérer les bâtiments"
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
@@ -277,10 +280,10 @@ Partial Class frmGestionBatiments
     Friend WithEvents txtNom As TextBox
     Friend WithEvents txtAdresse As TextBox
     Friend WithEvents txtFonction As TextBox
-    Friend WithEvents lbmID As Label
+    Friend WithEvents lblID As Label
     Friend WithEvents lblNom As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblAdresse As Label
+    Friend WithEvents lblFonction As Label
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents EditerToolStripMenuItem As ToolStripMenuItem

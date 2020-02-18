@@ -100,6 +100,11 @@ Public Class frmGestionPosition
         End Try
     End Sub
     Private Sub frmGestionPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        lblPNom.Text = strTitlePNom & " :"
+        lblPBatiment.Text = strTitlePBatiment & " :"
+        lblPResponsable.Text = strTitlePResponsable & " :"
+
         RefreshList()
         RefreshResponsable()
         RefreshBatiment()

@@ -1,6 +1,11 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class frmGestionPersonnes
     Private Sub frmAjouterPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblType.Text = strTitleNGenre & " :"
+        lblNom.Text = strTitleNNom & " :"
+        lblTelephone.Text = strTitleNTelephone & " :"
+        lblAutre.Text = strTitleNAutre & " :"
+
         RefreshGenre()
         RefreshList()
         If userType <> "Administrateur" Then
@@ -26,14 +31,12 @@ Public Class frmGestionPersonnes
             da.SelectCommand = cmd
             da.Fill(dtPersonnes)
 
-            For i As Integer = 0 To dtPersonnes.Columns.Count - 1
-                dtPersonnes.Columns(i).ColumnName = dtPersonnes.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
-            dgvListPersonne.DataSource = dtPersonnes
+            dtPersonnes.Columns("NNom").ColumnName = strTitleNNom
+            dtPersonnes.Columns("NGenre").ColumnName = strTitleNGenre
+            dtPersonnes.Columns("NTelephone").ColumnName = strTitleNTelephone
+            dtPersonnes.Columns("NAutre").ColumnName = strTitleNAutre
 
-            For i = 0 To dgvListPersonne.ColumnCount - 2
-                dgvListPersonne.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            Next
+            dgvListPersonne.DataSource = dtPersonnes
             dgvListPersonne.Columns(dgvListPersonne.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             connecter().Close()
 
@@ -157,7 +160,7 @@ Public Class frmGestionPersonnes
                 frmGestionPosition.RefreshResponsable()
             End If
             If frmEmprunterClef.IsHandleCreated Then
-                frmEmprunterClef.RefreshPersonne()
+                frmEmprunterClef.LoadPersonnes()
             End If
             If chkKeepOpen.Checked = False Then
                 Me.Close()
@@ -197,7 +200,7 @@ Public Class frmGestionPersonnes
     End Sub
 
     Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
-        Dim intIndexNom As Integer = dgvListPersonne.Columns("Nom").Index
+        Dim intIndexNom As Integer = dgvListPersonne.Columns(strTitleNNom).Index
         Dim stgToDelete As String = dgvListPersonne.SelectedRows(0).Cells(intIndexNom).Value.ToString()
         ' Initializes variables to pass to the MessageBox.Show method.
         Dim Message As String = "Voulez vous vraiment supprimer """ & stgToDelete & """ ?"

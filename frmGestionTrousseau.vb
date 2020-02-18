@@ -52,9 +52,13 @@ Public Class frmGestionTrousseau
             da.SelectCommand = cmd
             da.Fill(dtKeyList)
 
-            For i As Integer = 0 To dtKeyList.Columns.Count - 1
-                dtKeyList.Columns(i).ColumnName = dtKeyList.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+            dtKeyList.Columns("CID").ColumnName = strTitleCID
+            dtKeyList.Columns("CNom").ColumnName = strTitleCNom
+            dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
+            dtKeyList.Columns("CStatus").ColumnName = strTitleCStatus
+            dtKeyList.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
+
             dgvListClefs.DataSource = dtKeyList
             dgvListClefs.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             dgvListClefs.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -94,9 +98,13 @@ Public Class frmGestionTrousseau
             da.SelectCommand = cmd
             da.Fill(dtKeyList)
 
-            For i As Integer = 0 To dtKeyList.Columns.Count - 1
-                dtKeyList.Columns(i).ColumnName = dtKeyList.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+            dtKeyList.Columns("CID").ColumnName = strTitleCID
+            dtKeyList.Columns("CNom").ColumnName = strTitleCNom
+            dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
+            dtKeyList.Columns("CStatus").ColumnName = strTitleCStatus
+            dtKeyList.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
+
             dgvSelTrousseau.DataSource = dtKeyList
             dgvSelTrousseau.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             dgvSelTrousseau.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -277,7 +285,7 @@ Public Class frmGestionTrousseau
 
         If dtSelTrousseau.Rows.Count > 0 Then
             For Each r In dtSelTrousseau.Rows
-                Dim stgKeyFromTrousseau As String = r.item("ID").ToString
+                Dim stgKeyFromTrousseau As String = r.item(strTitleCID).ToString
                 Dim cmd As New MySqlCommand
                 Dim dt As New DataTable
                 Dim da As New MySqlDataAdapter
@@ -298,7 +306,7 @@ Public Class frmGestionTrousseau
         End If
         If dtListClefs.Rows.Count > 0 Then
             For Each r In dtListClefs.Rows
-                Dim stgKeyFromTrousseau As String = r.item("ID").ToString
+                Dim stgKeyFromTrousseau As String = r.item(strTitleCID).ToString
                 Dim cmd As New MySqlCommand
                 Dim dt As New DataTable
                 Dim da As New MySqlDataAdapter

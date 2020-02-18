@@ -23,7 +23,7 @@ Partial Class frmGestionPersonnes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gbRechercher = New System.Windows.Forms.GroupBox()
         Me.txtRechercher = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -31,13 +31,13 @@ Partial Class frmGestionPersonnes
         Me.btnAddType = New System.Windows.Forms.Button()
         Me.mtxtTel = New System.Windows.Forms.MaskedTextBox()
         Me.cmbType = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblAutre = New System.Windows.Forms.Label()
         Me.chkKeepOpen = New System.Windows.Forms.CheckBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblTelephone = New System.Windows.Forms.Label()
         Me.lblNom = New System.Windows.Forms.Label()
-        Me.lbmType = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
         Me.txtAutre = New System.Windows.Forms.TextBox()
         Me.txtNom = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -78,13 +78,13 @@ Partial Class frmGestionPersonnes
         Me.GroupBox2.Controls.Add(Me.btnAddType)
         Me.GroupBox2.Controls.Add(Me.mtxtTel)
         Me.GroupBox2.Controls.Add(Me.cmbType)
-        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.lblAutre)
         Me.GroupBox2.Controls.Add(Me.chkKeepOpen)
         Me.GroupBox2.Controls.Add(Me.btnSave)
         Me.GroupBox2.Controls.Add(Me.btnCancel)
-        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.lblTelephone)
         Me.GroupBox2.Controls.Add(Me.lblNom)
-        Me.GroupBox2.Controls.Add(Me.lbmType)
+        Me.GroupBox2.Controls.Add(Me.lblType)
         Me.GroupBox2.Controls.Add(Me.txtAutre)
         Me.GroupBox2.Controls.Add(Me.txtNom)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
@@ -130,14 +130,14 @@ Partial Class frmGestionPersonnes
         Me.cmbType.Size = New System.Drawing.Size(121, 21)
         Me.cmbType.TabIndex = 57
         '
-        'Label4
+        'lblAutre
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 146)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 13)
-        Me.Label4.TabIndex = 56
-        Me.Label4.Text = "Autre :"
+        Me.lblAutre.AutoSize = True
+        Me.lblAutre.Location = New System.Drawing.Point(6, 146)
+        Me.lblAutre.Name = "lblAutre"
+        Me.lblAutre.Size = New System.Drawing.Size(38, 13)
+        Me.lblAutre.TabIndex = 56
+        Me.lblAutre.Text = "Autre :"
         '
         'chkKeepOpen
         '
@@ -168,14 +168,14 @@ Partial Class frmGestionPersonnes
         Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Label3
+        'lblTelephone
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 103)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(64, 13)
-        Me.Label3.TabIndex = 55
-        Me.Label3.Text = "Téléphone :"
+        Me.lblTelephone.AutoSize = True
+        Me.lblTelephone.Location = New System.Drawing.Point(6, 103)
+        Me.lblTelephone.Name = "lblTelephone"
+        Me.lblTelephone.Size = New System.Drawing.Size(64, 13)
+        Me.lblTelephone.TabIndex = 55
+        Me.lblTelephone.Text = "Téléphone :"
         '
         'lblNom
         '
@@ -186,14 +186,14 @@ Partial Class frmGestionPersonnes
         Me.lblNom.TabIndex = 54
         Me.lblNom.Text = "Nom :"
         '
-        'lbmType
+        'lblType
         '
-        Me.lbmType.AutoSize = True
-        Me.lbmType.Location = New System.Drawing.Point(6, 17)
-        Me.lbmType.Name = "lbmType"
-        Me.lbmType.Size = New System.Drawing.Size(37, 13)
-        Me.lbmType.TabIndex = 53
-        Me.lbmType.Text = "Type :"
+        Me.lblType.AutoSize = True
+        Me.lblType.Location = New System.Drawing.Point(6, 17)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(37, 13)
+        Me.lblType.TabIndex = 53
+        Me.lblType.Text = "Type :"
         '
         'txtAutre
         '
@@ -231,14 +231,14 @@ Partial Class frmGestionPersonnes
         Me.dgvListPersonne.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListPersonne.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListPersonne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListPersonne.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListPersonne.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvListPersonne.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListPersonne.Location = New System.Drawing.Point(6, 21)
         Me.dgvListPersonne.MultiSelect = False
@@ -279,7 +279,9 @@ Partial Class frmGestionPersonnes
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmGestionPersonnes"
+        Me.ShowIcon = False
         Me.Text = "Gérer les personnes"
         Me.gbRechercher.ResumeLayout(False)
         Me.gbRechercher.PerformLayout()
@@ -295,13 +297,13 @@ Partial Class frmGestionPersonnes
     Friend WithEvents gbRechercher As GroupBox
     Friend WithEvents txtRechercher As TextBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblAutre As Label
     Friend WithEvents chkKeepOpen As CheckBox
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblTelephone As Label
     Friend WithEvents lblNom As Label
-    Friend WithEvents lbmType As Label
+    Friend WithEvents lblType As Label
     Friend WithEvents txtAutre As TextBox
     Friend WithEvents txtNom As TextBox
     Friend WithEvents GroupBox1 As GroupBox

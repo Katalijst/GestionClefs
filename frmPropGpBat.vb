@@ -23,9 +23,9 @@ Public Class frmPropGpBat
             Next
             dgvListBatiment.DataSource = dtBatiment
 
-            For i = 0 To dgvListBatiment.ColumnCount - 2
-                dgvListBatiment.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            Next
+            dtBatiment.Columns("BNum").ColumnName = strTitleBNum
+            dtBatiment.Columns("GIDBat").ColumnName = strTitleGIDBat
+
             dgvListBatiment.Columns(dgvListBatiment.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             connecter().Close()
 
@@ -37,4 +37,5 @@ Public Class frmPropGpBat
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Me.Close()
     End Sub
+
 End Class

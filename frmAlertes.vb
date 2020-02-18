@@ -2,6 +2,12 @@
 
 Public Class frmAlertes
     Private Sub frmAlertes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim strCBFiltre As String() = New String(2) {}
+        strCBFiltre(0) = strTitleCID
+        strCBFiltre(1) = strTitleCNom
+        strCBFiltre(2) = strTitleENomPersonne
+        cbRechercher.DataSource = strCBFiltre
+
         SearchAndRefresh()
         cbRechercher.SelectedIndex = 1
         chkAlertPopUp.Checked = My.Settings.ShowAlert
@@ -51,12 +57,12 @@ Public Class frmAlertes
                         End If
                     Next
                 Next
-                dtAlertes.Columns(0).ColumnName = "ID"
-                dtAlertes.Columns(1).ColumnName = "Nom de la clef"
-                dtAlertes.Columns(2).ColumnName = "Type d'emprunteur"
-                dtAlertes.Columns(3).ColumnName = "Nom de l'emprunteur"
-                dtAlertes.Columns(4).ColumnName = "Date d'emprunt"
-                dtAlertes.Columns(5).ColumnName = "Date de retour"
+                dtAlertes.Columns("EIDClef").ColumnName = strTitleCID
+                dtAlertes.Columns("CNom").ColumnName = strTitleCNom
+                dtAlertes.Columns("EIDGenre").ColumnName = strTitleEGenre
+                dtAlertes.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
+                dtAlertes.Columns("EDateDebut").ColumnName = strTitleEDateDebut
+                dtAlertes.Columns("EDateFin").ColumnName = strTitleEDateFin
 
                 dgvResultats.DataSource = dtAlertes
                 connecter().Close()
@@ -85,7 +91,7 @@ Public Class frmAlertes
 
     Private Sub RetourToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RetourToolStripMenuItem.Click
         If dgvResultats.SelectedRows.Count > 0 Then
-            RetourClef(dgvResultats.SelectedRows(0).Cells(0).Value.ToString())
+            RetourClef(dgvResultats.SelectedRows(0).Cells(strTitleCID).Value.ToString())
         End If
     End Sub
 
@@ -224,11 +230,11 @@ Public Class frmAlertes
         Dim searchValue As String = txtRechercher.Text
         Dim intIndex As Integer = 1
 
-        If cbRechercher.Text = "ID" Then
+        If cbRechercher.Text = strTitleCID Then
             intIndex = 0
-        ElseIf cbRechercher.Text = "Nom" Then
+        ElseIf cbRechercher.Text = strTitleCNom Then
             intIndex = 1
-        ElseIf cbRechercher.Text = "Emprunteur" Then
+        ElseIf cbRechercher.Text = strTitleENomPersonne Then
             intIndex = 3
         End If
 

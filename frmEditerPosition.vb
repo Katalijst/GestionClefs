@@ -3,6 +3,11 @@
 Public Class frmEditerPosition
     Shared stgPosID
     Private Sub frmEditerPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        lblPNom.Text = strTitlePNom & " :"
+        lblPBatiment.Text = strTitlePBatiment & " :"
+        lblPResponsable.Text = strTitlePResponsable & " :"
+
         RefreshResponsable()
         RefreshBatiment()
         RemplissageAuto()

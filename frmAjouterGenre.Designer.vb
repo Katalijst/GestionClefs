@@ -22,19 +22,19 @@ Partial Class frmAjouterGenre
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblGenre = New System.Windows.Forms.Label()
         Me.btnValider = New System.Windows.Forms.Button()
         Me.txtType = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblGenre
         '
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(160, 13)
-        Me.Label1.TabIndex = 5
-        Me.Label1.Text = "Type de personne"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblGenre.Location = New System.Drawing.Point(12, 9)
+        Me.lblGenre.Name = "lblGenre"
+        Me.lblGenre.Size = New System.Drawing.Size(160, 13)
+        Me.lblGenre.TabIndex = 5
+        Me.lblGenre.Text = "Type de personne"
+        Me.lblGenre.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'btnValider
         '
@@ -59,7 +59,7 @@ Partial Class frmAjouterGenre
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(184, 81)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblGenre)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtType)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -73,7 +73,7 @@ Partial Class frmAjouterGenre
 
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblGenre As Label
     Friend WithEvents btnValider As Button
     Friend WithEvents txtType As TextBox
 End Class

@@ -15,26 +15,6 @@ Public Class frmMain
         Return Enumerable.Range(0, str.Length / chunkSize).[Select](Function(i) str.Substring(i * chunkSize, chunkSize))
     End Function
 
-    Private Function TintBitmap(b As Bitmap, color As Color, intensity As Single) As Bitmap
-        Dim b2 As New Bitmap(b.Width, b.Height)
-
-        Dim ia As New ImageAttributes
-
-        Dim m As ColorMatrix
-        m = New ColorMatrix(New Single()() _
-            {New Single() {1, 0, 0, 0, 0},
-             New Single() {0, 1, 0, 0, 0},
-             New Single() {0, 0, 1, 0, 0},
-             New Single() {0, 0, 0, 1, 0},
-             New Single() {color.R / 255 * intensity, color.G / 255 * intensity, color.B / 255 * intensity, 0, 1}})
-
-        ia.SetColorMatrix(m)
-        Dim g As Graphics = Graphics.FromImage(b2)
-        g.DrawImage(b, New Rectangle(0, 0, b.Width, b.Height), 0, 0, b.Width, b.Height, GraphicsUnit.Pixel, ia)
-        Return b2
-
-    End Function
-
     Private Sub dgvResultats_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvResultats.CellMouseDown
         '--- Evenement de clic droit sur la DataGridView ---
         'Vérification si le clic a été fait sur une cellule
@@ -52,6 +32,12 @@ Public Class frmMain
         End If
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim strCBFiltre As String() = New String(3) {}
+        strCBFiltre(0) = strTitleCID
+        strCBFiltre(1) = strTitleCNom
+        strCBFiltre(2) = strTitleCPosition
+        strCBFiltre(3) = strTitleENomPersonne
+        cbRechercher.DataSource = strCBFiltre
         'Initialiser l'index du menu déroulant de sélection du type de recherche
         cbRechercher.SelectedIndex = 1
         'Sub d'actualisation et de recherche (Ctrl + clic sur le nom pour y accèder rapidement)
@@ -151,14 +137,14 @@ Public Class frmMain
         'Filtres du type de recherche
         Try
             If dgvResultats.RowCount > 0 Then
-                If cbRechercher.Text = "Nom" Then
-                    stgPredict = "Nom"
-                ElseIf cbRechercher.Text = "Emprunteur" Then
-                    stgPredict = "NomPersonne"
-                ElseIf cbRechercher.Text = "Lieu" Then
-                    stgPredict = "Position"
-                ElseIf cbRechercher.Text = "ID" Then
-                    stgPredict = "ID"
+                If cbRechercher.Text = strTitleCNom Then
+                    stgPredict = strTitleCNom
+                ElseIf cbRechercher.Text = strTitleENomPersonne Then
+                    stgPredict = strTitleENomPersonne
+                ElseIf cbRechercher.Text = strTitleCPosition Then
+                    stgPredict = strTitleCPosition
+                ElseIf cbRechercher.Text = strTitleCID Then
+                    stgPredict = strTitleCID
                 Else
                     Exit Sub
                 End If
@@ -193,25 +179,40 @@ Public Class frmMain
             End With
             da.SelectCommand = cmd
             da.Fill(dtKeyList)
-            For i As Integer = 0 To dtKeyList.Columns.Count - 1
-                dtKeyList.Columns(i).ColumnName = dtKeyList.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+            'For i As Integer = 0 To dtKeyList.Columns.Count - 1
+            '    dtKeyList.Columns(i).ColumnName = dtKeyList.Columns(i).ColumnName.ToString().Remove(0, 1)
+            'Next
+
+            dtKeyList.Columns("CID").ColumnName = strTitleCID
+            dtKeyList.Columns("CNom").ColumnName = strTitleCNom
+            dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
+            dtKeyList.Columns("CStatus").ColumnName = strTitleCStatus
+            dtKeyList.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
+
             srcKeyList.DataSource = dtKeyList
 
             For Each column In dgvResultats.Columns
                 column.SortMode = DataGridViewColumnSortMode.NotSortable
             Next
 
-            sql = "SELECT CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef AND CStatus like ""%"" and CID <> ""0"""
+            sql = "Select CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef And CStatus Like ""%"" And CID <> ""0"""
             With cmd
                 .Connection = connecter()
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
             da.Fill(dtOwner)
-            For i As Integer = 0 To dtOwner.Columns.Count - 1
-                dtOwner.Columns(i).ColumnName = dtOwner.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+
+            dtOwner.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtOwner.Columns("CID").ColumnName = strTitleCID
+            dtOwner.Columns("CNom").ColumnName = strTitleCNom
+            dtOwner.Columns("CPosition").ColumnName = strTitleCPosition
+            dtOwner.Columns("CStatus").ColumnName = strTitleCStatus
+            dtOwner.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
+            dtOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
+            dtOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
+
             srcOwner.DataSource = dtOwner
 
             If cbRechercher.Text = "Emprunteur" Then
@@ -249,34 +250,34 @@ Public Class frmMain
         If cbRechercher.Text <> "Emprunteur" Then
             Select Case chkNumber
                 Case 1
-                    srcKeyList.Filter = "Status='Attribuée'"
+                    srcKeyList.Filter = strTitleCStatus & "='Attribuée'"
                 Case 2
-                    srcKeyList.Filter = "Status='Empruntée'"
+                    srcKeyList.Filter = strTitleCStatus & "='Empruntée'"
                 Case 3
-                    srcKeyList.Filter = "Status='Attribuée' OR Status= 'Empruntée'"
+                    srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
                 Case 4
-                    srcKeyList.Filter = "Status='Disponible'"
+                    srcKeyList.Filter = strTitleCStatus & "='Disponible'"
                 Case 5
-                    srcKeyList.Filter = "Status='Attribuée' OR Status= 'Disponible'"
+                    srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
                 Case 6
-                    srcKeyList.Filter = "Status='Disponible' OR Status= 'Empruntée'"
+                    srcKeyList.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
                 Case Else
                     srcKeyList.Filter = ""
             End Select
         Else
             Select Case chkNumber
                 Case 1
-                    srcOwner.Filter = "Status='Attribuée'"
+                    srcOwner.Filter = strTitleCStatus & "='Attribuée'"
                 Case 2
-                    srcOwner.Filter = "Status='Empruntée'"
+                    srcOwner.Filter = strTitleCStatus & "='Empruntée'"
                 Case 3
-                    srcOwner.Filter = "Status='Attribuée' OR Status= 'Empruntée'"
+                    srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
                 Case 4
-                    srcOwner.Filter = "Status='Disponible'"
+                    srcOwner.Filter = strTitleCStatus & "='Disponible'"
                 Case 5
-                    srcOwner.Filter = "Status='Attribuée' OR Status= 'Disponible'"
+                    srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
                 Case 6
-                    srcOwner.Filter = "Status='Disponible' OR Status= 'Empruntée'"
+                    srcOwner.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
                 Case Else
                     srcOwner.Filter = ""
             End Select
@@ -351,13 +352,13 @@ Public Class frmMain
         Dim intColumnNb As Integer = 1
         'Filtres du type de recherche
         If cbRechercher.Text = "ID" Then
-            intColumnNb = dgvResultats.Columns("ID").Index
+            intColumnNb = dgvResultats.Columns(strTitleCID).Index
         ElseIf cbRechercher.Text = "Nom" Then
-            intColumnNb = dgvResultats.Columns("Nom").Index
+            intColumnNb = dgvResultats.Columns(strTitleCNom).Index
         ElseIf cbRechercher.Text = "Emprunteur" Then
-            intColumnNb = dgvResultats.Columns("NomPersonne").Index
+            intColumnNb = dgvResultats.Columns(strTitleENomPersonne).Index
         ElseIf cbRechercher.Text = "Lieu" Then
-            intColumnNb = dgvResultats.Columns("Position").Index
+            intColumnNb = dgvResultats.Columns(strTitleCPosition).Index
         End If
 
         Try
@@ -381,7 +382,7 @@ Public Class frmMain
 
     Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
         'Récupération de l'id de la ligne cliquée
-        Dim intIndexNom As Integer = dgvResultats.Columns("Nom").Index
+        Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
         'Sub de suppression de la clef à partir de son ID
         DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
     End Sub
@@ -455,7 +456,7 @@ Public Class frmMain
     Private Sub pbSupprimer_Click(sender As Object, e As EventArgs) Handles pbSupprimer.Click
         If dgvResultats.SelectedRows.Count > 0 Then
             'Récupération de l'id de la ligne cliquée
-            Dim intIndexNom As Integer = dgvResultats.Columns("Nom").Index
+            Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
             'Sub de suppression de la clef à partir de son ID
             DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
         End If

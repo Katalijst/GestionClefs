@@ -26,12 +26,12 @@ Partial Class frmEditerPersonne
         Me.btnAddType = New System.Windows.Forms.Button()
         Me.mtxtTel = New System.Windows.Forms.MaskedTextBox()
         Me.cmbType = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblAutre = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblTelephone = New System.Windows.Forms.Label()
         Me.lblNom = New System.Windows.Forms.Label()
-        Me.lbmType = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
         Me.txtAutre = New System.Windows.Forms.TextBox()
         Me.txtNom = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
@@ -42,12 +42,12 @@ Partial Class frmEditerPersonne
         Me.GroupBox2.Controls.Add(Me.btnAddType)
         Me.GroupBox2.Controls.Add(Me.mtxtTel)
         Me.GroupBox2.Controls.Add(Me.cmbType)
-        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.lblAutre)
         Me.GroupBox2.Controls.Add(Me.btnSave)
         Me.GroupBox2.Controls.Add(Me.btnCancel)
-        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.lblTelephone)
         Me.GroupBox2.Controls.Add(Me.lblNom)
-        Me.GroupBox2.Controls.Add(Me.lbmType)
+        Me.GroupBox2.Controls.Add(Me.lblType)
         Me.GroupBox2.Controls.Add(Me.txtAutre)
         Me.GroupBox2.Controls.Add(Me.txtNom)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
@@ -84,14 +84,14 @@ Partial Class frmEditerPersonne
         Me.cmbType.Size = New System.Drawing.Size(121, 21)
         Me.cmbType.TabIndex = 57
         '
-        'Label4
+        'lblAutre
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 146)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 13)
-        Me.Label4.TabIndex = 56
-        Me.Label4.Text = "Autre :"
+        Me.lblAutre.AutoSize = True
+        Me.lblAutre.Location = New System.Drawing.Point(6, 146)
+        Me.lblAutre.Name = "lblAutre"
+        Me.lblAutre.Size = New System.Drawing.Size(38, 13)
+        Me.lblAutre.TabIndex = 56
+        Me.lblAutre.Text = "Autre :"
         '
         'btnSave
         '
@@ -112,14 +112,14 @@ Partial Class frmEditerPersonne
         Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Label3
+        'lblTelephone
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 103)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(64, 13)
-        Me.Label3.TabIndex = 55
-        Me.Label3.Text = "Téléphone :"
+        Me.lblTelephone.AutoSize = True
+        Me.lblTelephone.Location = New System.Drawing.Point(6, 103)
+        Me.lblTelephone.Name = "lblTelephone"
+        Me.lblTelephone.Size = New System.Drawing.Size(64, 13)
+        Me.lblTelephone.TabIndex = 55
+        Me.lblTelephone.Text = "Téléphone :"
         '
         'lblNom
         '
@@ -130,14 +130,14 @@ Partial Class frmEditerPersonne
         Me.lblNom.TabIndex = 54
         Me.lblNom.Text = "Nom :"
         '
-        'lbmType
+        'lblType
         '
-        Me.lbmType.AutoSize = True
-        Me.lbmType.Location = New System.Drawing.Point(6, 17)
-        Me.lbmType.Name = "lbmType"
-        Me.lbmType.Size = New System.Drawing.Size(37, 13)
-        Me.lbmType.TabIndex = 53
-        Me.lbmType.Text = "Type :"
+        Me.lblType.AutoSize = True
+        Me.lblType.Location = New System.Drawing.Point(6, 17)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(37, 13)
+        Me.lblType.TabIndex = 53
+        Me.lblType.Text = "Type :"
         '
         'txtAutre
         '
@@ -180,12 +180,12 @@ Partial Class frmEditerPersonne
     Friend WithEvents btnAddType As Button
     Friend WithEvents mtxtTel As MaskedTextBox
     Friend WithEvents cmbType As ComboBox
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblAutre As Label
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblTelephone As Label
     Friend WithEvents lblNom As Label
-    Friend WithEvents lbmType As Label
+    Friend WithEvents lblType As Label
     Friend WithEvents txtAutre As TextBox
     Friend WithEvents txtNom As TextBox
 End Class

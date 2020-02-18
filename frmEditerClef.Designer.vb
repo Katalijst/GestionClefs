@@ -25,20 +25,20 @@ Partial Class frmEditerClef
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnGrpBatiment = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblCID = New System.Windows.Forms.Label()
         Me.btnNewLoc = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblCNom = New System.Windows.Forms.Label()
         Me.cmbLoc = New System.Windows.Forms.ComboBox()
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.btnNewTrousseau = New System.Windows.Forms.Button()
         Me.cmbTrousseauListe = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblCPosition = New System.Windows.Forms.Label()
+        Me.lblCStatus = New System.Windows.Forms.Label()
+        Me.lblCDate = New System.Windows.Forms.Label()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.lblStatus = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblCTrousseau = New System.Windows.Forms.Label()
+        Me.lblCBatiment = New System.Windows.Forms.Label()
         Me.txtNom = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
@@ -66,20 +66,20 @@ Partial Class frmEditerClef
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.btnGrpBatiment)
-        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.lblCID)
         Me.GroupBox1.Controls.Add(Me.btnNewLoc)
-        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.lblCNom)
         Me.GroupBox1.Controls.Add(Me.cmbLoc)
         Me.GroupBox1.Controls.Add(Me.dtpDate)
         Me.GroupBox1.Controls.Add(Me.btnNewTrousseau)
         Me.GroupBox1.Controls.Add(Me.cmbTrousseauListe)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.lblCPosition)
+        Me.GroupBox1.Controls.Add(Me.lblCStatus)
+        Me.GroupBox1.Controls.Add(Me.lblCDate)
         Me.GroupBox1.Controls.Add(Me.txtID)
         Me.GroupBox1.Controls.Add(Me.lblStatus)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.lblCTrousseau)
+        Me.GroupBox1.Controls.Add(Me.lblCBatiment)
         Me.GroupBox1.Controls.Add(Me.txtNom)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
@@ -88,14 +88,14 @@ Partial Class frmEditerClef
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Identité de la clefs"
         '
-        'Label1
+        'lblCID
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 25)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(24, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "ID :"
+        Me.lblCID.AutoSize = True
+        Me.lblCID.Location = New System.Drawing.Point(6, 25)
+        Me.lblCID.Name = "lblCID"
+        Me.lblCID.Size = New System.Drawing.Size(24, 13)
+        Me.lblCID.TabIndex = 1
+        Me.lblCID.Text = "ID :"
         '
         'btnNewLoc
         '
@@ -106,14 +106,14 @@ Partial Class frmEditerClef
         Me.btnNewLoc.Text = "+"
         Me.btnNewLoc.UseVisualStyleBackColor = True
         '
-        'Label2
+        'lblCNom
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 51)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(35, 13)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Nom :"
+        Me.lblCNom.AutoSize = True
+        Me.lblCNom.Location = New System.Drawing.Point(6, 51)
+        Me.lblCNom.Name = "lblCNom"
+        Me.lblCNom.Size = New System.Drawing.Size(35, 13)
+        Me.lblCNom.TabIndex = 3
+        Me.lblCNom.Text = "Nom :"
         '
         'cmbLoc
         '
@@ -151,32 +151,32 @@ Partial Class frmEditerClef
         Me.cmbTrousseauListe.Size = New System.Drawing.Size(168, 21)
         Me.cmbTrousseauListe.TabIndex = 27
         '
-        'Label3
+        'lblCPosition
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 77)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(69, 13)
-        Me.Label3.TabIndex = 7
-        Me.Label3.Text = "Localisation :"
+        Me.lblCPosition.AutoSize = True
+        Me.lblCPosition.Location = New System.Drawing.Point(6, 77)
+        Me.lblCPosition.Name = "lblCPosition"
+        Me.lblCPosition.Size = New System.Drawing.Size(69, 13)
+        Me.lblCPosition.TabIndex = 7
+        Me.lblCPosition.Text = "Localisation :"
         '
-        'Label4
+        'lblCStatus
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 103)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 13)
-        Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Status :"
+        Me.lblCStatus.AutoSize = True
+        Me.lblCStatus.Location = New System.Drawing.Point(6, 103)
+        Me.lblCStatus.Name = "lblCStatus"
+        Me.lblCStatus.Size = New System.Drawing.Size(43, 13)
+        Me.lblCStatus.TabIndex = 8
+        Me.lblCStatus.Text = "Status :"
         '
-        'Label8
+        'lblCDate
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 129)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(70, 13)
-        Me.Label8.TabIndex = 10
-        Me.Label8.Text = "Date d'ajout :"
+        Me.lblCDate.AutoSize = True
+        Me.lblCDate.Location = New System.Drawing.Point(6, 129)
+        Me.lblCDate.Name = "lblCDate"
+        Me.lblCDate.Size = New System.Drawing.Size(70, 13)
+        Me.lblCDate.TabIndex = 10
+        Me.lblCDate.Text = "Date d'ajout :"
         '
         'txtID
         '
@@ -195,23 +195,23 @@ Partial Class frmEditerClef
         Me.lblStatus.TabIndex = 18
         Me.lblStatus.Text = "Disponible"
         '
-        'Label7
+        'lblCTrousseau
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 155)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(63, 13)
-        Me.Label7.TabIndex = 11
-        Me.Label7.Text = "Trousseau :"
+        Me.lblCTrousseau.AutoSize = True
+        Me.lblCTrousseau.Location = New System.Drawing.Point(6, 155)
+        Me.lblCTrousseau.Name = "lblCTrousseau"
+        Me.lblCTrousseau.Size = New System.Drawing.Size(63, 13)
+        Me.lblCTrousseau.TabIndex = 11
+        Me.lblCTrousseau.Text = "Trousseau :"
         '
-        'Label6
+        'lblCBatiment
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 181)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(81, 13)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Utilisable dans :"
+        Me.lblCBatiment.AutoSize = True
+        Me.lblCBatiment.Location = New System.Drawing.Point(6, 181)
+        Me.lblCBatiment.Name = "lblCBatiment"
+        Me.lblCBatiment.Size = New System.Drawing.Size(81, 13)
+        Me.lblCBatiment.TabIndex = 15
+        Me.lblCBatiment.Text = "Utilisable dans :"
         '
         'txtNom
         '
@@ -257,20 +257,20 @@ Partial Class frmEditerClef
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnGrpBatiment As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblCID As Label
     Friend WithEvents btnNewLoc As Button
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblCNom As Label
     Friend WithEvents cmbLoc As ComboBox
     Friend WithEvents dtpDate As DateTimePicker
     Friend WithEvents btnNewTrousseau As Button
     Friend WithEvents cmbTrousseauListe As ComboBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label8 As Label
+    Friend WithEvents lblCPosition As Label
+    Friend WithEvents lblCStatus As Label
+    Friend WithEvents lblCDate As Label
     Friend WithEvents txtID As TextBox
     Friend WithEvents lblStatus As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblCTrousseau As Label
+    Friend WithEvents lblCBatiment As Label
     Friend WithEvents txtNom As TextBox
     Friend WithEvents btnSave As Button
 End Class
