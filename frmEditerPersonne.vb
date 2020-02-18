@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class frmEditerPersonne
     Shared stgPersonne As String
+
     Private Sub frmEditerPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim intIndexNom As Integer = frmGestionPersonnes.dgvListPersonne.Columns("Nom").Index
         stgPersonne = frmGestionPersonnes.dgvListPersonne.SelectedRows(0).Cells(intIndexNom).Value.ToString()
@@ -11,6 +12,7 @@ Public Class frmEditerPersonne
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         Dim sql As String
+        Dim tel As String = ""
         Try
             dt.Reset()
             sql = "Select NTelephone FROM NomPersonne WHERE NNom=""" & stgPersonne & """"
@@ -20,7 +22,10 @@ Public Class frmEditerPersonne
             End With
             da.SelectCommand = cmd
             da.Fill(dt)
-            mtxtTel.Text = dt.Rows(0)(0).ToString
+            For Each s As String In dt.Rows(0)(0).ToString.SplitBy(2)
+                tel = tel & s & " "
+            Next
+            mtxtTel.Text = tel
 
             dt.Reset()
             sql = "Select NAutre FROM NomPersonne WHERE NNom=""" & stgPersonne & """"

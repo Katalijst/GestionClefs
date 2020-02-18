@@ -3,7 +3,10 @@ Public Class frmEmprunterClef
     Dim stgKeyId As String
     Dim stgTrousseau As String
     Dim blnEmprunt As Boolean
-    Public Sub RefreshPersonne()
+    'Déclaration des sources de données pour la DataGridView
+    Dim srcPersonnes As New BindingSource()
+
+    Public Sub LoadPersonnes()
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -51,7 +54,7 @@ Public Class frmEmprunterClef
         End Try
     End Sub
     Private Sub frmEmpruntClef_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RefreshPersonne()
+        LoadPersonnes()
         blnEmprunt = frmMain.blnEmprunt
         If frmMain.blnEmprunt = False Then
             dtpFinEmprunt.Enabled = False

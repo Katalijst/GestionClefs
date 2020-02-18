@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Drawing.Imaging
+Imports MySql.Data.MySqlClient
 
 'Formulaire principal, peut être optimisé
 Public Class frmMain
@@ -9,6 +10,31 @@ Public Class frmMain
     Public blnAlertes As Boolean = True
     'Booléeen pour savoir si c'est un emprunt ou une attribution
     Public blnEmprunt As Boolean
+
+    Private Shared Function Split(ByVal str As String, ByVal chunkSize As Integer) As IEnumerable(Of String)
+        Return Enumerable.Range(0, str.Length / chunkSize).[Select](Function(i) str.Substring(i * chunkSize, chunkSize))
+    End Function
+
+    Private Function TintBitmap(b As Bitmap, color As Color, intensity As Single) As Bitmap
+        Dim b2 As New Bitmap(b.Width, b.Height)
+
+        Dim ia As New ImageAttributes
+
+        Dim m As ColorMatrix
+        m = New ColorMatrix(New Single()() _
+            {New Single() {1, 0, 0, 0, 0},
+             New Single() {0, 1, 0, 0, 0},
+             New Single() {0, 0, 1, 0, 0},
+             New Single() {0, 0, 0, 1, 0},
+             New Single() {color.R / 255 * intensity, color.G / 255 * intensity, color.B / 255 * intensity, 0, 1}})
+
+        ia.SetColorMatrix(m)
+        Dim g As Graphics = Graphics.FromImage(b2)
+        g.DrawImage(b, New Rectangle(0, 0, b.Width, b.Height), 0, 0, b.Width, b.Height, GraphicsUnit.Pixel, ia)
+        Return b2
+
+    End Function
+
     Private Sub dgvResultats_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvResultats.CellMouseDown
         '--- Evenement de clic droit sur la DataGridView ---
         'Vérification si le clic a été fait sur une cellule
@@ -39,8 +65,6 @@ Public Class frmMain
             SupprimerToolStripMenuItem.Enabled = False
             EditerToolStripMenuItem.Enabled = False
         End If
-        'Sub du remplissage de l'autocomplétion
-        SetAutocomplete()
         'Check des alertes
         CheckAlerts()
     End Sub
@@ -124,30 +148,28 @@ Public Class frmMain
 
     Public Sub SetAutocomplete()
         Dim stgPredict As String = ""
-        Dim dtPredictSource As DataTable = CType(srcKeyList.DataSource, DataTable)
-
         'Filtres du type de recherche
-
-        If cbRechercher.Text = "Nom" Then
-            stgPredict = "Nom"
-        ElseIf cbRechercher.Text = "Emprunteur" Then
-            dtPredictSource = CType(srcOwner.DataSource, DataTable)
-            stgPredict = "NomPersonne"
-        ElseIf cbRechercher.Text = "Lieu" Then
-            stgPredict = "Position"
-        Else
-            stgPredict = "ID"
-        End If
-        'Requetes et remplissage de l'autocomplétion
         Try
-            'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
-            txtRechercher.AutoCompleteCustomSource.Clear()
-            'LOOPING THE ROW OF DATA IN THE DATATABLE
-            For Each r In dtPredictSource.Rows
-                'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
-                txtRechercher.AutoCompleteCustomSource.Add(r.Item(stgPredict).ToString)
-            Next
-            connecter().Close()
+            If dgvResultats.RowCount > 0 Then
+                If cbRechercher.Text = "Nom" Then
+                    stgPredict = "Nom"
+                ElseIf cbRechercher.Text = "Emprunteur" Then
+                    stgPredict = "NomPersonne"
+                ElseIf cbRechercher.Text = "Lieu" Then
+                    stgPredict = "Position"
+                ElseIf cbRechercher.Text = "ID" Then
+                    stgPredict = "ID"
+                Else
+                    Exit Sub
+                End If
+                'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
+                txtRechercher.AutoCompleteCustomSource.Clear()
+                'LOOPING THE ROW OF DATA IN THE DATATABLE
+                For Each r In dgvResultats.Rows
+                    'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
+                    txtRechercher.AutoCompleteCustomSource.Add(r.Cells(stgPredict).Value.ToString)
+                Next
+            End If
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -202,6 +224,10 @@ Public Class frmMain
             dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
             connecter().Close()
+
+            'Sub du remplissage de l'autocomplétion
+            SetAutocomplete()
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -259,14 +285,17 @@ Public Class frmMain
 
     Private Sub chkDisponibles_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
         SetAutocomplete()
+        Filter()
     End Sub
 
     Private Sub chkEmpruntees_CheckedChanged(sender As Object, e As EventArgs) Handles chkEmpruntees.CheckedChanged
         SetAutocomplete()
+        Filter()
     End Sub
 
     Private Sub chkAttribuees_CheckedChanged(sender As Object, e As EventArgs) Handles chkAttribuees.CheckedChanged
         SetAutocomplete()
+        Filter()
     End Sub
 
     Private Sub cbRechercher_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRechercher.SelectedIndexChanged
@@ -277,6 +306,7 @@ Public Class frmMain
             dgvResultats.DataSource = srcKeyList
         End If
         SetAutocomplete()
+        Filter()
     End Sub
 
     Public Sub DeleteKey(stgKeyID As String)
@@ -417,4 +447,85 @@ Public Class frmMain
     Private Sub AProposToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AProposToolStripMenuItem.Click
         frmAbout.ShowDialog()
     End Sub
+
+    Private Sub pbPersonnes_Click(sender As Object, e As EventArgs) Handles pbPersonnes.Click
+        frmGestionPersonnes.ShowDialog()
+    End Sub
+
+    Private Sub pbSupprimer_Click(sender As Object, e As EventArgs) Handles pbSupprimer.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            'Récupération de l'id de la ligne cliquée
+            Dim intIndexNom As Integer = dgvResultats.Columns("Nom").Index
+            'Sub de suppression de la clef à partir de son ID
+            DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
+        End If
+    End Sub
+
+    Private Sub pbAttribuer_Click(sender As Object, e As EventArgs) Handles pbAttribuer.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            'Ouverture du menu emprunt/attribution de clef en mode attribution
+            blnEmprunt = False
+            frmEmprunterClef.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub pbAttribuer_MouseEnter() Handles pbAttribuer.MouseEnter
+        Dim b As Bitmap = New Bitmap(GestionClefs.My.Resources.login)
+        pbAttribuer.Image = TintBitmap(b, Color.White, 0.3)
+    End Sub
+
+    Private Sub pbAttribuer_MouseLeave() Handles pbAttribuer.MouseLeave
+        Dim b As Bitmap = New Bitmap(GestionClefs.My.Resources.login)
+        pbAttribuer.Image = TintBitmap(b, Color.Black, 1)
+    End Sub
+
+    Private Sub pbEmprunter_Click(sender As Object, e As EventArgs) Handles pbEmprunter.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            'Ouverture du menu emprunt/attribution de clef en mode Emprun
+            blnEmprunt = True
+            frmEmprunterClef.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub pbEmprunter_MouseEnter() Handles pbEmprunter.MouseEnter
+        Dim b As Bitmap = New Bitmap(GestionClefs.My.Resources.key1)
+        pbEmprunter.Image = TintBitmap(b, Color.White, 0.3)
+    End Sub
+
+    Private Sub pbEmprunter_MouseLeave() Handles pbEmprunter.MouseLeave
+        Dim b As Bitmap = New Bitmap(GestionClefs.My.Resources.key1)
+        pbEmprunter.Image = TintBitmap(b, Color.Black, 1)
+    End Sub
+
+    Private Sub pbEditer_Click(sender As Object, e As EventArgs) Handles pbEditer.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            frmEditerClef.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub pbProperties_Click(sender As Object, e As EventArgs) Handles pbProperties.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            'Menu propriété de la clef
+            frmProprietes.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub lblEditer_Click(sender As Object, e As EventArgs) Handles lblEditer.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            frmEditerClef.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub lblAttribuer_Click(sender As Object, e As EventArgs) Handles lblAttribuer.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            'Ouverture du menu emprunt/attribution de clef en mode attribution
+            blnEmprunt = False
+            frmEmprunterClef.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub lblGestionPersonnes_Click(sender As Object, e As EventArgs) Handles lblGestionPersonnes.Click
+        frmGestionPersonnes.ShowDialog()
+    End Sub
+
 End Class
