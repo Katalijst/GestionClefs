@@ -18,7 +18,7 @@ Public Class frmGestionTrousseau
 
             cmbTrousseauListe.DataSource = dt
             cmbTrousseauListe.ValueMember = "TNom"
-            cmbTrousseauListe.DisplayMember = "TNom"
+            cmbTrousseauListe.DisplayMember = strTitleTNom
             If cmbTrousseauListe.Items.Count > 0 Then
                 cmbTrousseauListe.SelectedIndex = 0
             End If
@@ -184,13 +184,13 @@ Public Class frmGestionTrousseau
                 Dim drToAdd As DataRow = dtListClef.Rows(intSelIndex)
                 dtSelClef.ImportRow(drToAdd)
                 dtSelClef.AcceptChanges()
-                dtSelClef.DefaultView.Sort = "Nom ASC"
+                dtSelClef.DefaultView.Sort = strTitleBNom & " ASC"
                 dtSelClef = dtSelClef.DefaultView.ToTable
                 dgvSelTrousseau.DataSource = dtSelClef
 
                 dtListClef.Rows(intSelIndex).Delete()
                 dtListClef.AcceptChanges()
-                dtListClef.DefaultView.Sort = "Nom ASC"
+                dtListClef.DefaultView.Sort = strTitleBNom & " ASC"
                 dtListClef = dtListClef.DefaultView.ToTable
                 dgvListClefs.DataSource = dtListClef
             Next
@@ -231,13 +231,13 @@ Public Class frmGestionTrousseau
                 Dim drToAdd As DataRow = dtSelClef.Rows(intSelIndex)
                 dtListClef.ImportRow(drToAdd)
                 dtListClef.AcceptChanges()
-                dtListClef.DefaultView.Sort = "Nom ASC"
+                dtListClef.DefaultView.Sort = strTitleBNom & " ASC"
                 dtListClef = dtListClef.DefaultView.ToTable
                 dgvListClefs.DataSource = dtListClef
 
                 dtSelClef.Rows(intSelIndex).Delete()
                 dtSelClef.AcceptChanges()
-                dtSelClef.DefaultView.Sort = "Nom ASC"
+                dtSelClef.DefaultView.Sort = strTitleBNom & " ASC"
                 dtSelClef = dtSelClef.DefaultView.ToTable
                 dgvSelTrousseau.DataSource = dtSelClef
             Next

@@ -2,7 +2,7 @@
 
 'Module de cryptage pour les login
 Public NotInheritable Class Simple3Des
-    Private TripleDes As New TripleDESCryptoServiceProvider
+    Private ReadOnly TripleDes As New TripleDESCryptoServiceProvider
     Private Function TruncateHash(
     ByVal key As String,
     ByVal length As Integer) As Byte()

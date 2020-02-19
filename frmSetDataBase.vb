@@ -31,7 +31,7 @@
             stgModif = stgModif & "Identifiant : " & My.Settings.MySQL_ID & " --> " & txtID.Text & vbCrLf
         End If
         If My.Settings.MySQL_Password <> txtPassword.Text Then
-            stgModif = stgModif & "Mot de passe"
+            stgModif &= "Mot de passe"
         End If
 
         If stgModif <> "" Then

@@ -23,7 +23,7 @@ Partial Class frmConnexion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblBrand = New System.Windows.Forms.Label()
         Me.tmrFondu = New System.Windows.Forms.Timer(Me.components)
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.txtID = New System.Windows.Forms.TextBox()
@@ -32,16 +32,16 @@ Partial Class frmConnexion
         Me.btnQuitter = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblBrand
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(217, 37)
-        Me.Label1.TabIndex = 10
-        Me.Label1.Text = "GestionClefs"
+        Me.lblBrand.AutoSize = True
+        Me.lblBrand.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBrand.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblBrand.Location = New System.Drawing.Point(12, 9)
+        Me.lblBrand.Name = "lblBrand"
+        Me.lblBrand.Size = New System.Drawing.Size(217, 37)
+        Me.lblBrand.TabIndex = 10
+        Me.lblBrand.Text = "GestionClefs"
         '
         'tmrFondu
         '
@@ -117,7 +117,7 @@ Partial Class frmConnexion
         Me.ClientSize = New System.Drawing.Size(238, 181)
         Me.Controls.Add(Me.btnQuitter)
         Me.Controls.Add(Me.lblVersion)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblBrand)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtID)
@@ -135,7 +135,7 @@ Partial Class frmConnexion
 
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblBrand As Label
     Friend WithEvents tmrFondu As Timer
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents txtID As TextBox

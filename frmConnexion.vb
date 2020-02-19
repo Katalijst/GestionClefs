@@ -12,7 +12,7 @@ Public Class frmConnexion
     End Sub
 
     Private Sub tmrFondu_Tick(sender As Object, e As EventArgs) Handles tmrFondu.Tick
-        If Me.Opacity < 0.9 Then
+        If Me.Opacity < 0.95 Then
             Me.Opacity += 0.01
         Else
             tmrFondu.Enabled = False

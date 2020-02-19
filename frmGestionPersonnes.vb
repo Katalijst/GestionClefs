@@ -123,7 +123,6 @@ Public Class frmGestionPersonnes
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim blnGroupeBatiment As Boolean = False
         Try
             Dim insert_command As New MySqlCommand("INSERT INTO
                                                               `NomPersonne`(

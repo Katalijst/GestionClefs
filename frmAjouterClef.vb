@@ -158,10 +158,9 @@ Public Class frmAjouterClef
             End With
             da.SelectCommand = cmd
             da.Fill(dtBatiments)
+            dtBatiments.Columns("BNum").ColumnName = strTitleBNum
+            dtBatiments.Columns("BNom").ColumnName = strTitleBNom
 
-            For i As Integer = 0 To dtBatiments.Columns.Count - 1
-                dtBatiments.Columns(i).ColumnName = dtBatiments.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
             dtBatiments.Rows.Clear()
             dgvSelBatiment.DataSource = dtBatiments
             dgvSelBatiment.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -239,7 +238,7 @@ Public Class frmAjouterClef
 
             cmbTrousseauListe.DataSource = dt
             cmbTrousseauListe.ValueMember = "TNom"
-            cmbTrousseauListe.DisplayMember = "TNom"
+            cmbTrousseauListe.DisplayMember = strTitleTNom
             If cmbTrousseauListe.Items.Count > 0 Then
                 cmbTrousseauListe.SelectedIndex = 0
             End If
@@ -266,7 +265,7 @@ Public Class frmAjouterClef
 
             cmbLoc.DataSource = dt
             cmbLoc.ValueMember = "PNom"
-            cmbLoc.DisplayMember = "PNom"
+            cmbLoc.DisplayMember = strTitlePNom
             If cmbLoc.Items.Count > 0 Then
                 cmbLoc.SelectedIndex = 0
             End If
@@ -293,7 +292,7 @@ Public Class frmAjouterClef
 
             cmbNomEmprunteur.DataSource = dt
             cmbNomEmprunteur.ValueMember = "NNom"
-            cmbNomEmprunteur.DisplayMember = "NNom"
+            cmbNomEmprunteur.DisplayMember = strTitleNNom
             If cmbNomEmprunteur.Items.Count > 0 Then
                 cmbNomEmprunteur.SelectedIndex = 0
             End If
@@ -401,13 +400,13 @@ Public Class frmAjouterClef
                 Dim drToAdd As DataRow = dtListBatiment.Rows(intSelIndex)
                 dtSelBatiment.ImportRow(drToAdd)
                 dtSelBatiment.AcceptChanges()
-                dtSelBatiment.DefaultView.Sort = "Nom ASC"
+                dtSelBatiment.DefaultView.Sort = strTitleBNom & " ASC"
                 dtSelBatiment = dtSelBatiment.DefaultView.ToTable
                 dgvSelBatiment.DataSource = dtSelBatiment
 
                 dtListBatiment.Rows(intSelIndex).Delete()
                 dtListBatiment.AcceptChanges()
-                dtListBatiment.DefaultView.Sort = "Nom ASC"
+                dtListBatiment.DefaultView.Sort = strTitleBNom & " ASC"
                 dtListBatiment = dtListBatiment.DefaultView.ToTable
                 dgvListBatiment.DataSource = dtListBatiment
             Next
@@ -423,13 +422,13 @@ Public Class frmAjouterClef
                 Dim drToAdd As DataRow = dtSelBatiment.Rows(intSelIndex)
                 dtListBatiment.ImportRow(drToAdd)
                 dtListBatiment.AcceptChanges()
-                dtListBatiment.DefaultView.Sort = "Nom ASC"
+                dtListBatiment.DefaultView.Sort = strTitleBNom & " ASC"
                 dtListBatiment = dtListBatiment.DefaultView.ToTable
                 dgvListBatiment.DataSource = dtListBatiment
 
                 dtSelBatiment.Rows(intSelIndex).Delete()
                 dtSelBatiment.AcceptChanges()
-                dtSelBatiment.DefaultView.Sort = "Nom ASC"
+                dtSelBatiment.DefaultView.Sort = strTitleBNom & " ASC"
                 dtSelBatiment = dtSelBatiment.DefaultView.ToTable
                 dgvSelBatiment.DataSource = dtSelBatiment
             Next

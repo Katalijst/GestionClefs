@@ -4,7 +4,7 @@ Public Class frmEmprunterClef
     Dim stgTrousseau As String
     Dim blnEmprunt As Boolean
     'Déclaration des sources de données pour la DataGridView
-    Dim srcPersonnes As New BindingSource()
+    ReadOnly srcPersonnes As New BindingSource()
 
     Public Sub LoadPersonnes()
         Dim cmd As New MySqlCommand
