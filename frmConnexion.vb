@@ -1,18 +1,21 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports MaterialSkin
 
 'Formulaire de connexion, peut être optimisé
 Public Class frmConnexion
     Private Sub frmConnexion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+        SkinManager.AddFormToManage(Me)
+        SkinManager.Theme = MaterialSkinManager.Themes.DARK
+        SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
+
         tmrFondu.Enabled = True
-        txtID.SetWaterMark("Identifiant")
-        txtPassword.SetWaterMark("Mot de passe")
-        lblVersion.Text = "Version " & My.Application.Info.Version.ToString
-        txtID.Focus()
+        'lblVersion.Text = "Version " & My.Application.Info.Version.ToString
         checkTableAndAccount()
     End Sub
 
     Private Sub tmrFondu_Tick(sender As Object, e As EventArgs) Handles tmrFondu.Tick
-        If Me.Opacity < 0.95 Then
+        If Me.Opacity < 1 Then
             Me.Opacity += 0.01
         Else
             tmrFondu.Enabled = False
@@ -46,8 +49,8 @@ Public Class frmConnexion
     End Sub
 
     Public Sub Valider()
-        Dim stgID As String = txtID.Text
-        Dim stgPassword As String = txtPassword.Text
+        Dim stgID As String = mtxtID.Text
+        Dim stgPassword As String = mtxtPassword.Text
 
         'Vérifier si compte admin existe
         Dim cmd As New MySqlCommand
@@ -107,23 +110,25 @@ Public Class frmConnexion
                     If dt.Rows.Count > 0 Then
                         userName = dt.Rows(0)(0).ToString
                     End If
-                    userID = txtID.Text
+                    userID = mtxtID.Text
+                    Me.Hide()
                     frmMain.Show()
                     connecter().Close()
                     Me.Close()
                 End If
             End If
         Catch ex As Exception
+            Me.Show()
             MsgBox(ex.Message)
         End Try
 
     End Sub
 
-    Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click
+    Private Sub btnConnexion_Click(sender As Object, e As EventArgs) Handles btnConnexion.Click
         Valider()
     End Sub
 
-    Private Sub btnQuitter_Click(sender As Object, e As EventArgs) Handles btnQuitter.Click
+    Private Sub btnQuitter_Click_1(sender As Object, e As EventArgs) Handles btnQuitter.Click
         Application.Exit()
         End
     End Sub

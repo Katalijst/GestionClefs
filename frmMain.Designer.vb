@@ -24,14 +24,13 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.chkDisponibles = New System.Windows.Forms.CheckBox()
-        Me.chkEmpruntees = New System.Windows.Forms.CheckBox()
-        Me.chkAttribuees = New System.Windows.Forms.CheckBox()
-        Me.btnAddClef = New System.Windows.Forms.Button()
-        Me.btnAddTrousseau = New System.Windows.Forms.Button()
         Me.gbRechercher = New System.Windows.Forms.GroupBox()
+        Me.btnSearch = New MaterialSkin.Controls.MaterialRaisedButton()
         Me.txtRechercher = New System.Windows.Forms.TextBox()
         Me.gbFilter = New System.Windows.Forms.GroupBox()
+        Me.chkAttribuees = New MaterialSkin.Controls.MaterialCheckBox()
+        Me.chkEmpruntees = New MaterialSkin.Controls.MaterialCheckBox()
+        Me.chkDisponibles = New MaterialSkin.Controls.MaterialCheckBox()
         Me.cbRechercher = New System.Windows.Forms.ComboBox()
         Me.dgvResultats = New System.Windows.Forms.DataGridView()
         Me.menuGrid = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -49,112 +48,36 @@ Partial Class frmMain
         Me.GestionDesPersonnesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDesTableauxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestionDesBâtimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestionDesTrousseauxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.SaisieÀLaVoléToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AProposToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.lblEditer = New System.Windows.Forms.Label()
-        Me.lblAttribuer = New System.Windows.Forms.Label()
-        Me.lblGestionPersonnes = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.pbProperties = New System.Windows.Forms.PictureBox()
-        Me.pbPersonnes = New System.Windows.Forms.PictureBox()
-        Me.pbEditer = New System.Windows.Forms.PictureBox()
-        Me.pbAttribuer = New System.Windows.Forms.PictureBox()
-        Me.pbSupprimer = New System.Windows.Forms.PictureBox()
-        Me.pbEmprunter = New System.Windows.Forms.PictureBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.btnSupprimer = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.dgvPanier = New System.Windows.Forms.DataGridView()
         Me.layMenu = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanel3 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanel4 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanel5 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanel6 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanel7 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.FlowLayoutPanel8 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnEmprunter = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.btnAttribuer = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.btnEditer = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.btnAddKey = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.btnInformations = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.btnPersonnes = New MaterialSkin.Controls.MaterialFlatButton()
+        Me.btnTrousseaux = New MaterialSkin.Controls.MaterialFlatButton()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.gbRechercher.SuspendLayout()
         Me.gbFilter.SuspendLayout()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuGrid.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
-        CType(Me.pbProperties, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbPersonnes, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbEditer, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbAttribuer, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbSupprimer, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbEmprunter, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvPanier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.layMenu.SuspendLayout()
-        Me.FlowLayoutPanel3.SuspendLayout()
-        Me.FlowLayoutPanel4.SuspendLayout()
-        Me.FlowLayoutPanel5.SuspendLayout()
-        Me.FlowLayoutPanel6.SuspendLayout()
-        Me.FlowLayoutPanel7.SuspendLayout()
-        Me.FlowLayoutPanel8.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'chkDisponibles
-        '
-        Me.chkDisponibles.AutoSize = True
-        Me.chkDisponibles.Checked = True
-        Me.chkDisponibles.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkDisponibles.Location = New System.Drawing.Point(6, 19)
-        Me.chkDisponibles.Name = "chkDisponibles"
-        Me.chkDisponibles.Size = New System.Drawing.Size(80, 17)
-        Me.chkDisponibles.TabIndex = 3
-        Me.chkDisponibles.Text = "Disponibles"
-        Me.chkDisponibles.UseVisualStyleBackColor = True
-        '
-        'chkEmpruntees
-        '
-        Me.chkEmpruntees.AutoSize = True
-        Me.chkEmpruntees.Checked = True
-        Me.chkEmpruntees.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkEmpruntees.Location = New System.Drawing.Point(93, 19)
-        Me.chkEmpruntees.Name = "chkEmpruntees"
-        Me.chkEmpruntees.Size = New System.Drawing.Size(82, 17)
-        Me.chkEmpruntees.TabIndex = 4
-        Me.chkEmpruntees.Text = "Empruntées"
-        Me.chkEmpruntees.UseVisualStyleBackColor = True
-        '
-        'chkAttribuees
-        '
-        Me.chkAttribuees.AutoSize = True
-        Me.chkAttribuees.Checked = True
-        Me.chkAttribuees.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkAttribuees.Location = New System.Drawing.Point(180, 19)
-        Me.chkAttribuees.Name = "chkAttribuees"
-        Me.chkAttribuees.Size = New System.Drawing.Size(73, 17)
-        Me.chkAttribuees.TabIndex = 5
-        Me.chkAttribuees.Text = "Attribuées"
-        Me.chkAttribuees.UseVisualStyleBackColor = True
-        '
-        'btnAddClef
-        '
-        Me.btnAddClef.Location = New System.Drawing.Point(3, 129)
-        Me.btnAddClef.Name = "btnAddClef"
-        Me.btnAddClef.Size = New System.Drawing.Size(140, 23)
-        Me.btnAddClef.TabIndex = 7
-        Me.btnAddClef.Text = "Ajouter une clef"
-        Me.btnAddClef.UseVisualStyleBackColor = True
-        '
-        'btnAddTrousseau
-        '
-        Me.btnAddTrousseau.Location = New System.Drawing.Point(149, 129)
-        Me.btnAddTrousseau.Name = "btnAddTrousseau"
-        Me.btnAddTrousseau.Size = New System.Drawing.Size(140, 23)
-        Me.btnAddTrousseau.TabIndex = 8
-        Me.btnAddTrousseau.Text = "Trousseaux"
-        Me.btnAddTrousseau.UseVisualStyleBackColor = True
         '
         'gbRechercher
         '
@@ -169,6 +92,21 @@ Partial Class frmMain
         Me.gbRechercher.TabStop = False
         Me.gbRechercher.Text = "Rechercher"
         '
+        'btnSearch
+        '
+        Me.btnSearch.AutoSize = True
+        Me.btnSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnSearch.Depth = 0
+        Me.btnSearch.Icon = Nothing
+        Me.btnSearch.Location = New System.Drawing.Point(147, 99)
+        Me.btnSearch.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Primary = True
+        Me.btnSearch.Size = New System.Drawing.Size(107, 36)
+        Me.btnSearch.TabIndex = 4
+        Me.btnSearch.Text = "Rechercher"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
         'txtRechercher
         '
         Me.txtRechercher.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
@@ -181,24 +119,78 @@ Partial Class frmMain
         '
         'gbFilter
         '
-        Me.gbFilter.Controls.Add(Me.chkDisponibles)
-        Me.gbFilter.Controls.Add(Me.chkEmpruntees)
         Me.gbFilter.Controls.Add(Me.chkAttribuees)
+        Me.gbFilter.Controls.Add(Me.chkEmpruntees)
+        Me.gbFilter.Controls.Add(Me.chkDisponibles)
         Me.gbFilter.Location = New System.Drawing.Point(6, 48)
         Me.gbFilter.Name = "gbFilter"
-        Me.gbFilter.Size = New System.Drawing.Size(262, 45)
+        Me.gbFilter.Size = New System.Drawing.Size(116, 104)
         Me.gbFilter.TabIndex = 2
         Me.gbFilter.TabStop = False
         Me.gbFilter.Text = "Filtres"
+        '
+        'chkAttribuees
+        '
+        Me.chkAttribuees.AutoSize = True
+        Me.chkAttribuees.Checked = True
+        Me.chkAttribuees.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAttribuees.Depth = 0
+        Me.chkAttribuees.Font = New System.Drawing.Font("Roboto", 10.0!)
+        Me.chkAttribuees.Location = New System.Drawing.Point(3, 72)
+        Me.chkAttribuees.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkAttribuees.MouseLocation = New System.Drawing.Point(-1, -1)
+        Me.chkAttribuees.MouseState = MaterialSkin.MouseState.HOVER
+        Me.chkAttribuees.Name = "chkAttribuees"
+        Me.chkAttribuees.Ripple = True
+        Me.chkAttribuees.Size = New System.Drawing.Size(94, 30)
+        Me.chkAttribuees.TabIndex = 6
+        Me.chkAttribuees.Text = "Attribuées"
+        Me.chkAttribuees.UseVisualStyleBackColor = True
+        '
+        'chkEmpruntees
+        '
+        Me.chkEmpruntees.AutoSize = True
+        Me.chkEmpruntees.Checked = True
+        Me.chkEmpruntees.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkEmpruntees.Depth = 0
+        Me.chkEmpruntees.Font = New System.Drawing.Font("Roboto", 10.0!)
+        Me.chkEmpruntees.Location = New System.Drawing.Point(3, 42)
+        Me.chkEmpruntees.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkEmpruntees.MouseLocation = New System.Drawing.Point(-1, -1)
+        Me.chkEmpruntees.MouseState = MaterialSkin.MouseState.HOVER
+        Me.chkEmpruntees.Name = "chkEmpruntees"
+        Me.chkEmpruntees.Ripple = True
+        Me.chkEmpruntees.Size = New System.Drawing.Size(104, 30)
+        Me.chkEmpruntees.TabIndex = 5
+        Me.chkEmpruntees.Text = "Empruntées"
+        Me.chkEmpruntees.UseVisualStyleBackColor = True
+        '
+        'chkDisponibles
+        '
+        Me.chkDisponibles.AutoSize = True
+        Me.chkDisponibles.Checked = True
+        Me.chkDisponibles.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkDisponibles.Depth = 0
+        Me.chkDisponibles.Font = New System.Drawing.Font("Roboto", 10.0!)
+        Me.chkDisponibles.Location = New System.Drawing.Point(3, 12)
+        Me.chkDisponibles.Margin = New System.Windows.Forms.Padding(0)
+        Me.chkDisponibles.MouseLocation = New System.Drawing.Point(-1, -1)
+        Me.chkDisponibles.MouseState = MaterialSkin.MouseState.HOVER
+        Me.chkDisponibles.Name = "chkDisponibles"
+        Me.chkDisponibles.Ripple = True
+        Me.chkDisponibles.Size = New System.Drawing.Size(102, 30)
+        Me.chkDisponibles.TabIndex = 4
+        Me.chkDisponibles.Text = "Disponibles"
+        Me.chkDisponibles.UseVisualStyleBackColor = True
         '
         'cbRechercher
         '
         Me.cbRechercher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRechercher.FormattingEnabled = True
         Me.cbRechercher.Items.AddRange(New Object() {"ID", "Nom", "Emprunteur", "Lieu"})
-        Me.cbRechercher.Location = New System.Drawing.Point(6, 105)
+        Me.cbRechercher.Location = New System.Drawing.Point(128, 55)
         Me.cbRechercher.Name = "cbRechercher"
-        Me.cbRechercher.Size = New System.Drawing.Size(161, 21)
+        Me.cbRechercher.Size = New System.Drawing.Size(140, 21)
         Me.cbRechercher.TabIndex = 1
         '
         'dgvResultats
@@ -301,7 +293,7 @@ Partial Class frmMain
         '
         'OutilsToolStripMenuItem
         '
-        Me.OutilsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDesPersonnesToolStripMenuItem, Me.GestionDesTableauxToolStripMenuItem, Me.GestionDesBâtimentsToolStripMenuItem, Me.ToolStripSeparator3, Me.SaisieÀLaVoléToolStripMenuItem, Me.ToolStripSeparator4, Me.SettingsToolStripMenuItem, Me.AProposToolStripMenuItem})
+        Me.OutilsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestionDesPersonnesToolStripMenuItem, Me.GestionDesTableauxToolStripMenuItem, Me.GestionDesBâtimentsToolStripMenuItem, Me.GestionDesTrousseauxToolStripMenuItem, Me.ToolStripSeparator3, Me.SaisieÀLaVoléToolStripMenuItem, Me.ToolStripSeparator4, Me.SettingsToolStripMenuItem, Me.AProposToolStripMenuItem})
         Me.OutilsToolStripMenuItem.Name = "OutilsToolStripMenuItem"
         Me.OutilsToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.OutilsToolStripMenuItem.Text = "&Outils"
@@ -310,49 +302,57 @@ Partial Class frmMain
         '
         Me.GestionDesPersonnesToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.two_men
         Me.GestionDesPersonnesToolStripMenuItem.Name = "GestionDesPersonnesToolStripMenuItem"
-        Me.GestionDesPersonnesToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.GestionDesPersonnesToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.GestionDesPersonnesToolStripMenuItem.Text = "Gestion des personnes"
         '
         'GestionDesTableauxToolStripMenuItem
         '
+        Me.GestionDesTableauxToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.tableaux
         Me.GestionDesTableauxToolStripMenuItem.Name = "GestionDesTableauxToolStripMenuItem"
-        Me.GestionDesTableauxToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.GestionDesTableauxToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.GestionDesTableauxToolStripMenuItem.Text = "Gestion des tableaux"
         '
         'GestionDesBâtimentsToolStripMenuItem
         '
         Me.GestionDesBâtimentsToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.web_server
         Me.GestionDesBâtimentsToolStripMenuItem.Name = "GestionDesBâtimentsToolStripMenuItem"
-        Me.GestionDesBâtimentsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.GestionDesBâtimentsToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.GestionDesBâtimentsToolStripMenuItem.Text = "Gestion des bâtiments"
+        '
+        'GestionDesTrousseauxToolStripMenuItem
+        '
+        Me.GestionDesTrousseauxToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.trousseaux
+        Me.GestionDesTrousseauxToolStripMenuItem.Name = "GestionDesTrousseauxToolStripMenuItem"
+        Me.GestionDesTrousseauxToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.GestionDesTrousseauxToolStripMenuItem.Text = "Gestion des trousseaux"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(189, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(192, 6)
         '
         'SaisieÀLaVoléToolStripMenuItem
         '
         Me.SaisieÀLaVoléToolStripMenuItem.Name = "SaisieÀLaVoléToolStripMenuItem"
-        Me.SaisieÀLaVoléToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.SaisieÀLaVoléToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.SaisieÀLaVoléToolStripMenuItem.Text = "Saisie Multiple"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(189, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(192, 6)
         '
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.settings_cogwheel_button
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.SettingsToolStripMenuItem.Text = "&Paramètres"
         '
         'AProposToolStripMenuItem
         '
         Me.AProposToolStripMenuItem.Name = "AProposToolStripMenuItem"
-        Me.AProposToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AProposToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.AProposToolStripMenuItem.Text = "A propos..."
         '
         'StatusStrip1
@@ -363,235 +363,182 @@ Partial Class frmMain
         Me.StatusStrip1.TabIndex = 101
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'lblEditer
+        'btnSupprimer
         '
-        Me.lblEditer.Location = New System.Drawing.Point(39, 0)
-        Me.lblEditer.Name = "lblEditer"
-        Me.lblEditer.Size = New System.Drawing.Size(37, 36)
-        Me.lblEditer.TabIndex = 108
-        Me.lblEditer.Text = "Editer"
-        Me.lblEditer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSupprimer.AutoSize = True
+        Me.btnSupprimer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnSupprimer.Depth = 0
+        Me.btnSupprimer.Icon = Global.GestionClefs.My.Resources.Resources.clear_button
+        Me.btnSupprimer.Location = New System.Drawing.Point(4, 102)
+        Me.btnSupprimer.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnSupprimer.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnSupprimer.Name = "btnSupprimer"
+        Me.btnSupprimer.Primary = False
+        Me.btnSupprimer.Size = New System.Drawing.Size(125, 36)
+        Me.btnSupprimer.TabIndex = 123
+        Me.btnSupprimer.Text = "Supprimer"
+        Me.ToolTip1.SetToolTip(Me.btnSupprimer, "Supprimer la clef")
+        Me.btnSupprimer.UseVisualStyleBackColor = True
         '
-        'lblAttribuer
+        'dgvPanier
         '
-        Me.lblAttribuer.Location = New System.Drawing.Point(39, 0)
-        Me.lblAttribuer.Name = "lblAttribuer"
-        Me.lblAttribuer.Size = New System.Drawing.Size(47, 36)
-        Me.lblAttribuer.TabIndex = 109
-        Me.lblAttribuer.Text = "Attribuer"
-        Me.lblAttribuer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblGestionPersonnes
-        '
-        Me.lblGestionPersonnes.Location = New System.Drawing.Point(39, 0)
-        Me.lblGestionPersonnes.Name = "lblGestionPersonnes"
-        Me.lblGestionPersonnes.Size = New System.Drawing.Size(96, 36)
-        Me.lblGestionPersonnes.TabIndex = 110
-        Me.lblGestionPersonnes.Text = "Gestion personnes"
-        Me.lblGestionPersonnes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(39, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(66, 36)
-        Me.Label1.TabIndex = 111
-        Me.Label1.Text = "Informations"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label2
-        '
-        Me.Label2.Location = New System.Drawing.Point(39, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 36)
-        Me.Label2.TabIndex = 112
-        Me.Label2.Text = "Supprimer"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'pbProperties
-        '
-        Me.pbProperties.Image = Global.GestionClefs.My.Resources.Resources.round_info_button
-        Me.pbProperties.Location = New System.Drawing.Point(3, 3)
-        Me.pbProperties.Name = "pbProperties"
-        Me.pbProperties.Size = New System.Drawing.Size(30, 30)
-        Me.pbProperties.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbProperties.TabIndex = 107
-        Me.pbProperties.TabStop = False
-        '
-        'pbPersonnes
-        '
-        Me.pbPersonnes.Image = Global.GestionClefs.My.Resources.Resources.two_men
-        Me.pbPersonnes.Location = New System.Drawing.Point(3, 3)
-        Me.pbPersonnes.Name = "pbPersonnes"
-        Me.pbPersonnes.Size = New System.Drawing.Size(30, 30)
-        Me.pbPersonnes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbPersonnes.TabIndex = 106
-        Me.pbPersonnes.TabStop = False
-        '
-        'pbEditer
-        '
-        Me.pbEditer.Image = Global.GestionClefs.My.Resources.Resources.writing
-        Me.pbEditer.Location = New System.Drawing.Point(3, 3)
-        Me.pbEditer.Name = "pbEditer"
-        Me.pbEditer.Size = New System.Drawing.Size(30, 30)
-        Me.pbEditer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbEditer.TabIndex = 105
-        Me.pbEditer.TabStop = False
-        '
-        'pbAttribuer
-        '
-        Me.pbAttribuer.Image = Global.GestionClefs.My.Resources.Resources.login
-        Me.pbAttribuer.Location = New System.Drawing.Point(3, 3)
-        Me.pbAttribuer.Name = "pbAttribuer"
-        Me.pbAttribuer.Size = New System.Drawing.Size(30, 30)
-        Me.pbAttribuer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbAttribuer.TabIndex = 104
-        Me.pbAttribuer.TabStop = False
-        '
-        'pbSupprimer
-        '
-        Me.pbSupprimer.Image = Global.GestionClefs.My.Resources.Resources.clear_button
-        Me.pbSupprimer.Location = New System.Drawing.Point(3, 3)
-        Me.pbSupprimer.Name = "pbSupprimer"
-        Me.pbSupprimer.Size = New System.Drawing.Size(30, 30)
-        Me.pbSupprimer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbSupprimer.TabIndex = 103
-        Me.pbSupprimer.TabStop = False
-        '
-        'pbEmprunter
-        '
-        Me.pbEmprunter.Image = Global.GestionClefs.My.Resources.Resources.emprunt
-        Me.pbEmprunter.Location = New System.Drawing.Point(3, 3)
-        Me.pbEmprunter.Name = "pbEmprunter"
-        Me.pbEmprunter.Size = New System.Drawing.Size(30, 30)
-        Me.pbEmprunter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbEmprunter.TabIndex = 102
-        Me.pbEmprunter.TabStop = False
-        '
-        'Label3
-        '
-        Me.Label3.Location = New System.Drawing.Point(39, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(58, 30)
-        Me.Label3.TabIndex = 113
-        Me.Label3.Text = "Emprunter"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AllowUserToOrderColumns = True
-        Me.DataGridView1.AllowUserToResizeRows = False
-        Me.DataGridView1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.dgvPanier.AllowUserToAddRows = False
+        Me.dgvPanier.AllowUserToDeleteRows = False
+        Me.dgvPanier.AllowUserToOrderColumns = True
+        Me.dgvPanier.AllowUserToResizeRows = False
+        Me.dgvPanier.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.ContextMenuStrip = Me.menuGrid
-        Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 19)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(390, 133)
-        Me.DataGridView1.TabIndex = 114
+        Me.dgvPanier.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvPanier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPanier.ContextMenuStrip = Me.menuGrid
+        Me.dgvPanier.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.dgvPanier.Location = New System.Drawing.Point(420, 3)
+        Me.dgvPanier.Name = "dgvPanier"
+        Me.dgvPanier.ReadOnly = True
+        Me.dgvPanier.RowHeadersVisible = False
+        Me.dgvPanier.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvPanier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvPanier.Size = New System.Drawing.Size(290, 152)
+        Me.dgvPanier.TabIndex = 114
         '
         'layMenu
         '
         Me.layMenu.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.layMenu.Controls.Add(Me.FlowLayoutPanel3)
-        Me.layMenu.Controls.Add(Me.FlowLayoutPanel4)
-        Me.layMenu.Controls.Add(Me.FlowLayoutPanel5)
-        Me.layMenu.Controls.Add(Me.FlowLayoutPanel6)
-        Me.layMenu.Controls.Add(Me.FlowLayoutPanel7)
-        Me.layMenu.Controls.Add(Me.FlowLayoutPanel8)
-        Me.layMenu.Controls.Add(Me.btnAddClef)
-        Me.layMenu.Controls.Add(Me.btnAddTrousseau)
-        Me.layMenu.Location = New System.Drawing.Point(289, 3)
+        Me.layMenu.Controls.Add(Me.btnEmprunter)
+        Me.layMenu.Controls.Add(Me.btnAttribuer)
+        Me.layMenu.Controls.Add(Me.btnEditer)
+        Me.layMenu.Controls.Add(Me.btnAddKey)
+        Me.layMenu.Controls.Add(Me.btnInformations)
+        Me.layMenu.Controls.Add(Me.btnSupprimer)
+        Me.layMenu.Controls.Add(Me.btnPersonnes)
+        Me.layMenu.Controls.Add(Me.btnTrousseaux)
+        Me.layMenu.Location = New System.Drawing.Point(3, 3)
         Me.layMenu.Name = "layMenu"
-        Me.layMenu.Size = New System.Drawing.Size(308, 158)
+        Me.layMenu.Size = New System.Drawing.Size(411, 152)
         Me.layMenu.TabIndex = 116
         '
-        'FlowLayoutPanel3
+        'btnEmprunter
         '
-        Me.FlowLayoutPanel3.Controls.Add(Me.pbEmprunter)
-        Me.FlowLayoutPanel3.Controls.Add(Me.Label3)
-        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(3, 3)
-        Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
-        Me.FlowLayoutPanel3.Size = New System.Drawing.Size(140, 36)
-        Me.FlowLayoutPanel3.TabIndex = 114
+        Me.btnEmprunter.AutoSize = True
+        Me.btnEmprunter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnEmprunter.Depth = 0
+        Me.btnEmprunter.Icon = Global.GestionClefs.My.Resources.Resources.emprunt
+        Me.btnEmprunter.Location = New System.Drawing.Point(4, 6)
+        Me.btnEmprunter.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnEmprunter.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnEmprunter.Name = "btnEmprunter"
+        Me.btnEmprunter.Primary = False
+        Me.btnEmprunter.Size = New System.Drawing.Size(129, 36)
+        Me.btnEmprunter.TabIndex = 118
+        Me.btnEmprunter.Text = "Emprunter"
+        Me.btnEmprunter.UseVisualStyleBackColor = True
         '
-        'FlowLayoutPanel4
+        'btnAttribuer
         '
-        Me.FlowLayoutPanel4.Controls.Add(Me.pbAttribuer)
-        Me.FlowLayoutPanel4.Controls.Add(Me.lblAttribuer)
-        Me.FlowLayoutPanel4.Location = New System.Drawing.Point(149, 3)
-        Me.FlowLayoutPanel4.Name = "FlowLayoutPanel4"
-        Me.FlowLayoutPanel4.Size = New System.Drawing.Size(140, 36)
-        Me.FlowLayoutPanel4.TabIndex = 115
+        Me.btnAttribuer.AutoSize = True
+        Me.btnAttribuer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnAttribuer.Depth = 0
+        Me.btnAttribuer.Icon = Global.GestionClefs.My.Resources.Resources.login
+        Me.btnAttribuer.Location = New System.Drawing.Point(141, 6)
+        Me.btnAttribuer.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnAttribuer.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnAttribuer.Name = "btnAttribuer"
+        Me.btnAttribuer.Primary = False
+        Me.btnAttribuer.Size = New System.Drawing.Size(121, 36)
+        Me.btnAttribuer.TabIndex = 119
+        Me.btnAttribuer.Text = "Attribuer"
+        Me.btnAttribuer.UseVisualStyleBackColor = True
         '
-        'FlowLayoutPanel5
+        'btnEditer
         '
-        Me.FlowLayoutPanel5.Controls.Add(Me.pbEditer)
-        Me.FlowLayoutPanel5.Controls.Add(Me.lblEditer)
-        Me.FlowLayoutPanel5.Location = New System.Drawing.Point(3, 45)
-        Me.FlowLayoutPanel5.Name = "FlowLayoutPanel5"
-        Me.FlowLayoutPanel5.Size = New System.Drawing.Size(140, 36)
-        Me.FlowLayoutPanel5.TabIndex = 116
+        Me.btnEditer.AutoSize = True
+        Me.btnEditer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnEditer.Depth = 0
+        Me.btnEditer.Icon = Global.GestionClefs.My.Resources.Resources.writing
+        Me.btnEditer.Location = New System.Drawing.Point(270, 6)
+        Me.btnEditer.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnEditer.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnEditer.Name = "btnEditer"
+        Me.btnEditer.Primary = False
+        Me.btnEditer.Size = New System.Drawing.Size(94, 36)
+        Me.btnEditer.TabIndex = 120
+        Me.btnEditer.Text = "Editer"
+        Me.btnEditer.UseVisualStyleBackColor = True
         '
-        'FlowLayoutPanel6
+        'btnAddKey
         '
-        Me.FlowLayoutPanel6.Controls.Add(Me.pbProperties)
-        Me.FlowLayoutPanel6.Controls.Add(Me.Label1)
-        Me.FlowLayoutPanel6.Location = New System.Drawing.Point(149, 45)
-        Me.FlowLayoutPanel6.Name = "FlowLayoutPanel6"
-        Me.FlowLayoutPanel6.Size = New System.Drawing.Size(140, 36)
-        Me.FlowLayoutPanel6.TabIndex = 117
+        Me.btnAddKey.AutoSize = True
+        Me.btnAddKey.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnAddKey.Depth = 0
+        Me.btnAddKey.Icon = Global.GestionClefs.My.Resources.Resources.ajouter_clefs
+        Me.btnAddKey.Location = New System.Drawing.Point(4, 54)
+        Me.btnAddKey.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnAddKey.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnAddKey.Name = "btnAddKey"
+        Me.btnAddKey.Primary = False
+        Me.btnAddKey.Size = New System.Drawing.Size(174, 36)
+        Me.btnAddKey.TabIndex = 124
+        Me.btnAddKey.Text = "Ajouter une clef"
+        Me.btnAddKey.UseVisualStyleBackColor = True
         '
-        'FlowLayoutPanel7
+        'btnInformations
         '
-        Me.FlowLayoutPanel7.Controls.Add(Me.pbPersonnes)
-        Me.FlowLayoutPanel7.Controls.Add(Me.lblGestionPersonnes)
-        Me.FlowLayoutPanel7.Location = New System.Drawing.Point(3, 87)
-        Me.FlowLayoutPanel7.Name = "FlowLayoutPanel7"
-        Me.FlowLayoutPanel7.Size = New System.Drawing.Size(140, 36)
-        Me.FlowLayoutPanel7.TabIndex = 118
+        Me.btnInformations.AutoSize = True
+        Me.btnInformations.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnInformations.Depth = 0
+        Me.btnInformations.Icon = Global.GestionClefs.My.Resources.Resources.round_info_button
+        Me.btnInformations.Location = New System.Drawing.Point(186, 54)
+        Me.btnInformations.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnInformations.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnInformations.Name = "btnInformations"
+        Me.btnInformations.Primary = False
+        Me.btnInformations.Size = New System.Drawing.Size(141, 36)
+        Me.btnInformations.TabIndex = 121
+        Me.btnInformations.Text = "Information"
+        Me.btnInformations.UseVisualStyleBackColor = True
         '
-        'FlowLayoutPanel8
+        'btnPersonnes
         '
-        Me.FlowLayoutPanel8.Controls.Add(Me.pbSupprimer)
-        Me.FlowLayoutPanel8.Controls.Add(Me.Label2)
-        Me.FlowLayoutPanel8.Location = New System.Drawing.Point(149, 87)
-        Me.FlowLayoutPanel8.Name = "FlowLayoutPanel8"
-        Me.FlowLayoutPanel8.Size = New System.Drawing.Size(140, 36)
-        Me.FlowLayoutPanel8.TabIndex = 119
+        Me.btnPersonnes.AutoSize = True
+        Me.btnPersonnes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnPersonnes.Depth = 0
+        Me.btnPersonnes.Icon = Global.GestionClefs.My.Resources.Resources.two_men
+        Me.btnPersonnes.Location = New System.Drawing.Point(137, 102)
+        Me.btnPersonnes.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnPersonnes.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnPersonnes.Name = "btnPersonnes"
+        Me.btnPersonnes.Primary = False
+        Me.btnPersonnes.Size = New System.Drawing.Size(127, 36)
+        Me.btnPersonnes.TabIndex = 122
+        Me.btnPersonnes.Text = "Personnes"
+        Me.btnPersonnes.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'btnTrousseaux
         '
-        Me.GroupBox1.AutoSize = True
-        Me.GroupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.GroupBox1.Controls.Add(Me.DataGridView1)
-        Me.GroupBox1.Location = New System.Drawing.Point(601, 0)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(402, 158)
-        Me.GroupBox1.TabIndex = 117
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Panier"
+        Me.btnTrousseaux.AutoSize = True
+        Me.btnTrousseaux.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnTrousseaux.Depth = 0
+        Me.btnTrousseaux.Icon = Global.GestionClefs.My.Resources.Resources.trousseaux
+        Me.btnTrousseaux.Location = New System.Drawing.Point(272, 102)
+        Me.btnTrousseaux.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnTrousseaux.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnTrousseaux.Name = "btnTrousseaux"
+        Me.btnTrousseaux.Primary = False
+        Me.btnTrousseaux.Size = New System.Drawing.Size(135, 36)
+        Me.btnTrousseaux.TabIndex = 125
+        Me.btnTrousseaux.Text = "Trousseaux"
+        Me.btnTrousseaux.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel1.ColumnCount = 3
+        Me.TableLayoutPanel1.ColumnCount = 2
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 286.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 314.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 450.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.gbRechercher, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.layMenu, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 1, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 27)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
@@ -599,14 +546,20 @@ Partial Class frmMain
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1005, 164)
         Me.TableLayoutPanel1.TabIndex = 117
         '
-        'btnSearch
+        'TableLayoutPanel2
         '
-        Me.btnSearch.Location = New System.Drawing.Point(173, 103)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(95, 23)
-        Me.btnSearch.TabIndex = 3
-        Me.btnSearch.Text = "Rechercher"
-        Me.btnSearch.UseVisualStyleBackColor = True
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 296.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.layMenu, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.dgvPanier, 1, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(289, 3)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(713, 158)
+        Me.TableLayoutPanel2.TabIndex = 6
         '
         'frmMain
         '
@@ -629,33 +582,15 @@ Partial Class frmMain
         Me.menuGrid.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        CType(Me.pbProperties, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbPersonnes, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbEditer, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbAttribuer, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbSupprimer, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbEmprunter, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvPanier, System.ComponentModel.ISupportInitialize).EndInit()
         Me.layMenu.ResumeLayout(False)
-        Me.FlowLayoutPanel3.ResumeLayout(False)
-        Me.FlowLayoutPanel4.ResumeLayout(False)
-        Me.FlowLayoutPanel5.ResumeLayout(False)
-        Me.FlowLayoutPanel6.ResumeLayout(False)
-        Me.FlowLayoutPanel7.ResumeLayout(False)
-        Me.FlowLayoutPanel8.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
+        Me.layMenu.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel1.PerformLayout()
+        Me.TableLayoutPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents chkDisponibles As CheckBox
-    Friend WithEvents chkEmpruntees As CheckBox
-    Friend WithEvents chkAttribuees As CheckBox
-    Friend WithEvents btnAddClef As Button
-    Friend WithEvents btnAddTrousseau As Button
     Friend WithEvents gbRechercher As GroupBox
     Friend WithEvents gbFilter As GroupBox
     Friend WithEvents dgvResultats As DataGridView
@@ -682,28 +617,22 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents RafraichirLaPageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AProposToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents pbEmprunter As PictureBox
-    Friend WithEvents pbSupprimer As PictureBox
-    Friend WithEvents pbAttribuer As PictureBox
-    Friend WithEvents pbEditer As PictureBox
-    Friend WithEvents pbPersonnes As PictureBox
-    Friend WithEvents pbProperties As PictureBox
-    Friend WithEvents lblEditer As Label
-    Friend WithEvents lblAttribuer As Label
-    Friend WithEvents lblGestionPersonnes As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents ToolTip1 As ToolTip
-    Friend WithEvents Label3 As Label
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvPanier As DataGridView
     Friend WithEvents layMenu As FlowLayoutPanel
-    Friend WithEvents FlowLayoutPanel3 As FlowLayoutPanel
-    Friend WithEvents FlowLayoutPanel4 As FlowLayoutPanel
-    Friend WithEvents FlowLayoutPanel5 As FlowLayoutPanel
-    Friend WithEvents FlowLayoutPanel6 As FlowLayoutPanel
-    Friend WithEvents FlowLayoutPanel7 As FlowLayoutPanel
-    Friend WithEvents FlowLayoutPanel8 As FlowLayoutPanel
-    Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents btnSearch As Button
+    Friend WithEvents chkAttribuees As MaterialSkin.Controls.MaterialCheckBox
+    Friend WithEvents chkEmpruntees As MaterialSkin.Controls.MaterialCheckBox
+    Friend WithEvents chkDisponibles As MaterialSkin.Controls.MaterialCheckBox
+    Friend WithEvents btnSearch As MaterialSkin.Controls.MaterialRaisedButton
+    Friend WithEvents btnEmprunter As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents btnAttribuer As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents btnInformations As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents btnEditer As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents btnAddKey As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents btnSupprimer As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents btnPersonnes As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents btnTrousseaux As MaterialSkin.Controls.MaterialFlatButton
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents GestionDesTrousseauxToolStripMenuItem As ToolStripMenuItem
 End Class

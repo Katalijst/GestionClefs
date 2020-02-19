@@ -73,6 +73,16 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property ajouter_clefs() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ajouter_clefs", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property city_buildings_silhouette() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("city-buildings-silhouette", resourceCulture)
@@ -216,6 +226,26 @@ Namespace My.Resources
         Friend ReadOnly Property settings_cogwheel_button() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("settings-cogwheel-button", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property tableaux() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("tableaux", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property trousseaux() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("trousseaux", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

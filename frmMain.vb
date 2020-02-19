@@ -1,9 +1,10 @@
-﻿Imports System.Drawing.Imaging
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
+Imports MaterialSkin
 
 'Formulaire principal, peut être optimisé
 Public Class frmMain
     'Déclaration des sources de données pour la DataGridView
+    ReadOnly srcPanier As New BindingSource()
     ReadOnly srcKeyList As New BindingSource()
     ReadOnly srcOwner As New BindingSource()
     'Booléeen pour l'affichage des alertes seulement une fois
@@ -32,12 +33,9 @@ Public Class frmMain
         End If
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ToolTip1.SetToolTip(pbEmprunter, "Emprunter")
-        ToolTip1.SetToolTip(pbAttribuer, "Attribuer")
-        ToolTip1.SetToolTip(pbPersonnes, "Gestion des personnes")
-        ToolTip1.SetToolTip(pbEditer, "Editer la clef")
-        ToolTip1.SetToolTip(pbProperties, "Information sur la clef")
-        ToolTip1.SetToolTip(pbSupprimer, "Supprimer la clef")
+        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+        SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+        SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
 
         Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
         SupprimerToolStripMenuItem.Image = TintBitmap(b, Color.Red, 1)
@@ -52,12 +50,12 @@ Public Class frmMain
         'Initialiser l'index du menu déroulant de sélection du type de recherche
         cbRechercher.SelectedIndex = 1
         'Sub d'actualisation et de recherche (Ctrl + clic sur le nom pour y accèder rapidement)
-        'FillDataSource()
-        FillData2()
+        FillDataSource()
+        'FillData2()
         'Désactivation des fonctions administrateur
         If userType <> "Administrateur" Then
-            btnAddClef.Enabled = False
-            btnAddTrousseau.Enabled = False
+            btnAddKey.Enabled = False
+            btnTrousseaux.Enabled = False
             GestionDesBâtimentsToolStripMenuItem.Enabled = False
             GestionDesTableauxToolStripMenuItem.Enabled = False
             SupprimerToolStripMenuItem.Enabled = False
@@ -133,16 +131,6 @@ Public Class frmMain
         End
     End Sub
 
-    Private Sub btnAddClef_Click(sender As Object, e As EventArgs) Handles btnAddClef.Click
-        'afficher la fenêtre d'ajout de clef
-        frmAjouterClef.ShowDialog()
-    End Sub
-
-    Private Sub btnAddTrousseau_Click(sender As Object, e As EventArgs) Handles btnAddTrousseau.Click
-        'afficher la fenêtre d'ajout de trousseau
-        frmGestionTrousseau.ShowDialog()
-    End Sub
-
     Private Sub EmprunterLaClefToolStripMenuItem_Click(sender As Object, e As EventArgs)
         'afficher la fenêtre d'emprunt de clef
         frmEmprunterClef.ShowDialog()
@@ -210,7 +198,6 @@ Public Class frmMain
 
             Next
 
-
             srcKeyList.DataSource = dtKeyList
 
             For Each column In dgvResultats.Columns
@@ -261,6 +248,7 @@ Public Class frmMain
         Dim da As New MySqlDataAdapter
         Dim dtKeyList As DataTable = New DataTable()
         Dim dtOwner As DataTable = New DataTable()
+        Dim dtEmpty As DataTable = New DataTable()
         Dim sql As String
 
         Try
@@ -311,10 +299,16 @@ Public Class frmMain
 
             If cbRechercher.Text = "Emprunteur" Then
                 dgvResultats.DataSource = srcOwner
+                dtEmpty = dtKeyList
+                dtEmpty.Rows.Clear()
             Else
                 dgvResultats.DataSource = srcKeyList
+                dtEmpty = dtOwner
+                dtEmpty.Rows.Clear()
             End If
 
+
+            dgvPanier.DataSource = dtEmpty
             dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
@@ -376,19 +370,31 @@ Public Class frmMain
                     srcOwner.Filter = ""
             End Select
         End If
+        chkDisponibles.Enabled = True
+        chkEmpruntees.Enabled = True
+        chkAttribuees.Enabled = True
     End Sub
 
-    Private Sub chkDisponibles_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
+    Private Sub chkDisponibles_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
+        chkDisponibles.Enabled = False
+        chkEmpruntees.Enabled = False
+        chkAttribuees.Enabled = False
         SetAutocomplete()
         Filter()
     End Sub
 
-    Private Sub chkEmpruntees_CheckedChanged(sender As Object, e As EventArgs) Handles chkEmpruntees.CheckedChanged
+    Private Sub chkEmpruntees_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkEmpruntees.CheckedChanged
+        chkDisponibles.Enabled = False
+        chkEmpruntees.Enabled = False
+        chkAttribuees.Enabled = False
         SetAutocomplete()
         Filter()
     End Sub
 
-    Private Sub chkAttribuees_CheckedChanged(sender As Object, e As EventArgs) Handles chkAttribuees.CheckedChanged
+    Private Sub chkAttribuees_CheckedChanged_1(sender As Object, e As EventArgs)
+        chkDisponibles.Enabled = False
+        chkEmpruntees.Enabled = False
+        chkAttribuees.Enabled = False
         SetAutocomplete()
         Filter()
     End Sub
@@ -530,7 +536,8 @@ Public Class frmMain
     Private Sub dgvResultats_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResultats.CellDoubleClick
         'Ouverture des propriétés au double clique sur une cellule
         If dgvResultats.SelectedRows.Count > 0 Then
-            frmProprietes.ShowDialog()
+            dgvPanier.Rows.Add(dgvResultats.SelectedRows(0))
+            dgvResultats.Rows.Remove(dgvResultats.SelectedRows(0))
         End If
     End Sub
 
@@ -543,21 +550,7 @@ Public Class frmMain
         frmAbout.ShowDialog()
     End Sub
 
-    Private Sub pbPersonnes_Click(sender As Object, e As EventArgs) Handles pbPersonnes.Click
-        frmGestionPersonnes.ShowDialog()
-    End Sub
-
-    Private Sub pbPersonnes_MouseEnter() Handles pbPersonnes.MouseEnter
-        Dim b As Bitmap = New Bitmap(My.Resources.two_men)
-        pbPersonnes.Image = TintBitmap(b, Color.White, 0.3)
-    End Sub
-
-    Private Sub pbPersonnes_MouseLeave() Handles pbPersonnes.MouseLeave
-        Dim b As Bitmap = New Bitmap(My.Resources.two_men)
-        pbPersonnes.Image = TintBitmap(b, Color.Black, 1)
-    End Sub
-
-    Private Sub pbSupprimer_Click(sender As Object, e As EventArgs) Handles pbSupprimer.Click
+    Private Sub pbSupprimer_Click(sender As Object, e As EventArgs)
         If dgvResultats.SelectedRows.Count > 0 Then
             'Récupération de l'id de la ligne cliquée
             Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
@@ -566,35 +559,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub pbSupprimer_MouseEnter() Handles pbSupprimer.MouseEnter
-        Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
-        pbSupprimer.Image = TintBitmap(b, Color.Red, 1)
-    End Sub
-
-    Private Sub pbSupprimer_MouseLeave() Handles pbSupprimer.MouseLeave
-        Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
-        pbSupprimer.Image = TintBitmap(b, Color.Black, 1)
-    End Sub
-
-    Private Sub pbAttribuer_Click(sender As Object, e As EventArgs) Handles pbAttribuer.Click
-        If dgvResultats.SelectedRows.Count > 0 Then
-            'Ouverture du menu emprunt/attribution de clef en mode attribution
-            blnEmprunt = False
-            frmEmprunterClef.ShowDialog()
-        End If
-    End Sub
-
-    Private Sub pbAttribuer_MouseEnter() Handles pbAttribuer.MouseEnter
-        Dim b As Bitmap = New Bitmap(My.Resources.login)
-        pbAttribuer.Image = TintBitmap(b, Color.White, 0.3)
-    End Sub
-
-    Private Sub pbAttribuer_MouseLeave() Handles pbAttribuer.MouseLeave
-        Dim b As Bitmap = New Bitmap(My.Resources.login)
-        pbAttribuer.Image = TintBitmap(b, Color.Black, 1)
-    End Sub
-
-    Private Sub pbEmprunter_Click(sender As Object, e As EventArgs) Handles pbEmprunter.Click
+    Private Sub btnEmprunter_Click(sender As Object, e As EventArgs) Handles btnEmprunter.Click
         If dgvResultats.SelectedRows.Count > 0 Then
             'Ouverture du menu emprunt/attribution de clef en mode Emprun
             blnEmprunt = True
@@ -602,95 +567,45 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub pbEmprunter_MouseEnter() Handles pbEmprunter.MouseEnter
-        Dim b As Bitmap = New Bitmap(My.Resources.emprunt)
-        pbEmprunter.Image = TintBitmap(b, Color.White, 0.3)
-    End Sub
-
-    Private Sub pbEmprunter_MouseLeave() Handles pbEmprunter.MouseLeave
-        Dim b As Bitmap = New Bitmap(My.Resources.emprunt)
-        pbEmprunter.Image = TintBitmap(b, Color.Black, 1)
-    End Sub
-
-    Private Sub pbEditer_Click(sender As Object, e As EventArgs) Handles pbEditer.Click
+    Private Sub btnAttribuer_Click(sender As Object, e As EventArgs) Handles btnAttribuer.Click
         If dgvResultats.SelectedRows.Count > 0 Then
-            frmEditerClef.ShowDialog()
+            'Ouverture du menu emprunt/attribution de clef en mode attribution
+            blnEmprunt = False
+            frmEmprunterClef.ShowDialog()
         End If
     End Sub
 
-    Private Sub pbEditer_MouseEnter() Handles pbEditer.MouseEnter
-        Dim b As Bitmap = New Bitmap(My.Resources.writing)
-        pbEditer.Image = TintBitmap(b, Color.White, 0.3)
-    End Sub
-
-    Private Sub pbEditer_MouseLeave() Handles pbEditer.MouseLeave
-        Dim b As Bitmap = New Bitmap(My.Resources.writing)
-        pbEditer.Image = TintBitmap(b, Color.Black, 1)
-    End Sub
-
-    Private Sub pbProperties_Click(sender As Object, e As EventArgs) Handles pbProperties.Click
+    Private Sub btnInformations_Click(sender As Object, e As EventArgs) Handles btnInformations.Click
         If dgvResultats.SelectedRows.Count > 0 Then
             'Menu propriété de la clef
             frmProprietes.ShowDialog()
         End If
     End Sub
 
-    Private Sub pbProperties_MouseEnter() Handles pbProperties.MouseEnter
-        Dim b As Bitmap = New Bitmap(My.Resources.round_info_button)
-        pbProperties.Image = TintBitmap(b, Color.RoyalBlue, 1)
+    Private Sub btnEditer_Click(sender As Object, e As EventArgs) Handles btnEditer.Click
+        If dgvResultats.SelectedRows.Count > 0 Then
+            frmEditerClef.ShowDialog()
+        End If
     End Sub
 
-    Private Sub pbProperties_MouseLeave() Handles pbProperties.MouseLeave
-        Dim b As Bitmap = New Bitmap(My.Resources.round_info_button)
-        pbProperties.Image = TintBitmap(b, Color.Black, 1)
+    Private Sub btnAddKey_Click(sender As Object, e As EventArgs) Handles btnAddKey.Click
+        'afficher la fenêtre d'ajout de clef
+        frmAjouterClef.ShowDialog()
     End Sub
 
-    Private Sub pbProperties_MouseEnter(sender As Object, e As EventArgs) Handles pbProperties.MouseEnter
-
+    Private Sub btnSupprimer_Click(sender As Object, e As EventArgs) Handles btnSupprimer.Click
+        'Récupération de l'id de la ligne cliquée
+        Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
+        'Sub de suppression de la clef à partir de son ID
+        DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
     End Sub
 
-    Private Sub pbProperties_MouseLeave(sender As Object, e As EventArgs) Handles pbProperties.MouseLeave
-
+    Private Sub btnPersonnes_Click(sender As Object, e As EventArgs) Handles btnPersonnes.Click
+        frmGestionPersonnes.ShowDialog()
     End Sub
 
-    Private Sub pbPersonnes_MouseEnter(sender As Object, e As EventArgs) Handles pbPersonnes.MouseEnter
-
-    End Sub
-
-    Private Sub pbPersonnes_MouseLeave(sender As Object, e As EventArgs) Handles pbPersonnes.MouseLeave
-
-    End Sub
-
-    Private Sub pbEditer_MouseEnter(sender As Object, e As EventArgs) Handles pbEditer.MouseEnter
-
-    End Sub
-
-    Private Sub pbEditer_MouseLeave(sender As Object, e As EventArgs) Handles pbEditer.MouseLeave
-
-    End Sub
-
-    Private Sub pbAttribuer_MouseEnter(sender As Object, e As EventArgs) Handles pbAttribuer.MouseEnter
-
-    End Sub
-
-    Private Sub pbAttribuer_MouseLeave(sender As Object, e As EventArgs) Handles pbAttribuer.MouseLeave
-
-    End Sub
-
-    Private Sub pbSupprimer_MouseEnter(sender As Object, e As EventArgs) Handles pbSupprimer.MouseEnter
-
-    End Sub
-
-    Private Sub pbSupprimer_MouseLeave(sender As Object, e As EventArgs) Handles pbSupprimer.MouseLeave
-
-    End Sub
-
-    Private Sub pbEmprunter_MouseEnter(sender As Object, e As EventArgs) Handles pbEmprunter.MouseEnter
-
-    End Sub
-
-    Private Sub pbEmprunter_MouseLeave(sender As Object, e As EventArgs) Handles pbEmprunter.MouseLeave
-
+    Private Sub btnTrousseaux_Click(sender As Object, e As EventArgs) Handles btnTrousseaux.Click
+        frmGestionTrousseau.ShowDialog()
     End Sub
 
 End Class

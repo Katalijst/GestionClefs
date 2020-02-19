@@ -79,6 +79,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySQL.Data.EntityFrameworkCore, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
@@ -370,6 +373,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
+    <None Include="Resources\tableaux.png" />
+    <None Include="Resources\trousseaux.png" />
+    <None Include="Resources\ajouter_clefs.png" />
     <None Include="Resources\emprunt.png" />
     <None Include="packages.config" />
     <None Include="Resources\round-info-button.png" />
