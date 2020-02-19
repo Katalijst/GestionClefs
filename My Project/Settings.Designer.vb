@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("192.168.0.244")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("127.0.0.1")>  _
         Public Property MySQL_Serveur() As String
             Get
                 Return CType(Me("MySQL_Serveur"),String)
@@ -114,84 +114,15 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public ReadOnly Property strTitleCID() As String
-            Get
-                Return CType(Me("strTitleCID"),String)
-            End Get
-        End Property
-        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property strTitleCNom() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("3308")>  _
+        Public Property MySQL_Port() As String
             Get
-                Return CType(Me("strTitleCNom"),String)
+                Return CType(Me("MySQL_Port"),String)
             End Get
             Set
-                Me("strTitleCNom") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property strTitleCPosition() As String
-            Get
-                Return CType(Me("strTitleCPosition"),String)
-            End Get
-            Set
-                Me("strTitleCPosition") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property strTitleCStatus() As String
-            Get
-                Return CType(Me("strTitleCStatus"),String)
-            End Get
-            Set
-                Me("strTitleCStatus") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property strTitleCDate() As String
-            Get
-                Return CType(Me("strTitleCDate"),String)
-            End Get
-            Set
-                Me("strTitleCDate") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property strTitleCTrousseau() As String
-            Get
-                Return CType(Me("strTitleCTrousseau"),String)
-            End Get
-            Set
-                Me("strTitleCTrousseau") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property strTitleCBatiment() As String
-            Get
-                Return CType(Me("strTitleCBatiment"),String)
-            End Get
-            Set
-                Me("strTitleCBatiment") = value
+                Me("MySQL_Port") = value
             End Set
         End Property
     End Class

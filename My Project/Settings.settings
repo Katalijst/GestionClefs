@@ -12,31 +12,13 @@
       <Value Profile="(Default)">C0utras33</Value>
     </Setting>
     <Setting Name="MySQL_Serveur" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.0.244</Value>
+      <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
     <Setting Name="ShowAlert" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="strTitleCID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="strTitleCNom" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="strTitleCPosition" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="strTitleCStatus" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="strTitleCDate" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="strTitleCTrousseau" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="strTitleCBatiment" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="MySQL_Port" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3308</Value>
     </Setting>
   </Settings>
 </SettingsFile>

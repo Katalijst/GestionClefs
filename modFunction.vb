@@ -9,7 +9,7 @@ Module modFunction
     Public Function connecter()
         'Création du string de connexion
         'Voir pour ajouter port éventuellement
-        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password
+        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Port=3308" & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password
         Dim con As MySqlConnection = New MySqlConnection With {
             .ConnectionString = myConnectionString
         }
@@ -94,6 +94,27 @@ Module modFunction
 
     End Function
 
+    Public Function InvertColors(bmp As Bitmap) As Bitmap
+        Dim width As Integer = bmp.Width
+        Dim height As Integer = bmp.Height
+
+        For y As Integer = 0 To height - 1
+
+            For x As Integer = 0 To width - 1
+                Dim p As Color = bmp.GetPixel(x, y)
+                Dim a As Integer = p.A
+                Dim r As Integer = p.R
+                Dim g As Integer = p.G
+                Dim b As Integer = p.B
+                r = 255 - r
+                g = 255 - g
+                b = 255 - b
+                bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b))
+            Next
+        Next
+        Return bmp
+    End Function
+
 End Module
 
 Public Module TextBoxExtensions
@@ -110,5 +131,21 @@ Public Module TextBoxExtensions
     Public Sub SetWaterMark(tb As TextBox, watermark As String)
         SendMessageW(tb.Handle, EM_SETCUEBANNER, 1, watermark)
     End Sub
+
+    <Extension()>
+    Public Iterator Function GetAllChildren(ByVal root As Control) As IEnumerable(Of Control)
+        Dim stack = New Stack(Of Control)()
+        stack.Push(root)
+
+        While stack.Any()
+            Dim [next] = stack.Pop()
+
+            For Each child As Control In [next].Controls
+                stack.Push(child)
+            Next
+
+            Yield [next]
+        End While
+    End Function
 
 End Module

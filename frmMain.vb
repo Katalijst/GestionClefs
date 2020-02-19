@@ -11,6 +11,7 @@ Public Class frmMain
     Public blnAlertes As Boolean = True
     'Booléeen pour savoir si c'est un emprunt ou une attribution
     Public blnEmprunt As Boolean
+    Public blnLightMode As Boolean = False
 
     Private Shared Function Split(ByVal str As String, ByVal chunkSize As Integer) As IEnumerable(Of String)
         Return Enumerable.Range(0, str.Length / chunkSize).[Select](Function(i) str.Substring(i * chunkSize, chunkSize))
@@ -34,13 +35,38 @@ Public Class frmMain
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
-        SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+        SkinManager.AddFormToManage(Me)
+        SkinManager.Theme = MaterialSkinManager.Themes.DARK
         SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
 
+        If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
+            For Each c As Control In GetAllChildren()
+                If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = InvertColors(bmp)
+                    End If
+                End If
+                If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = InvertColors(bmp)
+                    End If
+                End If
+            Next
+            For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
+                If c.Image IsNot Nothing Then
+                    Dim bmp As Bitmap = c.Image
+                    c.Image = InvertColors(bmp)
+                End If
+            Next
+            menuGrid.BackColor = ColorTranslator.FromHtml("#333333")
+        End If
+
         Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
-        SupprimerToolStripMenuItem.Image = TintBitmap(b, Color.Red, 1)
+        SupprimerToolStripMenuItem1.Image = TintBitmap(b, Color.Red, 1)
         b = New Bitmap(My.Resources.round_info_button)
-        PropriétésToolStripMenuItem.Image = TintBitmap(b, Color.RoyalBlue, 1)
+        PropriétésToolStripMenuItem1.Image = TintBitmap(b, Color.RoyalBlue, 1)
         Dim strCBFiltre As String() = New String(3) {}
         strCBFiltre(0) = strTitleCID
         strCBFiltre(1) = strTitleCNom
@@ -56,10 +82,10 @@ Public Class frmMain
         If userType <> "Administrateur" Then
             btnAddKey.Enabled = False
             btnTrousseaux.Enabled = False
-            GestionDesBâtimentsToolStripMenuItem.Enabled = False
-            GestionDesTableauxToolStripMenuItem.Enabled = False
-            SupprimerToolStripMenuItem.Enabled = False
-            EditerToolStripMenuItem.Enabled = False
+            btnBatiments.Enabled = False
+            btnTableaux.Enabled = False
+            SupprimerToolStripMenuItem1.Enabled = False
+            EditerToolStripMenuItem1.Enabled = False
         End If
         'Check des alertes
         CheckAlerts()
@@ -108,17 +134,19 @@ Public Class frmMain
                     End If
                 End If
                 'Mise en forme du menu alertes suivant le nombre d'alerte
-                menAlertes.Text = "Alertes (" & dt.Rows.Count & ")"
-                menAlertes.ForeColor = Color.Red
-                menAlertes.Font = New Font(menAlertes.Font, FontStyle.Bold)
+                btnAlertes.Text = "Alertes (" & dt.Rows.Count & ")"
+                btnAlertes.ForeColor = Color.Red
+                btnAlertes.Font = New Font(btnAlertes.Font, FontStyle.Bold)
                 Dim b As Bitmap = New Bitmap(My.Resources.round_error_symbol)
-                menAlertes.Image = TintBitmap(b, Color.Red, 1)
+                btnAlertes.Icon = TintBitmap(b, Color.Red, 1)
             Else
-                menAlertes.Text = "Alertes"
-                menAlertes.ForeColor = Color.Black
-                'menAlertes.Font = New Font(menAlertes.Font, FontStyle.Regular)
-                'Dim b As Bitmap = New Bitmap(My.Resources.round_error_symbol)
-                menAlertes.Image = Nothing
+                btnAlertes.Text = "Alertes"
+                'If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
+                '    btnAlertes.ForeColor = Color.White
+                'Else
+                '    btnAlertes.ForeColor = Color.Black
+                'End If
+                btnAlertes.Icon = Nothing
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -153,11 +181,11 @@ Public Class frmMain
                     Exit Sub
                 End If
                 'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
-                txtRechercher.AutoCompleteCustomSource.Clear()
+                'txtRechercher.AutoCompleteCustomSource.Clear()
                 'LOOPING THE ROW OF DATA IN THE DATATABLE
                 For Each r In dgvResultats.Rows
                     'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
-                    txtRechercher.AutoCompleteCustomSource.Add(r.Cells(stgPredict).Value.ToString)
+                    'txtRechercher.AutoCompleteCustomSource.Add(r.Cells(stgPredict).Value.ToString)
                 Next
             End If
         Catch ex As Exception
@@ -475,24 +503,12 @@ Public Class frmMain
         End Try
     End Sub
 
-    Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
+    Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs)
         'recherche à chaque caractère entré dans le champ de recherche
         Search()
     End Sub
 
-    Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
-        'Récupération de l'id de la ligne cliquée
-        Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
-        'Sub de suppression de la clef à partir de son ID
-        DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
-    End Sub
-
-    Private Sub PropriétésToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditerToolStripMenuItem.Click
-        'Ouverture de l'edition de clef (à finir)
-        frmEditerClef.ShowDialog()
-    End Sub
-
-    Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+    Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         'Ouverture des paramètres
         frmSettings.ShowDialog()
     End Sub
@@ -502,35 +518,18 @@ Public Class frmMain
         FillDataSource()
     End Sub
 
-    Private Sub GestionDesPersonnesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionDesPersonnesToolStripMenuItem.Click
+    Private Sub GestionDesPersonnesToolStripMenuItem_Click(sender As Object, e As EventArgs)
         'Menu gestion des personnes
         frmGestionPersonnes.ShowDialog()
     End Sub
 
-    Private Sub GestionDesBâtimentsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionDesBâtimentsToolStripMenuItem.Click
+    Private Sub GestionDesBâtimentsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         'Menu gestion des batiments
         frmGestionBatiments.ShowDialog()
     End Sub
 
-    Private Sub GestionDesTableauxToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestionDesTableauxToolStripMenuItem.Click
+    Private Sub GestionDesTableauxToolStripMenuItem_Click(sender As Object, e As EventArgs)
         frmGestionPosition.ShowDialog()
-    End Sub
-
-    Private Sub InfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropriétésToolStripMenuItem.Click
-        'Menu propriété de la clef
-        frmProprietes.ShowDialog()
-    End Sub
-
-    Private Sub EmprunterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmprunterToolStripMenuItem.Click
-        'Ouverture du menu emprunt/attribution de clef en mode emprunt
-        blnEmprunt = True
-        frmEmprunterClef.ShowDialog()
-    End Sub
-
-    Private Sub AttribuerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AttribuerToolStripMenuItem.Click
-        'Ouverture du menu emprunt/attribution de clef en mode attribution
-        blnEmprunt = False
-        frmEmprunterClef.ShowDialog()
     End Sub
 
     Private Sub dgvResultats_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResultats.CellDoubleClick
@@ -541,12 +540,12 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub menAlertes_Click(sender As Object, e As EventArgs) Handles menAlertes.Click
+    Private Sub menAlertes_Click(sender As Object, e As EventArgs)
         'ouverture du menu d'alerte
         frmAlertes.ShowDialog()
     End Sub
 
-    Private Sub AProposToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AProposToolStripMenuItem.Click
+    Private Sub AProposToolStripMenuItem_Click(sender As Object, e As EventArgs)
         frmAbout.ShowDialog()
     End Sub
 
@@ -601,6 +600,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnPersonnes_Click(sender As Object, e As EventArgs) Handles btnPersonnes.Click
+        'Menu gestion des personnes
         frmGestionPersonnes.ShowDialog()
     End Sub
 
@@ -608,4 +608,123 @@ Public Class frmMain
         frmGestionTrousseau.ShowDialog()
     End Sub
 
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        FillDataSource()
+    End Sub
+
+    Private Sub btnTableaux_Click(sender As Object, e As EventArgs) Handles btnTableaux.Click
+        frmGestionPosition.ShowDialog()
+    End Sub
+
+    Private Sub GestionDesTrousseauxToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub btnBatiments_Click(sender As Object, e As EventArgs) Handles btnBatiments.Click
+        'Menu gestion des batiments
+        frmGestionBatiments.ShowDialog()
+    End Sub
+
+    Private Sub btnParametres_Click_1(sender As Object, e As EventArgs) Handles btnParametres.Click
+        'Ouverture des paramètres
+        frmSettings.ShowDialog()
+    End Sub
+
+    Private Sub btnAlertes_Click(sender As Object, e As EventArgs) Handles btnAlertes.Click
+        'ouverture du menu d'alerte
+        frmAlertes.ShowDialog()
+    End Sub
+
+    Private Sub EmprunterToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EmprunterToolStripMenuItem1.Click
+        'Ouverture du menu emprunt/attribution de clef en mode emprunt
+        blnEmprunt = True
+        frmEmprunterClef.ShowDialog()
+    End Sub
+
+    Private Sub AttribuerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AttribuerToolStripMenuItem1.Click
+        'Ouverture du menu emprunt/attribution de clef en mode attribution
+        blnEmprunt = False
+        frmEmprunterClef.ShowDialog()
+    End Sub
+
+    Private Sub EditerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditerToolStripMenuItem1.Click
+        'Ouverture de l'edition de clef (à finir)
+        frmEditerClef.ShowDialog()
+    End Sub
+
+    Private Sub PropriétésToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PropriétésToolStripMenuItem1.Click
+        'Menu propriété de la clef
+        frmProprietes.ShowDialog()
+    End Sub
+
+    Private Sub SupprimerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem1.Click
+        'Récupération de l'id de la ligne cliquée
+        Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
+        'Sub de suppression de la clef à partir de son ID
+        DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
+    End Sub
+
+    Private Sub btnLightMode_Click(sender As Object, e As EventArgs) Handles btnLightMode.Click
+        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+        SkinManager.AddFormToManage(Me)
+        If blnLightMode = False Then
+            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.LightBlue200, TextShade.WHITE)
+            blnLightMode = True
+        Else
+            SkinManager.Theme = MaterialSkinManager.Themes.DARK
+            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
+            blnLightMode = False
+        End If
+
+        If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
+            For Each c As Control In GetAllChildren()
+                If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = InvertColors(bmp)
+                    End If
+                End If
+                If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = InvertColors(bmp)
+                    End If
+                End If
+            Next
+            For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
+                If c.Image IsNot Nothing Then
+                    Dim bmp As Bitmap = c.Image
+                    c.Image = InvertColors(bmp)
+                End If
+            Next
+            menuGrid.BackColor = ColorTranslator.FromHtml("#333333")
+        Else
+            For Each c As Control In GetAllChildren()
+                If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = InvertColors(bmp)
+                    End If
+                End If
+                If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = InvertColors(bmp)
+                    End If
+                End If
+            Next
+            For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
+                If c.Image IsNot Nothing Then
+                    Dim bmp As Bitmap = c.Image
+                    c.Image = InvertColors(bmp)
+                End If
+            Next
+            menuGrid.BackColor = ColorTranslator.FromHtml("#FFFFFF")
+        End If
+        Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
+        SupprimerToolStripMenuItem1.Image = TintBitmap(b, Color.Red, 1)
+        b = New Bitmap(My.Resources.round_info_button)
+        PropriétésToolStripMenuItem1.Image = TintBitmap(b, Color.RoyalBlue, 1)
+    End Sub
 End Class
