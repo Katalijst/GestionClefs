@@ -67,7 +67,7 @@
     <ApplicationIcon>icons8-key-64.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>F3B09D9CA14702CA1FA6439C56624F17CBB713BF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9777FB88F08499A8FF9A5FD1659B29A392B3508E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>GestionClefs_TemporaryKey.pfx</ManifestKeyFile>
@@ -662,6 +662,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="GestionClefs_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

@@ -545,7 +545,7 @@ Partial Class frmMain
         Me.btnLightMode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnLightMode.Depth = 0
         Me.btnLightMode.Icon = Global.GestionClefs.My.Resources.Resources.light_bulb_on
-        Me.btnLightMode.Location = New System.Drawing.Point(1934, 25)
+        Me.btnLightMode.Location = New System.Drawing.Point(918, 25)
         Me.btnLightMode.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnLightMode.Name = "btnLightMode"
         Me.btnLightMode.Primary = True
@@ -560,7 +560,7 @@ Partial Class frmMain
         Me.btnParametres.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnParametres.Depth = 0
         Me.btnParametres.Icon = Global.GestionClefs.My.Resources.Resources.settings_cogwheel_button
-        Me.btnParametres.Location = New System.Drawing.Point(1984, 25)
+        Me.btnParametres.Location = New System.Drawing.Point(968, 25)
         Me.btnParametres.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnParametres.Name = "btnParametres"
         Me.btnParametres.Primary = True
@@ -575,7 +575,7 @@ Partial Class frmMain
         Me.btnAlertes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnAlertes.Depth = 0
         Me.btnAlertes.Icon = Global.GestionClefs.My.Resources.Resources.round_error_symbol
-        Me.btnAlertes.Location = New System.Drawing.Point(1779, 25)
+        Me.btnAlertes.Location = New System.Drawing.Point(755, 25)
         Me.btnAlertes.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnAlertes.Name = "btnAlertes"
         Me.btnAlertes.Primary = True
