@@ -268,6 +268,7 @@ Partial Class frmGestionPosition
         Me.Controls.Add(Me.chkKeepOpen)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnSave)
+        Me.DoubleBuffered = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmGestionPosition"

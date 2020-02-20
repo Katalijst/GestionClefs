@@ -38,6 +38,9 @@ Partial Class frmSetDataBase
         Me.txtActServeur = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtPort = New System.Windows.Forms.TextBox()
+        Me.txtActPort = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -61,7 +64,7 @@ Partial Class frmSetDataBase
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 56)
+        Me.Label2.Location = New System.Drawing.Point(6, 95)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(85, 13)
         Me.Label2.TabIndex = 3
@@ -69,7 +72,7 @@ Partial Class frmSetDataBase
         '
         'txtDatabase
         '
-        Me.txtDatabase.Location = New System.Drawing.Point(6, 72)
+        Me.txtDatabase.Location = New System.Drawing.Point(6, 111)
         Me.txtDatabase.Name = "txtDatabase"
         Me.txtDatabase.Size = New System.Drawing.Size(238, 20)
         Me.txtDatabase.TabIndex = 2
@@ -77,7 +80,7 @@ Partial Class frmSetDataBase
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 95)
+        Me.Label3.Location = New System.Drawing.Point(6, 134)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(53, 13)
         Me.Label3.TabIndex = 5
@@ -85,7 +88,7 @@ Partial Class frmSetDataBase
         '
         'txtID
         '
-        Me.txtID.Location = New System.Drawing.Point(6, 111)
+        Me.txtID.Location = New System.Drawing.Point(6, 150)
         Me.txtID.Name = "txtID"
         Me.txtID.Size = New System.Drawing.Size(238, 20)
         Me.txtID.TabIndex = 4
@@ -93,7 +96,7 @@ Partial Class frmSetDataBase
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 134)
+        Me.Label4.Location = New System.Drawing.Point(6, 173)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(71, 13)
         Me.Label4.TabIndex = 7
@@ -101,7 +104,7 @@ Partial Class frmSetDataBase
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(6, 150)
+        Me.txtPassword.Location = New System.Drawing.Point(6, 189)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(238, 20)
@@ -109,6 +112,8 @@ Partial Class frmSetDataBase
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.txtPort)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.txtPassword)
@@ -120,20 +125,21 @@ Partial Class frmSetDataBase
         Me.GroupBox1.Controls.Add(Me.txtServeur)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(429, 180)
+        Me.GroupBox1.Size = New System.Drawing.Size(429, 216)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Base de donnée"
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtActPort)
         Me.GroupBox2.Controls.Add(Me.txtActPassword)
         Me.GroupBox2.Controls.Add(Me.txtActID)
         Me.GroupBox2.Controls.Add(Me.txtActDatabase)
         Me.GroupBox2.Controls.Add(Me.txtActServeur)
         Me.GroupBox2.Location = New System.Drawing.Point(250, 0)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(179, 180)
+        Me.GroupBox2.Size = New System.Drawing.Size(179, 216)
         Me.GroupBox2.TabIndex = 12
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Valeurs actuelle"
@@ -141,7 +147,7 @@ Partial Class frmSetDataBase
         'txtActPassword
         '
         Me.txtActPassword.Enabled = False
-        Me.txtActPassword.Location = New System.Drawing.Point(6, 150)
+        Me.txtActPassword.Location = New System.Drawing.Point(6, 189)
         Me.txtActPassword.Name = "txtActPassword"
         Me.txtActPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtActPassword.Size = New System.Drawing.Size(167, 20)
@@ -150,7 +156,7 @@ Partial Class frmSetDataBase
         'txtActID
         '
         Me.txtActID.Enabled = False
-        Me.txtActID.Location = New System.Drawing.Point(6, 111)
+        Me.txtActID.Location = New System.Drawing.Point(6, 150)
         Me.txtActID.Name = "txtActID"
         Me.txtActID.Size = New System.Drawing.Size(167, 20)
         Me.txtActID.TabIndex = 13
@@ -158,7 +164,7 @@ Partial Class frmSetDataBase
         'txtActDatabase
         '
         Me.txtActDatabase.Enabled = False
-        Me.txtActDatabase.Location = New System.Drawing.Point(6, 72)
+        Me.txtActDatabase.Location = New System.Drawing.Point(6, 111)
         Me.txtActDatabase.Name = "txtActDatabase"
         Me.txtActDatabase.Size = New System.Drawing.Size(167, 20)
         Me.txtActDatabase.TabIndex = 12
@@ -173,7 +179,7 @@ Partial Class frmSetDataBase
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(12, 198)
+        Me.btnSave.Location = New System.Drawing.Point(12, 234)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(117, 23)
         Me.btnSave.TabIndex = 9
@@ -183,24 +189,48 @@ Partial Class frmSetDataBase
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(139, 198)
+        Me.btnCancel.Location = New System.Drawing.Point(139, 234)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(117, 23)
         Me.btnCancel.TabIndex = 10
         Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'frmOptions
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 56)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(26, 13)
+        Me.Label5.TabIndex = 14
+        Me.Label5.Text = "Port"
+        '
+        'txtPort
+        '
+        Me.txtPort.Location = New System.Drawing.Point(6, 72)
+        Me.txtPort.Name = "txtPort"
+        Me.txtPort.Size = New System.Drawing.Size(238, 20)
+        Me.txtPort.TabIndex = 13
+        '
+        'txtActPort
+        '
+        Me.txtActPort.Enabled = False
+        Me.txtActPort.Location = New System.Drawing.Point(6, 72)
+        Me.txtActPort.Name = "txtActPort"
+        Me.txtActPort.Size = New System.Drawing.Size(167, 20)
+        Me.txtActPort.TabIndex = 15
+        '
+        'frmSetDataBase
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(453, 232)
+        Me.ClientSize = New System.Drawing.Size(453, 267)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Name = "frmOptions"
+        Me.Name = "frmSetDataBase"
         Me.Text = "Paramètres"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -226,4 +256,7 @@ Partial Class frmSetDataBase
     Friend WithEvents txtActID As TextBox
     Friend WithEvents txtActDatabase As TextBox
     Friend WithEvents txtActServeur As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtPort As TextBox
+    Friend WithEvents txtActPort As TextBox
 End Class

@@ -9,7 +9,7 @@ Module modFunction
     Public Function connecter()
         'Création du string de connexion
         'Voir pour ajouter port éventuellement
-        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Port=3308" & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password
+        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Port=" & My.Settings.MySQL_Port & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password
         Dim con As MySqlConnection = New MySqlConnection With {
             .ConnectionString = myConnectionString
         }
@@ -115,6 +115,35 @@ Module modFunction
         Return bmp
     End Function
 
+    Private Function calcColorSwap(_base As Byte, _new As Byte) As Single
+        Return (CInt(_new) - CInt(_base)) / 255.0!
+    End Function
+
+    Public Function setColorToBitmap(inBMP As Bitmap, baseColor As Color, newColor As Color) As Bitmap
+        Dim newimg As New Bitmap(inBMP.Width, inBMP.Height)
+        Dim transformation As New ColorMatrix(New Single()() {
+              New Single() {1, 0, 0, 0, 0},
+              New Single() {0, 1, 0, 0, 0},
+              New Single() {0, 0, 1, 0, 0},
+              New Single() {0, 0, 0, 1, 0},
+              New Single() {calcColorSwap(baseColor.R, newColor.R), calcColorSwap(baseColor.G, newColor.G), calcColorSwap(baseColor.B, newColor.B), 0, 1}
+          })
+
+        Dim imageAttributes As New ImageAttributes()
+        imageAttributes.SetColorMatrix(transformation)
+
+
+        Using g As Graphics = Graphics.FromImage(newimg)
+            g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+            g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+            g.DrawImage(inBMP, New Rectangle(0, 0, inBMP.Width, inBMP.Height), 0, 0, inBMP.Width, inBMP.Height, GraphicsUnit.Pixel, imageAttributes)
+        End Using
+
+        Return newimg
+
+    End Function
+
 End Module
 
 Public Module TextBoxExtensions
@@ -131,6 +160,7 @@ Public Module TextBoxExtensions
     Public Sub SetWaterMark(tb As TextBox, watermark As String)
         SendMessageW(tb.Handle, EM_SETCUEBANNER, 1, watermark)
     End Sub
+
 
     <Extension()>
     Public Iterator Function GetAllChildren(ByVal root As Control) As IEnumerable(Of Control)

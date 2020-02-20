@@ -4,6 +4,9 @@ Imports MaterialSkin
 'Formulaire principal, peut être optimisé
 Public Class frmMain
     'Déclaration des sources de données pour la DataGridView
+    Dim dtPanier As New DataTable
+    Dim dtKeyList As New DataTable
+    Dim dtOwner As New DataTable
     ReadOnly srcPanier As New BindingSource()
     ReadOnly srcKeyList As New BindingSource()
     ReadOnly srcOwner As New BindingSource()
@@ -34,6 +37,7 @@ Public Class frmMain
         End If
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
         SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.DARK
@@ -44,29 +48,31 @@ Public Class frmMain
                 If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
                     If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
                         Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = InvertColors(bmp)
+                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
                 End If
                 If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
                     If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
                         Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = InvertColors(bmp)
+                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
                 End If
             Next
             For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
                 If c.Image IsNot Nothing Then
                     Dim bmp As Bitmap = c.Image
-                    c.Image = InvertColors(bmp)
+                    c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
                 End If
             Next
             menuGrid.BackColor = ColorTranslator.FromHtml("#333333")
+            cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
+            cbRechercher.ForeColor = Color.White
         End If
 
         Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
-        SupprimerToolStripMenuItem1.Image = TintBitmap(b, Color.Red, 1)
+        SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
         b = New Bitmap(My.Resources.round_info_button)
-        PropriétésToolStripMenuItem1.Image = TintBitmap(b, Color.RoyalBlue, 1)
+        PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
         Dim strCBFiltre As String() = New String(3) {}
         strCBFiltre(0) = strTitleCID
         strCBFiltre(1) = strTitleCNom
@@ -194,88 +200,11 @@ Public Class frmMain
 
     End Sub
 
-    Public Sub FillData2()
-        Dim cmd As New MySqlCommand
-        Dim da As New MySqlDataAdapter
-        Dim dtKeyList As DataTable = New DataTable()
-        Dim dtOwner As DataTable = New DataTable()
-        Dim sql As String
-
-        Try
-
-            sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> ""0"""
-
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dtKeyList)
-            'For i As Integer = 0 To dtKeyList.Columns.Count - 1
-            '    dtKeyList.Columns(i).ColumnName = dtKeyList.Columns(i).ColumnName.ToString().Remove(0, 1)
-            'Next
-
-            dtKeyList.Columns("CID").ColumnName = strTitleCID
-            dtKeyList.Columns("CNom").ColumnName = strTitleCNom
-            dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyList.Columns("CStatus").ColumnName = strTitleCStatus
-            dtKeyList.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
-
-            For Each dr As DataRow In dtOwner.Rows
-
-            Next
-
-            srcKeyList.DataSource = dtKeyList
-
-            For Each column In dgvResultats.Columns
-                column.SortMode = DataGridViewColumnSortMode.NotSortable
-            Next
-
-            sql = "Select CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef And CStatus Like ""%"" And CID <> ""0"""
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dtOwner)
-
-            dtOwner.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dtOwner.Columns("CID").ColumnName = strTitleCID
-            dtOwner.Columns("CNom").ColumnName = strTitleCNom
-            dtOwner.Columns("CPosition").ColumnName = strTitleCPosition
-            dtOwner.Columns("CStatus").ColumnName = strTitleCStatus
-            dtOwner.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
-            dtOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
-            dtOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
-
-            srcOwner.DataSource = dtOwner
-
-            If cbRechercher.Text = "Emprunteur" Then
-                dgvResultats.DataSource = srcOwner
-            Else
-                dgvResultats.DataSource = srcKeyList
-            End If
-
-            dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-
-            connecter().Close()
-
-            'Sub du remplissage de l'autocomplétion
-            SetAutocomplete()
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
-
     Public Sub FillDataSource()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
-        Dim dtKeyList As DataTable = New DataTable()
-        Dim dtOwner As DataTable = New DataTable()
+        Dim dt1 As DataTable = New DataTable()
+        Dim dt2 As DataTable = New DataTable()
         Dim dtEmpty As DataTable = New DataTable()
         Dim sql As String
 
@@ -288,18 +217,16 @@ Public Class frmMain
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
-            da.Fill(dtKeyList)
-            'For i As Integer = 0 To dtKeyList.Columns.Count - 1
-            '    dtKeyList.Columns(i).ColumnName = dtKeyList.Columns(i).ColumnName.ToString().Remove(0, 1)
-            'Next
+            da.Fill(dt1)
 
-            dtKeyList.Columns("CID").ColumnName = strTitleCID
-            dtKeyList.Columns("CNom").ColumnName = strTitleCNom
-            dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyList.Columns("CStatus").ColumnName = strTitleCStatus
-            dtKeyList.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
+            dt1.Columns("CID").ColumnName = strTitleCID
+            dt1.Columns("CNom").ColumnName = strTitleCNom
+            dt1.Columns("CPosition").ColumnName = strTitleCPosition
+            dt1.Columns("CStatus").ColumnName = strTitleCStatus
+            dt1.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dt1.Columns("CBatiment").ColumnName = strTitleCBatiment
 
+            dtKeyList = dt1.Copy
             srcKeyList.DataSource = dtKeyList
 
             For Each column In dgvResultats.Columns
@@ -312,31 +239,35 @@ Public Class frmMain
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
-            da.Fill(dtOwner)
+            da.Fill(dt2)
 
-            dtOwner.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dtOwner.Columns("CID").ColumnName = strTitleCID
-            dtOwner.Columns("CNom").ColumnName = strTitleCNom
-            dtOwner.Columns("CPosition").ColumnName = strTitleCPosition
-            dtOwner.Columns("CStatus").ColumnName = strTitleCStatus
-            dtOwner.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
-            dtOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
-            dtOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
+            dt2.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dt2.Columns("CID").ColumnName = strTitleCID
+            dt2.Columns("CNom").ColumnName = strTitleCNom
+            dt2.Columns("CPosition").ColumnName = strTitleCPosition
+            dt2.Columns("CStatus").ColumnName = strTitleCStatus
+            dt2.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
+            dt2.Columns("EDateDebut").ColumnName = strTitleEDateDebut
+            dt2.Columns("EDateFin").ColumnName = strTitleEDateFin
 
+            dtOwner = dt2.Copy
             srcOwner.DataSource = dtOwner
+            dgvResultats.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
+            dgvResultats.RowHeadersVisible = False
 
-            If cbRechercher.Text = "Emprunteur" Then
-                dgvResultats.DataSource = srcOwner
-                dtEmpty = dtKeyList
+            If cbRechercher.Text <> strTitleENomPersonne Then
+                dgvResultats.DataSource = srcKeyList
+                dtEmpty = dtKeyList.Copy
                 dtEmpty.Rows.Clear()
             Else
-                dgvResultats.DataSource = srcKeyList
-                dtEmpty = dtOwner
+                dgvResultats.DataSource = srcOwner
+                dtEmpty = dtOwner.Copy
                 dtEmpty.Rows.Clear()
             End If
+            dtPanier = dtEmpty.Copy
+            srcPanier.DataSource = dtPanier
+            dgvPanier.DataSource = srcPanier
 
-
-            dgvPanier.DataSource = dtEmpty
             dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
@@ -344,13 +275,14 @@ Public Class frmMain
 
             'Sub du remplissage de l'autocomplétion
             SetAutocomplete()
-
+            dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+            dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
 
-    Private Sub Filter()
+    Private Sub Rechercher()
         Dim chkNumber As Integer = 0
         'Création de tout les cas possible de filtre pour les cases à cochées
         '(utilisation d'une sorte de "table de Karnaugh")
@@ -363,41 +295,86 @@ Public Class frmMain
         If chkAttribuees.Checked = True Then
             chkNumber += 1
         End If
-        If cbRechercher.Text <> "Emprunteur" Then
-            Select Case chkNumber
-                Case 1
-                    srcKeyList.Filter = strTitleCStatus & "='Attribuée'"
-                Case 2
-                    srcKeyList.Filter = strTitleCStatus & "='Empruntée'"
-                Case 3
-                    srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
-                Case 4
-                    srcKeyList.Filter = strTitleCStatus & "='Disponible'"
-                Case 5
-                    srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
-                Case 6
-                    srcKeyList.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
-                Case Else
-                    srcKeyList.Filter = ""
-            End Select
+        dgvResultats.RowHeadersVisible = False
+        If txtRechercher.Text <> "" Then
+            Dim strTypeDeRecherche As String = "`" & cbRechercher.Text & "`"
+            If cbRechercher.Text <> strTitleENomPersonne Then
+                srcKeyList.RemoveFilter()
+                Select Case chkNumber
+                    Case 1
+                        srcKeyList.Filter = strTitleCStatus & "='Attribuée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 2
+                        srcKeyList.Filter = strTitleCStatus & "='Empruntée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 3
+                        srcKeyList.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 4
+                        srcKeyList.Filter = strTitleCStatus & "='Disponible' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 5
+                        srcKeyList.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Disponible') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 6
+                        srcKeyList.Filter = "(" & strTitleCStatus & "='Disponible' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case Else
+                        srcKeyList.Filter = strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                End Select
+            Else
+                srcOwner.RemoveFilter()
+                Select Case chkNumber
+                    Case 1
+                        srcOwner.Filter = strTitleCStatus & "='Attribuée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 2
+                        srcOwner.Filter = strTitleCStatus & "='Empruntée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 3
+                        srcOwner.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 4
+                        srcOwner.Filter = strTitleCStatus & "='Disponible' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 5
+                        srcOwner.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Disponible') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case 6
+                        srcOwner.Filter = "(" & strTitleCStatus & "='Disponible' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                    Case Else
+                        srcOwner.Filter = strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
+                End Select
+            End If
         Else
-            Select Case chkNumber
-                Case 1
-                    srcOwner.Filter = strTitleCStatus & "='Attribuée'"
-                Case 2
-                    srcOwner.Filter = strTitleCStatus & "='Empruntée'"
-                Case 3
-                    srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
-                Case 4
-                    srcOwner.Filter = strTitleCStatus & "='Disponible'"
-                Case 5
-                    srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
-                Case 6
-                    srcOwner.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
-                Case Else
-                    srcOwner.Filter = ""
-            End Select
+            srcKeyList.RemoveFilter()
+            If cbRechercher.Text <> strTitleENomPersonne Then
+                Select Case chkNumber
+                    Case 1
+                        srcKeyList.Filter = strTitleCStatus & "='Attribuée'"
+                    Case 2
+                        srcKeyList.Filter = strTitleCStatus & "='Empruntée'"
+                    Case 3
+                        srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
+                    Case 4
+                        srcKeyList.Filter = strTitleCStatus & "='Disponible'"
+                    Case 5
+                        srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
+                    Case 6
+                        srcKeyList.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
+                    Case Else
+                        srcKeyList.Filter = ""
+                End Select
+            Else
+                srcOwner.RemoveFilter()
+                Select Case chkNumber
+                    Case 1
+                        srcOwner.Filter = strTitleCStatus & "='Attribuée'"
+                    Case 2
+                        srcOwner.Filter = strTitleCStatus & "='Empruntée'"
+                    Case 3
+                        srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
+                    Case 4
+                        srcOwner.Filter = strTitleCStatus & "='Disponible'"
+                    Case 5
+                        srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
+                    Case 6
+                        srcOwner.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
+                    Case Else
+                        srcOwner.Filter = ""
+                End Select
+            End If
         End If
+
         chkDisponibles.Enabled = True
         chkEmpruntees.Enabled = True
         chkAttribuees.Enabled = True
@@ -408,7 +385,7 @@ Public Class frmMain
         chkEmpruntees.Enabled = False
         chkAttribuees.Enabled = False
         SetAutocomplete()
-        Filter()
+        Rechercher()
     End Sub
 
     Private Sub chkEmpruntees_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkEmpruntees.CheckedChanged
@@ -416,26 +393,29 @@ Public Class frmMain
         chkEmpruntees.Enabled = False
         chkAttribuees.Enabled = False
         SetAutocomplete()
-        Filter()
+        Rechercher()
     End Sub
 
-    Private Sub chkAttribuees_CheckedChanged_1(sender As Object, e As EventArgs)
+    Private Sub chkAttribuees_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkAttribuees.CheckedChanged
         chkDisponibles.Enabled = False
         chkEmpruntees.Enabled = False
         chkAttribuees.Enabled = False
         SetAutocomplete()
-        Filter()
+        Rechercher()
     End Sub
 
     Private Sub cbRechercher_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRechercher.SelectedIndexChanged
         'Filtres du type de recherche
-        If cbRechercher.Text = "Emprunteur" Then
+
+        dgvResultats.RowHeadersVisible = False
+        If cbRechercher.Text = strTitleENomPersonne Then
             dgvResultats.DataSource = srcOwner
         Else
             dgvResultats.DataSource = srcKeyList
         End If
+
         SetAutocomplete()
-        Filter()
+        Rechercher()
     End Sub
 
     Public Sub DeleteKey(stgKeyID As String)
@@ -475,87 +455,70 @@ Public Class frmMain
             End Try
         End If
     End Sub
-    Private Sub Search()
-        Dim searchValue As String = txtRechercher.Text
-        Dim intColumnNb As Integer = 1
-        'Filtres du type de recherche
-        If cbRechercher.Text = "ID" Then
-            intColumnNb = dgvResultats.Columns(strTitleCID).Index
-        ElseIf cbRechercher.Text = "Nom" Then
-            intColumnNb = dgvResultats.Columns(strTitleCNom).Index
-        ElseIf cbRechercher.Text = "Emprunteur" Then
-            intColumnNb = dgvResultats.Columns(strTitleENomPersonne).Index
-        ElseIf cbRechercher.Text = "Lieu" Then
-            intColumnNb = dgvResultats.Columns(strTitleCPosition).Index
+
+    Private Sub addToPanier()
+        If cbRechercher.Text <> strTitleENomPersonne Then
+            If dgvResultats.SelectedRows.Count > 0 Then
+                Dim rows As New List(Of DataRow)
+                For Each selRow As DataGridViewRow In dgvResultats.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
+                    If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
+                        Dim intSelIndex As Integer = selRow.Index
+                        If selRow.Index >= 0 Then
+                            Dim drToAdd As DataRow = dtKeyList.Rows(intSelIndex)
+                            Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                            rows.Add(row)
+                            dtPanier.ImportRow(drToAdd)
+                            dtPanier.AcceptChanges()
+                        End If
+                    End If
+                Next
+                For Each r As DataRow In rows
+                    dtKeyList.Rows.Remove(r)
+                    dtKeyList.AcceptChanges()
+                Next
+                dgvResultats.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
+                dgvResultats.RowHeadersVisible = False
+                dgvResultats.DataSource = srcKeyList
+
+                dgvPanier.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
+                dgvPanier.RowHeadersVisible = False
+                dgvPanier.DataSource = srcPanier
+
+            End If
         End If
-
-        Try
-            For i = 0 To dgvResultats.RowCount - 1
-                If dgvResultats.Rows(i).Cells(intColumnNb).Value.ToString.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
-                    dgvResultats.Rows(i).Selected = True
-                    dgvResultats.FirstDisplayedScrollingRowIndex = i
-                    Exit For
-                    MsgBox("found on row " & i)
-                End If
-            Next
-        Catch exc As Exception
-            MessageBox.Show(exc.Message)
-        End Try
     End Sub
 
-    Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs)
-        'recherche à chaque caractère entré dans le champ de recherche
-        Search()
-    End Sub
-
-    Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        'Ouverture des paramètres
-        frmSettings.ShowDialog()
-    End Sub
-
-    Private Sub ActualiserToolStripMenuItem1_Click(sender As Object, e As EventArgs)
-        'Menu actualiser
-        FillDataSource()
-    End Sub
-
-    Private Sub GestionDesPersonnesToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        'Menu gestion des personnes
-        frmGestionPersonnes.ShowDialog()
-    End Sub
-
-    Private Sub GestionDesBâtimentsToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        'Menu gestion des batiments
-        frmGestionBatiments.ShowDialog()
-    End Sub
-
-    Private Sub GestionDesTableauxToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        frmGestionPosition.ShowDialog()
+    Private Sub removeFromPanier()
+        If cbRechercher.Text <> strTitleENomPersonne Then
+            If dgvPanier.SelectedRows.Count > 0 Then
+                Dim rows As New List(Of DataRow)
+                For Each selRow As DataGridViewRow In dgvPanier.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
+                    Dim intSelIndex As Integer = selRow.Index
+                    If selRow.Index >= 0 Then
+                        Dim drToAdd As DataRow = dtPanier.Rows(intSelIndex)
+                        Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                        rows.Add(row)
+                        dtKeyList.ImportRow(drToAdd)
+                        dtKeyList.AcceptChanges()
+                        dtKeyList.DefaultView.Sort = dtKeyList.Columns(0).ColumnName & " ASC"
+                    End If
+                Next
+                For Each r As DataRow In rows
+                    dtPanier.Rows.Remove(r)
+                    dtPanier.AcceptChanges()
+                Next
+                dgvPanier.DataSource = srcPanier
+                dgvResultats.DataSource = srcKeyList
+            End If
+        End If
     End Sub
 
     Private Sub dgvResultats_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResultats.CellDoubleClick
-        'Ouverture des propriétés au double clique sur une cellule
-        If dgvResultats.SelectedRows.Count > 0 Then
-            dgvPanier.Rows.Add(dgvResultats.SelectedRows(0))
-            dgvResultats.Rows.Remove(dgvResultats.SelectedRows(0))
-        End If
+        addToPanier()
     End Sub
 
-    Private Sub menAlertes_Click(sender As Object, e As EventArgs)
-        'ouverture du menu d'alerte
-        frmAlertes.ShowDialog()
-    End Sub
-
-    Private Sub AProposToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        frmAbout.ShowDialog()
-    End Sub
-
-    Private Sub pbSupprimer_Click(sender As Object, e As EventArgs)
-        If dgvResultats.SelectedRows.Count > 0 Then
-            'Récupération de l'id de la ligne cliquée
-            Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
-            'Sub de suppression de la clef à partir de son ID
-            DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
-        End If
+    Private Sub dgvPanier_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPanier.CellDoubleClick
+        removeFromPanier()
     End Sub
 
     Private Sub btnEmprunter_Click(sender As Object, e As EventArgs) Handles btnEmprunter.Click
@@ -563,6 +526,7 @@ Public Class frmMain
             'Ouverture du menu emprunt/attribution de clef en mode Emprun
             blnEmprunt = True
             frmEmprunterClef.ShowDialog()
+            frmEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
 
@@ -682,49 +646,74 @@ Public Class frmMain
                 If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
                     If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
                         Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = InvertColors(bmp)
+                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
                 End If
                 If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
                     If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
                         Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = InvertColors(bmp)
+                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
                 End If
             Next
             For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
                 If c.Image IsNot Nothing Then
                     Dim bmp As Bitmap = c.Image
-                    c.Image = InvertColors(bmp)
+                    c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
                 End If
             Next
             menuGrid.BackColor = ColorTranslator.FromHtml("#333333")
+            cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
+            cbRechercher.ForeColor = Color.White
+            Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
+            SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.Red)
+            b = New Bitmap(My.Resources.round_info_button)
+            PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.RoyalBlue)
         Else
             For Each c As Control In GetAllChildren()
                 If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
                     If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
                         Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = InvertColors(bmp)
+                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
                     End If
                 End If
                 If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
                     If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
                         Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = InvertColors(bmp)
+                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
                     End If
                 End If
             Next
             For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
                 If c.Image IsNot Nothing Then
                     Dim bmp As Bitmap = c.Image
-                    c.Image = InvertColors(bmp)
+                    c.Image = setColorToBitmap(bmp, Color.White, Color.Black)
                 End If
             Next
             menuGrid.BackColor = ColorTranslator.FromHtml("#FFFFFF")
+            cbRechercher.BackColor = ColorTranslator.FromHtml("#FFFFFF")
+            cbRechercher.ForeColor = Color.Black
+            Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
+            SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
+            b = New Bitmap(My.Resources.round_info_button)
+            PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
         End If
-        Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
-        SupprimerToolStripMenuItem1.Image = TintBitmap(b, Color.Red, 1)
-        b = New Bitmap(My.Resources.round_info_button)
-        PropriétésToolStripMenuItem1.Image = TintBitmap(b, Color.RoyalBlue, 1)
+
+    End Sub
+
+    Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
+        Rechercher()
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs)
+        dgvResultats.DataSource = srcOwner
+    End Sub
+
+    Private Sub btnAddToPanier_Click(sender As Object, e As EventArgs) Handles btnAddToPanier.Click
+        addToPanier()
+    End Sub
+
+    Private Sub btnRemoveToPanier_Click(sender As Object, e As EventArgs) Handles btnRemoveToPanier.Click
+        removeFromPanier()
     End Sub
 End Class

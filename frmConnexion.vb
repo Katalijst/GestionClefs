@@ -4,6 +4,8 @@ Imports MaterialSkin
 'Formulaire de connexion, peut être optimisé
 Public Class frmConnexion
     Private Sub frmConnexion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.MinimumSize = New Size(Width, Height)
+        Me.MaximumSize = Me.MinimumSize
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
         SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.DARK
@@ -132,4 +134,5 @@ Public Class frmConnexion
         Application.Exit()
         End
     End Sub
+
 End Class

@@ -194,31 +194,6 @@ Public Class frmGestionTrousseau
                 dtListClef = dtListClef.DefaultView.ToTable
                 dgvListClefs.DataSource = dtListClef
             Next
-            'Dim Id As String = ""
-
-            'For Each dr As DataGridViewRow In GV1.Rows
-
-            '    If Convert.ToBoolean(dr.Cells("gv1Select").Value) = True Then
-            '        Dim gv2dr As DataRow = dt2.NewRow()
-            '        gv2dr("Id") = dr.Cells("Id").Value.ToString()
-            '        gv2dr("Name") = dr.Cells("Name").Value.ToString()
-            '        dt2.Rows.Add(gv2dr)
-            '        Id += "," & dr.Cells("Id").Value.ToString()
-            '    End If
-            'Next
-
-            'If Id <> "" Then
-            '    Dim result As String() = Id.Substring(1).ToString().Split(","c)
-
-            '    For Each IdtoDelete As String In result
-            '        Dim Dr As DataRow() = Nothing
-            '        Dr = dt1.[Select]("Id = '" & IdtoDelete & "'")
-
-            '        For i As Integer = 0 To Dr.Length - 1
-            '            dt1.Rows.Remove(Dr(i))
-            '        Next
-            '    Next
-            'End If
         End If
     End Sub
 

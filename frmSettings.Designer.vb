@@ -44,6 +44,8 @@ Partial Class frmSettings
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnUserManager = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.txtActPort = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.gbMySQL.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -51,6 +53,9 @@ Partial Class frmSettings
         '
         'gbMySQL
         '
+        Me.gbMySQL.Controls.Add(Me.btnCancel)
+        Me.gbMySQL.Controls.Add(Me.txtActPort)
+        Me.gbMySQL.Controls.Add(Me.Label6)
         Me.gbMySQL.Controls.Add(Me.btnMySQL)
         Me.gbMySQL.Controls.Add(Me.Label1)
         Me.gbMySQL.Controls.Add(Me.Label4)
@@ -62,16 +67,16 @@ Partial Class frmSettings
         Me.gbMySQL.Controls.Add(Me.txtActServeur)
         Me.gbMySQL.Location = New System.Drawing.Point(272, 12)
         Me.gbMySQL.Name = "gbMySQL"
-        Me.gbMySQL.Size = New System.Drawing.Size(187, 207)
+        Me.gbMySQL.Size = New System.Drawing.Size(187, 253)
         Me.gbMySQL.TabIndex = 0
         Me.gbMySQL.TabStop = False
         Me.gbMySQL.Text = "Paramètre MySQL"
         '
         'btnMySQL
         '
-        Me.btnMySQL.Location = New System.Drawing.Point(9, 175)
+        Me.btnMySQL.Location = New System.Drawing.Point(9, 223)
         Me.btnMySQL.Name = "btnMySQL"
-        Me.btnMySQL.Size = New System.Drawing.Size(167, 23)
+        Me.btnMySQL.Size = New System.Drawing.Size(104, 23)
         Me.btnMySQL.TabIndex = 19
         Me.btnMySQL.Text = "Modifier..."
         Me.btnMySQL.UseVisualStyleBackColor = True
@@ -88,7 +93,7 @@ Partial Class frmSettings
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 133)
+        Me.Label4.Location = New System.Drawing.Point(6, 172)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(71, 13)
         Me.Label4.TabIndex = 11
@@ -97,7 +102,7 @@ Partial Class frmSettings
         'txtActDatabase
         '
         Me.txtActDatabase.Enabled = False
-        Me.txtActDatabase.Location = New System.Drawing.Point(9, 71)
+        Me.txtActDatabase.Location = New System.Drawing.Point(9, 110)
         Me.txtActDatabase.Name = "txtActDatabase"
         Me.txtActDatabase.Size = New System.Drawing.Size(167, 20)
         Me.txtActDatabase.TabIndex = 16
@@ -105,7 +110,7 @@ Partial Class frmSettings
         'txtActPassword
         '
         Me.txtActPassword.Enabled = False
-        Me.txtActPassword.Location = New System.Drawing.Point(9, 149)
+        Me.txtActPassword.Location = New System.Drawing.Point(9, 188)
         Me.txtActPassword.Name = "txtActPassword"
         Me.txtActPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtActPassword.Size = New System.Drawing.Size(167, 20)
@@ -114,7 +119,7 @@ Partial Class frmSettings
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 55)
+        Me.Label2.Location = New System.Drawing.Point(6, 94)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(85, 13)
         Me.Label2.TabIndex = 9
@@ -123,7 +128,7 @@ Partial Class frmSettings
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 94)
+        Me.Label3.Location = New System.Drawing.Point(6, 133)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(53, 13)
         Me.Label3.TabIndex = 10
@@ -132,7 +137,7 @@ Partial Class frmSettings
         'txtActID
         '
         Me.txtActID.Enabled = False
-        Me.txtActID.Location = New System.Drawing.Point(9, 110)
+        Me.txtActID.Location = New System.Drawing.Point(9, 149)
         Me.txtActID.Name = "txtActID"
         Me.txtActID.Size = New System.Drawing.Size(167, 20)
         Me.txtActID.TabIndex = 17
@@ -256,12 +261,29 @@ Partial Class frmSettings
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(281, 235)
+        Me.btnCancel.Location = New System.Drawing.Point(119, 223)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(167, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(62, 23)
         Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "Quitter"
         Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'txtActPort
+        '
+        Me.txtActPort.Enabled = False
+        Me.txtActPort.Location = New System.Drawing.Point(9, 71)
+        Me.txtActPort.Name = "txtActPort"
+        Me.txtActPort.Size = New System.Drawing.Size(167, 20)
+        Me.txtActPort.TabIndex = 21
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(6, 55)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(26, 13)
+        Me.Label6.TabIndex = 20
+        Me.Label6.Text = "Port"
         '
         'frmSettings
         '
@@ -270,7 +292,6 @@ Partial Class frmSettings
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(471, 277)
-        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbMySQL)
         Me.MaximizeBox = False
@@ -310,4 +331,6 @@ Partial Class frmSettings
     Friend WithEvents btnCancel As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents btnUserManager As Button
+    Friend WithEvents txtActPort As TextBox
+    Friend WithEvents Label6 As Label
 End Class

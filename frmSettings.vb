@@ -6,6 +6,7 @@ Public Class frmSettings
     End Sub
     Public Sub RefreshMySQL()
         txtActServeur.Text = My.Settings.MySQL_Serveur
+        txtActPort.Text = My.Settings.MySQL_Port
         txtActDatabase.Text = My.Settings.MySQL_Database
         txtActID.Text = My.Settings.MySQL_ID
         txtActPassword.Text = My.Settings.MySQL_Password

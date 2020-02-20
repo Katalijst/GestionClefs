@@ -6,12 +6,14 @@
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Pré remplissage avec anciennes valeurs
         txtServeur.Text = My.Settings.MySQL_Serveur
+        txtPort.Text = My.Settings.MySQL_Port
         txtDatabase.Text = My.Settings.MySQL_Database
         txtID.Text = My.Settings.MySQL_ID
         txtPassword.Text = My.Settings.MySQL_Password
 
         'Anciennes valeurs
         txtActServeur.Text = My.Settings.MySQL_Serveur
+        txtActPort.Text = My.Settings.MySQL_Port
         txtActDatabase.Text = My.Settings.MySQL_Database
         txtActID.Text = My.Settings.MySQL_ID
         txtActPassword.Text = My.Settings.MySQL_Password
@@ -23,6 +25,9 @@
         ' Initializes variables to pass to the MessageBox.Show method.
         If My.Settings.MySQL_Serveur <> txtServeur.Text Then
             stgModif = stgModif & "Serveur : " & My.Settings.MySQL_Serveur & " --> " & txtServeur.Text & vbCrLf
+        End If
+        If My.Settings.MySQL_Port <> txtPort.Text Then
+            stgModif = stgModif & "Port : " & My.Settings.MySQL_Port & " --> " & txtPort.Text & vbCrLf
         End If
         If My.Settings.MySQL_Database <> txtDatabase.Text Then
             stgModif = stgModif & "Base de donnée : " & My.Settings.MySQL_Database & " --> " & txtDatabase.Text & vbCrLf
@@ -51,6 +56,7 @@
             If Result = System.Windows.Forms.DialogResult.Yes Then
 
                 My.Settings.MySQL_Serveur = txtServeur.Text
+                My.Settings.MySQL_Port = txtPort.Text
                 My.Settings.MySQL_Database = txtDatabase.Text
                 My.Settings.MySQL_ID = txtID.Text
                 My.Settings.MySQL_Password = txtPassword.Text

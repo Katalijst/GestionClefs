@@ -117,9 +117,9 @@ Partial Class frmConnexion
         Me.Name = "frmConnexion"
         Me.Opacity = 0R
         Me.ShowIcon = False
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Connexion à GestionClefs"
-        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

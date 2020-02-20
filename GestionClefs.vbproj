@@ -76,7 +76,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -436,6 +436,12 @@
     <Compile Include="frmEditerPosition.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEmprunterEtAttribuer.Designer.vb">
+      <DependentUpon>frmEmprunterEtAttribuer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmprunterEtAttribuer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmGestionBatiments.Designer.vb">
       <DependentUpon>frmGestionBatiments.vb</DependentUpon>
     </Compile>
@@ -590,6 +596,9 @@
     <EmbeddedResource Include="frmEditerPosition.resx">
       <DependentUpon>frmEditerPosition.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEmprunterEtAttribuer.resx">
+      <DependentUpon>frmEmprunterEtAttribuer.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGestionBatiments.resx">
       <DependentUpon>frmGestionBatiments.vb</DependentUpon>
     </EmbeddedResource>
@@ -653,7 +662,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="GestionClefs_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -667,6 +675,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
+    <None Include="Resources\shopping-cart.png" />
+    <None Include="Resources\shopping-basket-button.png" />
+    <None Include="Resources\light-bulb-on.png" />
     <None Include="Resources\tableaux.png" />
     <None Include="Resources\trousseaux.png" />
     <None Include="Resources\ajouter_clefs.png" />
