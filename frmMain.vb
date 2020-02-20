@@ -40,7 +40,7 @@ Public Class frmMain
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
-        SkinManager.EnforceBackcolorOnAllComponents = False
+        'SkinManager.EnforceBackcolorOnAllComponents = False
         SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.DARK
         SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
