@@ -193,6 +193,16 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property plus() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("plus", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property refresh_button() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("refresh-button", resourceCulture)
@@ -243,9 +253,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property shopping_basket_button() As System.Drawing.Bitmap
+        Friend ReadOnly Property shopping_cart_add() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("shopping-basket-button", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("shopping-cart-add", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -253,9 +263,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property shopping_cart() As System.Drawing.Bitmap
+        Friend ReadOnly Property shopping_cart_remove() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("shopping-cart", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("shopping-cart-remove", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

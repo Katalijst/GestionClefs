@@ -113,10 +113,9 @@ Public Class frmConnexion
                         userName = dt.Rows(0)(0).ToString
                     End If
                     userID = mtxtID.Text
+                    connecter().Close()
                     Me.Hide()
                     frmMain.Show()
-                    connecter().Close()
-                    Me.Close()
                 End If
             End If
         Catch ex As Exception

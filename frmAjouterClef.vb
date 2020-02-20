@@ -94,7 +94,7 @@ Public Class frmAjouterClef
 
             Next
             frmMain.FillDataSource()
-            frmMain.SetAutocomplete()
+            'frmMain.SetAutocomplete()
             If chkKeepOpen.Checked = False Then
                 Me.Close()
             End If

@@ -91,8 +91,11 @@
     <Reference Include="Google.Protobuf, Version=3.11.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.11.4\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
+    <Reference Include="LoadingIndicator.WinForms, Version=1.0.3.0, Culture=neutral, PublicKeyToken=1b7ed145d0f47614, processorArchitecture=MSIL">
+      <HintPath>packages\LoadingIndicator.WinForms.1.0.3\lib\net45\LoadingIndicator.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialSkin.2.2.1.2\lib\net461\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=1.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.Hosting.Abstractions.1.1.3\lib\net451\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
@@ -508,10 +511,10 @@
     <Compile Include="frmGestionUtilisateur.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrincipale.Designer.vb">
-      <DependentUpon>frmPrincipale.vb</DependentUpon>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPrincipale.vb">
+    <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPropAlertes.Designer.vb">
@@ -541,13 +544,6 @@
     <Compile Include="modAES.vb" />
     <Compile Include="modShare.vb" />
     <Compile Include="modFunction.vb" />
-    <Compile Include="frmMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMain.Designer.vb">
-      <DependentUpon>frmMain.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -632,9 +628,6 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrincipale.resx">
-      <DependentUpon>frmPrincipale.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPropAlertes.resx">
       <DependentUpon>frmPropAlertes.vb</DependentUpon>
     </EmbeddedResource>
@@ -649,9 +642,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditerClef.resx">
       <DependentUpon>frmEditerClef.vb</DependentUpon>
@@ -676,7 +669,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
-    <None Include="Resources\shopping-cart.png" />
+    <None Include="Resources\shopping-cart-add.png" />
+    <None Include="Resources\shopping-cart-remove1.png" />
+    <None Include="Resources\shopping-cart-remove.png" />
+    <None Include="Resources\delete-from-cart1.png" />
+    <None Include="Resources\add-to-cart1.png" />
+    <None Include="Resources\plus.png" />
     <None Include="Resources\shopping-basket-button.png" />
     <None Include="Resources\light-bulb-on.png" />
     <None Include="Resources\tableaux.png" />

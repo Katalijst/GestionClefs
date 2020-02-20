@@ -386,7 +386,7 @@ Public Class frmEmprunterClef
             End If
             connecter().Close()
             frmMain.FillDataSource()
-            frmMain.SetAutocomplete()
+            'frmMain.SetAutocomplete()
             Me.Close()
         Catch ex As Exception
             MsgBox(ex.Message)

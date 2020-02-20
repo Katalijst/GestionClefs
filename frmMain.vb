@@ -1,5 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports MaterialSkin
+Imports MaterialSkin.Controls
 
 'Formulaire principal, peut être optimisé
 Public Class frmMain
@@ -39,23 +40,33 @@ Public Class frmMain
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+        SkinManager.EnforceBackcolorOnAllComponents = False
         SkinManager.AddFormToManage(Me)
         SkinManager.Theme = MaterialSkinManager.Themes.DARK
         SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
 
         If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
             For Each c As Control In GetAllChildren()
-                If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
                 End If
-                If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
+                End If
+                If TypeOf c Is DataGridView Then
+                    CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.White
+                    CType(c, DataGridView).DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#616161")
+                    CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#424242")
+                    CType(c, DataGridView).BackgroundColor = ColorTranslator.FromHtml("#424242")
+                    CType(c, DataGridView).EnableHeadersVisualStyles = False
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#37474F")
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
                 End If
             Next
             For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
@@ -64,15 +75,16 @@ Public Class frmMain
                     c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
                 End If
             Next
-            menuGrid.BackColor = ColorTranslator.FromHtml("#333333")
-            cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
-            cbRechercher.ForeColor = Color.White
-        End If
 
+            menuGrid.BackColor = ColorTranslator.FromHtml("#505050")
+            'cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
+            'cbRechercher.ForeColor = Color.White
+        End If
         Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
         SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
         b = New Bitmap(My.Resources.round_info_button)
         PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
+
         Dim strCBFiltre As String() = New String(3) {}
         strCBFiltre(0) = strTitleCID
         strCBFiltre(1) = strTitleCNom
@@ -128,13 +140,14 @@ Public Class frmMain
                     'Si c'est la première pop up depuis le lancement du logiciel
                     If blnAlertes = True Then
                         'Création de la messagebox
-                        Dim Message As String = "Il y a " & dt.Rows.Count & " clefs non rendues !"
-                        Dim Caption As String = "Alertes"
-                        Dim Buttons As MessageBoxButtons = MessageBoxButtons.OKCancel
-                        Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
-                        Dim Result As DialogResult
+                        'Dim Message As String = "Il y a " & dt.Rows.Count & " clefs non rendues !"
+                        'Dim Caption As String = "Alertes"
+                        'Dim Buttons As MessageBoxButtons = MessageBoxButtons.OKCancel
+                        'Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+                        'Dim Result As DialogResult
                         'Affichage de la message box
-                        Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+                        'Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+                        MaterialMessageBox.Show("Il y a " & dt.Rows.Count & " clefs non rendues !", "Alertes")
                         'Passage du booléen blnAlertes à false pour évite la pop up à chaque actualisation
                         blnAlertes = False
                     End If
@@ -170,35 +183,35 @@ Public Class frmMain
         frmEmprunterClef.ShowDialog()
     End Sub
 
-    Public Sub SetAutocomplete()
-        'Filtres du type de recherche
-        Try
-            If dgvResultats.RowCount > 0 Then
-                Dim stgPredict As String
-                If cbRechercher.Text = strTitleCNom Then
-                    stgPredict = strTitleCNom
-                ElseIf cbRechercher.Text = strTitleENomPersonne Then
-                    stgPredict = strTitleENomPersonne
-                ElseIf cbRechercher.Text = strTitleCPosition Then
-                    stgPredict = strTitleCPosition
-                ElseIf cbRechercher.Text = strTitleCID Then
-                    stgPredict = strTitleCID
-                Else
-                    Exit Sub
-                End If
-                'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
-                'txtRechercher.AutoCompleteCustomSource.Clear()
-                'LOOPING THE ROW OF DATA IN THE DATATABLE
-                For Each r In dgvResultats.Rows
-                    'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
-                    'txtRechercher.AutoCompleteCustomSource.Add(r.Cells(stgPredict).Value.ToString)
-                Next
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+    'Public Sub SetAutocomplete()
+    '    'Filtres du type de recherche
+    '    Try
+    '        If dgvResultats.RowCount > 0 Then
+    '            Dim stgPredict As String
+    '            If cbRechercher.Text = strTitleCNom Then
+    '                stgPredict = strTitleCNom
+    '            ElseIf cbRechercher.Text = strTitleENomPersonne Then
+    '                stgPredict = strTitleENomPersonne
+    '            ElseIf cbRechercher.Text = strTitleCPosition Then
+    '                stgPredict = strTitleCPosition
+    '            ElseIf cbRechercher.Text = strTitleCID Then
+    '                stgPredict = strTitleCID
+    '            Else
+    '                Exit Sub
+    '            End If
+    '            'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
+    '            txtRechercher.AutoCompleteCustomSource.Clear()
+    '            'LOOPING THE ROW OF DATA IN THE DATATABLE
+    '            For Each r In dgvResultats.Rows
+    '                'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
+    '                txtRechercher.AutoCompleteCustomSource.Add(r.Cells(stgPredict).Value.ToString)
+    '            Next
+    '        End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    End Try
 
-    End Sub
+    'End Sub
 
     Public Sub FillDataSource()
         Dim cmd As New MySqlCommand
@@ -274,7 +287,7 @@ Public Class frmMain
             connecter().Close()
 
             'Sub du remplissage de l'autocomplétion
-            SetAutocomplete()
+            'SetAutocomplete()
             dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
             dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
         Catch ex As Exception
@@ -384,7 +397,7 @@ Public Class frmMain
         chkDisponibles.Enabled = False
         chkEmpruntees.Enabled = False
         chkAttribuees.Enabled = False
-        SetAutocomplete()
+        'SetAutocomplete()
         Rechercher()
     End Sub
 
@@ -392,7 +405,7 @@ Public Class frmMain
         chkDisponibles.Enabled = False
         chkEmpruntees.Enabled = False
         chkAttribuees.Enabled = False
-        SetAutocomplete()
+        'SetAutocomplete()
         Rechercher()
     End Sub
 
@@ -400,7 +413,7 @@ Public Class frmMain
         chkDisponibles.Enabled = False
         chkEmpruntees.Enabled = False
         chkAttribuees.Enabled = False
-        SetAutocomplete()
+        'SetAutocomplete()
         Rechercher()
     End Sub
 
@@ -414,7 +427,7 @@ Public Class frmMain
             dgvResultats.DataSource = srcKeyList
         End If
 
-        SetAutocomplete()
+        'SetAutocomplete()
         Rechercher()
     End Sub
 
@@ -643,17 +656,26 @@ Public Class frmMain
 
         If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
             For Each c As Control In GetAllChildren()
-                If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
                 End If
-                If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
                     End If
+                End If
+                If TypeOf c Is DataGridView Then
+                    CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.White
+                    CType(c, DataGridView).DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#616161")
+                    CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#424242")
+                    CType(c, DataGridView).BackgroundColor = ColorTranslator.FromHtml("#424242")
+                    CType(c, DataGridView).EnableHeadersVisualStyles = False
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#37474F")
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
                 End If
             Next
             For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
@@ -662,26 +684,35 @@ Public Class frmMain
                     c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
                 End If
             Next
-            menuGrid.BackColor = ColorTranslator.FromHtml("#333333")
-            cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
-            cbRechercher.ForeColor = Color.White
+            menuGrid.BackColor = ColorTranslator.FromHtml("#505050")
+            'cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
+            'cbRechercher.ForeColor = Color.White
             Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
             SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.Red)
             b = New Bitmap(My.Resources.round_info_button)
             PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.RoyalBlue)
         Else
             For Each c As Control In GetAllChildren()
-                If TypeOf c Is MaterialSkin.Controls.MaterialRaisedButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialRaisedButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
                     End If
                 End If
-                If TypeOf c Is MaterialSkin.Controls.MaterialFlatButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialFlatButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
                     End If
+                End If
+                If TypeOf c Is DataGridView Then
+                    CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.Black
+                    CType(c, DataGridView).DefaultCellStyle.BackColor = Color.White
+                    CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
+                    CType(c, DataGridView).BackgroundColor = Color.White
+                    CType(c, DataGridView).EnableHeadersVisualStyles = False
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = SystemColors.Highlight
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
                 End If
             Next
             For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
@@ -691,8 +722,8 @@ Public Class frmMain
                 End If
             Next
             menuGrid.BackColor = ColorTranslator.FromHtml("#FFFFFF")
-            cbRechercher.BackColor = ColorTranslator.FromHtml("#FFFFFF")
-            cbRechercher.ForeColor = Color.Black
+            'cbRechercher.BackColor = ColorTranslator.FromHtml("#FFFFFF")
+            'cbRechercher.ForeColor = Color.Black
             Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
             SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
             b = New Bitmap(My.Resources.round_info_button)
@@ -716,4 +747,9 @@ Public Class frmMain
     Private Sub btnRemoveToPanier_Click(sender As Object, e As EventArgs) Handles btnRemoveToPanier.Click
         removeFromPanier()
     End Sub
+
+    Private Sub MaterialTabSelector1_Click(sender As Object, e As EventArgs) Handles MaterialTabSelector1.Click
+        frmAjouterClef.ShowDialog()
+    End Sub
+
 End Class
