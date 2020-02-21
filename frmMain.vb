@@ -6,11 +6,11 @@ Imports MaterialSkin.Controls
 Public Class frmMain
     'Déclaration des sources de données pour la DataGridView
     Dim intKeyAmount As Integer = 0
-    Dim dtPanier As New DataTable
-    Dim dtKeyList As New DataTable
+    Public dtPanier As New DataTable
+    Public dtKeyList As New DataTable
     Dim dtOwner As New DataTable
-    ReadOnly srcPanier As New BindingSource()
-    ReadOnly srcKeyList As New BindingSource()
+    Public srcPanier As New BindingSource()
+    Public srcKeyList As New BindingSource()
     ReadOnly srcOwner As New BindingSource()
     'Booléeen pour l'affichage des alertes seulement une fois
     Public blnAlertes As Boolean = True
@@ -40,56 +40,7 @@ Public Class frmMain
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-        If My.Settings.DarkMode = True Then
-            Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
-            'SkinManager.EnforceBackcolorOnAllComponents = False
-            SkinManager.AddFormToManage(Me)
-            SkinManager.Theme = MaterialSkinManager.Themes.DARK
-            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
-
-            If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
-                For Each c As Control In GetAllChildren()
-                    If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
-                        If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
-                            Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
-                            CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
-                        End If
-                    End If
-                    If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
-                        If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
-                            Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
-                            CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
-                        End If
-                    End If
-                    If TypeOf c Is DataGridView Then
-                        CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.White
-                        CType(c, DataGridView).DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#616161")
-                        CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#424242")
-                        CType(c, DataGridView).BackgroundColor = ColorTranslator.FromHtml("#424242")
-                        CType(c, DataGridView).EnableHeadersVisualStyles = False
-                        CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#37474F")
-                        CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
-                    End If
-                Next
-                For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
-                    If c.Image IsNot Nothing Then
-                        Dim bmp As Bitmap = c.Image
-                        c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
-                    End If
-                Next
-
-                menuGrid.BackColor = ColorTranslator.FromHtml("#505050")
-                'cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
-                'cbRechercher.ForeColor = Color.White
-            End If
-        Else
-            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.LightBlue200, TextShade.WHITE)
-        End If
-        Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
-        SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
-        b = New Bitmap(My.Resources.round_info_button)
-        PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
+        BrightOrDarkMode()
 
         Dim strCBFiltre As String() = New String(3) {}
         strCBFiltre(0) = strTitleCID
@@ -98,7 +49,7 @@ Public Class frmMain
         strCBFiltre(3) = "Emprunteur"
         cbRechercher.DataSource = strCBFiltre
         'Initialiser l'index du menu déroulant de sélection du type de recherche
-        cbRechercher.SelectedIndex = 1
+        cbRechercher.SelectedIndex = 0
         'Sub d'actualisation et de recherche (Ctrl + clic sur le nom pour y accèder rapidement)
         FillDataSource()
         'FillData2()
@@ -554,27 +505,24 @@ Public Class frmMain
     End Sub
 
     Private Sub removeFromPanier()
-        If cbRechercher.Text <> "Emprunteur" Then
-            If dgvPanier.SelectedRows.Count > 0 Then
-                Dim rows As New List(Of DataRow)
-                For Each selRow As DataGridViewRow In dgvPanier.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
-                    Dim intSelIndex As Integer = selRow.Index
-                    If selRow.Index >= 0 Then
-                        Dim drToAdd As DataRow = dtPanier.Rows(intSelIndex)
-                        Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
-                        rows.Add(row)
-                        dtKeyList.ImportRow(drToAdd)
-                        dtKeyList.AcceptChanges()
-                        dtKeyList.DefaultView.Sort = dtKeyList.Columns(0).ColumnName & " ASC"
-                    End If
-                Next
-                For Each r As DataRow In rows
-                    dtPanier.Rows.Remove(r)
-                    dtPanier.AcceptChanges()
-                Next
-                dgvPanier.DataSource = srcPanier
-                dgvResultats.DataSource = srcKeyList
-            End If
+        If dgvPanier.SelectedRows.Count > 0 Then
+            Dim rows As New List(Of DataRow)
+            For Each selRow As DataGridViewRow In dgvPanier.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
+                Dim intSelIndex As Integer = selRow.Index
+                If selRow.Index >= 0 Then
+                    Dim drToAdd As DataRow = dtPanier.Rows(intSelIndex)
+                    Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                    rows.Add(row)
+                    dtKeyList.ImportRow(drToAdd)
+                    dtKeyList.AcceptChanges()
+                End If
+            Next
+            For Each r As DataRow In rows
+                dtPanier.Rows.Remove(r)
+                dtPanier.AcceptChanges()
+            Next
+            dgvPanier.DataSource = srcPanier
+            dgvResultats.DataSource = srcKeyList
         End If
     End Sub
 
@@ -590,8 +538,7 @@ Public Class frmMain
         If dgvResultats.SelectedRows.Count > 0 Then
             'Ouverture du menu emprunt/attribution de clef en mode Emprun
             blnEmprunt = True
-            frmEmprunterClef.ShowDialog()
-            frmEmprunterEtAttribuer.ShowDialog()
+            frmEmprunterEtAttribuer.Show()
         End If
     End Sub
 
@@ -599,7 +546,7 @@ Public Class frmMain
         If dgvResultats.SelectedRows.Count > 0 Then
             'Ouverture du menu emprunt/attribution de clef en mode attribution
             blnEmprunt = False
-            frmEmprunterClef.ShowDialog()
+            frmEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
 
@@ -693,17 +640,15 @@ Public Class frmMain
         DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
     End Sub
 
-    Private Sub btnLightMode_Click(sender As Object, e As EventArgs) Handles btnLightMode.Click
+    Public Sub BrightOrDarkMode()
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
         SkinManager.AddFormToManage(Me)
         If My.Settings.DarkMode = True Then
             SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
             SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.LightBlue200, TextShade.WHITE)
-            My.Settings.DarkMode = False
         Else
             SkinManager.Theme = MaterialSkinManager.Themes.DARK
             SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
-            My.Settings.DarkMode = True
         End If
 
         If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
@@ -782,6 +727,17 @@ Public Class frmMain
             PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
         End If
 
+    End Sub
+
+    Private Sub btnLightMode_Click(sender As Object, e As EventArgs) Handles btnLightMode.Click
+        If My.Settings.DarkMode = True Then
+            My.Settings.DarkMode = False
+            My.Settings.Save()
+        Else
+            My.Settings.DarkMode = True
+            My.Settings.Save()
+        End If
+        BrightOrDarkMode()
     End Sub
 
     Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
