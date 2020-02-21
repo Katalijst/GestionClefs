@@ -17,11 +17,11 @@ Public Class frmEmprunterEtAttribuer
     Public Sub CreateKeyControls()
         Dim dt As DataTable = frmMain.dtPanier
 
-        Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox()
-        Dim txtKeyID As MaterialSkin.Controls.MaterialTextBox()
-        Dim dtFin As System.Windows.Forms.DateTimePicker()
-        Dim dtDebut As System.Windows.Forms.DateTimePicker()
-        Dim btnDelete As MaterialSkin.Controls.MaterialButton()
+        Dim cbEmprunterAttribuer As New MaterialSkin.Controls.MaterialComboBox()
+        Dim txtKeyID As New MaterialSkin.Controls.MaterialTextBox()
+        Dim dtFin As New System.Windows.Forms.DateTimePicker()
+        Dim dtDebut As New System.Windows.Forms.DateTimePicker()
+        Dim btnDelete As New MaterialSkin.Controls.MaterialButton()
 
         Dim i As Integer = 0
         For Each r As DataRow In dt.Rows
@@ -103,11 +103,11 @@ Public Class frmEmprunterEtAttribuer
             btnDelete.UseAccentColor = False
             btnDelete.UseVisualStyleBackColor = True
 
-            Panel1.Controls.Add(cbEmprunterAttribuer(i))
-            Panel1.Controls.Add(txtKeyID(i))
-            Panel1.Controls.Add(dtFin(i))
-            Panel1.Controls.Add(dtDebut(i))
-            Panel1.Controls.Add(btnDelete(i))
+            Panel1.Controls.Add(cbEmprunterAttribuer)
+            Panel1.Controls.Add(txtKeyID)
+            Panel1.Controls.Add(dtFin)
+            Panel1.Controls.Add(dtDebut)
+            Panel1.Controls.Add(btnDelete)
 
             AddHandler btnDelete.Click, AddressOf btnDelete_click
             AddHandler cbEmprunterAttribuer.SelectedIndexChanged, AddressOf cbEmprunterAttribuer_SelectedIndexChanged
