@@ -20,5 +20,8 @@
     <Setting Name="MySQL_Port" Type="System.String" Scope="User">
       <Value Profile="(Default)">3308</Value>
     </Setting>
+    <Setting Name="DarkMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

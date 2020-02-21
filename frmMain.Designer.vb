@@ -55,10 +55,10 @@ Partial Class frmMain
         Me.dgvPanier = New System.Windows.Forms.DataGridView()
         Me.dgvResultats = New System.Windows.Forms.DataGridView()
         Me.cbRechercher = New MaterialSkin.Controls.MaterialComboBox()
-        Me.MaterialFloatingActionButton1 = New MaterialSkin.Controls.MaterialFloatingActionButton()
         Me.btnRemoveToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnRefresh = New MaterialSkin.Controls.MaterialButton()
+        Me.lblNbDeClefs = New MaterialSkin.Controls.MaterialLabel()
         Me.MaterialTabControl1.SuspendLayout()
         Me.tabClefs.SuspendLayout()
         Me.tlytClefs.SuspendLayout()
@@ -255,9 +255,9 @@ Partial Class frmMain
         Me.btnInformations.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnInformations.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnInformations.Name = "btnInformations"
-        Me.btnInformations.Size = New System.Drawing.Size(148, 36)
+        Me.btnInformations.Size = New System.Drawing.Size(157, 36)
         Me.btnInformations.TabIndex = 121
-        Me.btnInformations.Text = "Information"
+        Me.btnInformations.Text = "Informations"
         Me.btnInformations.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnInformations.UseAccentColor = False
         Me.btnInformations.UseVisualStyleBackColor = True
@@ -560,7 +560,7 @@ Partial Class frmMain
         Me.dgvResultats.RowHeadersVisible = False
         Me.dgvResultats.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvResultats.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvResultats.Size = New System.Drawing.Size(1004, 492)
+        Me.dgvResultats.Size = New System.Drawing.Size(1004, 479)
         Me.dgvResultats.TabIndex = 141
         '
         'cbRechercher
@@ -584,22 +584,6 @@ Partial Class frmMain
         Me.cbRechercher.Size = New System.Drawing.Size(221, 35)
         Me.cbRechercher.TabIndex = 157
         Me.cbRechercher.UseTallSize = False
-        '
-        'MaterialFloatingActionButton1
-        '
-        Me.MaterialFloatingActionButton1.AnimateShowHideButton = False
-        Me.MaterialFloatingActionButton1.Depth = 0
-        Me.MaterialFloatingActionButton1.DrawShadows = True
-        Me.MaterialFloatingActionButton1.Icon = Global.GestionClefs.My.Resources.Resources.plus
-        Me.MaterialFloatingActionButton1.Location = New System.Drawing.Point(895, 639)
-        Me.MaterialFloatingActionButton1.Margin = New System.Windows.Forms.Padding(64)
-        Me.MaterialFloatingActionButton1.Mini = False
-        Me.MaterialFloatingActionButton1.MouseState = MaterialSkin.MouseState.HOVER
-        Me.MaterialFloatingActionButton1.Name = "MaterialFloatingActionButton1"
-        Me.MaterialFloatingActionButton1.Size = New System.Drawing.Size(56, 56)
-        Me.MaterialFloatingActionButton1.TabIndex = 158
-        Me.MaterialFloatingActionButton1.Text = "MaterialFloatingActionButton1"
-        Me.MaterialFloatingActionButton1.UseVisualStyleBackColor = True
         '
         'btnRemoveToPanier
         '
@@ -652,12 +636,25 @@ Partial Class frmMain
         Me.btnRefresh.UseAccentColor = False
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
+        'lblNbDeClefs
+        '
+        Me.lblNbDeClefs.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblNbDeClefs.AutoSize = True
+        Me.lblNbDeClefs.Depth = 0
+        Me.lblNbDeClefs.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblNbDeClefs.Location = New System.Drawing.Point(9, 746)
+        Me.lblNbDeClefs.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblNbDeClefs.Name = "lblNbDeClefs"
+        Me.lblNbDeClefs.Size = New System.Drawing.Size(274, 19)
+        Me.lblNbDeClefs.TabIndex = 158
+        Me.lblNbDeClefs.Text = "25 clefs trouvées, 135 clefs enregistrés"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1024, 768)
-        Me.Controls.Add(Me.MaterialFloatingActionButton1)
+        Me.Controls.Add(Me.lblNbDeClefs)
         Me.Controls.Add(Me.cbRechercher)
         Me.Controls.Add(Me.txtRechercher)
         Me.Controls.Add(Me.MaterialLabel1)
@@ -724,5 +721,5 @@ Partial Class frmMain
     Friend WithEvents dgvResultats As DataGridView
     Friend WithEvents cbRechercher As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents tlytGestion As TableLayoutPanel
-    Friend WithEvents MaterialFloatingActionButton1 As MaterialSkin.Controls.MaterialFloatingActionButton
+    Friend WithEvents lblNbDeClefs As MaterialSkin.Controls.MaterialLabel
 End Class

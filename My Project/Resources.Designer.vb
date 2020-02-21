@@ -221,6 +221,126 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_Black() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_Black", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_BlackItalic() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_BlackItalic", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_Bold() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_Bold", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_BoldItalic() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_BoldItalic", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_Italic() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_Italic", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_Light() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_Light", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_LightItalic() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_LightItalic", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_Medium() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_Medium", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_MediumItalic() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_MediumItalic", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_Regular() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_Regular", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_Thin() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_Thin", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Roboto_ThinItalic() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Roboto_ThinItalic", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property round_error_symbol() As System.Drawing.Bitmap
@@ -236,6 +356,16 @@ Namespace My.Resources
         Friend ReadOnly Property round_info_button() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("round-info-button", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property rubbish_bin_delete_button() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("rubbish-bin-delete-button", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

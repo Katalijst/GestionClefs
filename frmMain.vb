@@ -5,6 +5,7 @@ Imports MaterialSkin.Controls
 'Formulaire principal, peut être optimisé
 Public Class frmMain
     'Déclaration des sources de données pour la DataGridView
+    Dim intKeyAmount As Integer = 0
     Dim dtPanier As New DataTable
     Dim dtKeyList As New DataTable
     Dim dtOwner As New DataTable
@@ -39,46 +40,51 @@ Public Class frmMain
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
-        'SkinManager.EnforceBackcolorOnAllComponents = False
-        SkinManager.AddFormToManage(Me)
-        SkinManager.Theme = MaterialSkinManager.Themes.DARK
-        SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
+        If My.Settings.DarkMode = True Then
+            Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+            'SkinManager.EnforceBackcolorOnAllComponents = False
+            SkinManager.AddFormToManage(Me)
+            SkinManager.Theme = MaterialSkinManager.Themes.DARK
+            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
 
-        If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
-            For Each c As Control In GetAllChildren()
-                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+            If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
+                For Each c As Control In GetAllChildren()
+                    If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                        If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                            Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                            CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                        End If
                     End If
-                End If
-                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
-                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
-                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
-                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                    If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                        If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                            Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                            CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                        End If
                     End If
-                End If
-                If TypeOf c Is DataGridView Then
-                    CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.White
-                    CType(c, DataGridView).DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#616161")
-                    CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#424242")
-                    CType(c, DataGridView).BackgroundColor = ColorTranslator.FromHtml("#424242")
-                    CType(c, DataGridView).EnableHeadersVisualStyles = False
-                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#37474F")
-                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
-                End If
-            Next
-            For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
-                If c.Image IsNot Nothing Then
-                    Dim bmp As Bitmap = c.Image
-                    c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
-                End If
-            Next
+                    If TypeOf c Is DataGridView Then
+                        CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.White
+                        CType(c, DataGridView).DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#616161")
+                        CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#424242")
+                        CType(c, DataGridView).BackgroundColor = ColorTranslator.FromHtml("#424242")
+                        CType(c, DataGridView).EnableHeadersVisualStyles = False
+                        CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#37474F")
+                        CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+                    End If
+                Next
+                For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
+                    If c.Image IsNot Nothing Then
+                        Dim bmp As Bitmap = c.Image
+                        c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
+                    End If
+                Next
 
-            menuGrid.BackColor = ColorTranslator.FromHtml("#505050")
-            'cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
-            'cbRechercher.ForeColor = Color.White
+                menuGrid.BackColor = ColorTranslator.FromHtml("#505050")
+                'cbRechercher.BackColor = ColorTranslator.FromHtml("#37474f")
+                'cbRechercher.ForeColor = Color.White
+            End If
+        Else
+            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.LightBlue200, TextShade.WHITE)
         End If
         Dim b As Bitmap = New Bitmap(My.Resources.clear_button)
         SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
@@ -89,7 +95,7 @@ Public Class frmMain
         strCBFiltre(0) = strTitleCID
         strCBFiltre(1) = strTitleCNom
         strCBFiltre(2) = strTitleCPosition
-        strCBFiltre(3) = strTitleENomPersonne
+        strCBFiltre(3) = "Emprunteur"
         cbRechercher.DataSource = strCBFiltre
         'Initialiser l'index du menu déroulant de sélection du type de recherche
         cbRechercher.SelectedIndex = 1
@@ -190,7 +196,7 @@ Public Class frmMain
     '            Dim stgPredict As String
     '            If cbRechercher.Text = strTitleCNom Then
     '                stgPredict = strTitleCNom
-    '            ElseIf cbRechercher.Text = strTitleENomPersonne Then
+    '            ElseIf cbRechercher.Text = "Emprunteur" Then
     '                stgPredict = strTitleENomPersonne
     '            ElseIf cbRechercher.Text = strTitleCPosition Then
     '                stgPredict = strTitleCPosition
@@ -216,8 +222,8 @@ Public Class frmMain
     Public Sub FillDataSource()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
-        Dim dt1 As DataTable = New DataTable()
-        Dim dt2 As DataTable = New DataTable()
+        Dim dtKeyListRow As DataTable = New DataTable()
+        Dim dtKeyListByOwner As DataTable = New DataTable()
         Dim dtEmpty As DataTable = New DataTable()
         Dim sql As String
 
@@ -230,16 +236,61 @@ Public Class frmMain
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
-            da.Fill(dt1)
+            da.Fill(dtKeyListRow)
+            intKeyAmount = dtKeyListRow.Rows.Count
+            dtKeyListRow.Columns.Add("Quantité")
+            For Each r As DataRow In dtKeyListRow.Rows
+                Dim input As String = r.Item("CID")
+                Dim index As Integer = input.LastIndexOf("-")
+                If index > 0 Then
+                    r.Item("CID") = input.Substring(0, index)
+                End If
+                r.Item("Quantité") = 1
+            Next
+            dtKeyListRow.DefaultView.Sort = "CID ASC, CStatus ASC, CPosition ASC, CTrousseau ASC"
+            Dim dtKeyListSorted As DataTable = dtKeyListRow.DefaultView.ToTable.Copy
 
-            dt1.Columns("CID").ColumnName = strTitleCID
-            dt1.Columns("CNom").ColumnName = strTitleCNom
-            dt1.Columns("CPosition").ColumnName = strTitleCPosition
-            dt1.Columns("CStatus").ColumnName = strTitleCStatus
-            dt1.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dt1.Columns("CBatiment").ColumnName = strTitleCBatiment
+            Dim rowToCompare As DataRow
+            Dim duplicateList As ArrayList = New ArrayList()
+            Dim dtTemp As DataTable = New DataTable()
+            dtTemp = dtKeyListSorted
 
-            dtKeyList = dt1.Copy
+            For Each drow As DataRow In dtTemp.Rows
+                duplicateList.Add(drow)
+            Next
+
+            For Each r As DataRow In duplicateList
+                Dim blnSimilar As Boolean = False
+                If rowToCompare Is Nothing Then
+                    rowToCompare = r
+                Else
+                    If r.Item("CID") = rowToCompare.Item("CID") Then
+                        If r.Item("CStatus") = rowToCompare.Item("CStatus") Then
+                            If r.Item("CPosition") = rowToCompare.Item("CPosition") Then
+                                If r.Item("CTrousseau") = rowToCompare.Item("CTrousseau") Then
+                                    blnSimilar = True
+                                End If
+                            End If
+                        End If
+                    End If
+                    If blnSimilar = True Then
+                        rowToCompare.Item("Quantité") += 1
+                        dtTemp.Rows.Remove(r)
+                    Else
+                        rowToCompare = r
+                    End If
+                End If
+            Next
+            dtKeyListSorted = dtTemp.Copy
+
+            dtKeyListSorted.Columns("CID").ColumnName = strTitleCID
+            dtKeyListSorted.Columns("CNom").ColumnName = strTitleCNom
+            dtKeyListSorted.Columns("CPosition").ColumnName = strTitleCPosition
+            dtKeyListSorted.Columns("CStatus").ColumnName = strTitleCStatus
+            dtKeyListSorted.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtKeyListSorted.Columns("CBatiment").ColumnName = strTitleCBatiment
+
+            dtKeyList = dtKeyListSorted
             srcKeyList.DataSource = dtKeyList
 
             For Each column In dgvResultats.Columns
@@ -252,23 +303,23 @@ Public Class frmMain
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
-            da.Fill(dt2)
+            da.Fill(dtKeyListByOwner)
 
-            dt2.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dt2.Columns("CID").ColumnName = strTitleCID
-            dt2.Columns("CNom").ColumnName = strTitleCNom
-            dt2.Columns("CPosition").ColumnName = strTitleCPosition
-            dt2.Columns("CStatus").ColumnName = strTitleCStatus
-            dt2.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
-            dt2.Columns("EDateDebut").ColumnName = strTitleEDateDebut
-            dt2.Columns("EDateFin").ColumnName = strTitleEDateFin
+            dtKeyListByOwner.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtKeyListByOwner.Columns("CID").ColumnName = strTitleCID
+            dtKeyListByOwner.Columns("CNom").ColumnName = strTitleCNom
+            dtKeyListByOwner.Columns("CPosition").ColumnName = strTitleCPosition
+            dtKeyListByOwner.Columns("CStatus").ColumnName = strTitleCStatus
+            dtKeyListByOwner.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
+            dtKeyListByOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
+            dtKeyListByOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
 
-            dtOwner = dt2.Copy
+            dtOwner = dtKeyListByOwner.Copy
             srcOwner.DataSource = dtOwner
             dgvResultats.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
             dgvResultats.RowHeadersVisible = False
 
-            If cbRechercher.Text <> strTitleENomPersonne Then
+            If cbRechercher.Text <> "Emprunteur" Then
                 dgvResultats.DataSource = srcKeyList
                 dtEmpty = dtKeyList.Copy
                 dtEmpty.Rows.Clear()
@@ -293,6 +344,7 @@ Public Class frmMain
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+        lblNbDeClefs.Text = intKeyAmount & " clefs chargées"
     End Sub
 
     Private Sub Rechercher()
@@ -311,7 +363,7 @@ Public Class frmMain
         dgvResultats.RowHeadersVisible = False
         If txtRechercher.Text <> "" Then
             Dim strTypeDeRecherche As String = "`" & cbRechercher.Text & "`"
-            If cbRechercher.Text <> strTitleENomPersonne Then
+            If cbRechercher.Text <> "Emprunteur" Then
                 srcKeyList.RemoveFilter()
                 Select Case chkNumber
                     Case 1
@@ -350,7 +402,7 @@ Public Class frmMain
             End If
         Else
             srcKeyList.RemoveFilter()
-            If cbRechercher.Text <> strTitleENomPersonne Then
+            If cbRechercher.Text <> "Emprunteur" Then
                 Select Case chkNumber
                     Case 1
                         srcKeyList.Filter = strTitleCStatus & "='Attribuée'"
@@ -421,7 +473,7 @@ Public Class frmMain
         'Filtres du type de recherche
 
         dgvResultats.RowHeadersVisible = False
-        If cbRechercher.Text = strTitleENomPersonne Then
+        If cbRechercher.Text = "Emprunteur" Then
             dgvResultats.DataSource = srcOwner
         Else
             dgvResultats.DataSource = srcKeyList
@@ -470,7 +522,7 @@ Public Class frmMain
     End Sub
 
     Private Sub addToPanier()
-        If cbRechercher.Text <> strTitleENomPersonne Then
+        If cbRechercher.Text <> "Emprunteur" Then
             If dgvResultats.SelectedRows.Count > 0 Then
                 Dim rows As New List(Of DataRow)
                 For Each selRow As DataGridViewRow In dgvResultats.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
@@ -502,7 +554,7 @@ Public Class frmMain
     End Sub
 
     Private Sub removeFromPanier()
-        If cbRechercher.Text <> strTitleENomPersonne Then
+        If cbRechercher.Text <> "Emprunteur" Then
             If dgvPanier.SelectedRows.Count > 0 Then
                 Dim rows As New List(Of DataRow)
                 For Each selRow As DataGridViewRow In dgvPanier.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
@@ -644,14 +696,14 @@ Public Class frmMain
     Private Sub btnLightMode_Click(sender As Object, e As EventArgs) Handles btnLightMode.Click
         Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
         SkinManager.AddFormToManage(Me)
-        If blnLightMode = False Then
+        If My.Settings.DarkMode = True Then
             SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
             SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.LightBlue200, TextShade.WHITE)
-            blnLightMode = True
+            My.Settings.DarkMode = False
         Else
             SkinManager.Theme = MaterialSkinManager.Themes.DARK
             SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
-            blnLightMode = False
+            My.Settings.DarkMode = True
         End If
 
         If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
@@ -746,10 +798,6 @@ Public Class frmMain
 
     Private Sub btnRemoveToPanier_Click(sender As Object, e As EventArgs) Handles btnRemoveToPanier.Click
         removeFromPanier()
-    End Sub
-
-    Private Sub MaterialTabSelector1_Click(sender As Object, e As EventArgs) Handles MaterialTabSelector1.Click
-        frmAjouterClef.ShowDialog()
     End Sub
 
 End Class
