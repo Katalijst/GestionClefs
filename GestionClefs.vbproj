@@ -693,6 +693,8 @@
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
     <Content Include="LogoICO.ico" />
+    <None Include="Resources\key %281%29.png" />
+    <None Include="Resources\LogoICO.ico" />
     <None Include="Resources\rubbish-bin-delete-button.png" />
     <None Include="Resources\Roboto-Black.ttf" />
     <None Include="Resources\Roboto-BlackItalic.ttf" />

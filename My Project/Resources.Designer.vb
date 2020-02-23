@@ -123,6 +123,16 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property key__1_() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("key__1_", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property key1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("key1", resourceCulture)
@@ -167,6 +177,16 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("login", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
+        '''</summary>
+        Friend ReadOnly Property LogoICO() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("LogoICO", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
         
