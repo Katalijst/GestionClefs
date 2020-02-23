@@ -22,6 +22,8 @@ Partial Class frmMain
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.txtRechercher = New MaterialSkin.Controls.MaterialTextBox()
         Me.MaterialLabel1 = New MaterialSkin.Controls.MaterialLabel()
         Me.MaterialTabSelector1 = New MaterialSkin.Controls.MaterialTabSelector()
@@ -55,10 +57,11 @@ Partial Class frmMain
         Me.dgvPanier = New System.Windows.Forms.DataGridView()
         Me.dgvResultats = New System.Windows.Forms.DataGridView()
         Me.cbRechercher = New MaterialSkin.Controls.MaterialComboBox()
+        Me.lblNbDeClefs = New MaterialSkin.Controls.MaterialLabel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnRemoveToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnRefresh = New MaterialSkin.Controls.MaterialButton()
-        Me.lblNbDeClefs = New MaterialSkin.Controls.MaterialLabel()
         Me.MaterialTabControl1.SuspendLayout()
         Me.tabClefs.SuspendLayout()
         Me.tlytClefs.SuspendLayout()
@@ -104,10 +107,10 @@ Partial Class frmMain
         Me.MaterialTabSelector1.BaseTabControl = Me.MaterialTabControl1
         Me.MaterialTabSelector1.Depth = 0
         Me.MaterialTabSelector1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialTabSelector1.Location = New System.Drawing.Point(170, 32)
+        Me.MaterialTabSelector1.Location = New System.Drawing.Point(170, 25)
         Me.MaterialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialTabSelector1.Name = "MaterialTabSelector1"
-        Me.MaterialTabSelector1.Size = New System.Drawing.Size(350, 32)
+        Me.MaterialTabSelector1.Size = New System.Drawing.Size(350, 39)
         Me.MaterialTabSelector1.TabIndex = 148
         Me.MaterialTabSelector1.Text = "MaterialTabSelector1"
         '
@@ -168,6 +171,7 @@ Partial Class frmMain
         Me.btnEmprunter.Size = New System.Drawing.Size(136, 36)
         Me.btnEmprunter.TabIndex = 118
         Me.btnEmprunter.Text = "Emprunter"
+        Me.ToolTip1.SetToolTip(Me.btnEmprunter, "Le panier est vide !")
         Me.btnEmprunter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnEmprunter.UseAccentColor = False
         Me.btnEmprunter.UseVisualStyleBackColor = True
@@ -186,6 +190,7 @@ Partial Class frmMain
         Me.btnAttribuer.Size = New System.Drawing.Size(127, 36)
         Me.btnAttribuer.TabIndex = 119
         Me.btnAttribuer.Text = "Attribuer"
+        Me.ToolTip1.SetToolTip(Me.btnAttribuer, "Le panier est vide !")
         Me.btnAttribuer.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnAttribuer.UseAccentColor = False
         Me.btnAttribuer.UseVisualStyleBackColor = True
@@ -585,6 +590,19 @@ Partial Class frmMain
         Me.cbRechercher.TabIndex = 157
         Me.cbRechercher.UseTallSize = False
         '
+        'lblNbDeClefs
+        '
+        Me.lblNbDeClefs.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblNbDeClefs.AutoSize = True
+        Me.lblNbDeClefs.Depth = 0
+        Me.lblNbDeClefs.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblNbDeClefs.Location = New System.Drawing.Point(9, 746)
+        Me.lblNbDeClefs.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblNbDeClefs.Name = "lblNbDeClefs"
+        Me.lblNbDeClefs.Size = New System.Drawing.Size(274, 19)
+        Me.lblNbDeClefs.TabIndex = 158
+        Me.lblNbDeClefs.Text = "25 clefs trouvées, 135 clefs enregistrés"
+        '
         'btnRemoveToPanier
         '
         Me.btnRemoveToPanier.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -636,19 +654,6 @@ Partial Class frmMain
         Me.btnRefresh.UseAccentColor = False
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
-        'lblNbDeClefs
-        '
-        Me.lblNbDeClefs.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblNbDeClefs.AutoSize = True
-        Me.lblNbDeClefs.Depth = 0
-        Me.lblNbDeClefs.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.lblNbDeClefs.Location = New System.Drawing.Point(9, 746)
-        Me.lblNbDeClefs.MouseState = MaterialSkin.MouseState.HOVER
-        Me.lblNbDeClefs.Name = "lblNbDeClefs"
-        Me.lblNbDeClefs.Size = New System.Drawing.Size(274, 19)
-        Me.lblNbDeClefs.TabIndex = 158
-        Me.lblNbDeClefs.Text = "25 clefs trouvées, 135 clefs enregistrés"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -668,6 +673,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.MaterialTabControl1)
         Me.Controls.Add(Me.dgvPanier)
         Me.Controls.Add(Me.dgvResultats)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMain"
         Me.Text = "GestionClefs"
         Me.MaterialTabControl1.ResumeLayout(False)
@@ -722,4 +728,5 @@ Partial Class frmMain
     Friend WithEvents cbRechercher As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents tlytGestion As TableLayoutPanel
     Friend WithEvents lblNbDeClefs As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

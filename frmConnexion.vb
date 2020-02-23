@@ -4,13 +4,9 @@ Imports MaterialSkin
 'Formulaire de connexion, peut être optimisé
 Public Class frmConnexion
     Private Sub frmConnexion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        BrightOrDarkMode()
         Me.MinimumSize = New Size(Width, Height)
         Me.MaximumSize = Me.MinimumSize
-        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
-        SkinManager.AddFormToManage(Me)
-        SkinManager.Theme = MaterialSkinManager.Themes.DARK
-        SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
-
         tmrFondu.Enabled = True
         'lblVersion.Text = "Version " & My.Application.Info.Version.ToString
         checkTableAndAccount()
@@ -132,6 +128,19 @@ Public Class frmConnexion
     Private Sub btnQuitter_Click_1(sender As Object, e As EventArgs) Handles btnQuitter.Click
         Application.Exit()
         End
+    End Sub
+
+    Public Sub BrightOrDarkMode()
+        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+        SkinManager.AddFormToManage(Me)
+        If My.Settings.DarkMode = True Then
+            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.DeepOrange400, TextShade.WHITE)
+        Else
+            SkinManager.Theme = MaterialSkinManager.Themes.DARK
+            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)
+        End If
+
     End Sub
 
 End Class

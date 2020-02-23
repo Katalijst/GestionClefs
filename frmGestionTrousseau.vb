@@ -24,7 +24,7 @@ Public Class frmGestionTrousseau
             End If
 
             connecter().Close()
-        Catch ex As Exception
+        Catch ex As MySqlException
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -73,7 +73,7 @@ Public Class frmGestionTrousseau
                 FilldgvSelClefs()
             End If
 
-        Catch ex As Exception
+        Catch ex As MySqlException
             MsgBox(ex.Message)
         End Try
     End Sub

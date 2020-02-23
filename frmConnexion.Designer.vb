@@ -23,11 +23,13 @@ Partial Class frmConnexion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConnexion))
         Me.tmrFondu = New System.Windows.Forms.Timer(Me.components)
         Me.btnConnexion = New MaterialSkin.Controls.MaterialButton()
         Me.btnQuitter = New MaterialSkin.Controls.MaterialButton()
         Me.mtxtID = New MaterialSkin.Controls.MaterialTextBox()
         Me.mtxtPassword = New MaterialSkin.Controls.MaterialTextBox()
+        Me.MaterialProgressBar1 = New MaterialSkin.Controls.MaterialProgressBar()
         Me.SuspendLayout()
         '
         'tmrFondu
@@ -105,6 +107,17 @@ Partial Class frmConnexion
         Me.mtxtPassword.Text = ""
         Me.mtxtPassword.UseTallSize = False
         '
+        'MaterialProgressBar1
+        '
+        Me.MaterialProgressBar1.Depth = 0
+        Me.MaterialProgressBar1.Location = New System.Drawing.Point(-1, 203)
+        Me.MaterialProgressBar1.Margin = New System.Windows.Forms.Padding(0)
+        Me.MaterialProgressBar1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialProgressBar1.Name = "MaterialProgressBar1"
+        Me.MaterialProgressBar1.Size = New System.Drawing.Size(265, 5)
+        Me.MaterialProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.MaterialProgressBar1.TabIndex = 4
+        '
         'frmConnexion
         '
         Me.AcceptButton = Me.btnConnexion
@@ -113,10 +126,12 @@ Partial Class frmConnexion
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.CancelButton = Me.btnQuitter
         Me.ClientSize = New System.Drawing.Size(265, 208)
+        Me.Controls.Add(Me.MaterialProgressBar1)
         Me.Controls.Add(Me.mtxtPassword)
         Me.Controls.Add(Me.mtxtID)
         Me.Controls.Add(Me.btnQuitter)
         Me.Controls.Add(Me.btnConnexion)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmConnexion"
@@ -134,4 +149,5 @@ Partial Class frmConnexion
     Friend WithEvents btnQuitter As MaterialSkin.Controls.MaterialButton
     Friend WithEvents mtxtID As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents mtxtPassword As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents MaterialProgressBar1 As MaterialSkin.Controls.MaterialProgressBar
 End Class

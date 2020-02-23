@@ -4,6 +4,7 @@ Imports MaterialSkin.Controls
 
 'Formulaire principal, peut être optimisé
 Public Class frmMain
+
     'Déclaration des sources de données pour la DataGridView
     Dim intKeyAmount As Integer = 0
     Public dtPanier As New DataTable
@@ -74,7 +75,7 @@ Public Class frmMain
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         'Déclaration de la requète
-        Dim sql As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
+        Dim SqlCommand As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
         'Try permet de renvoyer l'erreur si la requète échoue au lieu de freeze le logiciel
         Try
             'reset de la datatable, pas nécessaire à l'initialisation, mais pour les refresh oui
@@ -82,7 +83,7 @@ Public Class frmMain
             'execution de la commande via la connection déclarer dans la fonction situé dans modFunction.vb
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = SqlCommand
             End With
             'récupération des données
             da.SelectCommand = cmd
@@ -499,7 +500,6 @@ Public Class frmMain
                 dgvPanier.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
                 dgvPanier.RowHeadersVisible = False
                 dgvPanier.DataSource = srcPanier
-
             End If
         End If
     End Sub
@@ -535,15 +535,15 @@ Public Class frmMain
     End Sub
 
     Private Sub btnEmprunter_Click(sender As Object, e As EventArgs) Handles btnEmprunter.Click
-        If dgvResultats.SelectedRows.Count > 0 Then
-            'Ouverture du menu emprunt/attribution de clef en mode Emprun
+        If dtPanier.Rows.Count > 0 Then
+            'Ouverture du menu emprunt/attribution de clef en mode Emprunt
             blnEmprunt = True
-            frmEmprunterEtAttribuer.Show()
+            frmEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
 
     Private Sub btnAttribuer_Click(sender As Object, e As EventArgs) Handles btnAttribuer.Click
-        If dgvResultats.SelectedRows.Count > 0 Then
+        If dtPanier.Rows.Count > 0 Then
             'Ouverture du menu emprunt/attribution de clef en mode attribution
             blnEmprunt = False
             frmEmprunterEtAttribuer.ShowDialog()
@@ -565,7 +565,7 @@ Public Class frmMain
 
     Private Sub btnAddKey_Click(sender As Object, e As EventArgs) Handles btnAddKey.Click
         'afficher la fenêtre d'ajout de clef
-        frmAjouterClef.ShowDialog()
+        frmCreerClefs.ShowDialog()
     End Sub
 
     Private Sub btnSupprimer_Click(sender As Object, e As EventArgs) Handles btnSupprimer.Click
@@ -645,10 +645,10 @@ Public Class frmMain
         SkinManager.AddFormToManage(Me)
         If My.Settings.DarkMode = True Then
             SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.LightBlue200, TextShade.WHITE)
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.DeepOrange400, TextShade.WHITE)
         Else
             SkinManager.Theme = MaterialSkinManager.Themes.DARK
-            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE)
+            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)
         End If
 
         If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then

@@ -20,6 +20,9 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
     <PublishUrl>C:\Users\Utilisateur\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -35,8 +38,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,19 +72,22 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icons8-key-64.ico</ApplicationIcon>
+    <ApplicationIcon>LogoICO.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9E94C578AC7F0CB7000790637F6B0335162B1832</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9F4C63814937F482241AEBA46A745836E3998FC7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GestionClefs_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GestionClefs_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -440,6 +444,12 @@
     <Compile Include="frmConnexion.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmCreerClefs.Designer.vb">
+      <DependentUpon>frmCreerClefs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreerClefs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmEditerPosition.Designer.vb">
       <DependentUpon>frmEditerPosition.vb</DependentUpon>
     </Compile>
@@ -593,6 +603,9 @@
     <EmbeddedResource Include="frmConnexion.resx">
       <DependentUpon>frmConnexion.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCreerClefs.resx">
+      <DependentUpon>frmCreerClefs.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditerBatiment.resx">
       <DependentUpon>frmEditerBatiment.vb</DependentUpon>
     </EmbeddedResource>
@@ -663,7 +676,9 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="GestionClefs_1_TemporaryKey.pfx" />
+    <None Include="GestionClefs_2_TemporaryKey.pfx" />
     <None Include="GestionClefs_TemporaryKey.pfx" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -677,6 +692,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
+    <Content Include="LogoICO.ico" />
     <None Include="Resources\rubbish-bin-delete-button.png" />
     <None Include="Resources\Roboto-Black.ttf" />
     <None Include="Resources\Roboto-BlackItalic.ttf" />
