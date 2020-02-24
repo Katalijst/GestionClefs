@@ -43,7 +43,7 @@ Public Class frmCreerClefs
         Else
             MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
         End If
-        If txtID.Text = "" Then
+        If txtID.Text.ToUpper = "" Then
             MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
             blnIncompleteForm = True
         ElseIf txtNom.Text = "" Then
@@ -63,6 +63,12 @@ Public Class frmCreerClefs
             Exit Sub
         End If
 
+        Dim blnOption As Boolean = False
+        If txtRefOrg.Text <> "" Or txtCnInt.Text <> "" Or txtCnExt.Text <> "" Or txtCnOpt.Text <> "" Then
+            blnOption = True
+        End If
+
+
         Dim blnClefExisteDeja As Boolean = False
         Dim stgNomClef As String = txtNom.Text
         Dim stgBatimentClef As String
@@ -80,7 +86,7 @@ Public Class frmCreerClefs
         connecter()
 
         Try
-            getKeyID_command.Parameters("@IDClef").Value = txtID.Text & "-%"
+            getKeyID_command.Parameters("@IDClef").Value = txtID.Text.ToUpper & "-%"
             getKeyID_command.ExecuteNonQuery()
         Catch ex As MySqlException
             'Retour d'une erreur my MySQL si connection impossible
@@ -139,6 +145,9 @@ Public Class frmCreerClefs
         Dim insert_gp_bt_command As New MySqlCommand(cmdGrpBat, connecter())
         insert_command.CommandType = CommandType.Text
         daSql.InsertCommand = insert_command
+        Dim cmdInfoTech As String = "INSERT INTO InfosTechniques(IDClef, RefOrg, CanonInte, CanonExte, CanonOpt) VALUES (@keyid,@RefOrg,@CanonInt,@CanonExte,@CanonOpt);"
+        Dim insert_infotech As New MySqlCommand(cmdInfoTech, connecter())
+        insert_infotech.CommandType = CommandType.Text
 
         With insert_command
             .Parameters.Add("@id", MySqlDbType.VarChar)
@@ -155,11 +164,19 @@ Public Class frmCreerClefs
             .Parameters.Add("@batid", MySqlDbType.VarChar)
         End With
 
+        With insert_infotech
+            .Parameters.Add("@keyid", MySqlDbType.VarChar)
+            .Parameters.Add("@RefOrg", MySqlDbType.VarChar)
+            .Parameters.Add("@CanonInt", MySqlDbType.Float)
+            .Parameters.Add("@CanonExte", MySqlDbType.Float)
+            .Parameters.Add("@CanonOpt", MySqlDbType.VarChar)
+        End With
+
         Try
             Dim i As Integer = 0
             For i = 1 + LastKeyID To CUInt(txtQuantity.Text) + LastKeyID
                 With insert_command
-                    .Parameters("@id").Value = txtID.Text & "-" & i
+                    .Parameters("@id").Value = txtID.Text.ToUpper & "-" & i
                     .Parameters("@name").Value = stgNomClef
                     .Parameters("@pos").Value = cmbLoc.Text
                     .Parameters("@status").Value = "Disponible"
@@ -187,14 +204,28 @@ Public Class frmCreerClefs
                 If blnGroupeBatiment = True Then
                     For Each row In dgvSelBatiment.Rows
                         With insert_gp_bt_command
-                            .Parameters("@keyid").Value = txtID.Text & "-" & "0" & i
+                            .Parameters("@keyid").Value = txtID.Text.ToUpper & "-" & "0" & i
                             .Parameters("@batid").Value = row.Cells(1).Value.ToString()
                             .ExecuteNonQuery()
                         End With
                     Next
                 End If
             Next
-
+            Dim intCanonInt As Integer
+            Dim intCanonExt As Integer
+            Integer.TryParse(txtCnInt.Text, intCanonInt)
+            Integer.TryParse(txtCnInt.Text, intCanonExt)
+            If blnOption = True Then
+                With insert_infotech
+                    '@keyid,@RefOrg,@CanonInt,@CanonExte,@CanonOpt
+                    .Parameters("@keyid").Value = txtID.Text.ToUpper
+                    .Parameters("@RefOrg").Value = txtRefOrg.Text
+                    .Parameters("@CanonInt").Value = intCanonInt
+                    .Parameters("@CanonExte").Value = intCanonExt
+                    .Parameters("@CanonOpt").Value = txtCnOpt.Text
+                    .ExecuteNonQuery()
+                End With
+            End If
         Catch ex As MySqlException
             'Retour d'une erreur my MySQL si connection impossible
             MsgBox((ex.Number & " - " & ex.Message))
@@ -452,7 +483,15 @@ Public Class frmCreerClefs
         End If
     End Sub
 
-    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrousseauListe.SelectedIndexChanged
+    Private Sub txtCnInt_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCnInt.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
 
+    Private Sub txtCnExt_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCnExt.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
     End Sub
 End Class

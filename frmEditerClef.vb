@@ -1,6 +1,23 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class frmEditerClef
     Shared stgKeyId As String
+    Private Sub frmEditKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblBatiment.Visible = False
+        btnGrpBatiment.Visible = False
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        lblCID.Text = strTitleCID & " :"
+        lblCNom.Text = strTitleCNom & " :"
+        lblCPosition.Text = strTitleCPosition & " :"
+        lblCStatus.Text = strTitleCStatus & " :"
+        lblCTrousseau.Text = strTitleCTrousseau & " :"
+        lblCDate.Text = strTitleCDate & " :"
+        txtID.Hint = strTitleCID
+        txtNom.Hint = strTitleCNom
+        cmbLoc.Hint = strTitleCPosition
+        'txtStatus.Hint = strTitleCStatus
+        cmbTrousseauListe.Hint = strTitleCTrousseau
+        LoadAndRefresh()
+    End Sub
 
     Public Sub RefreshTrousseau()
         Dim cmd As New MySqlCommand
@@ -96,7 +113,7 @@ Public Class frmEditerClef
         Dim sql As String
 
         Dim intIndexID As Integer = frmMain.dgvResultats.Columns(strTitleCID).Index
-        stgKeyId = frmMain.dgvResultats.SelectedRows(0).Cells(intIndexID).Value.ToString()
+        stgKeyId = frmMain.dgvResultats.SelectedRows(stgKeyId).Cells(intIndexID).Value.ToString() & "-%"
         txtID.Text = stgKeyId
 
         RefreshTrousseau()
@@ -104,7 +121,7 @@ Public Class frmEditerClef
 
         Try
             dt.Reset()
-            sql = "Select CNom FROM Clefs WHERE CID=""" & stgKeyId & """"
+            sql = "Select CNom FROM Clefs WHERE CID like '" & stgKeyId & "'"
             With cmd
                 .Connection = connecter()
                 .CommandText = sql
@@ -114,7 +131,7 @@ Public Class frmEditerClef
             txtNom.Text = dt.Rows(0)(0)
 
             dt.Reset()
-            sql = "Select CDate FROM Clefs WHERE CID=""" & stgKeyId & """"
+            sql = "Select CDate FROM Clefs WHERE CID like '" & stgKeyId & "'"
             With cmd
                 .Connection = connecter()
                 .CommandText = sql
@@ -130,17 +147,6 @@ Public Class frmEditerClef
             MsgBox(ex.Message)
         End Try
 
-    End Sub
-
-    Private Sub frmEditKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-        lblCID.Text = strTitleCID & " :"
-        lblCNom.Text = strTitleCNom & " :"
-        lblCPosition.Text = strTitleCPosition & " :"
-        lblCStatus.Text = strTitleCStatus & " :"
-        lblCTrousseau.Text = strTitleCTrousseau & " :"
-        lblCDate.Text = strTitleCDate & " :"
-        LoadAndRefresh()
     End Sub
 
     Private Sub frmEditKey_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
@@ -169,7 +175,7 @@ Public Class frmEditerClef
         End Try
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
 

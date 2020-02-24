@@ -65,6 +65,7 @@ Partial Class frmMain
         Me.btnRemoveToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnRefresh = New MaterialSkin.Controls.MaterialButton()
+        Me.btnClefsPerdues = New MaterialSkin.Controls.MaterialButton()
         Me.MaterialTabControl1.SuspendLayout()
         Me.tabClefs.SuspendLayout()
         Me.tlytClefs.SuspendLayout()
@@ -283,6 +284,7 @@ Partial Class frmMain
         '
         'tlytGestion
         '
+        Me.tlytGestion.BackColor = System.Drawing.Color.Transparent
         Me.tlytGestion.ColumnCount = 4
         Me.tlytGestion.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.tlytGestion.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
@@ -295,6 +297,7 @@ Partial Class frmMain
         Me.tlytGestion.Controls.Add(Me.btnParametres, 3, 1)
         Me.tlytGestion.Controls.Add(Me.btnLightMode, 2, 1)
         Me.tlytGestion.Controls.Add(Me.btnPersonnes, 0, 0)
+        Me.tlytGestion.Controls.Add(Me.btnClefsPerdues, 1, 1)
         Me.tlytGestion.Location = New System.Drawing.Point(6, 6)
         Me.tlytGestion.Name = "tlytGestion"
         Me.tlytGestion.RowCount = 2
@@ -681,6 +684,24 @@ Partial Class frmMain
         Me.btnRefresh.UseAccentColor = False
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
+        'btnClefsPerdues
+        '
+        Me.btnClefsPerdues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnClefsPerdues.Depth = 0
+        Me.btnClefsPerdues.DrawShadows = True
+        Me.btnClefsPerdues.HighEmphasis = False
+        Me.btnClefsPerdues.Icon = Global.GestionClefs.My.Resources.Resources.trousseaux
+        Me.btnClefsPerdues.Location = New System.Drawing.Point(142, 54)
+        Me.btnClefsPerdues.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnClefsPerdues.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnClefsPerdues.Name = "btnClefsPerdues"
+        Me.btnClefsPerdues.Size = New System.Drawing.Size(113, 36)
+        Me.btnClefsPerdues.TabIndex = 155
+        Me.btnClefsPerdues.Text = "Perdues"
+        Me.btnClefsPerdues.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnClefsPerdues.UseAccentColor = False
+        Me.btnClefsPerdues.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -756,4 +777,5 @@ Partial Class frmMain
     Friend WithEvents tlytGestion As TableLayoutPanel
     Friend WithEvents lblNbDeClefs As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
 End Class

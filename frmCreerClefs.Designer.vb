@@ -50,6 +50,13 @@ Partial Class frmCreerClefs
         Me.MaterialDivider2 = New MaterialSkin.Controls.MaterialDivider()
         Me.btnNewLoc = New MaterialSkin.Controls.MaterialButton()
         Me.btnNewTrousseau = New MaterialSkin.Controls.MaterialButton()
+        Me.txtRefOrg = New MaterialSkin.Controls.MaterialMultiLineTextBox()
+        Me.MaterialLabel9 = New MaterialSkin.Controls.MaterialLabel()
+        Me.txtCnInt = New MaterialSkin.Controls.MaterialTextBox()
+        Me.txtCnExt = New MaterialSkin.Controls.MaterialTextBox()
+        Me.txtCnOpt = New MaterialSkin.Controls.MaterialTextBox()
+        Me.MaterialLabel10 = New MaterialSkin.Controls.MaterialLabel()
+        Me.MaterialDivider3 = New MaterialSkin.Controls.MaterialDivider()
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -137,7 +144,7 @@ Partial Class frmCreerClefs
         Me.chkKeepOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkKeepOpen.AutoSize = True
         Me.chkKeepOpen.Depth = 0
-        Me.chkKeepOpen.Location = New System.Drawing.Point(499, 408)
+        Me.chkKeepOpen.Location = New System.Drawing.Point(465, 425)
         Me.chkKeepOpen.Margin = New System.Windows.Forms.Padding(0)
         Me.chkKeepOpen.MouseLocation = New System.Drawing.Point(-1, -1)
         Me.chkKeepOpen.MouseState = MaterialSkin.MouseState.HOVER
@@ -174,7 +181,7 @@ Partial Class frmCreerClefs
         Me.dgvListBatiment.RowHeadersVisible = False
         Me.dgvListBatiment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvListBatiment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvListBatiment.Size = New System.Drawing.Size(225, 217)
+        Me.dgvListBatiment.Size = New System.Drawing.Size(225, 209)
         Me.dgvListBatiment.TabIndex = 10
         '
         'dgvSelBatiment
@@ -203,7 +210,7 @@ Partial Class frmCreerClefs
         Me.dgvSelBatiment.RowHeadersVisible = False
         Me.dgvSelBatiment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvSelBatiment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSelBatiment.Size = New System.Drawing.Size(225, 217)
+        Me.dgvSelBatiment.Size = New System.Drawing.Size(225, 206)
         Me.dgvSelBatiment.TabIndex = 13
         '
         'MaterialLabel1
@@ -312,9 +319,9 @@ Partial Class frmCreerClefs
         Me.MaterialLabel3.Location = New System.Drawing.Point(12, 74)
         Me.MaterialLabel3.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel3.Name = "MaterialLabel3"
-        Me.MaterialLabel3.Size = New System.Drawing.Size(69, 19)
+        Me.MaterialLabel3.Size = New System.Drawing.Size(80, 19)
         Me.MaterialLabel3.TabIndex = 53
-        Me.MaterialLabel3.Text = "N° de clef"
+        Me.MaterialLabel3.Text = "N° de clef *"
         '
         'MaterialLabel4
         '
@@ -324,9 +331,9 @@ Partial Class frmCreerClefs
         Me.MaterialLabel4.Location = New System.Drawing.Point(12, 135)
         Me.MaterialLabel4.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel4.Name = "MaterialLabel4"
-        Me.MaterialLabel4.Size = New System.Drawing.Size(43, 19)
+        Me.MaterialLabel4.Size = New System.Drawing.Size(54, 19)
         Me.MaterialLabel4.TabIndex = 54
-        Me.MaterialLabel4.Text = "Accès"
+        Me.MaterialLabel4.Text = "Accès *"
         '
         'MaterialLabel5
         '
@@ -336,9 +343,9 @@ Partial Class frmCreerClefs
         Me.MaterialLabel5.Location = New System.Drawing.Point(12, 196)
         Me.MaterialLabel5.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel5.Name = "MaterialLabel5"
-        Me.MaterialLabel5.Size = New System.Drawing.Size(59, 19)
+        Me.MaterialLabel5.Size = New System.Drawing.Size(70, 19)
         Me.MaterialLabel5.TabIndex = 55
-        Me.MaterialLabel5.Text = "Tableau"
+        Me.MaterialLabel5.Text = "Tableau *"
         '
         'MaterialLabel6
         '
@@ -348,9 +355,9 @@ Partial Class frmCreerClefs
         Me.MaterialLabel6.Location = New System.Drawing.Point(12, 256)
         Me.MaterialLabel6.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel6.Name = "MaterialLabel6"
-        Me.MaterialLabel6.Size = New System.Drawing.Size(76, 19)
+        Me.MaterialLabel6.Size = New System.Drawing.Size(87, 19)
         Me.MaterialLabel6.TabIndex = 56
-        Me.MaterialLabel6.Text = "Trousseau"
+        Me.MaterialLabel6.Text = "Trousseau *"
         '
         'MaterialLabel7
         '
@@ -360,9 +367,9 @@ Partial Class frmCreerClefs
         Me.MaterialLabel7.Location = New System.Drawing.Point(12, 316)
         Me.MaterialLabel7.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel7.Name = "MaterialLabel7"
-        Me.MaterialLabel7.Size = New System.Drawing.Size(61, 19)
+        Me.MaterialLabel7.Size = New System.Drawing.Size(72, 19)
         Me.MaterialLabel7.TabIndex = 57
-        Me.MaterialLabel7.Text = "Quantité"
+        Me.MaterialLabel7.Text = "Quantité *"
         '
         'txtQuantity
         '
@@ -388,9 +395,9 @@ Partial Class frmCreerClefs
         Me.MaterialLabel8.Location = New System.Drawing.Point(290, 74)
         Me.MaterialLabel8.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel8.Name = "MaterialLabel8"
-        Me.MaterialLabel8.Size = New System.Drawing.Size(73, 19)
+        Me.MaterialLabel8.Size = New System.Drawing.Size(84, 19)
         Me.MaterialLabel8.TabIndex = 59
-        Me.MaterialLabel8.Text = "Bâtiments"
+        Me.MaterialLabel8.Text = "Bâtiments *"
         '
         'btnSave
         '
@@ -400,7 +407,7 @@ Partial Class frmCreerClefs
         Me.btnSave.DrawShadows = True
         Me.btnSave.HighEmphasis = True
         Me.btnSave.Icon = Nothing
-        Me.btnSave.Location = New System.Drawing.Point(716, 407)
+        Me.btnSave.Location = New System.Drawing.Point(702, 424)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnSave.Name = "btnSave"
@@ -417,11 +424,11 @@ Partial Class frmCreerClefs
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MaterialDivider1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.MaterialDivider1.Depth = 0
-        Me.MaterialDivider1.Location = New System.Drawing.Point(14, 390)
+        Me.MaterialDivider1.Location = New System.Drawing.Point(10, 379)
         Me.MaterialDivider1.Margin = New System.Windows.Forms.Padding(5, 10, 5, 10)
         Me.MaterialDivider1.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialDivider1.Name = "MaterialDivider1"
-        Me.MaterialDivider1.Size = New System.Drawing.Size(790, 1)
+        Me.MaterialDivider1.Size = New System.Drawing.Size(794, 1)
         Me.MaterialDivider1.TabIndex = 61
         Me.MaterialDivider1.Text = "MaterialDivider1"
         '
@@ -435,7 +442,7 @@ Partial Class frmCreerClefs
         Me.MaterialDivider2.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.MaterialDivider2.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialDivider2.Name = "MaterialDivider2"
-        Me.MaterialDivider2.Size = New System.Drawing.Size(1, 301)
+        Me.MaterialDivider2.Size = New System.Drawing.Size(1, 292)
         Me.MaterialDivider2.TabIndex = 62
         Me.MaterialDivider2.Text = "MaterialDivider2"
         '
@@ -473,11 +480,122 @@ Partial Class frmCreerClefs
         Me.btnNewTrousseau.UseAccentColor = False
         Me.btnNewTrousseau.UseVisualStyleBackColor = True
         '
+        'txtRefOrg
+        '
+        Me.txtRefOrg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRefOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRefOrg.Depth = 0
+        Me.txtRefOrg.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtRefOrg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.txtRefOrg.Hint = "Informations complémentaires"
+        Me.txtRefOrg.Location = New System.Drawing.Point(12, 411)
+        Me.txtRefOrg.MaxLength = 512
+        Me.txtRefOrg.MouseState = MaterialSkin.MouseState.HOVER
+        Me.txtRefOrg.Name = "txtRefOrg"
+        Me.txtRefOrg.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal
+        Me.txtRefOrg.Size = New System.Drawing.Size(223, 76)
+        Me.txtRefOrg.TabIndex = 63
+        Me.txtRefOrg.Text = ""
+        '
+        'MaterialLabel9
+        '
+        Me.MaterialLabel9.AutoSize = True
+        Me.MaterialLabel9.Depth = 0
+        Me.MaterialLabel9.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MaterialLabel9.Location = New System.Drawing.Point(238, 387)
+        Me.MaterialLabel9.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialLabel9.Name = "MaterialLabel9"
+        Me.MaterialLabel9.Size = New System.Drawing.Size(47, 19)
+        Me.MaterialLabel9.TabIndex = 64
+        Me.MaterialLabel9.Text = "Canon"
+        '
+        'txtCnInt
+        '
+        Me.txtCnInt.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtCnInt.Depth = 0
+        Me.txtCnInt.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtCnInt.Hint = "Intérieur"
+        Me.txtCnInt.Location = New System.Drawing.Point(241, 409)
+        Me.txtCnInt.MaxLength = 20
+        Me.txtCnInt.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtCnInt.Multiline = False
+        Me.txtCnInt.Name = "txtCnInt"
+        Me.txtCnInt.Size = New System.Drawing.Size(86, 36)
+        Me.txtCnInt.TabIndex = 65
+        Me.txtCnInt.Text = ""
+        Me.txtCnInt.UseTallSize = False
+        '
+        'txtCnExt
+        '
+        Me.txtCnExt.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtCnExt.Depth = 0
+        Me.txtCnExt.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtCnExt.Hint = "Extérieur"
+        Me.txtCnExt.Location = New System.Drawing.Point(333, 409)
+        Me.txtCnExt.MaxLength = 20
+        Me.txtCnExt.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtCnExt.Multiline = False
+        Me.txtCnExt.Name = "txtCnExt"
+        Me.txtCnExt.Size = New System.Drawing.Size(86, 36)
+        Me.txtCnExt.TabIndex = 66
+        Me.txtCnExt.Text = ""
+        Me.txtCnExt.UseTallSize = False
+        '
+        'txtCnOpt
+        '
+        Me.txtCnOpt.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtCnOpt.Depth = 0
+        Me.txtCnOpt.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtCnOpt.Hint = "Options"
+        Me.txtCnOpt.Location = New System.Drawing.Point(240, 451)
+        Me.txtCnOpt.MaxLength = 255
+        Me.txtCnOpt.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtCnOpt.Multiline = False
+        Me.txtCnOpt.Name = "txtCnOpt"
+        Me.txtCnOpt.Size = New System.Drawing.Size(179, 36)
+        Me.txtCnOpt.TabIndex = 67
+        Me.txtCnOpt.Text = ""
+        Me.txtCnOpt.UseTallSize = False
+        '
+        'MaterialLabel10
+        '
+        Me.MaterialLabel10.AutoSize = True
+        Me.MaterialLabel10.Depth = 0
+        Me.MaterialLabel10.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MaterialLabel10.Location = New System.Drawing.Point(9, 387)
+        Me.MaterialLabel10.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialLabel10.Name = "MaterialLabel10"
+        Me.MaterialLabel10.Size = New System.Drawing.Size(200, 19)
+        Me.MaterialLabel10.TabIndex = 68
+        Me.MaterialLabel10.Text = "Références/Organigrammes"
+        '
+        'MaterialDivider3
+        '
+        Me.MaterialDivider3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.MaterialDivider3.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.MaterialDivider3.Depth = 0
+        Me.MaterialDivider3.Location = New System.Drawing.Point(439, 392)
+        Me.MaterialDivider3.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
+        Me.MaterialDivider3.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialDivider3.Name = "MaterialDivider3"
+        Me.MaterialDivider3.Size = New System.Drawing.Size(1, 101)
+        Me.MaterialDivider3.TabIndex = 69
+        Me.MaterialDivider3.Text = "MaterialDivider3"
+        '
         'frmCreerClefs
         '
+        Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(817, 460)
+        Me.ClientSize = New System.Drawing.Size(817, 504)
+        Me.Controls.Add(Me.MaterialDivider3)
+        Me.Controls.Add(Me.MaterialLabel10)
+        Me.Controls.Add(Me.txtCnOpt)
+        Me.Controls.Add(Me.txtCnExt)
+        Me.Controls.Add(Me.txtCnInt)
+        Me.Controls.Add(Me.MaterialLabel9)
+        Me.Controls.Add(Me.txtRefOrg)
         Me.Controls.Add(Me.btnNewTrousseau)
         Me.Controls.Add(Me.btnNewLoc)
         Me.Controls.Add(Me.MaterialDivider2)
@@ -504,7 +622,7 @@ Partial Class frmCreerClefs
         Me.Controls.Add(Me.btnAddBatiment)
         Me.Controls.Add(Me.txtID)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximumSize = New System.Drawing.Size(817, 460)
+        Me.MaximumSize = New System.Drawing.Size(817, 504)
         Me.MinimumSize = New System.Drawing.Size(817, 460)
         Me.Name = "frmCreerClefs"
         Me.Text = "Ajouter une clef au gestionnaire"
@@ -539,4 +657,11 @@ Partial Class frmCreerClefs
     Friend WithEvents MaterialDivider2 As MaterialSkin.Controls.MaterialDivider
     Friend WithEvents btnNewLoc As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnNewTrousseau As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents txtRefOrg As MaterialSkin.Controls.MaterialMultiLineTextBox
+    Friend WithEvents MaterialLabel9 As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents txtCnInt As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents txtCnExt As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents txtCnOpt As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents MaterialLabel10 As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents MaterialDivider3 As MaterialSkin.Controls.MaterialDivider
 End Class

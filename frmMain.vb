@@ -184,7 +184,7 @@ Public Class frmMain
 
         Try
 
-            sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> ""0"""
+            sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue'"
 
             With cmd
                 .Connection = connecter()
@@ -252,7 +252,7 @@ Public Class frmMain
                 column.SortMode = DataGridViewColumnSortMode.NotSortable
             Next
 
-            sql = "Select CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef And CStatus Like ""%"" And CID <> ""0"""
+            sql = "Select CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef And CStatus <> 'Perdue' And CID <> '0'"
             With cmd
                 .Connection = connecter()
                 .CommandText = sql
@@ -617,13 +617,15 @@ Public Class frmMain
     Private Sub EmprunterToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EmprunterToolStripMenuItem1.Click
         'Ouverture du menu emprunt/attribution de clef en mode emprunt
         blnEmprunt = True
-        frmEmprunterClef.ShowDialog()
+        addToPanier()
+        frmEmprunterEtAttribuer.ShowDialog()
     End Sub
 
     Private Sub AttribuerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AttribuerToolStripMenuItem1.Click
         'Ouverture du menu emprunt/attribution de clef en mode attribution
         blnEmprunt = False
-        frmEmprunterClef.ShowDialog()
+        addToPanier()
+        frmEmprunterEtAttribuer.ShowDialog()
     End Sub
 
     Private Sub EditerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditerToolStripMenuItem1.Click
