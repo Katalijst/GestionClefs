@@ -29,6 +29,57 @@ Public Class frmCreerClefs
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If CUInt(txtQuantity.Text) > 49 Then
+            If MsgBox("Voulez-vous vraiment ajouter " & txtQuantity.Text.ToString & " au gestionnaire ?", MsgBoxStyle.YesNo) = DialogResult.No Then
+                Exit Sub
+            End If
+        End If
+        Dim blnClefExisteDeja As Boolean = False
+        Dim stgNomClef As String = txtNom.Text
+        Dim LastKeyID As Integer = 0
+        Dim cmd As String = "Select CID, CNom from Clefs Where CID like @IDClef;"
+        Dim da As New MySqlDataAdapter
+        Dim dtListClefs As DataTable = New DataTable()
+        Dim getKeyID_command As New MySqlCommand(cmd, connecter())
+        getKeyID_command.CommandType = CommandType.Text
+        da.InsertCommand = getKeyID_command
+
+        With getKeyID_command
+            .Parameters.Add("@IDClef", MySqlDbType.String)
+        End With
+        connecter()
+
+        Try
+            getKeyID_command.Parameters("@IDClef").Value = txtID.Text & "-%"
+            getKeyID_command.ExecuteNonQuery()
+        Catch ex As MySqlException
+            'Retour d'une erreur my MySQL si connection impossible
+            MsgBox((ex.Number & " - " & ex.Message))
+        End Try
+        da.SelectCommand = getKeyID_command
+        da.Fill(dtListClefs)
+
+        If dtListClefs.Rows.Count > 0 Then
+            For Each r As DataRow In dtListClefs.Rows
+                Dim input As String = r.Item("CID")
+                Dim index As Integer = input.LastIndexOf("-")
+                If index > 0 Then
+                    Dim TempInt As Integer
+                    Integer.TryParse(input.Substring(index + 1), TempInt)
+                    If TempInt > LastKeyID Then
+                        LastKeyID = TempInt
+                    End If
+                End If
+            Next
+            Dim DialogAjoutClef As DialogResult = MsgBox("Une clef existe déjà avec ce numéro, voulez-vous vraiment ajouter " & txtQuantity.Text.ToString & " à la quantité de cette clef ?" & System.Environment.NewLine & "(L'accès de la clef sera remplacé pour correspondre à celui des clefs existantes.)", MsgBoxStyle.OkCancel)
+            If DialogAjoutClef = DialogResult.Cancel Then
+                Exit Sub
+            Else
+                blnClefExisteDeja = True
+                stgNomClef = dtListClefs.Rows(0).Item(0).ToString
+            End If
+        End If
+
         Dim blnGroupeBatiment As Boolean = False
         Dim intQuantity As Integer
         Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
@@ -58,8 +109,6 @@ Public Class frmCreerClefs
         insert_command.CommandType = CommandType.Text
         daSql.InsertCommand = insert_command
 
-        connecter()
-
         With insert_command
             .Parameters.Add("@id", MySqlDbType.VarChar)
             .Parameters.Add("@name", MySqlDbType.VarChar)
@@ -77,14 +126,14 @@ Public Class frmCreerClefs
 
         Try
             Dim i As Integer = 0
-            For i = 1 To intQuantity
+            For i = 1 + LastKeyID To CUInt(txtQuantity.Text) + LastKeyID
                 With insert_command
                     .Parameters("@id").Value = txtID.Text & "-" & i
-                    .Parameters("@name").Value = txtNom.Text
+                    .Parameters("@name").Value = stgNomClef
                     .Parameters("@pos").Value = cmbLoc.Text
                     .Parameters("@status").Value = "Disponible"
                     .Parameters("@date").Value = Now
-                    If cmbTrousseauListe.Text <> "" Or cmbTrousseauListe.Text = "Aucun" Then
+                    If cmbTrousseauListe.SelectedItem IsNot Nothing Or cmbTrousseauListe.Text = "Aucun" Then
                         .Parameters("@trousseau").Value = cmbTrousseauListe.Text
                     Else
                         .Parameters("@trousseau").Value = "Aucun"
@@ -218,15 +267,15 @@ Public Class frmCreerClefs
 
             Dim newRow As DataRow = dt.NewRow()
             newRow(0) = "Aucun"
-            newRow(1) = "Personne"
             dt.Rows.InsertAt(newRow, 0)
 
-            cmbTrousseauListe.DataSource = dt
-            cmbTrousseauListe.ValueMember = "TNom"
-            cmbTrousseauListe.DisplayMember = strTitleTNom
-            If cmbTrousseauListe.Items.Count > 0 Then
-                cmbTrousseauListe.SelectedIndex = 0
-            End If
+            For Each r As DataRow In dt.Rows
+                cmbTrousseauListe.Items.Add(r.Item(0).ToString)
+            Next
+
+            'cmbTrousseauListe.DataSource = dt
+            'cmbTrousseauListe.ValueMember = dt.Columns(0).ToString
+            'cmbTrousseauListe.DisplayMember = strTitleTNom
 
             connecter().Close()
         Catch ex As Exception
@@ -248,12 +297,13 @@ Public Class frmCreerClefs
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            cmbLoc.DataSource = dt
-            cmbLoc.ValueMember = "PNom"
-            cmbLoc.DisplayMember = strTitlePNom
-            If cmbLoc.Items.Count > 0 Then
-                cmbLoc.SelectedIndex = 0
-            End If
+            For Each r As DataRow In dt.Rows
+                cmbLoc.Items.Add(r.Item(0).ToString)
+            Next
+
+            'cmbLoc.DataSource = dt
+            'cmbLoc.ValueMember = dt.Columns(0).ToString
+            'cmbLoc.DisplayMember = strTitlePNom
 
             connecter().Close()
         Catch ex As Exception
@@ -261,12 +311,6 @@ Public Class frmCreerClefs
         End Try
     End Sub
     Public Sub LoadAndRefresh()
-        If cmbLoc.Items.Count > 0 Then
-            cmbLoc.SelectedIndex = 0
-        End If
-        If cmbTrousseauListe.Items.Count > 0 Then
-            cmbTrousseauListe.SelectedIndex = 0
-        End If
         RefreshPosition()
         RefreshTrousseau()
         FilldgSelBatiment()
@@ -363,4 +407,13 @@ Public Class frmCreerClefs
         addToSel()
     End Sub
 
+    Private Sub txtQuantity_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrousseauListe.SelectedIndexChanged
+
+    End Sub
 End Class

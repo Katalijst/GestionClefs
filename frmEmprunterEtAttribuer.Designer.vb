@@ -133,21 +133,21 @@ Partial Class frmEmprunterEtAttribuer
         'dtDebutGlobal
         '
         Me.dtDebutGlobal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.dtDebutGlobal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtDebutGlobal.Font = New System.Drawing.Font("Noto Sans", 12.0!)
         Me.dtDebutGlobal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtDebutGlobal.Location = New System.Drawing.Point(305, 461)
         Me.dtDebutGlobal.Name = "dtDebutGlobal"
-        Me.dtDebutGlobal.Size = New System.Drawing.Size(127, 26)
+        Me.dtDebutGlobal.Size = New System.Drawing.Size(127, 29)
         Me.dtDebutGlobal.TabIndex = 5
         '
         'dtFinGlobal
         '
         Me.dtFinGlobal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.dtFinGlobal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtFinGlobal.Font = New System.Drawing.Font("Noto Sans", 12.0!)
         Me.dtFinGlobal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtFinGlobal.Location = New System.Drawing.Point(438, 461)
         Me.dtFinGlobal.Name = "dtFinGlobal"
-        Me.dtFinGlobal.Size = New System.Drawing.Size(127, 26)
+        Me.dtFinGlobal.Size = New System.Drawing.Size(127, 29)
         Me.dtFinGlobal.TabIndex = 6
         '
         'swtReglageIndividuelle
@@ -205,6 +205,8 @@ Partial Class frmEmprunterEtAttribuer
         '
         Me.chkPrint.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkPrint.AutoSize = True
+        Me.chkPrint.Checked = True
+        Me.chkPrint.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkPrint.Depth = 0
         Me.chkPrint.Location = New System.Drawing.Point(263, 516)
         Me.chkPrint.Margin = New System.Windows.Forms.Padding(0)

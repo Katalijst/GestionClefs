@@ -100,7 +100,9 @@ Public Class frmGestionPosition
         End Try
     End Sub
     Private Sub frmGestionPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+        SetStyle(ControlStyles.UserPaint, True)
         lblPNom.Text = strTitlePNom & " :"
         lblPBatiment.Text = strTitlePBatiment & " :"
         lblPResponsable.Text = strTitlePResponsable & " :"

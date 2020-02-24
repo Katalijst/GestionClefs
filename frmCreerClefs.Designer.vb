@@ -226,9 +226,9 @@ Partial Class frmCreerClefs
         Me.MaterialLabel2.Location = New System.Drawing.Point(573, 138)
         Me.MaterialLabel2.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel2.Name = "MaterialLabel2"
-        Me.MaterialLabel2.Size = New System.Drawing.Size(201, 19)
+        Me.MaterialLabel2.Size = New System.Drawing.Size(100, 19)
         Me.MaterialLabel2.TabIndex = 48
-        Me.MaterialLabel2.Text = "Bâtiments où utiliser la clefs"
+        Me.MaterialLabel2.Text = "La clef ouvre :"
         '
         'btnAddSelBatiment
         '

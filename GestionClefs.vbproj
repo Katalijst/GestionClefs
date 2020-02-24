@@ -75,10 +75,10 @@
     <ApplicationIcon>LogoICO.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9F4C63814937F482241AEBA46A745836E3998FC7</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9E94C578AC7F0CB7000790637F6B0335162B1832</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GestionClefs_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GestionClefs_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>

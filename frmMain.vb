@@ -41,6 +41,9 @@ Public Class frmMain
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        'SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+        'SetStyle(ControlStyles.UserPaint, True)
+
         BrightOrDarkMode()
 
         Dim strCBFiltre As String() = New String(3) {}
@@ -98,14 +101,14 @@ Public Class frmMain
                     'Si c'est la première pop up depuis le lancement du logiciel
                     If blnAlertes = True Then
                         'Création de la messagebox
-                        'Dim Message As String = "Il y a " & dt.Rows.Count & " clefs non rendues !"
-                        'Dim Caption As String = "Alertes"
-                        'Dim Buttons As MessageBoxButtons = MessageBoxButtons.OKCancel
-                        'Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
-                        'Dim Result As DialogResult
+                        Dim Message As String = "Il y a " & dt.Rows.Count & " clefs non rendues !"
+                        Dim Caption As String = "Alertes"
+                        Dim Buttons As MessageBoxButtons = MessageBoxButtons.OKCancel
+                        Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+                        Dim Result As DialogResult
                         'Affichage de la message box
-                        'Result = MessageBox.Show(Message, Caption, Buttons, Icon)
-                        MaterialMessageBox.Show("Il y a " & dt.Rows.Count & " clefs non rendues !", "Alertes")
+                        Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+                        'MaterialMessageBox.Show("Il y a " & dt.Rows.Count & " clefs non rendues !", "Alertes")
                         'Passage du booléen blnAlertes à false pour évite la pop up à chaque actualisation
                         blnAlertes = False
                     End If

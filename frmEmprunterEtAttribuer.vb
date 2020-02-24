@@ -7,6 +7,8 @@ Public Class frmEmprunterEtAttribuer
 
     Private Sub frmEmprunterEtAttribuer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+
         SkinManager.AddFormToManage(Me)
         CreateKeyControls()
         If frmMain.blnEmprunt = True Then
@@ -14,6 +16,12 @@ Public Class frmEmprunterEtAttribuer
         Else
             cbEmprunterAttribuerGlobal.SelectedIndex = 1
         End If
+        dtDebutGlobal.Font = New System.Drawing.Font("Noto Sans", 12.0!)
+        dtDebutGlobal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        dtDebutGlobal.Size = New System.Drawing.Size(127, 29)
+        dtFinGlobal.Font = New System.Drawing.Font("Noto Sans", 12.0!)
+        dtFinGlobal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        dtFinGlobal.Size = New System.Drawing.Size(127, 29)
         LoadPersonnes()
     End Sub
     Private Sub frmEmprunterEtAttribuer_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
