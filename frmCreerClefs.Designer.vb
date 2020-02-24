@@ -82,7 +82,7 @@ Partial Class frmCreerClefs
         Me.txtNom.Multiline = False
         Me.txtNom.Name = "txtNom"
         Me.txtNom.Size = New System.Drawing.Size(203, 36)
-        Me.txtNom.TabIndex = 3
+        Me.txtNom.TabIndex = 2
         Me.txtNom.Text = ""
         Me.txtNom.UseTallSize = False
         '
@@ -106,7 +106,7 @@ Partial Class frmCreerClefs
         Me.cmbLoc.MouseState = MaterialSkin.MouseState.OUT
         Me.cmbLoc.Name = "cmbLoc"
         Me.cmbLoc.Size = New System.Drawing.Size(203, 35)
-        Me.cmbLoc.TabIndex = 4
+        Me.cmbLoc.TabIndex = 3
         Me.cmbLoc.UseTallSize = False
         '
         'cmbTrousseauListe
@@ -144,7 +144,7 @@ Partial Class frmCreerClefs
         Me.chkKeepOpen.Name = "chkKeepOpen"
         Me.chkKeepOpen.Ripple = True
         Me.chkKeepOpen.Size = New System.Drawing.Size(208, 37)
-        Me.chkKeepOpen.TabIndex = 51
+        Me.chkKeepOpen.TabIndex = 14
         Me.chkKeepOpen.Text = "Garder la fenêtre ouverte"
         Me.chkKeepOpen.UseVisualStyleBackColor = True
         '
@@ -152,7 +152,8 @@ Partial Class frmCreerClefs
         '
         Me.dgvListBatiment.AllowUserToAddRows = False
         Me.dgvListBatiment.AllowUserToDeleteRows = False
-        Me.dgvListBatiment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgvListBatiment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvListBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
@@ -174,13 +175,14 @@ Partial Class frmCreerClefs
         Me.dgvListBatiment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvListBatiment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvListBatiment.Size = New System.Drawing.Size(225, 217)
-        Me.dgvListBatiment.TabIndex = 45
+        Me.dgvListBatiment.TabIndex = 10
         '
         'dgvSelBatiment
         '
         Me.dgvSelBatiment.AllowUserToAddRows = False
         Me.dgvSelBatiment.AllowUserToDeleteRows = False
-        Me.dgvSelBatiment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.dgvSelBatiment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSelBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSelBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
@@ -202,11 +204,10 @@ Partial Class frmCreerClefs
         Me.dgvSelBatiment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvSelBatiment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvSelBatiment.Size = New System.Drawing.Size(225, 217)
-        Me.dgvSelBatiment.TabIndex = 46
+        Me.dgvSelBatiment.TabIndex = 13
         '
         'MaterialLabel1
         '
-        Me.MaterialLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MaterialLabel1.AutoSize = True
         Me.MaterialLabel1.Depth = 0
         Me.MaterialLabel1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
@@ -232,7 +233,7 @@ Partial Class frmCreerClefs
         '
         'btnAddSelBatiment
         '
-        Me.btnAddSelBatiment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAddSelBatiment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.btnAddSelBatiment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnAddSelBatiment.Depth = 0
         Me.btnAddSelBatiment.DrawShadows = True
@@ -243,14 +244,14 @@ Partial Class frmCreerClefs
         Me.btnAddSelBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnAddSelBatiment.Name = "btnAddSelBatiment"
         Me.btnAddSelBatiment.Size = New System.Drawing.Size(44, 36)
-        Me.btnAddSelBatiment.TabIndex = 49
+        Me.btnAddSelBatiment.TabIndex = 11
         Me.btnAddSelBatiment.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined
         Me.btnAddSelBatiment.UseAccentColor = False
         Me.btnAddSelBatiment.UseVisualStyleBackColor = True
         '
         'btnRemSelBatiment
         '
-        Me.btnRemSelBatiment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRemSelBatiment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.btnRemSelBatiment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnRemSelBatiment.Depth = 0
         Me.btnRemSelBatiment.DrawShadows = True
@@ -261,14 +262,15 @@ Partial Class frmCreerClefs
         Me.btnRemSelBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnRemSelBatiment.Name = "btnRemSelBatiment"
         Me.btnRemSelBatiment.Size = New System.Drawing.Size(44, 36)
-        Me.btnRemSelBatiment.TabIndex = 50
+        Me.btnRemSelBatiment.TabIndex = 12
         Me.btnRemSelBatiment.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined
         Me.btnRemSelBatiment.UseAccentColor = False
         Me.btnRemSelBatiment.UseVisualStyleBackColor = True
         '
         'txtRechercher
         '
-        Me.txtRechercher.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtRechercher.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtRechercher.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtRechercher.Depth = 0
         Me.txtRechercher.Font = New System.Drawing.Font("Roboto", 12.0!)
@@ -279,7 +281,7 @@ Partial Class frmCreerClefs
         Me.txtRechercher.Multiline = False
         Me.txtRechercher.Name = "txtRechercher"
         Me.txtRechercher.Size = New System.Drawing.Size(320, 36)
-        Me.txtRechercher.TabIndex = 45
+        Me.txtRechercher.TabIndex = 8
         Me.txtRechercher.Text = ""
         Me.txtRechercher.UseTallSize = False
         '
@@ -296,7 +298,7 @@ Partial Class frmCreerClefs
         Me.btnAddBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnAddBatiment.Name = "btnAddBatiment"
         Me.btnAddBatiment.Size = New System.Drawing.Size(181, 36)
-        Me.btnAddBatiment.TabIndex = 0
+        Me.btnAddBatiment.TabIndex = 9
         Me.btnAddBatiment.Text = "Gérer les bâtiments"
         Me.btnAddBatiment.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined
         Me.btnAddBatiment.UseAccentColor = False
@@ -374,13 +376,12 @@ Partial Class frmCreerClefs
         Me.txtQuantity.Multiline = False
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(204, 36)
-        Me.txtQuantity.TabIndex = 58
+        Me.txtQuantity.TabIndex = 7
         Me.txtQuantity.Text = ""
         Me.txtQuantity.UseTallSize = False
         '
         'MaterialLabel8
         '
-        Me.MaterialLabel8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MaterialLabel8.AutoSize = True
         Me.MaterialLabel8.Depth = 0
         Me.MaterialLabel8.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
@@ -404,7 +405,7 @@ Partial Class frmCreerClefs
         Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(85, 36)
-        Me.btnSave.TabIndex = 60
+        Me.btnSave.TabIndex = 15
         Me.btnSave.Text = "Ajouter"
         Me.btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
         Me.btnSave.UseAccentColor = False
@@ -412,7 +413,7 @@ Partial Class frmCreerClefs
         '
         'MaterialDivider1
         '
-        Me.MaterialDivider1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.MaterialDivider1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MaterialDivider1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.MaterialDivider1.Depth = 0
@@ -427,7 +428,7 @@ Partial Class frmCreerClefs
         'MaterialDivider2
         '
         Me.MaterialDivider2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.MaterialDivider2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.MaterialDivider2.Depth = 0
         Me.MaterialDivider2.Location = New System.Drawing.Point(273, 74)
@@ -440,7 +441,6 @@ Partial Class frmCreerClefs
         '
         'btnNewLoc
         '
-        Me.btnNewLoc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnNewLoc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnNewLoc.Depth = 0
         Me.btnNewLoc.DrawShadows = True
@@ -451,14 +451,13 @@ Partial Class frmCreerClefs
         Me.btnNewLoc.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnNewLoc.Name = "btnNewLoc"
         Me.btnNewLoc.Size = New System.Drawing.Size(44, 36)
-        Me.btnNewLoc.TabIndex = 63
+        Me.btnNewLoc.TabIndex = 4
         Me.btnNewLoc.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnNewLoc.UseAccentColor = False
         Me.btnNewLoc.UseVisualStyleBackColor = True
         '
         'btnNewTrousseau
         '
-        Me.btnNewTrousseau.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnNewTrousseau.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnNewTrousseau.Depth = 0
         Me.btnNewTrousseau.DrawShadows = True
@@ -469,7 +468,7 @@ Partial Class frmCreerClefs
         Me.btnNewTrousseau.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnNewTrousseau.Name = "btnNewTrousseau"
         Me.btnNewTrousseau.Size = New System.Drawing.Size(44, 36)
-        Me.btnNewTrousseau.TabIndex = 64
+        Me.btnNewTrousseau.TabIndex = 6
         Me.btnNewTrousseau.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnNewTrousseau.UseAccentColor = False
         Me.btnNewTrousseau.UseVisualStyleBackColor = True
@@ -505,6 +504,8 @@ Partial Class frmCreerClefs
         Me.Controls.Add(Me.btnAddBatiment)
         Me.Controls.Add(Me.txtID)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximumSize = New System.Drawing.Size(817, 460)
+        Me.MinimumSize = New System.Drawing.Size(817, 460)
         Me.Name = "frmCreerClefs"
         Me.Text = "Ajouter une clef au gestionnaire"
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()

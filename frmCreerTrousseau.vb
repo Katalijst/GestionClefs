@@ -19,8 +19,8 @@ Public Class frmCreerTrousseau
         If frmGestionTrousseau.IsHandleCreated Then
             frmGestionTrousseau.RefreshTrousseau()
         End If
-        If frmAjouterClef.IsHandleCreated Then
-            frmAjouterClef.RefreshTrousseau()
+        If frmCreerClefs.IsHandleCreated Then
+            frmCreerClefs.RefreshTrousseau()
         End If
         If frmEditerClef.IsHandleCreated Then
             frmEditerClef.RefreshTrousseau()

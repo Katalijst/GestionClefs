@@ -159,8 +159,8 @@ Public Class frmEditerPosition
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-        If frmAjouterClef.IsHandleCreated Then
-            frmAjouterClef.RefreshPosition()
+        If frmCreerClefs.IsHandleCreated Then
+            frmCreerClefs.RefreshPosition()
         End If
         If frmGestionPosition.IsHandleCreated Then
             frmGestionPosition.RefreshList()

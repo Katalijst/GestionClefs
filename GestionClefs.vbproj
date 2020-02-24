@@ -468,12 +468,6 @@
     <Compile Include="frmGestionBatiments.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAjouterClef.Designer.vb">
-      <DependentUpon>frmAjouterClef.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmAjouterClef.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmAjouterGenre.Designer.vb">
       <DependentUpon>frmAjouterGenre.vb</DependentUpon>
     </Compile>
@@ -617,9 +611,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGestionBatiments.resx">
       <DependentUpon>frmGestionBatiments.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAjouterClef.resx">
-      <DependentUpon>frmAjouterClef.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAjouterGenre.resx">
       <DependentUpon>frmAjouterGenre.vb</DependentUpon>

@@ -74,7 +74,7 @@ Public Class frmEmprunterEtAttribuer
             cbEmprunterAttribuer.MouseState = MaterialSkin.MouseState.OUT
             cbEmprunterAttribuer.Name = "cbEmprunterAttribuer-" & i
             cbEmprunterAttribuer.Size = New System.Drawing.Size(146, 35)
-            cbEmprunterAttribuer.TabIndex = 0
+            cbEmprunterAttribuer.TabIndex = 4 + i
             cbEmprunterAttribuer.UseAccent = False
             cbEmprunterAttribuer.UseTallSize = False
             '
@@ -100,7 +100,7 @@ Public Class frmEmprunterEtAttribuer
             dtFin.Location = New System.Drawing.Point(435, (17 + intY))
             dtFin.Name = "dtFin-" & i
             dtFin.Size = New System.Drawing.Size(127, 29)
-            dtFin.TabIndex = 2
+            dtFin.TabIndex = 6 + i
             '
             'dtDebut
             '
@@ -109,7 +109,7 @@ Public Class frmEmprunterEtAttribuer
             dtDebut.Location = New System.Drawing.Point(302, (17 + intY))
             dtDebut.Name = "dtDebut-" & i
             dtDebut.Size = New System.Drawing.Size(127, 29)
-            dtDebut.TabIndex = 3
+            dtDebut.TabIndex = 5 + i
             '
             'btnDelete
             '
@@ -123,7 +123,7 @@ Public Class frmEmprunterEtAttribuer
             btnDelete.MouseState = MaterialSkin.MouseState.HOVER
             btnDelete.Name = "btnDelete-" & i
             btnDelete.Size = New System.Drawing.Size(44, 36)
-            btnDelete.TabIndex = 4
+            btnDelete.TabIndex = 7 + i
             btnDelete.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
             btnDelete.UseAccentColor = False
             btnDelete.UseVisualStyleBackColor = True

@@ -152,9 +152,6 @@ Public Class frmGestionPersonnes
 
             insert_command.ExecuteNonQuery()
             connecter().Close()
-            If frmAjouterClef.IsHandleCreated Then
-                frmAjouterClef.RefreshNomEmprunteur()
-            End If
             If frmGestionPosition.IsHandleCreated Then
                 frmGestionPosition.RefreshResponsable()
             End If

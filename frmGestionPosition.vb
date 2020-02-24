@@ -217,8 +217,8 @@ Public Class frmGestionPosition
 
             insert_command.ExecuteNonQuery()
             connecter().Close()
-            If frmAjouterClef.IsHandleCreated Then
-                frmAjouterClef.RefreshPosition()
+            If frmCreerClefs.IsHandleCreated Then
+                frmCreerClefs.RefreshPosition()
             End If
             If chkKeepOpen.Checked = False Then
                 Me.Close()

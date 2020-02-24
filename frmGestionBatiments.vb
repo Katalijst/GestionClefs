@@ -157,8 +157,8 @@ Public Class frmGestionBatiments
 
             insert_command.ExecuteNonQuery()
             connecter().Close()
-            If frmAjouterClef.IsHandleCreated Then
-                frmAjouterClef.RefreshBatiment()
+            If frmCreerClefs.IsHandleCreated Then
+                frmCreerClefs.RefreshBatiment()
             End If
             If chkKeepOpen.Checked = False Then
                 Me.Close()

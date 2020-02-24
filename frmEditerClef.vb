@@ -131,7 +131,9 @@ Public Class frmEditerClef
         End Try
 
     End Sub
+
     Private Sub frmEditKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         lblCID.Text = strTitleCID & " :"
         lblCNom.Text = strTitleCNom & " :"
         lblCPosition.Text = strTitleCPosition & " :"
@@ -139,6 +141,10 @@ Public Class frmEditerClef
         lblCTrousseau.Text = strTitleCTrousseau & " :"
         lblCDate.Text = strTitleCDate & " :"
         LoadAndRefresh()
+    End Sub
+
+    Private Sub frmEditKey_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
+        Me.Dispose()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click

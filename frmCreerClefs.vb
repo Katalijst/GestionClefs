@@ -8,6 +8,10 @@ Public Class frmCreerClefs
         RefreshBatiment()
     End Sub
 
+    Private Sub frmCreerClefs_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
+        Me.Dispose()
+    End Sub
+
     Private Sub dgvListBatiment_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvListBatiment.CellMouseDown
         If e.RowIndex <> -1 AndAlso e.ColumnIndex <> -1 Then
             If e.Button = MouseButtons.Right Then
@@ -29,15 +33,41 @@ Public Class frmCreerClefs
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If CUInt(txtQuantity.Text) > 49 Then
-            If MsgBox("Voulez-vous vraiment ajouter " & txtQuantity.Text.ToString & " au gestionnaire ?", MsgBoxStyle.YesNo) = DialogResult.No Then
-                Exit Sub
+        Dim blnIncompleteForm As Boolean = False
+        If txtQuantity.Text <> "" Then
+            If CUInt(txtQuantity.Text) > 49 Then
+                If MsgBox("Voulez-vous vraiment ajouter " & txtQuantity.Text.ToString & " au gestionnaire ?", MsgBoxStyle.YesNo) = DialogResult.No Then
+                    Exit Sub
+                End If
             End If
+        Else
+            MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
         End If
+        If txtID.Text = "" Then
+            MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
+            blnIncompleteForm = True
+        ElseIf txtNom.Text = "" Then
+            MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
+            blnIncompleteForm = True
+        ElseIf cmbLoc.SelectedIndex = -1 Then
+            MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
+            blnIncompleteForm = True
+        ElseIf cmbTrousseauListe.SelectedIndex = -1 Then
+            MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
+            blnIncompleteForm = True
+        ElseIf dgvSelBatiment.RowCount < 1 Then
+            MsgBox("Vous n'avez pas assigné de batiments d'utilisation à la clef !")
+            blnIncompleteForm = True
+        End If
+        If blnIncompleteForm = True Then
+            Exit Sub
+        End If
+
         Dim blnClefExisteDeja As Boolean = False
         Dim stgNomClef As String = txtNom.Text
+        Dim stgBatimentClef As String
         Dim LastKeyID As Integer = 0
-        Dim cmd As String = "Select CID, CNom from Clefs Where CID like @IDClef;"
+        Dim cmd As String = "Select CID, CNom, CBatiment from Clefs Where CID like @IDClef;"
         Dim da As New MySqlDataAdapter
         Dim dtListClefs As DataTable = New DataTable()
         Dim getKeyID_command As New MySqlCommand(cmd, connecter())
@@ -71,12 +101,13 @@ Public Class frmCreerClefs
                     End If
                 End If
             Next
-            Dim DialogAjoutClef As DialogResult = MsgBox("Une clef existe déjà avec ce numéro, voulez-vous vraiment ajouter " & txtQuantity.Text.ToString & " à la quantité de cette clef ?" & System.Environment.NewLine & "(L'accès de la clef sera remplacé pour correspondre à celui des clefs existantes.)", MsgBoxStyle.OkCancel)
+            Dim DialogAjoutClef As DialogResult = MsgBox("Une clef existe déjà avec ce numéro, voulez-vous vraiment ajouter " & txtQuantity.Text.ToString & " à la quantité de cette clef ?" & System.Environment.NewLine & "(L'accès de la clef et les bâtiments seront remplacés pour correspondre à celui des clefs existantes.)", MsgBoxStyle.OkCancel)
             If DialogAjoutClef = DialogResult.Cancel Then
                 Exit Sub
             Else
                 blnClefExisteDeja = True
-                stgNomClef = dtListClefs.Rows(0).Item(0).ToString
+                stgNomClef = dtListClefs.Rows(0).Item(1).ToString
+                stgBatimentClef = dtListClefs.Rows(0).Item(2).ToString
             End If
         End If
 
@@ -138,14 +169,19 @@ Public Class frmCreerClefs
                     Else
                         .Parameters("@trousseau").Value = "Aucun"
                     End If
-                    If dgvSelBatiment.RowCount > 1 Then
-                        .Parameters("@batiment").Value = "Groupe de Batiments"
-                        blnGroupeBatiment = True
-                    ElseIf dgvSelBatiment.RowCount = 1 Then
-                        .Parameters("@batiment").Value = dgvSelBatiment.Rows(0).Cells(1).Value.ToString()
+                    If blnClefExisteDeja = True Then
+                        .Parameters("@batiment").Value = stgBatimentClef
                     Else
-                        MsgBox("Vous n'avez pas assigné de batiments d'utilisation à la clef !")
+                        If dgvSelBatiment.RowCount > 1 Then
+                            .Parameters("@batiment").Value = "Groupe de Batiments"
+                            blnGroupeBatiment = True
+                        ElseIf dgvSelBatiment.RowCount = 1 Then
+                            .Parameters("@batiment").Value = dgvSelBatiment.Rows(0).Cells(1).Value.ToString()
+                        Else
+                            MsgBox("Vous n'avez pas assigné de batiments d'utilisation à la clef !")
+                        End If
                     End If
+
                     .ExecuteNonQuery()
                 End With
                 If blnGroupeBatiment = True Then
@@ -167,6 +203,7 @@ Public Class frmCreerClefs
             frmMain.FillDataSource()
             If chkKeepOpen.Checked = False Then
                 Me.Dispose()
+                Me.Close()
             End If
         End Try
     End Sub
@@ -251,6 +288,7 @@ Public Class frmCreerClefs
     End Sub
 
     Public Sub RefreshTrousseau()
+        cmbTrousseauListe.Items.Clear()
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -283,6 +321,7 @@ Public Class frmCreerClefs
         End Try
     End Sub
     Public Sub RefreshPosition()
+        cmbLoc.Items.Clear()
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter

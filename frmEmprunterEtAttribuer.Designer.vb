@@ -127,7 +127,7 @@ Partial Class frmEmprunterEtAttribuer
         Me.cbEmprunterAttribuerGlobal.MouseState = MaterialSkin.MouseState.OUT
         Me.cbEmprunterAttribuerGlobal.Name = "cbEmprunterAttribuerGlobal"
         Me.cbEmprunterAttribuerGlobal.Size = New System.Drawing.Size(146, 35)
-        Me.cbEmprunterAttribuerGlobal.TabIndex = 4
+        Me.cbEmprunterAttribuerGlobal.TabIndex = 97
         Me.cbEmprunterAttribuerGlobal.UseTallSize = False
         '
         'dtDebutGlobal
@@ -138,7 +138,7 @@ Partial Class frmEmprunterEtAttribuer
         Me.dtDebutGlobal.Location = New System.Drawing.Point(305, 461)
         Me.dtDebutGlobal.Name = "dtDebutGlobal"
         Me.dtDebutGlobal.Size = New System.Drawing.Size(127, 29)
-        Me.dtDebutGlobal.TabIndex = 5
+        Me.dtDebutGlobal.TabIndex = 98
         '
         'dtFinGlobal
         '
@@ -148,7 +148,7 @@ Partial Class frmEmprunterEtAttribuer
         Me.dtFinGlobal.Location = New System.Drawing.Point(438, 461)
         Me.dtFinGlobal.Name = "dtFinGlobal"
         Me.dtFinGlobal.Size = New System.Drawing.Size(127, 29)
-        Me.dtFinGlobal.TabIndex = 6
+        Me.dtFinGlobal.TabIndex = 99
         '
         'swtReglageIndividuelle
         '
@@ -161,7 +161,7 @@ Partial Class frmEmprunterEtAttribuer
         Me.swtReglageIndividuelle.Name = "swtReglageIndividuelle"
         Me.swtReglageIndividuelle.Ripple = True
         Me.swtReglageIndividuelle.Size = New System.Drawing.Size(164, 37)
-        Me.swtReglageIndividuelle.TabIndex = 7
+        Me.swtReglageIndividuelle.TabIndex = 3
         Me.swtReglageIndividuelle.Text = "Edition par clef"
         Me.swtReglageIndividuelle.UseVisualStyleBackColor = True
         '
@@ -215,7 +215,7 @@ Partial Class frmEmprunterEtAttribuer
         Me.chkPrint.Name = "chkPrint"
         Me.chkPrint.Ripple = True
         Me.chkPrint.Size = New System.Drawing.Size(283, 37)
-        Me.chkPrint.TabIndex = 12
+        Me.chkPrint.TabIndex = 100
         Me.chkPrint.Text = "Imprimer une attestation d'emprunt"
         Me.chkPrint.UseVisualStyleBackColor = True
         '
