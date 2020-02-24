@@ -45,7 +45,7 @@ Partial Class frmEditerClef
         Me.MaterialCheckbox4 = New MaterialSkin.Controls.MaterialCheckbox()
         Me.txtQuantity = New MaterialSkin.Controls.MaterialTextBox()
         Me.lblQuantity = New MaterialSkin.Controls.MaterialLabel()
-        Me.MaterialComboBox1 = New MaterialSkin.Controls.MaterialComboBox()
+        Me.cmbStatus = New MaterialSkin.Controls.MaterialComboBox()
         Me.lblBatiment = New MaterialSkin.Controls.MaterialLabel()
         Me.MaterialSwitch1 = New MaterialSkin.Controls.MaterialSwitch()
         Me.MaterialLabel10 = New MaterialSkin.Controls.MaterialLabel()
@@ -54,19 +54,18 @@ Partial Class frmEditerClef
         Me.txtCnInt = New MaterialSkin.Controls.MaterialTextBox()
         Me.MaterialLabel9 = New MaterialSkin.Controls.MaterialLabel()
         Me.txtRefOrg = New MaterialSkin.Controls.MaterialMultiLineTextBox()
-        Me.MaterialLabel1 = New MaterialSkin.Controls.MaterialLabel()
-        Me.MaterialLabel2 = New MaterialSkin.Controls.MaterialLabel()
         Me.MaterialDivider2 = New MaterialSkin.Controls.MaterialDivider()
+        Me.MaterialLabel1 = New MaterialSkin.Controls.MaterialLabel()
         Me.SuspendLayout()
         '
         'dtpDate
         '
-        Me.dtpDate.CalendarFont = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDate.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDate.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpDate.Location = New System.Drawing.Point(137, 286)
         Me.dtpDate.Name = "dtpDate"
-        Me.dtpDate.Size = New System.Drawing.Size(182, 27)
+        Me.dtpDate.Size = New System.Drawing.Size(182, 26)
         Me.dtpDate.TabIndex = 12
         '
         'btnSave
@@ -174,7 +173,7 @@ Partial Class frmEditerClef
         Me.cmbLoc.DropDownHeight = 118
         Me.cmbLoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLoc.DropDownWidth = 121
-        Me.cmbLoc.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cmbLoc.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
         Me.cmbLoc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cmbLoc.FormattingEnabled = True
         Me.cmbLoc.IntegralHeight = False
@@ -196,7 +195,7 @@ Partial Class frmEditerClef
         Me.cmbTrousseauListe.DropDownHeight = 118
         Me.cmbTrousseauListe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTrousseauListe.DropDownWidth = 121
-        Me.cmbTrousseauListe.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cmbTrousseauListe.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
         Me.cmbTrousseauListe.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cmbTrousseauListe.FormattingEnabled = True
         Me.cmbTrousseauListe.IntegralHeight = False
@@ -216,7 +215,7 @@ Partial Class frmEditerClef
         Me.btnGrpBatiment.DrawShadows = True
         Me.btnGrpBatiment.HighEmphasis = True
         Me.btnGrpBatiment.Icon = Nothing
-        Me.btnGrpBatiment.Location = New System.Drawing.Point(518, 323)
+        Me.btnGrpBatiment.Location = New System.Drawing.Point(419, 314)
         Me.btnGrpBatiment.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnGrpBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnGrpBatiment.Name = "btnGrpBatiment"
@@ -256,7 +255,7 @@ Partial Class frmEditerClef
         Me.lblCBatiment.AutoSize = True
         Me.lblCBatiment.Depth = 0
         Me.lblCBatiment.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.lblCBatiment.Location = New System.Drawing.Point(393, 332)
+        Me.lblCBatiment.Location = New System.Drawing.Point(393, 290)
         Me.lblCBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblCBatiment.Name = "lblCBatiment"
         Me.lblCBatiment.Size = New System.Drawing.Size(113, 19)
@@ -391,34 +390,35 @@ Partial Class frmEditerClef
         Me.lblQuantity.TabIndex = 52
         Me.lblQuantity.Text = "Quantité :"
         '
-        'MaterialComboBox1
+        'cmbStatus
         '
-        Me.MaterialComboBox1.AutoResize = False
-        Me.MaterialComboBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.MaterialComboBox1.Depth = 0
-        Me.MaterialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.MaterialComboBox1.DropDownHeight = 118
-        Me.MaterialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.MaterialComboBox1.DropDownWidth = 121
-        Me.MaterialComboBox1.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialComboBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.MaterialComboBox1.FormattingEnabled = True
-        Me.MaterialComboBox1.IntegralHeight = False
-        Me.MaterialComboBox1.ItemHeight = 29
-        Me.MaterialComboBox1.Location = New System.Drawing.Point(137, 240)
-        Me.MaterialComboBox1.MaxDropDownItems = 4
-        Me.MaterialComboBox1.MouseState = MaterialSkin.MouseState.OUT
-        Me.MaterialComboBox1.Name = "MaterialComboBox1"
-        Me.MaterialComboBox1.Size = New System.Drawing.Size(182, 35)
-        Me.MaterialComboBox1.TabIndex = 54
-        Me.MaterialComboBox1.UseTallSize = False
+        Me.cmbStatus.AutoResize = False
+        Me.cmbStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cmbStatus.Depth = 0
+        Me.cmbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cmbStatus.DropDownHeight = 118
+        Me.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbStatus.DropDownWidth = 121
+        Me.cmbStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cmbStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cmbStatus.FormattingEnabled = True
+        Me.cmbStatus.Hint = "Status"
+        Me.cmbStatus.IntegralHeight = False
+        Me.cmbStatus.ItemHeight = 29
+        Me.cmbStatus.Location = New System.Drawing.Point(137, 240)
+        Me.cmbStatus.MaxDropDownItems = 4
+        Me.cmbStatus.MouseState = MaterialSkin.MouseState.OUT
+        Me.cmbStatus.Name = "cmbStatus"
+        Me.cmbStatus.Size = New System.Drawing.Size(182, 35)
+        Me.cmbStatus.TabIndex = 54
+        Me.cmbStatus.UseTallSize = False
         '
         'lblBatiment
         '
         Me.lblBatiment.AutoSize = True
         Me.lblBatiment.Depth = 0
         Me.lblBatiment.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.lblBatiment.Location = New System.Drawing.Point(515, 332)
+        Me.lblBatiment.Location = New System.Drawing.Point(393, 314)
         Me.lblBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblBatiment.Name = "lblBatiment"
         Me.lblBatiment.Size = New System.Drawing.Size(65, 19)
@@ -458,7 +458,7 @@ Partial Class frmEditerClef
         Me.txtCnOpt.Depth = 0
         Me.txtCnOpt.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtCnOpt.Hint = "Options"
-        Me.txtCnOpt.Location = New System.Drawing.Point(396, 282)
+        Me.txtCnOpt.Location = New System.Drawing.Point(396, 240)
         Me.txtCnOpt.MaxLength = 255
         Me.txtCnOpt.MouseState = MaterialSkin.MouseState.OUT
         Me.txtCnOpt.Multiline = False
@@ -474,7 +474,7 @@ Partial Class frmEditerClef
         Me.txtCnExt.Depth = 0
         Me.txtCnExt.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtCnExt.Hint = "Extérieur"
-        Me.txtCnExt.Location = New System.Drawing.Point(396, 239)
+        Me.txtCnExt.Location = New System.Drawing.Point(507, 197)
         Me.txtCnExt.MaxLength = 20
         Me.txtCnExt.MouseState = MaterialSkin.MouseState.OUT
         Me.txtCnExt.Multiline = False
@@ -508,16 +508,16 @@ Partial Class frmEditerClef
         Me.MaterialLabel9.Location = New System.Drawing.Point(393, 176)
         Me.MaterialLabel9.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel9.Name = "MaterialLabel9"
-        Me.MaterialLabel9.Size = New System.Drawing.Size(47, 19)
+        Me.MaterialLabel9.Size = New System.Drawing.Size(195, 19)
         Me.MaterialLabel9.TabIndex = 70
-        Me.MaterialLabel9.Text = "Canon"
+        Me.MaterialLabel9.Text = "Canon (intérieur x extérieur)"
         '
         'txtRefOrg
         '
         Me.txtRefOrg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtRefOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRefOrg.Depth = 0
-        Me.txtRefOrg.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtRefOrg.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.txtRefOrg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtRefOrg.Hint = "Informations complémentaires"
         Me.txtRefOrg.Location = New System.Drawing.Point(396, 97)
@@ -528,30 +528,6 @@ Partial Class frmEditerClef
         Me.txtRefOrg.Size = New System.Drawing.Size(223, 76)
         Me.txtRefOrg.TabIndex = 69
         Me.txtRefOrg.Text = ""
-        '
-        'MaterialLabel1
-        '
-        Me.MaterialLabel1.AutoSize = True
-        Me.MaterialLabel1.Depth = 0
-        Me.MaterialLabel1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialLabel1.Location = New System.Drawing.Point(488, 206)
-        Me.MaterialLabel1.MouseState = MaterialSkin.MouseState.HOVER
-        Me.MaterialLabel1.Name = "MaterialLabel1"
-        Me.MaterialLabel1.Size = New System.Drawing.Size(29, 19)
-        Me.MaterialLabel1.TabIndex = 75
-        Me.MaterialLabel1.Text = "mm"
-        '
-        'MaterialLabel2
-        '
-        Me.MaterialLabel2.AutoSize = True
-        Me.MaterialLabel2.Depth = 0
-        Me.MaterialLabel2.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialLabel2.Location = New System.Drawing.Point(488, 248)
-        Me.MaterialLabel2.MouseState = MaterialSkin.MouseState.HOVER
-        Me.MaterialLabel2.Name = "MaterialLabel2"
-        Me.MaterialLabel2.Size = New System.Drawing.Size(29, 19)
-        Me.MaterialLabel2.TabIndex = 76
-        Me.MaterialLabel2.Text = "mm"
         '
         'MaterialDivider2
         '
@@ -564,6 +540,18 @@ Partial Class frmEditerClef
         Me.MaterialDivider2.TabIndex = 77
         Me.MaterialDivider2.Text = "MaterialDivider2"
         '
+        'MaterialLabel1
+        '
+        Me.MaterialLabel1.AutoSize = True
+        Me.MaterialLabel1.Depth = 0
+        Me.MaterialLabel1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MaterialLabel1.Location = New System.Drawing.Point(488, 206)
+        Me.MaterialLabel1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialLabel1.Name = "MaterialLabel1"
+        Me.MaterialLabel1.Size = New System.Drawing.Size(17, 19)
+        Me.MaterialLabel1.TabIndex = 75
+        Me.MaterialLabel1.Text = " x "
+        '
         'frmEditerClef
         '
         Me.AcceptButton = Me.btnSave
@@ -571,7 +559,6 @@ Partial Class frmEditerClef
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(698, 438)
         Me.Controls.Add(Me.MaterialDivider2)
-        Me.Controls.Add(Me.MaterialLabel2)
         Me.Controls.Add(Me.MaterialLabel1)
         Me.Controls.Add(Me.MaterialLabel10)
         Me.Controls.Add(Me.txtCnOpt)
@@ -581,7 +568,7 @@ Partial Class frmEditerClef
         Me.Controls.Add(Me.txtRefOrg)
         Me.Controls.Add(Me.MaterialSwitch1)
         Me.Controls.Add(Me.lblBatiment)
-        Me.Controls.Add(Me.MaterialComboBox1)
+        Me.Controls.Add(Me.cmbStatus)
         Me.Controls.Add(Me.txtQuantity)
         Me.Controls.Add(Me.lblQuantity)
         Me.Controls.Add(Me.btnNewTrousseau)
@@ -634,7 +621,7 @@ Partial Class frmEditerClef
     Friend WithEvents MaterialCheckbox4 As MaterialSkin.Controls.MaterialCheckbox
     Friend WithEvents txtQuantity As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents lblQuantity As MaterialSkin.Controls.MaterialLabel
-    Friend WithEvents MaterialComboBox1 As MaterialSkin.Controls.MaterialComboBox
+    Friend WithEvents cmbStatus As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents lblBatiment As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents MaterialSwitch1 As MaterialSkin.Controls.MaterialSwitch
     Friend WithEvents MaterialLabel10 As MaterialSkin.Controls.MaterialLabel
@@ -643,7 +630,6 @@ Partial Class frmEditerClef
     Friend WithEvents txtCnInt As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents MaterialLabel9 As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents txtRefOrg As MaterialSkin.Controls.MaterialMultiLineTextBox
-    Friend WithEvents MaterialLabel1 As MaterialSkin.Controls.MaterialLabel
-    Friend WithEvents MaterialLabel2 As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents MaterialDivider2 As MaterialSkin.Controls.MaterialDivider
+    Friend WithEvents MaterialLabel1 As MaterialSkin.Controls.MaterialLabel
 End Class

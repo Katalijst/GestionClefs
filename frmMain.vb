@@ -46,11 +46,12 @@ Public Class frmMain
 
         BrightOrDarkMode()
 
-        Dim strCBFiltre As String() = New String(3) {}
+        Dim strCBFiltre As String() = New String(4) {}
         strCBFiltre(0) = strTitleCID
         strCBFiltre(1) = strTitleCNom
         strCBFiltre(2) = strTitleCPosition
         strCBFiltre(3) = "Emprunteur"
+        strCBFiltre(4) = strTitleCTrousseau
         cbRechercher.DataSource = strCBFiltre
         'Initialiser l'index du menu déroulant de sélection du type de recherche
         cbRechercher.SelectedIndex = 0
@@ -119,6 +120,8 @@ Public Class frmMain
                 btnAlertes.Font = New Font(btnAlertes.Font, FontStyle.Bold)
                 Dim b As Bitmap = New Bitmap(My.Resources.round_error_symbol)
                 btnAlertes.Icon = TintBitmap(b, Color.Red, 1)
+                lblAlertNotif.Text = "" & dt.Rows.Count
+                lblAlertNotif.Visible = True
             Else
                 btnAlertes.Text = "Alertes"
                 'If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
@@ -127,6 +130,8 @@ Public Class frmMain
                 '    btnAlertes.ForeColor = Color.Black
                 'End If
                 btnAlertes.Icon = Nothing
+                lblAlertNotif.Text = ""
+                lblAlertNotif.Visible = False
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -265,7 +270,7 @@ Public Class frmMain
             dtKeyListByOwner.Columns("CNom").ColumnName = strTitleCNom
             dtKeyListByOwner.Columns("CPosition").ColumnName = strTitleCPosition
             dtKeyListByOwner.Columns("CStatus").ColumnName = strTitleCStatus
-            dtKeyListByOwner.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
+            dtKeyListByOwner.Columns("ENomPersonne").ColumnName = "Emprunteur"
             dtKeyListByOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
             dtKeyListByOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
 
@@ -761,4 +766,8 @@ Public Class frmMain
         removeFromPanier()
     End Sub
 
+    Private Sub pbClearPanier_Click(sender As Object, e As EventArgs) Handles pbClearPanier.Click
+        dgvPanier.SelectAll()
+        removeFromPanier()
+    End Sub
 End Class

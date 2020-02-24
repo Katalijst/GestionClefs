@@ -485,10 +485,10 @@ Partial Class frmCreerClefs
         Me.txtRefOrg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtRefOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRefOrg.Depth = 0
-        Me.txtRefOrg.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtRefOrg.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.txtRefOrg.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtRefOrg.Hint = "Informations complémentaires"
-        Me.txtRefOrg.Location = New System.Drawing.Point(12, 411)
+        Me.txtRefOrg.Location = New System.Drawing.Point(12, 413)
         Me.txtRefOrg.MaxLength = 512
         Me.txtRefOrg.MouseState = MaterialSkin.MouseState.HOVER
         Me.txtRefOrg.Name = "txtRefOrg"
@@ -502,7 +502,7 @@ Partial Class frmCreerClefs
         Me.MaterialLabel9.AutoSize = True
         Me.MaterialLabel9.Depth = 0
         Me.MaterialLabel9.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialLabel9.Location = New System.Drawing.Point(238, 387)
+        Me.MaterialLabel9.Location = New System.Drawing.Point(238, 389)
         Me.MaterialLabel9.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel9.Name = "MaterialLabel9"
         Me.MaterialLabel9.Size = New System.Drawing.Size(47, 19)
@@ -515,7 +515,7 @@ Partial Class frmCreerClefs
         Me.txtCnInt.Depth = 0
         Me.txtCnInt.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtCnInt.Hint = "Intérieur"
-        Me.txtCnInt.Location = New System.Drawing.Point(241, 409)
+        Me.txtCnInt.Location = New System.Drawing.Point(241, 411)
         Me.txtCnInt.MaxLength = 20
         Me.txtCnInt.MouseState = MaterialSkin.MouseState.OUT
         Me.txtCnInt.Multiline = False
@@ -531,7 +531,7 @@ Partial Class frmCreerClefs
         Me.txtCnExt.Depth = 0
         Me.txtCnExt.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtCnExt.Hint = "Extérieur"
-        Me.txtCnExt.Location = New System.Drawing.Point(333, 409)
+        Me.txtCnExt.Location = New System.Drawing.Point(333, 411)
         Me.txtCnExt.MaxLength = 20
         Me.txtCnExt.MouseState = MaterialSkin.MouseState.OUT
         Me.txtCnExt.Multiline = False
@@ -547,7 +547,7 @@ Partial Class frmCreerClefs
         Me.txtCnOpt.Depth = 0
         Me.txtCnOpt.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtCnOpt.Hint = "Options"
-        Me.txtCnOpt.Location = New System.Drawing.Point(240, 451)
+        Me.txtCnOpt.Location = New System.Drawing.Point(240, 453)
         Me.txtCnOpt.MaxLength = 255
         Me.txtCnOpt.MouseState = MaterialSkin.MouseState.OUT
         Me.txtCnOpt.Multiline = False
@@ -562,7 +562,7 @@ Partial Class frmCreerClefs
         Me.MaterialLabel10.AutoSize = True
         Me.MaterialLabel10.Depth = 0
         Me.MaterialLabel10.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialLabel10.Location = New System.Drawing.Point(9, 387)
+        Me.MaterialLabel10.Location = New System.Drawing.Point(9, 389)
         Me.MaterialLabel10.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialLabel10.Name = "MaterialLabel10"
         Me.MaterialLabel10.Size = New System.Drawing.Size(200, 19)

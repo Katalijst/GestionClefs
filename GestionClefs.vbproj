@@ -75,10 +75,10 @@
     <ApplicationIcon>LogoICO.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9E94C578AC7F0CB7000790637F6B0335162B1832</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9F4C63814937F482241AEBA46A745836E3998FC7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GestionClefs_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GestionClefs_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -684,6 +684,8 @@
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
     <Content Include="LogoICO.ico" />
+    <None Include="Resources\clear-icon-0.png" />
+    <None Include="Resources\shopping-cart-clear.png" />
     <None Include="Resources\key %281%29.png" />
     <None Include="Resources\LogoICO.ico" />
     <None Include="Resources\rubbish-bin-delete-button.png" />

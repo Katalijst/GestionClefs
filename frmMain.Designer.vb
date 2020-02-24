@@ -48,6 +48,7 @@ Partial Class frmMain
         Me.btnParametres = New MaterialSkin.Controls.MaterialButton()
         Me.btnLightMode = New MaterialSkin.Controls.MaterialButton()
         Me.btnPersonnes = New MaterialSkin.Controls.MaterialButton()
+        Me.btnClefsPerdues = New MaterialSkin.Controls.MaterialButton()
         Me.menuGrid = New MaterialSkin.Controls.MaterialContextMenuStrip()
         Me.EmprunterToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.AttribuerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -65,7 +66,8 @@ Partial Class frmMain
         Me.btnRemoveToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnRefresh = New MaterialSkin.Controls.MaterialButton()
-        Me.btnClefsPerdues = New MaterialSkin.Controls.MaterialButton()
+        Me.pbClearPanier = New System.Windows.Forms.PictureBox()
+        Me.lblAlertNotif = New System.Windows.Forms.Label()
         Me.MaterialTabControl1.SuspendLayout()
         Me.tabClefs.SuspendLayout()
         Me.tlytClefs.SuspendLayout()
@@ -74,6 +76,7 @@ Partial Class frmMain
         Me.menuGrid.SuspendLayout()
         CType(Me.dgvPanier, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbClearPanier, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtRechercher
@@ -432,6 +435,24 @@ Partial Class frmMain
         Me.btnPersonnes.UseAccentColor = False
         Me.btnPersonnes.UseVisualStyleBackColor = True
         '
+        'btnClefsPerdues
+        '
+        Me.btnClefsPerdues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnClefsPerdues.Depth = 0
+        Me.btnClefsPerdues.DrawShadows = True
+        Me.btnClefsPerdues.HighEmphasis = False
+        Me.btnClefsPerdues.Icon = Global.GestionClefs.My.Resources.Resources.trousseaux
+        Me.btnClefsPerdues.Location = New System.Drawing.Point(142, 54)
+        Me.btnClefsPerdues.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnClefsPerdues.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnClefsPerdues.Name = "btnClefsPerdues"
+        Me.btnClefsPerdues.Size = New System.Drawing.Size(113, 36)
+        Me.btnClefsPerdues.TabIndex = 155
+        Me.btnClefsPerdues.Text = "Perdues"
+        Me.btnClefsPerdues.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnClefsPerdues.UseAccentColor = False
+        Me.btnClefsPerdues.UseVisualStyleBackColor = True
+        '
         'menuGrid
         '
         Me.menuGrid.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -543,7 +564,7 @@ Partial Class frmMain
         Me.dgvPanier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Noto Sans", 8.249999!)
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!)
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -573,7 +594,7 @@ Partial Class frmMain
         Me.dgvResultats.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Noto Sans", 11.25!)
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -582,7 +603,7 @@ Partial Class frmMain
         Me.dgvResultats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Noto Sans", 9.749999!)
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.749999!)
         DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -684,29 +705,36 @@ Partial Class frmMain
         Me.btnRefresh.UseAccentColor = False
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
-        'btnClefsPerdues
+        'pbClearPanier
         '
-        Me.btnClefsPerdues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnClefsPerdues.Depth = 0
-        Me.btnClefsPerdues.DrawShadows = True
-        Me.btnClefsPerdues.HighEmphasis = False
-        Me.btnClefsPerdues.Icon = Global.GestionClefs.My.Resources.Resources.trousseaux
-        Me.btnClefsPerdues.Location = New System.Drawing.Point(142, 54)
-        Me.btnClefsPerdues.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.btnClefsPerdues.MouseState = MaterialSkin.MouseState.HOVER
-        Me.btnClefsPerdues.Name = "btnClefsPerdues"
-        Me.btnClefsPerdues.Size = New System.Drawing.Size(113, 36)
-        Me.btnClefsPerdues.TabIndex = 155
-        Me.btnClefsPerdues.Text = "Perdues"
-        Me.btnClefsPerdues.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
-        Me.btnClefsPerdues.UseAccentColor = False
-        Me.btnClefsPerdues.UseVisualStyleBackColor = True
+        Me.pbClearPanier.Image = Global.GestionClefs.My.Resources.Resources.clear_button
+        Me.pbClearPanier.Location = New System.Drawing.Point(993, 67)
+        Me.pbClearPanier.Name = "pbClearPanier"
+        Me.pbClearPanier.Size = New System.Drawing.Size(19, 19)
+        Me.pbClearPanier.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbClearPanier.TabIndex = 159
+        Me.pbClearPanier.TabStop = False
+        '
+        'lblAlertNotif
+        '
+        Me.lblAlertNotif.AutoSize = True
+        Me.lblAlertNotif.BackColor = System.Drawing.Color.Transparent
+        Me.lblAlertNotif.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAlertNotif.ForeColor = System.Drawing.Color.Red
+        Me.lblAlertNotif.Location = New System.Drawing.Point(348, 32)
+        Me.lblAlertNotif.Name = "lblAlertNotif"
+        Me.lblAlertNotif.Size = New System.Drawing.Size(13, 14)
+        Me.lblAlertNotif.TabIndex = 160
+        Me.lblAlertNotif.Text = "1"
+        Me.lblAlertNotif.Visible = False
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.Controls.Add(Me.lblAlertNotif)
+        Me.Controls.Add(Me.pbClearPanier)
         Me.Controls.Add(Me.lblNbDeClefs)
         Me.Controls.Add(Me.cbRechercher)
         Me.Controls.Add(Me.txtRechercher)
@@ -734,6 +762,7 @@ Partial Class frmMain
         Me.menuGrid.ResumeLayout(False)
         CType(Me.dgvPanier, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbClearPanier, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -778,4 +807,6 @@ Partial Class frmMain
     Friend WithEvents lblNbDeClefs As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents pbClearPanier As PictureBox
+    Friend WithEvents lblAlertNotif As Label
 End Class
