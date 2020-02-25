@@ -496,4 +496,10 @@ Public Class frmCreerClefs
             e.Handled = True
         End If
     End Sub
+
+    Private Sub txtID_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtID.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsLetter(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
 End Class

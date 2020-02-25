@@ -67,6 +67,11 @@ Public Class frmMain
             btnTableaux.Enabled = False
             SupprimerToolStripMenuItem1.Enabled = False
             EditerToolStripMenuItem1.Enabled = False
+            btnParametres.Enabled = False
+            btnSupprimer.Enabled = False
+            btnEditer.Enabled = False
+            SupprimerToolStripMenuItem1.Enabled = False
+            EditerToolStripMenuItem1.Enabled = False
         End If
         'Check des alertes
         CheckAlerts()
@@ -431,8 +436,12 @@ Public Class frmMain
         dgvResultats.RowHeadersVisible = False
         If cbRechercher.Text = "Emprunteur" Then
             dgvResultats.DataSource = srcOwner
+            chkDisponibles.Enabled = False
+            chkEmpruntees.Checked = True
+            chkAttribuees.Checked = True
         Else
             dgvResultats.DataSource = srcKeyList
+            chkDisponibles.Enabled = True
         End If
 
         'SetAutocomplete()
@@ -566,14 +575,14 @@ Public Class frmMain
         If dgvResultats.SelectedRows.Count > 0 Then
             'Menu propriété de la clef
             blnProperties = True
-            frmEditerEtProprietees.ShowDialog()
+            frmEditerEtProprietes.ShowDialog()
         End If
     End Sub
 
     Private Sub btnEditer_Click(sender As Object, e As EventArgs) Handles btnEditer.Click
         If dgvResultats.SelectedRows.Count > 0 Then
             blnProperties = False
-            frmEditerEtProprietees.ShowDialog()
+            frmEditerEtProprietes.ShowDialog()
         End If
     End Sub
 
@@ -642,13 +651,13 @@ Public Class frmMain
     Private Sub EditerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditerToolStripMenuItem1.Click
         'Ouverture de l'edition de clef (à finir)
         blnProperties = False
-        frmEditerEtProprietees.ShowDialog()
+        frmEditerEtProprietes.ShowDialog()
     End Sub
 
     Private Sub PropriétésToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PropriétésToolStripMenuItem1.Click
         'Menu propriété de la clef
         blnProperties = True
-        frmEditerEtProprietees.ShowDialog()
+        frmEditerEtProprietes.ShowDialog()
     End Sub
 
     Private Sub SupprimerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem1.Click

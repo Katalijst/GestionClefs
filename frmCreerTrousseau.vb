@@ -22,8 +22,8 @@ Public Class frmCreerTrousseau
         If frmCreerClefs.IsHandleCreated Then
             frmCreerClefs.RefreshTrousseau()
         End If
-        If frmEditerEtProprietees.IsHandleCreated Then
-            frmEditerEtProprietees.RefreshTrousseau()
+        If frmEditerEtProprietes.IsHandleCreated Then
+            frmEditerEtProprietes.RefreshTrousseau()
         End If
     End Sub
     Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click

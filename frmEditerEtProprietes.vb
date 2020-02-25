@@ -1,11 +1,17 @@
 ﻿Imports System.Globalization
 Imports MySql.Data.MySqlClient
-Public Class frmEditerEtProprietees
+Public Class frmEditerEtProprietes
+    Shared intOldQuantity As Integer
     Shared stgKeyId As String
-    Shared stgStatus As String = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCStatus).Value
-    Public IDToLookFor As String = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value & "-%"
+    Shared stgStatus As String
+    Public IDToLookFor As String
     Public IDClef As String = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value
     Private Sub frmEditKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        intOldQuantity = frmMain.dgvResultats.SelectedRows(0).Cells("Quantité").Value
+        stgStatus = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCStatus).Value
+        IDToLookFor = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value & "-%"
+        IDClef = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value
+
         lblBatiment.Visible = False
         btnGrpBatiment.Visible = False
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
@@ -25,7 +31,7 @@ Public Class frmEditerEtProprietees
         Else
             AddHandler btnSave.Click, AddressOf Properties_btnSave_Click
             btnSave.Text = "OK"
-            swtEditOneKEy.Visible = False
+            swtEditOneKey.Visible = False
             txtID.Enabled = False
             txtQuantity.Enabled = False
             txtNom.Enabled = False
@@ -41,6 +47,8 @@ Public Class frmEditerEtProprietees
             txtTel.Enabled = False
             dtpDebut.Enabled = False
             dtpFin.Enabled = False
+            btnNewLoc.Enabled = False
+            btnNewTrousseau.Enabled = False
             Me.Text = "Informations"
         End If
 
@@ -128,7 +136,6 @@ Public Class frmEditerEtProprietees
         cmbLoc.SelectedItem = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
         cmbTrousseauListe.SelectedItem = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
         txtQuantity.Text = frmMain.dgvResultats.SelectedRows(0).Cells("Quantité").Value
-
 
         With cmd
             .Parameters.Add("@IDClef", MySqlDbType.String)
@@ -246,6 +253,8 @@ Public Class frmEditerEtProprietees
     End Sub
 
     Private Sub Edit_btnSave_Click(sender As Object, e As EventArgs)
+        Dim blnQuantityChanged As Boolean
+        Dim blnInfTech As Boolean = True
         Dim da As New MySqlDataAdapter
         Dim sql As String
         Dim cmdUpdateClef As New MySqlCommand
@@ -263,49 +272,62 @@ Public Class frmEditerEtProprietees
             .Parameters.Add("@OldTrousseauxClef", MySqlDbType.VarChar)
         End With
 
-        With insert_infotech
-            .Parameters.Add("@keyid", MySqlDbType.VarChar)
-            .Parameters.Add("@RefOrg", MySqlDbType.VarChar)
-            .Parameters.Add("@CanonInt", MySqlDbType.Float)
-            .Parameters.Add("@CanonExte", MySqlDbType.Float)
-            .Parameters.Add("@CanonOpt", MySqlDbType.VarChar)
-        End With
+        If intOldQuantity = frmMain.dgvResultats.SelectedRows(0).Cells("Quantité").Value Then
+            blnQuantityChanged = False
+        Else
+            blnQuantityChanged = True
+        End If
 
-        Try
-            If swtEditOneKEy.Checked = False Then
-                sql = "UPDATE Clefs SET CID = @IDClef, CNom = @Nom, CPosition = @Tableau, CDate = @Date, CTrousseau = @Trousseau WHERE CID LIKE @IDClef AND CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef LIMIT 1;"
-                With cmdUpdateClef
-                    .Parameters("@IDClef").Value = txtID.Text & "-%"
-                    .Parameters("@Nom").Value = txtNom.Text
-                    .Parameters("@Tableau").Value = cmbLoc.Text
-                    .Parameters("@Date").Value = dtpDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
-                    .Parameters("@Trousseau").Value = cmbTrousseauListe.Text
-                    .Parameters("@OldStatusClef").Value = stgStatus
-                    .Parameters("@OldTableauClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
-                    .Parameters("@OldTrousseauxClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
-                    .Connection = connecter()
-                    .CommandText = sql
-                    .ExecuteNonQuery()
-                End With
+        cmdUpdateInfosTechniques.Parameters.Add("@IDClef", MySqlDbType.VarChar)
+        If txtRefOrg.Text = "" And txtCnExt.Text = "" And txtCnInt.Text = "" And txtCnOpt.Text = "" Then
+            blnInfTech = False
+            cmdUpdateInfosTechniques.CommandText = "DELETE FROM InfosTechniques WHERE IDClef = @IDClef;"
+        Else
+            blnInfTech = True
+            With cmdUpdateInfosTechniques
+                .Parameters.Add("@RefOrg", MySqlDbType.VarChar)
+                .Parameters.Add("@CanonInt", MySqlDbType.Float)
+                .Parameters.Add("@CanonExte", MySqlDbType.Float)
+                .Parameters.Add("@CanonOpt", MySqlDbType.VarChar)
+                .CommandText = "INSERT INTO InfosTechniques(IDClef, RefOrg, CanonInte, CanonExte, CanonOpt) VALUES (@IDClef,@RefOrg,@CanonInt,@CanonExte,@CanonOpt) ON DUPLICATE KEY UPDATE InfosTechniques SET IDClef = @IDClef, RefOrg = @RefOrg, CanonInte = @CanonInt, CanonExte = @CanonExte, CanonOpt = @CanonOpt WHERE IDClef = @IDClef;"
+            End With
+        End If
 
-                Dim cmdInfoTech As String = "INSERT INTO InfosTechniques(keyid, RefOrg, CanonInte, CanonExte, CanonOpt) VALUES (@keyid,@RefOrg,@CanonInt,@CanonExte,@CanonOpt)
-                                               ON DUPLICATE KEY;"
-                With cmdUpdateClef
-                    .Parameters("@keyid").Value = txtID.Text
+        If swtEditOneKey.Checked = False Then 'Editer toutes les clefs
+            sql = "UPDATE Clefs SET CID = @IDClef, CNom = @Nom, CPosition = @Tableau, CDate = @Date, CTrousseau = @Trousseau WHERE CID LIKE @IDClef AND CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef LIMIT 1;"
+            With cmdUpdateClef
+                .Parameters("@IDClef").Value = txtID.Text & "-%"
+                .Parameters("@Nom").Value = txtNom.Text
+                .Parameters("@Tableau").Value = cmbLoc.Text
+                .Parameters("@Date").Value = dtpDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                .Parameters("@Trousseau").Value = cmbTrousseauListe.Text
+                .Parameters("@OldStatusClef").Value = stgStatus
+                .Parameters("@OldTableauClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
+                .Parameters("@OldTrousseauxClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+
+
+            cmdUpdateInfosTechniques.Parameters("@IDClef").Value = txtID.Text
+            If blnInfTech = True Then
+                With cmdUpdateInfosTechniques
                     .Parameters("@RefOrg").Value = txtNom.Text
                     .Parameters("@CanonInt").Value = cmbLoc.Text
                     .Parameters("@CanonExte").Value = dtpDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
                     .Parameters("@CanonOpt").Value = cmbTrousseauListe.Text
-                    .Connection = connecter()
-                    .CommandText = cmdInfoTech
-                    .ExecuteNonQuery()
                 End With
-
-            Else
-
             End If
+            cmdUpdateInfosTechniques.Connection = connecter()
+            cmdUpdateInfosTechniques.ExecuteNonQuery()
+        Else 'Editer une seule clef
+            '
+            ' AJOUTER LE CHANGEMENT POUR LA QUANTITÉ
+            '
+        End If
 
-
+        Try
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
@@ -337,5 +359,21 @@ Public Class frmEditerEtProprietees
 
     Private Sub btnGrpBatiment_Click(sender As Object, e As EventArgs) Handles btnGrpBatiment.Click
         frmPropGpBat.ShowDialog()
+    End Sub
+
+    Private Sub swtEditOneKey_CheckedChanged(sender As Object, e As EventArgs) Handles swtEditOneKey.CheckedChanged
+        If swtEditOneKey.Checked = True Then
+            txtQuantity.Enabled = False
+            txtRefOrg.Enabled = False
+            txtCnExt.Enabled = False
+            txtCnInt.Enabled = False
+            txtCnOpt.Enabled = False
+        Else
+            txtQuantity.Enabled = True
+            txtRefOrg.Enabled = True
+            txtCnExt.Enabled = True
+            txtCnInt.Enabled = True
+            txtCnOpt.Enabled = True
+        End If
     End Sub
 End Class

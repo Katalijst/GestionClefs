@@ -23,18 +23,20 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\Utilisateur\Desktop\</PublishUrl>
+    <PublishUrl>\\serveur\partage\SOS\transfert\GestionClefs\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -75,19 +77,29 @@
     <ApplicationIcon>LogoICO.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9E94C578AC7F0CB7000790637F6B0335162B1832</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5C68D4600AFA2906F53016EA4ECF79308A409B3C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GestionClefs_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GestionClefs_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -561,10 +573,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="frmEditerEtProprietees.Designer.vb">
-      <DependentUpon>frmEditerEtProprietees.vb</DependentUpon>
+    <Compile Include="frmEditerEtProprietes.Designer.vb">
+      <DependentUpon>frmEditerEtProprietes.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEditerEtProprietees.vb">
+    <Compile Include="frmEditerEtProprietes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSetDataBase.Designer.vb">
@@ -642,8 +654,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditerEtProprietees.resx">
-      <DependentUpon>frmEditerEtProprietees.vb</DependentUpon>
+    <EmbeddedResource Include="frmEditerEtProprietes.resx">
+      <DependentUpon>frmEditerEtProprietes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetDataBase.resx">
       <DependentUpon>frmSetDataBase.vb</DependentUpon>

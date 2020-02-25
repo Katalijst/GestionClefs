@@ -15,8 +15,8 @@ Public Class frmPropGpBat
         dtBatiment.Reset()
         sql = "SELECT DISTINCT BNum, GIDBat FROM Batiment, GroupeBat, Emprunts WHERE GIDClef = @IDClef AND GIDBat = BNom"
             With cmd
-                .Parameters("@IDClef").Value = frmEditerEtProprietees.IDClef
-                .Connection = connecter()
+            .Parameters("@IDClef").Value = frmEditerEtProprietes.IDClef
+            .Connection = connecter()
                 .CommandText = sql
             End With
             da.SelectCommand = cmd

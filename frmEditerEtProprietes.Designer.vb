@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmEditerEtProprietees
+Partial Class frmEditerEtProprietes
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
@@ -47,7 +47,7 @@ Partial Class frmEditerEtProprietees
         Me.lblQuantity = New MaterialSkin.Controls.MaterialLabel()
         Me.cmbStatus = New MaterialSkin.Controls.MaterialComboBox()
         Me.lblBatiment = New MaterialSkin.Controls.MaterialLabel()
-        Me.swtEditOneKEy = New MaterialSkin.Controls.MaterialSwitch()
+        Me.swtEditOneKey = New MaterialSkin.Controls.MaterialSwitch()
         Me.MaterialLabel10 = New MaterialSkin.Controls.MaterialLabel()
         Me.txtCnOpt = New MaterialSkin.Controls.MaterialTextBox()
         Me.txtCnExt = New MaterialSkin.Controls.MaterialTextBox()
@@ -268,9 +268,9 @@ Partial Class frmEditerEtProprietees
         Me.lblCBatiment.Location = New System.Drawing.Point(12, 374)
         Me.lblCBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblCBatiment.Name = "lblCBatiment"
-        Me.lblCBatiment.Size = New System.Drawing.Size(113, 19)
+        Me.lblCBatiment.Size = New System.Drawing.Size(81, 19)
         Me.lblCBatiment.TabIndex = 48
-        Me.lblCBatiment.Text = "Utilisable dans :"
+        Me.lblCBatiment.Text = "Bâtiments :"
         '
         'MaterialDivider1
         '
@@ -436,21 +436,22 @@ Partial Class frmEditerEtProprietees
         Me.lblBatiment.TabIndex = 55
         Me.lblBatiment.Text = "Bâtiment"
         '
-        'swtEditOneKEy
+        'swtEditOneKey
         '
-        Me.swtEditOneKEy.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.swtEditOneKEy.AutoSize = True
-        Me.swtEditOneKEy.Depth = 0
-        Me.swtEditOneKEy.Location = New System.Drawing.Point(240, 474)
-        Me.swtEditOneKEy.Margin = New System.Windows.Forms.Padding(0)
-        Me.swtEditOneKEy.MouseLocation = New System.Drawing.Point(-1, -1)
-        Me.swtEditOneKEy.MouseState = MaterialSkin.MouseState.HOVER
-        Me.swtEditOneKEy.Name = "swtEditOneKEy"
-        Me.swtEditOneKEy.Ripple = True
-        Me.swtEditOneKEy.Size = New System.Drawing.Size(199, 37)
-        Me.swtEditOneKEy.TabIndex = 56
-        Me.swtEditOneKEy.Text = "Editer une seule clef"
-        Me.swtEditOneKEy.UseVisualStyleBackColor = True
+        Me.swtEditOneKey.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.swtEditOneKey.AutoSize = True
+        Me.swtEditOneKey.Depth = 0
+        Me.swtEditOneKey.Location = New System.Drawing.Point(240, 474)
+        Me.swtEditOneKey.Margin = New System.Windows.Forms.Padding(0)
+        Me.swtEditOneKey.MouseLocation = New System.Drawing.Point(-1, -1)
+        Me.swtEditOneKey.MouseState = MaterialSkin.MouseState.HOVER
+        Me.swtEditOneKey.Name = "swtEditOneKey"
+        Me.swtEditOneKey.Ripple = True
+        Me.swtEditOneKey.Size = New System.Drawing.Size(199, 37)
+        Me.swtEditOneKey.TabIndex = 56
+        Me.swtEditOneKey.Text = "Editer une seule clef"
+        Me.swtEditOneKey.UseVisualStyleBackColor = True
+        Me.swtEditOneKey.Visible = False
         '
         'MaterialLabel10
         '
@@ -660,7 +661,7 @@ Partial Class frmEditerEtProprietees
         Me.txtTel.Text = ""
         Me.txtTel.UseTallSize = False
         '
-        'frmEditerEtProprietees
+        'frmEditerEtProprietes
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -681,7 +682,7 @@ Partial Class frmEditerEtProprietees
         Me.Controls.Add(Me.txtCnInt)
         Me.Controls.Add(Me.MaterialLabel9)
         Me.Controls.Add(Me.txtRefOrg)
-        Me.Controls.Add(Me.swtEditOneKEy)
+        Me.Controls.Add(Me.swtEditOneKey)
         Me.Controls.Add(Me.lblBatiment)
         Me.Controls.Add(Me.cmbStatus)
         Me.Controls.Add(Me.txtQuantity)
@@ -705,7 +706,7 @@ Partial Class frmEditerEtProprietees
         Me.Controls.Add(Me.dtpDate)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmEditerEtProprietees"
+        Me.Name = "frmEditerEtProprietes"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Text = "Editer une clef..."
@@ -738,7 +739,7 @@ Partial Class frmEditerEtProprietees
     Friend WithEvents lblQuantity As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents cmbStatus As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents lblBatiment As MaterialSkin.Controls.MaterialLabel
-    Friend WithEvents swtEditOneKEy As MaterialSkin.Controls.MaterialSwitch
+    Friend WithEvents swtEditOneKey As MaterialSkin.Controls.MaterialSwitch
     Friend WithEvents MaterialLabel10 As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents txtCnOpt As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents txtCnExt As MaterialSkin.Controls.MaterialTextBox
