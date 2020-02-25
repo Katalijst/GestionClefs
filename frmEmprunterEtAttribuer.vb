@@ -19,9 +19,11 @@ Public Class frmEmprunterEtAttribuer
         dtDebutGlobal.Font = New System.Drawing.Font("Noto Sans", 12.0!)
         dtDebutGlobal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         dtDebutGlobal.Size = New System.Drawing.Size(127, 29)
+        dtDebutGlobal.Value = Now
         dtFinGlobal.Font = New System.Drawing.Font("Noto Sans", 12.0!)
         dtFinGlobal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         dtFinGlobal.Size = New System.Drawing.Size(127, 29)
+        dtFinGlobal.Value = Now.AddDays(1)
         LoadPersonnes()
     End Sub
     Private Sub frmEmprunterEtAttribuer_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
@@ -128,6 +130,9 @@ Public Class frmEmprunterEtAttribuer
             btnDelete.UseAccentColor = False
             btnDelete.UseVisualStyleBackColor = True
 
+            dtDebut.Value = Now
+            dtFin.Value = Now.AddDays(1)
+
             Panel1.Controls.Add(dvLigne)
             Panel1.Controls.Add(cbEmprunterAttribuer)
             Panel1.Controls.Add(txtKeyID)
@@ -137,6 +142,8 @@ Public Class frmEmprunterEtAttribuer
 
             AddHandler btnDelete.Click, AddressOf btnDelete_click
             AddHandler cbEmprunterAttribuer.SelectedIndexChanged, AddressOf cbEmprunterAttribuer_SelectedIndexChanged
+            AddHandler dtDebut.ValueChanged, AddressOf dtDebut_ValueChanged
+            AddHandler dtFin.ValueChanged, AddressOf dtFin_ValueChanged
 
             If frmMain.blnEmprunt = True Then
                 cbEmprunterAttribuer.SelectedIndex = 0
@@ -226,6 +233,47 @@ Public Class frmEmprunterEtAttribuer
                         End If
                     End If
                 End If
+            End If
+        End If
+    End Sub
+
+    Private Sub dtDebut_ValueChanged(sender As Object, e As EventArgs)
+        Dim stgNomControle As String = sender.name
+        Dim intIndexControle As Integer
+        Dim index As Integer = CInt(stgNomControle.LastIndexOf("-"))
+        If index > 0 Then
+            intIndexControle = stgNomControle.Substring((index + 1))
+        End If
+
+        Dim strDtDebut As String = "dtDebut-" & intIndexControle
+        Dim strDtFin As String = "dtFin-" & intIndexControle
+        Dim ctrlDtDebut As Control() = Me.Controls.Find(strDtDebut, True)
+        Dim ctrlDtFin As Control() = Me.Controls.Find(strDtFin, True)
+        If ctrlDtDebut.Length = 1 Then
+            If ctrlDtFin.Length = 1 Then
+                Dim dtDebut As DateTimePicker = TryCast(ctrlDtDebut(0), DateTimePicker)
+                Dim dtFin As DateTimePicker = TryCast(ctrlDtFin(0), DateTimePicker)
+                dtFin.MinDate = dtDebut.Value
+            End If
+        End If
+    End Sub
+    Private Sub dtFin_ValueChanged(sender As Object, e As EventArgs)
+        Dim stgNomControle As String = sender.name
+        Dim intIndexControle As Integer
+        Dim index As Integer = CInt(stgNomControle.LastIndexOf("-"))
+        If index > 0 Then
+            intIndexControle = stgNomControle.Substring((index + 1))
+        End If
+
+        Dim strDtDebut As String = "dtDebut-" & intIndexControle
+        Dim strDtFin As String = "dtFin-" & intIndexControle
+        Dim ctrlDtDebut As Control() = Me.Controls.Find(strDtDebut, True)
+        Dim ctrlDtFin As Control() = Me.Controls.Find(strDtFin, True)
+        If ctrlDtDebut.Length = 1 Then
+            If ctrlDtFin.Length = 1 Then
+                Dim dtDebut As DateTimePicker = TryCast(ctrlDtDebut(0), DateTimePicker)
+                Dim dtFin As DateTimePicker = TryCast(ctrlDtFin(0), DateTimePicker)
+                dtDebut.MaxDate = dtFin.Value
             End If
         End If
     End Sub
@@ -477,12 +525,11 @@ Public Class frmEmprunterEtAttribuer
             Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
 
             cbEmprunterAttribuer.Text = cbEmprunterAttribuerGlobal.Text
-            dtDebut.Value = dtDebutGlobal.Value
-            dtFin.Value = dtFinGlobal.Value
         Next
     End Sub
 
     Private Sub dtDebutGlobal_ValueChanged(sender As Object, e As EventArgs) Handles dtDebutGlobal.ValueChanged
+        dtFinGlobal.MinDate = dtDebutGlobal.Value
         For i = 0 To frmMain.dtPanier.Rows.Count - 1
             Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
             Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
@@ -500,6 +547,7 @@ Public Class frmEmprunterEtAttribuer
     End Sub
 
     Private Sub dtFinGlobal_ValueChanged(sender As Object, e As EventArgs) Handles dtFinGlobal.ValueChanged
+        dtDebutGlobal.MaxDate = dtFinGlobal.Value
         For i = 0 To frmMain.dtPanier.Rows.Count - 1
             Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
             Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
@@ -515,5 +563,4 @@ Public Class frmEmprunterEtAttribuer
             dtFin.Value = dtFinGlobal.Value
         Next
     End Sub
-
 End Class

@@ -201,16 +201,18 @@ Public Class frmCreerClefs
 
                     .ExecuteNonQuery()
                 End With
-                If blnGroupeBatiment = True Then
-                    For Each row In dgvSelBatiment.Rows
-                        With insert_gp_bt_command
-                            .Parameters("@keyid").Value = txtID.Text.ToUpper & "-" & "0" & i
-                            .Parameters("@batid").Value = row.Cells(1).Value.ToString()
-                            .ExecuteNonQuery()
-                        End With
-                    Next
-                End If
             Next
+
+            If blnGroupeBatiment = True Then
+                For Each row In dgvSelBatiment.Rows
+                    With insert_gp_bt_command
+                        .Parameters("@keyid").Value = txtID.Text.ToUpper
+                        .Parameters("@batid").Value = row.Cells(1).Value.ToString()
+                        .ExecuteNonQuery()
+                    End With
+                Next
+            End If
+
             Dim intCanonInt As Integer
             Dim intCanonExt As Integer
             Integer.TryParse(txtCnInt.Text, intCanonInt)

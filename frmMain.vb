@@ -17,6 +17,7 @@ Public Class frmMain
     Public blnAlertes As Boolean = True
     'Booléeen pour savoir si c'est un emprunt ou une attribution
     Public blnEmprunt As Boolean
+    Public blnProperties As Boolean = False
     Public blnLightMode As Boolean = False
 
     Private Shared Function Split(ByVal str As String, ByVal chunkSize As Integer) As IEnumerable(Of String)
@@ -142,11 +143,6 @@ Public Class frmMain
         'Fermé l'application à la fermeture de cette fenêtre
         Application.Exit()
         End
-    End Sub
-
-    Private Sub EmprunterLaClefToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        'afficher la fenêtre d'emprunt de clef
-        frmEmprunterClef.ShowDialog()
     End Sub
 
     'Public Sub SetAutocomplete()
@@ -547,6 +543,10 @@ Public Class frmMain
             'Ouverture du menu emprunt/attribution de clef en mode Emprunt
             blnEmprunt = True
             frmEmprunterEtAttribuer.ShowDialog()
+        Else
+            blnEmprunt = True
+            addToPanier()
+            frmEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
 
@@ -555,19 +555,25 @@ Public Class frmMain
             'Ouverture du menu emprunt/attribution de clef en mode attribution
             blnEmprunt = False
             frmEmprunterEtAttribuer.ShowDialog()
+        Else
+            blnEmprunt = False
+            addToPanier()
+            frmEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
 
     Private Sub btnInformations_Click(sender As Object, e As EventArgs) Handles btnInformations.Click
         If dgvResultats.SelectedRows.Count > 0 Then
             'Menu propriété de la clef
-            frmProprietes.ShowDialog()
+            blnProperties = True
+            frmEditerEtProprietees.ShowDialog()
         End If
     End Sub
 
     Private Sub btnEditer_Click(sender As Object, e As EventArgs) Handles btnEditer.Click
         If dgvResultats.SelectedRows.Count > 0 Then
-            frmEditerClef.ShowDialog()
+            blnProperties = False
+            frmEditerEtProprietees.ShowDialog()
         End If
     End Sub
 
@@ -635,12 +641,14 @@ Public Class frmMain
 
     Private Sub EditerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditerToolStripMenuItem1.Click
         'Ouverture de l'edition de clef (à finir)
-        frmEditerClef.ShowDialog()
+        blnProperties = False
+        frmEditerEtProprietees.ShowDialog()
     End Sub
 
     Private Sub PropriétésToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PropriétésToolStripMenuItem1.Click
         'Menu propriété de la clef
-        frmProprietes.ShowDialog()
+        blnProperties = True
+        frmEditerEtProprietees.ShowDialog()
     End Sub
 
     Private Sub SupprimerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem1.Click

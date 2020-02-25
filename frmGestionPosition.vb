@@ -17,28 +17,30 @@ Public Class frmGestionPosition
             da.SelectCommand = cmd
             da.Fill(dtPosition)
 
-            For i As Integer = 0 To dtPosition.Columns.Count - 1
-                dtPosition.Columns(i).ColumnName = dtPosition.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+            dtPosition.Columns("PNom").ColumnName = strTitlePNom
+            dtPosition.Columns("PResponsable").ColumnName = strTitlePResponsable
+            dtPosition.Columns("PBatiment").ColumnName = strTitlePBatiment
+
             dgvListTableau.DataSource = dtPosition
 
-            For i = 0 To dgvListTableau.ColumnCount - 2
-                dgvListTableau.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            Next
-            dgvListTableau.Columns(dgvListTableau.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-            connecter().Close()
+            'Dim intIndexNom As Integer = dgvListTableau.Columns("Nom").Index
+            'Dim r As DataRow
+            ''CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
+            'txtRechercher.AutoCompleteCustomSource.Clear()
+            ''LOOPING THE ROW OF DATA IN THE DATATABLE
+            'For Each r In dtPosition.Rows
+            '    'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
+            '    txtRechercher.AutoCompleteCustomSource.Add(r.Item(intIndexNom).ToString)
+            'Next
 
-            Dim intIndexNom As Integer = dgvListTableau.Columns("Nom").Index
-            Dim r As DataRow
-            'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
-            txtRechercher.AutoCompleteCustomSource.Clear()
-            'LOOPING THE ROW OF DATA IN THE DATATABLE
-            For Each r In dtPosition.Rows
-                'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
-                txtRechercher.AutoCompleteCustomSource.Add(r.Item(intIndexNom).ToString)
-            Next
         Catch ex As Exception
             MsgBox(ex.Message)
+        Finally
+            'For i = 0 To dgvListTableau.ColumnCount - 2
+            '    dgvListTableau.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            'Next
+            'dgvListTableau.Columns(dgvListTableau.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            connecter().Close()
         End Try
     End Sub
     Public Sub RefreshResponsable()
@@ -132,7 +134,7 @@ Public Class frmGestionPosition
 
     Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
         Dim searchValue As String = txtRechercher.Text
-        Dim intIndexNom As Integer = dgvListTableau.Columns("Nom").Index
+        Dim intIndexNom As Integer = dgvListTableau.Columns(strTitlePNom).Index
 
         Try
             For i = 0 To dgvListTableau.RowCount - 1
@@ -152,7 +154,7 @@ Public Class frmGestionPosition
     End Sub
 
     Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
-        Dim intIndexNom As Integer = dgvListTableau.Columns("Nom").Index
+        Dim intIndexNom As Integer = dgvListTableau.Columns(strTitlePNom).Index
         Dim stgToDelete As String = dgvListTableau.SelectedRows(0).Cells(intIndexNom).Value.ToString()
         ' Initializes variables to pass to the MessageBox.Show method.
         Dim Message As String = "Voulez vous vraiment supprimer """ & stgToDelete & """ ?"
@@ -190,7 +192,7 @@ Public Class frmGestionPosition
     End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            Dim intIndexNom As Integer = dgvListBatiment.Columns("Nom").Index
+            Dim intIndexNom As Integer = dgvListBatiment.Columns(strTitlePNom).Index
             Dim stgBatNom As String = dgvListBatiment.SelectedRows(0).Cells(intIndexNom).Value.ToString()
 
             Dim insert_command As New MySqlCommand("INSERT INTO
@@ -228,5 +230,9 @@ Public Class frmGestionPosition
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub frmGestionPosition_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Me.Dispose()
     End Sub
 End Class

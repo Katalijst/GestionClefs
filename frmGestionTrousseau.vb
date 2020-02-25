@@ -55,8 +55,6 @@ Public Class frmGestionTrousseau
             dtKeyList.Columns("CID").ColumnName = strTitleCID
             dtKeyList.Columns("CNom").ColumnName = strTitleCNom
             dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyList.Columns("CStatus").ColumnName = strTitleCStatus
-            dtKeyList.Columns("CTrousseau").ColumnName = strTitleCTrousseau
             dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
 
             dgvListClefs.DataSource = dtKeyList
@@ -101,8 +99,6 @@ Public Class frmGestionTrousseau
             dtKeyList.Columns("CID").ColumnName = strTitleCID
             dtKeyList.Columns("CNom").ColumnName = strTitleCNom
             dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyList.Columns("CStatus").ColumnName = strTitleCStatus
-            dtKeyList.Columns("CTrousseau").ColumnName = strTitleCTrousseau
             dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
 
             dgvSelTrousseau.DataSource = dtKeyList

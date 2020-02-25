@@ -155,8 +155,8 @@ Public Class frmGestionPersonnes
             If frmGestionPosition.IsHandleCreated Then
                 frmGestionPosition.RefreshResponsable()
             End If
-            If frmEmprunterClef.IsHandleCreated Then
-                frmEmprunterClef.LoadPersonnes()
+            If frmEmprunterEtAttribuer.IsHandleCreated Then
+                frmEmprunterEtAttribuer.LoadPersonnes()
             End If
             If chkKeepOpen.Checked = False Then
                 Me.Close()

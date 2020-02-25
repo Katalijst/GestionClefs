@@ -75,10 +75,10 @@
     <ApplicationIcon>LogoICO.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>9F4C63814937F482241AEBA46A745836E3998FC7</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9E94C578AC7F0CB7000790637F6B0335162B1832</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GestionClefs_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>GestionClefs_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -171,6 +171,9 @@
     </Reference>
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\VisualBasic.PowerPacks.Vs.1.0.0\lib\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -510,12 +513,6 @@
     <Compile Include="frmCreerTrousseau.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEmprunterClef.Designer.vb">
-      <DependentUpon>frmEmprunterClef.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmEmprunterClef.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmGestionUtilisateur.Designer.vb">
       <DependentUpon>frmGestionUtilisateur.vb</DependentUpon>
     </Compile>
@@ -538,12 +535,6 @@
       <DependentUpon>frmPropGpBat.vb</DependentUpon>
     </Compile>
     <Compile Include="frmPropGpBat.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProprietes.Designer.vb">
-      <DependentUpon>frmProprietes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmProprietes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSettings.Designer.vb">
@@ -570,10 +561,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="frmEditerClef.Designer.vb">
-      <DependentUpon>frmEditerClef.vb</DependentUpon>
+    <Compile Include="frmEditerEtProprietees.Designer.vb">
+      <DependentUpon>frmEditerEtProprietees.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEditerClef.vb">
+    <Compile Include="frmEditerEtProprietees.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSetDataBase.Designer.vb">
@@ -630,9 +621,6 @@
     <EmbeddedResource Include="frmCreerTrousseau.resx">
       <DependentUpon>frmCreerTrousseau.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEmprunterClef.resx">
-      <DependentUpon>frmEmprunterClef.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmGestionUtilisateur.resx">
       <DependentUpon>frmGestionUtilisateur.vb</DependentUpon>
     </EmbeddedResource>
@@ -645,9 +633,6 @@
     <EmbeddedResource Include="frmPropGpBat.resx">
       <DependentUpon>frmPropGpBat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmProprietes.resx">
-      <DependentUpon>frmProprietes.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>
     </EmbeddedResource>
@@ -657,8 +642,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditerClef.resx">
-      <DependentUpon>frmEditerClef.vb</DependentUpon>
+    <EmbeddedResource Include="frmEditerEtProprietees.resx">
+      <DependentUpon>frmEditerEtProprietees.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetDataBase.resx">
       <DependentUpon>frmSetDataBase.vb</DependentUpon>

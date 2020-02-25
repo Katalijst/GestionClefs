@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmEditerClef
+Partial Class frmEditerEtProprietees
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
@@ -47,7 +47,7 @@ Partial Class frmEditerClef
         Me.lblQuantity = New MaterialSkin.Controls.MaterialLabel()
         Me.cmbStatus = New MaterialSkin.Controls.MaterialComboBox()
         Me.lblBatiment = New MaterialSkin.Controls.MaterialLabel()
-        Me.MaterialSwitch1 = New MaterialSkin.Controls.MaterialSwitch()
+        Me.swtEditOneKEy = New MaterialSkin.Controls.MaterialSwitch()
         Me.MaterialLabel10 = New MaterialSkin.Controls.MaterialLabel()
         Me.txtCnOpt = New MaterialSkin.Controls.MaterialTextBox()
         Me.txtCnExt = New MaterialSkin.Controls.MaterialTextBox()
@@ -56,6 +56,13 @@ Partial Class frmEditerClef
         Me.txtRefOrg = New MaterialSkin.Controls.MaterialMultiLineTextBox()
         Me.MaterialDivider2 = New MaterialSkin.Controls.MaterialDivider()
         Me.MaterialLabel1 = New MaterialSkin.Controls.MaterialLabel()
+        Me.txtEmprunteur = New MaterialSkin.Controls.MaterialTextBox()
+        Me.lblEmprunteur = New MaterialSkin.Controls.MaterialLabel()
+        Me.lblDateDebut = New MaterialSkin.Controls.MaterialLabel()
+        Me.dtpDebut = New System.Windows.Forms.DateTimePicker()
+        Me.lblDateFin = New MaterialSkin.Controls.MaterialLabel()
+        Me.dtpFin = New System.Windows.Forms.DateTimePicker()
+        Me.txtTel = New MaterialSkin.Controls.MaterialTextBox()
         Me.SuspendLayout()
         '
         'dtpDate
@@ -70,12 +77,13 @@ Partial Class frmEditerClef
         '
         'btnSave
         '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnSave.Depth = 0
         Me.btnSave.DrawShadows = True
         Me.btnSave.HighEmphasis = True
         Me.btnSave.Icon = Nothing
-        Me.btnSave.Location = New System.Drawing.Point(568, 390)
+        Me.btnSave.Location = New System.Drawing.Point(484, 474)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnSave.Name = "btnSave"
@@ -138,6 +146,7 @@ Partial Class frmEditerClef
         '
         Me.txtID.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtID.Depth = 0
+        Me.txtID.Enabled = False
         Me.txtID.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtID.Location = New System.Drawing.Point(137, 73)
         Me.txtID.MaxLength = 50
@@ -153,6 +162,7 @@ Partial Class frmEditerClef
         '
         Me.txtNom.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtNom.Depth = 0
+        Me.txtNom.Enabled = False
         Me.txtNom.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtNom.Location = New System.Drawing.Point(137, 157)
         Me.txtNom.MaxLength = 50
@@ -215,14 +225,14 @@ Partial Class frmEditerClef
         Me.btnGrpBatiment.DrawShadows = True
         Me.btnGrpBatiment.HighEmphasis = True
         Me.btnGrpBatiment.Icon = Nothing
-        Me.btnGrpBatiment.Location = New System.Drawing.Point(419, 314)
+        Me.btnGrpBatiment.Location = New System.Drawing.Point(140, 397)
         Me.btnGrpBatiment.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnGrpBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnGrpBatiment.Name = "btnGrpBatiment"
         Me.btnGrpBatiment.Size = New System.Drawing.Size(176, 36)
         Me.btnGrpBatiment.TabIndex = 45
         Me.btnGrpBatiment.Text = "Groupe de bâtiment"
-        Me.btnGrpBatiment.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnGrpBatiment.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined
         Me.btnGrpBatiment.UseAccentColor = False
         Me.btnGrpBatiment.UseVisualStyleBackColor = True
         '
@@ -255,7 +265,7 @@ Partial Class frmEditerClef
         Me.lblCBatiment.AutoSize = True
         Me.lblCBatiment.Depth = 0
         Me.lblCBatiment.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.lblCBatiment.Location = New System.Drawing.Point(393, 290)
+        Me.lblCBatiment.Location = New System.Drawing.Point(12, 374)
         Me.lblCBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblCBatiment.Name = "lblCBatiment"
         Me.lblCBatiment.Size = New System.Drawing.Size(113, 19)
@@ -264,9 +274,10 @@ Partial Class frmEditerClef
         '
         'MaterialDivider1
         '
+        Me.MaterialDivider1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MaterialDivider1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.MaterialDivider1.Depth = 0
-        Me.MaterialDivider1.Location = New System.Drawing.Point(15, 377)
+        Me.MaterialDivider1.Location = New System.Drawing.Point(-69, 465)
         Me.MaterialDivider1.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialDivider1.Name = "MaterialDivider1"
         Me.MaterialDivider1.Size = New System.Drawing.Size(668, 1)
@@ -415,30 +426,31 @@ Partial Class frmEditerClef
         '
         'lblBatiment
         '
-        Me.lblBatiment.AutoSize = True
         Me.lblBatiment.Depth = 0
         Me.lblBatiment.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.lblBatiment.Location = New System.Drawing.Point(393, 314)
+        Me.lblBatiment.Location = New System.Drawing.Point(134, 395)
+        Me.lblBatiment.MaximumSize = New System.Drawing.Size(235, 46)
         Me.lblBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblBatiment.Name = "lblBatiment"
-        Me.lblBatiment.Size = New System.Drawing.Size(65, 19)
+        Me.lblBatiment.Size = New System.Drawing.Size(235, 22)
         Me.lblBatiment.TabIndex = 55
         Me.lblBatiment.Text = "Bâtiment"
         '
-        'MaterialSwitch1
+        'swtEditOneKEy
         '
-        Me.MaterialSwitch1.AutoSize = True
-        Me.MaterialSwitch1.Depth = 0
-        Me.MaterialSwitch1.Location = New System.Drawing.Point(324, 390)
-        Me.MaterialSwitch1.Margin = New System.Windows.Forms.Padding(0)
-        Me.MaterialSwitch1.MouseLocation = New System.Drawing.Point(-1, -1)
-        Me.MaterialSwitch1.MouseState = MaterialSkin.MouseState.HOVER
-        Me.MaterialSwitch1.Name = "MaterialSwitch1"
-        Me.MaterialSwitch1.Ripple = True
-        Me.MaterialSwitch1.Size = New System.Drawing.Size(199, 37)
-        Me.MaterialSwitch1.TabIndex = 56
-        Me.MaterialSwitch1.Text = "Editer une seule clef"
-        Me.MaterialSwitch1.UseVisualStyleBackColor = True
+        Me.swtEditOneKEy.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.swtEditOneKEy.AutoSize = True
+        Me.swtEditOneKEy.Depth = 0
+        Me.swtEditOneKEy.Location = New System.Drawing.Point(240, 474)
+        Me.swtEditOneKEy.Margin = New System.Windows.Forms.Padding(0)
+        Me.swtEditOneKEy.MouseLocation = New System.Drawing.Point(-1, -1)
+        Me.swtEditOneKEy.MouseState = MaterialSkin.MouseState.HOVER
+        Me.swtEditOneKEy.Name = "swtEditOneKEy"
+        Me.swtEditOneKEy.Ripple = True
+        Me.swtEditOneKEy.Size = New System.Drawing.Size(199, 37)
+        Me.swtEditOneKEy.TabIndex = 56
+        Me.swtEditOneKEy.Text = "Editer une seule clef"
+        Me.swtEditOneKEy.UseVisualStyleBackColor = True
         '
         'MaterialLabel10
         '
@@ -463,7 +475,7 @@ Partial Class frmEditerClef
         Me.txtCnOpt.MouseState = MaterialSkin.MouseState.OUT
         Me.txtCnOpt.Multiline = False
         Me.txtCnOpt.Name = "txtCnOpt"
-        Me.txtCnOpt.Size = New System.Drawing.Size(224, 36)
+        Me.txtCnOpt.Size = New System.Drawing.Size(197, 36)
         Me.txtCnOpt.TabIndex = 73
         Me.txtCnOpt.Text = ""
         Me.txtCnOpt.UseTallSize = False
@@ -525,7 +537,7 @@ Partial Class frmEditerClef
         Me.txtRefOrg.MouseState = MaterialSkin.MouseState.HOVER
         Me.txtRefOrg.Name = "txtRefOrg"
         Me.txtRefOrg.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal
-        Me.txtRefOrg.Size = New System.Drawing.Size(223, 76)
+        Me.txtRefOrg.Size = New System.Drawing.Size(197, 76)
         Me.txtRefOrg.TabIndex = 69
         Me.txtRefOrg.Text = ""
         '
@@ -536,7 +548,7 @@ Partial Class frmEditerClef
         Me.MaterialDivider2.Location = New System.Drawing.Point(375, 78)
         Me.MaterialDivider2.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialDivider2.Name = "MaterialDivider2"
-        Me.MaterialDivider2.Size = New System.Drawing.Size(1, 285)
+        Me.MaterialDivider2.Size = New System.Drawing.Size(1, 362)
         Me.MaterialDivider2.TabIndex = 77
         Me.MaterialDivider2.Text = "MaterialDivider2"
         '
@@ -552,12 +564,115 @@ Partial Class frmEditerClef
         Me.MaterialLabel1.TabIndex = 75
         Me.MaterialLabel1.Text = " x "
         '
-        'frmEditerClef
+        'txtEmprunteur
+        '
+        Me.txtEmprunteur.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtEmprunteur.Depth = 0
+        Me.txtEmprunteur.DetectUrls = False
+        Me.txtEmprunteur.Enabled = False
+        Me.txtEmprunteur.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtEmprunteur.Hint = "Emprunteur"
+        Me.txtEmprunteur.Location = New System.Drawing.Point(396, 312)
+        Me.txtEmprunteur.MaxLength = 50
+        Me.txtEmprunteur.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtEmprunteur.Multiline = False
+        Me.txtEmprunteur.Name = "txtEmprunteur"
+        Me.txtEmprunteur.Size = New System.Drawing.Size(197, 36)
+        Me.txtEmprunteur.TabIndex = 79
+        Me.txtEmprunteur.Text = ""
+        Me.txtEmprunteur.UseTallSize = False
+        '
+        'lblEmprunteur
+        '
+        Me.lblEmprunteur.AutoSize = True
+        Me.lblEmprunteur.Depth = 0
+        Me.lblEmprunteur.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblEmprunteur.Location = New System.Drawing.Point(393, 290)
+        Me.lblEmprunteur.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblEmprunteur.Name = "lblEmprunteur"
+        Me.lblEmprunteur.Size = New System.Drawing.Size(91, 19)
+        Me.lblEmprunteur.TabIndex = 78
+        Me.lblEmprunteur.Text = "Emprunteur :"
+        '
+        'lblDateDebut
+        '
+        Me.lblDateDebut.AutoSize = True
+        Me.lblDateDebut.Depth = 0
+        Me.lblDateDebut.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblDateDebut.Location = New System.Drawing.Point(393, 400)
+        Me.lblDateDebut.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblDateDebut.Name = "lblDateDebut"
+        Me.lblDateDebut.Size = New System.Drawing.Size(66, 19)
+        Me.lblDateDebut.TabIndex = 81
+        Me.lblDateDebut.Text = "Depuis le"
+        '
+        'dtpDebut
+        '
+        Me.dtpDebut.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDebut.Enabled = False
+        Me.dtpDebut.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDebut.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDebut.Location = New System.Drawing.Point(465, 396)
+        Me.dtpDebut.Name = "dtpDebut"
+        Me.dtpDebut.Size = New System.Drawing.Size(128, 26)
+        Me.dtpDebut.TabIndex = 80
+        '
+        'lblDateFin
+        '
+        Me.lblDateFin.AutoSize = True
+        Me.lblDateFin.Depth = 0
+        Me.lblDateFin.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblDateFin.Location = New System.Drawing.Point(393, 436)
+        Me.lblDateFin.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblDateFin.Name = "lblDateFin"
+        Me.lblDateFin.Size = New System.Drawing.Size(70, 19)
+        Me.lblDateFin.TabIndex = 83
+        Me.lblDateFin.Text = "Jusqu'au "
+        Me.lblDateFin.Visible = False
+        '
+        'dtpFin
+        '
+        Me.dtpFin.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpFin.Enabled = False
+        Me.dtpFin.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpFin.Location = New System.Drawing.Point(465, 432)
+        Me.dtpFin.Name = "dtpFin"
+        Me.dtpFin.Size = New System.Drawing.Size(128, 26)
+        Me.dtpFin.TabIndex = 82
+        Me.dtpFin.Visible = False
+        '
+        'txtTel
+        '
+        Me.txtTel.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtTel.Depth = 0
+        Me.txtTel.DetectUrls = False
+        Me.txtTel.Enabled = False
+        Me.txtTel.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtTel.Hint = "Téléphone"
+        Me.txtTel.Location = New System.Drawing.Point(396, 354)
+        Me.txtTel.MaxLength = 50
+        Me.txtTel.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtTel.Multiline = False
+        Me.txtTel.Name = "txtTel"
+        Me.txtTel.Size = New System.Drawing.Size(197, 36)
+        Me.txtTel.TabIndex = 84
+        Me.txtTel.Text = ""
+        Me.txtTel.UseTallSize = False
+        '
+        'frmEditerEtProprietees
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(698, 438)
+        Me.ClientSize = New System.Drawing.Size(614, 522)
+        Me.Controls.Add(Me.txtTel)
+        Me.Controls.Add(Me.lblDateFin)
+        Me.Controls.Add(Me.dtpFin)
+        Me.Controls.Add(Me.lblDateDebut)
+        Me.Controls.Add(Me.dtpDebut)
+        Me.Controls.Add(Me.txtEmprunteur)
+        Me.Controls.Add(Me.lblEmprunteur)
         Me.Controls.Add(Me.MaterialDivider2)
         Me.Controls.Add(Me.MaterialLabel1)
         Me.Controls.Add(Me.MaterialLabel10)
@@ -566,7 +681,7 @@ Partial Class frmEditerClef
         Me.Controls.Add(Me.txtCnInt)
         Me.Controls.Add(Me.MaterialLabel9)
         Me.Controls.Add(Me.txtRefOrg)
-        Me.Controls.Add(Me.MaterialSwitch1)
+        Me.Controls.Add(Me.swtEditOneKEy)
         Me.Controls.Add(Me.lblBatiment)
         Me.Controls.Add(Me.cmbStatus)
         Me.Controls.Add(Me.txtQuantity)
@@ -590,7 +705,7 @@ Partial Class frmEditerClef
         Me.Controls.Add(Me.dtpDate)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmEditerClef"
+        Me.Name = "frmEditerEtProprietees"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Text = "Editer une clef..."
@@ -623,7 +738,7 @@ Partial Class frmEditerClef
     Friend WithEvents lblQuantity As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents cmbStatus As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents lblBatiment As MaterialSkin.Controls.MaterialLabel
-    Friend WithEvents MaterialSwitch1 As MaterialSkin.Controls.MaterialSwitch
+    Friend WithEvents swtEditOneKEy As MaterialSkin.Controls.MaterialSwitch
     Friend WithEvents MaterialLabel10 As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents txtCnOpt As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents txtCnExt As MaterialSkin.Controls.MaterialTextBox
@@ -632,4 +747,11 @@ Partial Class frmEditerClef
     Friend WithEvents txtRefOrg As MaterialSkin.Controls.MaterialMultiLineTextBox
     Friend WithEvents MaterialDivider2 As MaterialSkin.Controls.MaterialDivider
     Friend WithEvents MaterialLabel1 As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents txtEmprunteur As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents lblEmprunteur As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents lblDateDebut As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents dtpDebut As DateTimePicker
+    Friend WithEvents lblDateFin As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents dtpFin As DateTimePicker
+    Friend WithEvents txtTel As MaterialSkin.Controls.MaterialTextBox
 End Class

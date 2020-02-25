@@ -1,32 +1,34 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class frmPropGpBat
+
     Private Sub frmPropGpBat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim cmd As New MySqlCommand
-        Dim da As New MySqlDataAdapter
         Dim dtBatiment As New DataTable
+        Dim da As New MySqlDataAdapter
         Dim sql As String
+        Dim cmd As New MySqlCommand
+        cmd.CommandType = CommandType.Text
 
-        Dim stgIDClef As String = frmProprietes.lblID.Text
-        Try
+        With cmd
+            .Parameters.Add("@IDClef", MySqlDbType.String)
+        End With
 
-            sql = "SELECT DISTINCT BNum, GIDBat FROM Batiment, GroupeBat, Emprunts  WHERE GIDClef = '" & stgIDClef & "' AND GIDBat = BNom"
-
+        dtBatiment.Reset()
+        sql = "SELECT DISTINCT BNum, GIDBat FROM Batiment, GroupeBat, Emprunts WHERE GIDClef = @IDClef AND GIDBat = BNom"
             With cmd
+                .Parameters("@IDClef").Value = frmEditerEtProprietees.IDClef
                 .Connection = connecter()
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
             da.Fill(dtBatiment)
-
-            For i As Integer = 0 To dtBatiment.Columns.Count - 1
-                dtBatiment.Columns(i).ColumnName = dtBatiment.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
-            dgvListBatiment.DataSource = dtBatiment
-
             dtBatiment.Columns("BNum").ColumnName = strTitleBNum
             dtBatiment.Columns("GIDBat").ColumnName = strTitleGIDBat
 
-            dgvListBatiment.Columns(dgvListBatiment.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            dgvListBatiment.DataSource = dtBatiment
+            dgvListBatiment.Columns(0).Width = 50
+            dgvListBatiment.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+
+        Try
             connecter().Close()
 
         Catch ex As Exception
@@ -35,7 +37,6 @@ Public Class frmPropGpBat
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-        Me.Close()
+        Me.Dispose()
     End Sub
-
 End Class
