@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Globalization
+Imports MySql.Data.MySqlClient
 
 Public Class frmCreerClefs
     Private Sub frmCreerClefs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -176,7 +177,7 @@ Public Class frmCreerClefs
             Dim i As Integer = 0
             For i = 1 + LastKeyID To CUInt(txtQuantity.Text) + LastKeyID
                 With insert_command
-                    .Parameters("@id").Value = txtID.Text.ToUpper & "-" & i
+                    .Parameters("@id").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-" & i
                     .Parameters("@name").Value = stgNomClef
                     .Parameters("@pos").Value = cmbLoc.Text
                     .Parameters("@status").Value = "Disponible"
@@ -231,6 +232,8 @@ Public Class frmCreerClefs
         Catch ex As MySqlException
             'Retour d'une erreur my MySQL si connection impossible
             MsgBox((ex.Number & " - " & ex.Message))
+            connecter().Close()
+            Exit Sub
         Finally
             connecter().Close()
             frmMain.FillDataSource()

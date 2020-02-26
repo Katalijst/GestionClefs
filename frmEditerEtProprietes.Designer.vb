@@ -429,10 +429,10 @@ Partial Class frmEditerEtProprietes
         Me.lblBatiment.Depth = 0
         Me.lblBatiment.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.lblBatiment.Location = New System.Drawing.Point(134, 395)
-        Me.lblBatiment.MaximumSize = New System.Drawing.Size(235, 46)
+        Me.lblBatiment.MaximumSize = New System.Drawing.Size(235, 71)
         Me.lblBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblBatiment.Name = "lblBatiment"
-        Me.lblBatiment.Size = New System.Drawing.Size(235, 22)
+        Me.lblBatiment.Size = New System.Drawing.Size(235, 71)
         Me.lblBatiment.TabIndex = 55
         Me.lblBatiment.Text = "Bâtiment"
         '
