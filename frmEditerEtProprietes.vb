@@ -307,7 +307,7 @@ Public Class frmEditerEtProprietes
         End If
 
         If swtEditOneKey.Checked = False Then 'Editer toutes les clefs
-            sql = "UPDATE Clefs SET CID = @IDClef, CNom = @Nom, CPosition = @Tableau, CDate = @Date, CTrousseau = @Trousseau WHERE CID LIKE @IDClef AND CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef LIMIT 1;"
+            sql = "UPDATE Clefs SET CNom = @Nom, CPosition = @Tableau, CDate = @Date, CTrousseau = @Trousseau WHERE CID LIKE @IDClef AND CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef LIMIT 1;"
             With cmdUpdateClef
                 .Parameters("@IDClef").Value = txtID.Text & "-%"
                 .Parameters("@Nom").Value = txtNom.Text
