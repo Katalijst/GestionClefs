@@ -9,7 +9,7 @@ Module modFunction
     Public Function connecter()
         'Création du string de connexion
         'Voir pour ajouter port éventuellement
-        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Port=" & My.Settings.MySQL_Port & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password
+        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Port=" & My.Settings.MySQL_Port & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password & ";Allow User Variables=True"
         Dim con As MySqlConnection = New MySqlConnection With {
             .ConnectionString = myConnectionString
         }
@@ -18,7 +18,16 @@ Module modFunction
             con.Open()
         Catch ex As MySqlException
             'Retour d'une erreur my MySQL si connection impossible
-            MsgBox(ex.Number & " - " & ex.Message)
+            Dim Message As String
+            Dim Caption As String
+            Message = "Impossible de se connecter à la base de données, vérifier votre connexion." & System.Environment.NewLine & "Si le problème persiste, contactez votre administrateur réseau." & System.Environment.NewLine & System.Environment.NewLine & ex.Number & " - " & ex.Message
+            Caption = "Echec de la connexion !"
+            Dim Buttons As MessageBoxButtons = MessageBoxButtons.OK
+            Dim Icon As MessageBoxIcon = MessageBoxIcon.Error
+            Dim Result As DialogResult
+            'Displays the MessageBox
+            Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+
             Using FormShow As New Form
                 frmSetDataBase.ShowDialog()
             End Using

@@ -31,16 +31,17 @@ Partial Class frmSetDataBase
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtPort = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtActPort = New System.Windows.Forms.TextBox()
         Me.txtActPassword = New System.Windows.Forms.TextBox()
         Me.txtActID = New System.Windows.Forms.TextBox()
         Me.txtActDatabase = New System.Windows.Forms.TextBox()
         Me.txtActServeur = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtPort = New System.Windows.Forms.TextBox()
-        Me.txtActPort = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -130,6 +131,22 @@ Partial Class frmSetDataBase
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Base de donnée"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 56)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(26, 13)
+        Me.Label5.TabIndex = 14
+        Me.Label5.Text = "Port"
+        '
+        'txtPort
+        '
+        Me.txtPort.Location = New System.Drawing.Point(6, 72)
+        Me.txtPort.Name = "txtPort"
+        Me.txtPort.Size = New System.Drawing.Size(238, 20)
+        Me.txtPort.TabIndex = 13
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtActPort)
@@ -142,7 +159,15 @@ Partial Class frmSetDataBase
         Me.GroupBox2.Size = New System.Drawing.Size(179, 216)
         Me.GroupBox2.TabIndex = 12
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Valeurs actuelle"
+        Me.GroupBox2.Text = "Valeurs précédentes"
+        '
+        'txtActPort
+        '
+        Me.txtActPort.Enabled = False
+        Me.txtActPort.Location = New System.Drawing.Point(6, 72)
+        Me.txtActPort.Name = "txtActPort"
+        Me.txtActPort.Size = New System.Drawing.Size(167, 20)
+        Me.txtActPort.TabIndex = 15
         '
         'txtActPassword
         '
@@ -179,7 +204,7 @@ Partial Class frmSetDataBase
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(12, 234)
+        Me.btnSave.Location = New System.Drawing.Point(324, 253)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(117, 23)
         Me.btnSave.TabIndex = 9
@@ -189,36 +214,23 @@ Partial Class frmSetDataBase
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(139, 234)
+        Me.btnCancel.Location = New System.Drawing.Point(201, 253)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(117, 23)
         Me.btnCancel.TabIndex = 10
         Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Label5
+        'Label6
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 56)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(26, 13)
-        Me.Label5.TabIndex = 14
-        Me.Label5.Text = "Port"
-        '
-        'txtPort
-        '
-        Me.txtPort.Location = New System.Drawing.Point(6, 72)
-        Me.txtPort.Name = "txtPort"
-        Me.txtPort.Size = New System.Drawing.Size(238, 20)
-        Me.txtPort.TabIndex = 13
-        '
-        'txtActPort
-        '
-        Me.txtActPort.Enabled = False
-        Me.txtActPort.Location = New System.Drawing.Point(6, 72)
-        Me.txtActPort.Name = "txtActPort"
-        Me.txtActPort.Size = New System.Drawing.Size(167, 20)
-        Me.txtActPort.TabIndex = 15
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Red
+        Me.Label6.Location = New System.Drawing.Point(12, 232)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(431, 15)
+        Me.Label6.TabIndex = 11
+        Me.Label6.Text = "ATTENTION ! Ne modifier les paramètres que si vous savez ce que vous faîtes !"
         '
         'frmSetDataBase
         '
@@ -226,17 +238,28 @@ Partial Class frmSetDataBase
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(453, 267)
+        Me.ClientSize = New System.Drawing.Size(453, 285)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.KeyPreview = True
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(469, 324)
+        Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(469, 324)
         Me.Name = "frmSetDataBase"
+        Me.ShowIcon = False
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Paramètres"
+        Me.TopMost = True
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -259,4 +282,5 @@ Partial Class frmSetDataBase
     Friend WithEvents Label5 As Label
     Friend WithEvents txtPort As TextBox
     Friend WithEvents txtActPort As TextBox
+    Friend WithEvents Label6 As Label
 End Class

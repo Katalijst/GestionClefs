@@ -1,7 +1,12 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports MaterialSkin
+Imports MySql.Data.MySqlClient
 
 Public Class frmAlertes
     Private Sub frmAlertes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
+        BrightOrDarkMode()
+
         Dim strCBFiltre As String() = New String(2) {}
         strCBFiltre(0) = strTitleCID
         strCBFiltre(1) = strTitleCNom
@@ -249,6 +254,83 @@ Public Class frmAlertes
         Catch exc As Exception
             MessageBox.Show(exc.Message)
         End Try
+    End Sub
+
+    Public Sub BrightOrDarkMode()
+        Dim SkinManager As MaterialSkinManager = MaterialSkinManager.Instance
+        SkinManager.AddFormToManage(Me)
+        If My.Settings.DarkMode = True Then
+            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.DeepOrange400, TextShade.WHITE)
+        Else
+            SkinManager.Theme = MaterialSkinManager.Themes.DARK
+            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)
+        End If
+
+        If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
+            For Each c As Control In GetAllChildren()
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                    End If
+                End If
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.Black, Color.White)
+                    End If
+                End If
+                If TypeOf c Is DataGridView Then
+                    CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.White
+                    CType(c, DataGridView).DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#616161")
+                    CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#424242")
+                    CType(c, DataGridView).BackgroundColor = ColorTranslator.FromHtml("#424242")
+                    CType(c, DataGridView).EnableHeadersVisualStyles = False
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#37474F")
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+                End If
+            Next
+            For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
+                If c.Image IsNot Nothing Then
+                    Dim bmp As Bitmap = c.Image
+                    c.Image = setColorToBitmap(bmp, Color.Black, Color.White)
+                End If
+            Next
+            menuGrid.BackColor = ColorTranslator.FromHtml("#505050")
+        Else
+            For Each c As Control In GetAllChildren()
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
+                    End If
+                End If
+                If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
+                    If CType(c, MaterialSkin.Controls.MaterialButton).Icon IsNot Nothing Then
+                        Dim bmp As Bitmap = New Bitmap(CType(c, MaterialSkin.Controls.MaterialButton).Icon)
+                        CType(c, MaterialSkin.Controls.MaterialButton).Icon = setColorToBitmap(bmp, Color.White, Color.Black)
+                    End If
+                End If
+                If TypeOf c Is DataGridView Then
+                    CType(c, DataGridView).DefaultCellStyle.ForeColor = Color.Black
+                    CType(c, DataGridView).DefaultCellStyle.BackColor = Color.White
+                    CType(c, DataGridView).AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
+                    CType(c, DataGridView).BackgroundColor = Color.White
+                    CType(c, DataGridView).EnableHeadersVisualStyles = False
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.BackColor = SystemColors.Highlight
+                    CType(c, DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+                End If
+            Next
+            For Each c As ToolStripMenuItem In menuGrid.Items.OfType(Of ToolStripMenuItem)
+                If c.Image IsNot Nothing Then
+                    Dim bmp As Bitmap = c.Image
+                    c.Image = setColorToBitmap(bmp, Color.White, Color.Black)
+                End If
+            Next
+            menuGrid.BackColor = ColorTranslator.FromHtml("#FFFFFF")
+        End If
+
     End Sub
 
 End Class

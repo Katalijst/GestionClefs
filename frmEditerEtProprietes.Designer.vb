@@ -705,7 +705,9 @@ Partial Class frmEditerEtProprietes
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.dtpDate)
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(614, 522)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(614, 522)
         Me.Name = "frmEditerEtProprietes"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False

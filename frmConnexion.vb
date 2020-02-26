@@ -41,7 +41,7 @@ Public Class frmConnexion
                 frmAddUser.ShowDialog()
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+
         End Try
 
     End Sub

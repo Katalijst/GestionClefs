@@ -46,6 +46,10 @@ Public Class frmMain
         End If
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim bmp As Bitmap = My.Resources.clear_button
+        pbClearPanier.Image = setColorToBitmap(bmp, Color.Black, Color.Red)
+
+
         FillDataSource()
 
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
@@ -156,170 +160,19 @@ Public Class frmMain
         End
     End Sub
 
-    'Public Sub SetAutocomplete()
-    '    'Filtres du type de recherche
-    '    Try
-    '        If dgvResultats.RowCount > 0 Then
-    '            Dim stgPredict As String
-    '            If cbRechercher.Text = strTitleCNom Then
-    '                stgPredict = strTitleCNom
-    '            ElseIf cbRechercher.Text = "Emprunteur" Then
-    '                stgPredict = strTitleENomPersonne
-    '            ElseIf cbRechercher.Text = strTitleCPosition Then
-    '                stgPredict = strTitleCPosition
-    '            ElseIf cbRechercher.Text = strTitleCID Then
-    '                stgPredict = strTitleCID
-    '            Else
-    '                Exit Sub
-    '            End If
-    '            'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
-    '            txtRechercher.AutoCompleteCustomSource.Clear()
-    '            'LOOPING THE ROW OF DATA IN THE DATATABLE
-    '            For Each r In dgvResultats.Rows
-    '                'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
-    '                txtRechercher.AutoCompleteCustomSource.Add(r.Cells(stgPredict).Value.ToString)
-    '            Next
-    '        End If
-    '    Catch ex As Exception
-    '        MsgBox(ex.Message)
-    '    End Try
-
-    'End Sub
-
-    Public Sub FillDataSourceOld()
-        Dim cmd As New MySqlCommand
-        Dim da As New MySqlDataAdapter
-        Dim dtKeyListRow As DataTable = New DataTable()
-        Dim dtKeyListByOwner As DataTable = New DataTable()
-        Dim dtEmpty As DataTable = New DataTable()
-        Dim sql As String
-
-        Try
-
-            sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue'"
-
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dtKeyListRow)
-            intKeyAmount = dtKeyListRow.Rows.Count
-            dtKeyListRow.Columns.Add("Quantité")
-            For Each r As DataRow In dtKeyListRow.Rows
-                Dim input As String = r.Item("CID")
-                Dim index As Integer = input.LastIndexOf("-")
-                If index > 0 Then
-                    r.Item("CID") = input.Substring(0, index)
-                End If
-                r.Item("Quantité") = 1
-            Next
-            dtKeyListRow.DefaultView.Sort = "CID ASC, CStatus ASC, CPosition ASC, CTrousseau ASC"
-            Dim dtKeyListSorted As DataTable = dtKeyListRow.DefaultView.ToTable.Copy
-
-            Dim rowToCompare As DataRow
-            Dim duplicateList As ArrayList = New ArrayList()
-            Dim dtTemp As DataTable = New DataTable()
-            dtTemp = dtKeyListSorted
-
-            For Each drow As DataRow In dtTemp.Rows
-                duplicateList.Add(drow)
-            Next
-
-            For Each r As DataRow In duplicateList
-                Dim blnSimilar As Boolean = False
-                If rowToCompare Is Nothing Then
-                    rowToCompare = r
-                Else
-                    If r.Item("CID") = rowToCompare.Item("CID") Then
-                        If r.Item("CStatus") = rowToCompare.Item("CStatus") Then
-                            If r.Item("CPosition") = rowToCompare.Item("CPosition") Then
-                                If r.Item("CTrousseau") = rowToCompare.Item("CTrousseau") Then
-                                    blnSimilar = True
-                                End If
-                            End If
-                        End If
-                    End If
-                    If blnSimilar = True Then
-                        rowToCompare.Item("Quantité") += 1
-                        dtTemp.Rows.Remove(r)
-                    Else
-                        rowToCompare = r
-                    End If
-                End If
-            Next
-            dtKeyListSorted = dtTemp.Copy
-
-            dtKeyListSorted.Columns("CID").ColumnName = strTitleCID
-            dtKeyListSorted.Columns("CNom").ColumnName = strTitleCNom
-            dtKeyListSorted.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyListSorted.Columns("CStatus").ColumnName = strTitleCStatus
-            dtKeyListSorted.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dtKeyListSorted.Columns("CBatiment").ColumnName = strTitleCBatiment
-
-            dtKeyList = dtKeyListSorted
-            srcKeyList.DataSource = dtKeyList
-
-            For Each column In dgvResultats.Columns
-                column.SortMode = DataGridViewColumnSortMode.NotSortable
-            Next
-
-            sql = "Select CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef And CStatus <> 'Perdue' And CID <> '0'"
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dtKeyListByOwner)
-
-            dtKeyListByOwner.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dtKeyListByOwner.Columns("CID").ColumnName = strTitleCID
-            dtKeyListByOwner.Columns("CNom").ColumnName = strTitleCNom
-            dtKeyListByOwner.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyListByOwner.Columns("CStatus").ColumnName = strTitleCStatus
-            dtKeyListByOwner.Columns("ENomPersonne").ColumnName = "Emprunteur"
-            dtKeyListByOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
-            dtKeyListByOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
-
-            dtOwner = dtKeyListByOwner.Copy
-            srcOwner.DataSource = dtOwner
-            dgvResultats.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
-            dgvResultats.RowHeadersVisible = False
-
-            If cbRechercher.Text <> "Emprunteur" Then
-                dgvResultats.DataSource = srcKeyList
-                dtEmpty = dtKeyList.Copy
-                dtEmpty.Rows.Clear()
-            Else
-                dgvResultats.DataSource = srcOwner
-                dtEmpty = dtOwner.Copy
-                dtEmpty.Rows.Clear()
-            End If
-            dtPanier = dtEmpty.Copy
-            srcPanier.DataSource = dtPanier
-            dgvPanier.DataSource = srcPanier
-
-            dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-
-            connecter().Close()
-
-            'Sub du remplissage de l'autocomplétion
-            'SetAutocomplete()
-            dgvResultats.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-            dgvResultats.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.None
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-        lblNbDeClefs.Text = intKeyAmount & " clefs chargées"
-    End Sub
-
     Public Sub FillDataSource()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
         Dim dtKeyListByOwner As DataTable = New DataTable()
         Dim dtEmpty As DataTable = New DataTable()
         Dim sql As String
+
+        dtKeyListSansGBat.Reset()
+        dtKeyListAvecGBat.Reset()
+        dtGBat.Reset()
+        dtPanier.Reset()
+        dtKeyList.Reset()
+        dtOwner.Reset()
 
         Try
             sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment <> 'Groupe de Batiments'"
@@ -372,9 +225,16 @@ Public Class frmMain
 
             If cbRechercher.Text <> "Emprunteur" Then
                 dgvResultats.DataSource = srcKeyList
-                dtEmpty = dtKeyList.Copy
+                dtEmpty = dtKeyListSansGBat.Copy
                 dtEmpty.Rows.Clear()
+                dtEmpty.Columns("CID").ColumnName = strTitleCID
+                dtEmpty.Columns("CNom").ColumnName = strTitleCNom
+                dtEmpty.Columns("CPosition").ColumnName = strTitleCPosition
+                dtEmpty.Columns("CStatus").ColumnName = strTitleCStatus
+                dtEmpty.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+                dtEmpty.Columns("CBatiment").ColumnName = strTitleCBatiment
             Else
+                dgvResultats.RowHeadersVisible = False
                 dgvResultats.DataSource = srcOwner
                 dtEmpty = dtOwner.Copy
                 dtEmpty.Rows.Clear()
@@ -388,7 +248,6 @@ Public Class frmMain
         Finally
             Rechercher()
         End Try
-        lblNbDeClefs.Text = intKeyAmount & " clefs chargées"
     End Sub
 
     Private Sub Rechercher()
@@ -416,7 +275,7 @@ Public Class frmMain
             Next
         Next
 
-            Dim CheckIDClef As New StringCollection()
+        Dim CheckIDClef As New StringCollection()
         Dim dtTempDistinct As DataTable = dtResultats.Copy
         dtTempDistinct.Clear()
 
@@ -429,7 +288,7 @@ Public Class frmMain
 
         dtResultats.Clear()
         dtResultats = dtTempDistinct.Copy
-
+        intKeyAmount = dtResultats.Rows.Count
         dtResultats.Columns.Add("Quantité")
 
         For Each r As DataRow In dtResultats.Rows
@@ -482,6 +341,8 @@ Public Class frmMain
         dtKeyListSorted.Columns("CTrousseau").ColumnName = strTitleCTrousseau
         dtKeyListSorted.Columns("CBatiment").ColumnName = strTitleCBatiment
         dtResultats.Clear()
+        dgvResultats.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        dgvResultats.RowHeadersVisible = False
         dtResultats = dtKeyListSorted.Copy
         dtKeyList = dtResultats.Copy
         srcKeyList.DataSource = dtKeyList
@@ -502,7 +363,6 @@ Public Class frmMain
         If chkAttribuees.Checked = True Then
             chkNumber += 1
         End If
-        dgvResultats.RowHeadersVisible = False
         If txtRechercher.Text <> "" And cbRechercher.Text <> strTitleCBatiment Then
             Dim strTypeDeRecherche As String = "`" & cbRechercher.Text & "`"
             If cbRechercher.Text <> "Emprunteur" Then
@@ -581,105 +441,18 @@ Public Class frmMain
                 End Select
             End If
         End If
-
-    End Sub
-
-    Private Sub RechercherOld()
-        Dim chkNumber As Integer = 0
-        'Création de tout les cas possible de filtre pour les cases à cochées
-        '(utilisation d'une sorte de "table de Karnaugh")
-        If chkDisponibles.Checked = True Then
-            chkNumber += 4
-        End If
-        If chkEmpruntees.Checked = True Then
-            chkNumber += 2
-        End If
-        If chkAttribuees.Checked = True Then
-            chkNumber += 1
-        End If
-        dgvResultats.RowHeadersVisible = False
-        If txtRechercher.Text <> "" Then
-            Dim strTypeDeRecherche As String = "`" & cbRechercher.Text & "`"
-            If cbRechercher.Text <> "Emprunteur" Then
-                srcKeyList.RemoveFilter()
-                Select Case chkNumber
-                    Case 1
-                        srcKeyList.Filter = strTitleCStatus & "='Attribuée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 2
-                        srcKeyList.Filter = strTitleCStatus & "='Empruntée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 3
-                        srcKeyList.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 4
-                        srcKeyList.Filter = strTitleCStatus & "='Disponible' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 5
-                        srcKeyList.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Disponible') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 6
-                        srcKeyList.Filter = "(" & strTitleCStatus & "='Disponible' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case Else
-                        srcKeyList.Filter = strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                End Select
-            Else
-                srcOwner.RemoveFilter()
-                Select Case chkNumber
-                    Case 1
-                        srcOwner.Filter = strTitleCStatus & "='Attribuée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 2
-                        srcOwner.Filter = strTitleCStatus & "='Empruntée' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 3
-                        srcOwner.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 4
-                        srcOwner.Filter = strTitleCStatus & "='Disponible' AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 5
-                        srcOwner.Filter = "(" & strTitleCStatus & "='Attribuée' OR Status= 'Disponible') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case 6
-                        srcOwner.Filter = "(" & strTitleCStatus & "='Disponible' OR Status= 'Empruntée') AND " & strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                    Case Else
-                        srcOwner.Filter = strTypeDeRecherche & " like '%" & txtRechercher.Text & "%'"
-                End Select
-            End If
+        Dim nbResultats As Integer = 0
+        For Each r As DataGridViewRow In dgvResultats.Rows
+            nbResultats += r.Cells("Quantité").Value
+        Next
+        If nbResultats > 1 Then
+            lblNbDeClefs.Text = nbResultats & " clefs trouvées, " & intKeyAmount & " clefs enregistrées."
+        ElseIf nbResultats = 1 Then
+            lblNbDeClefs.Text = nbResultats & " clef trouvée, " & intKeyAmount & " clefs enregistrées."
         Else
-            srcKeyList.RemoveFilter()
-            If cbRechercher.Text <> "Emprunteur" Then
-                Select Case chkNumber
-                    Case 1
-                        srcKeyList.Filter = strTitleCStatus & "='Attribuée'"
-                    Case 2
-                        srcKeyList.Filter = strTitleCStatus & "='Empruntée'"
-                    Case 3
-                        srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
-                    Case 4
-                        srcKeyList.Filter = strTitleCStatus & "='Disponible'"
-                    Case 5
-                        srcKeyList.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
-                    Case 6
-                        srcKeyList.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
-                    Case Else
-                        srcKeyList.Filter = ""
-                End Select
-            Else
-                srcOwner.RemoveFilter()
-                Select Case chkNumber
-                    Case 1
-                        srcOwner.Filter = strTitleCStatus & "='Attribuée'"
-                    Case 2
-                        srcOwner.Filter = strTitleCStatus & "='Empruntée'"
-                    Case 3
-                        srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Empruntée'"
-                    Case 4
-                        srcOwner.Filter = strTitleCStatus & "='Disponible'"
-                    Case 5
-                        srcOwner.Filter = strTitleCStatus & "='Attribuée' OR Status= 'Disponible'"
-                    Case 6
-                        srcOwner.Filter = strTitleCStatus & "='Disponible' OR Status= 'Empruntée'"
-                    Case Else
-                        srcOwner.Filter = ""
-                End Select
-            End If
+            lblNbDeClefs.Text = "Aucune clef trouvée, " & intKeyAmount & " clefs enregistrées."
         End If
 
-        chkDisponibles.Enabled = True
-        chkEmpruntees.Enabled = True
-        chkAttribuees.Enabled = True
     End Sub
 
     Private Sub chkDisponibles_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
@@ -716,40 +489,59 @@ Public Class frmMain
     End Sub
 
     Public Sub DeleteKey(stgKeyID As String)
-        'Pop-up (message box):
-        ' Initializes variables to pass to the MessageBox.Show method.
-        Dim Message As String = "Voulez vous vraiment supprimer la clef sélectionnée ?"
-        Dim Caption As String = "Supprimer une clef"
-        Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
-        Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+        If dgvResultats.SelectedRows.Count > 0 Then
+            'Pop-up (message box):
+            ' Initializes variables to pass to the MessageBox.Show method.
+            Dim Message As String
+            Dim Caption As String
+            If dgvResultats.SelectedRows.Count > 1 Then
+                Message = "Voulez vous vraiment supprimer les clefs sélectionnées ?"
+                Caption = "Supprimer des clefs"
+            Else
+                Message = "Voulez vous vraiment supprimer la clef sélectionnée ?"
+                Caption = "Supprimer une clef"
+            End If
+            Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
+            Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
 
-        Dim Result As DialogResult
+            Dim Result As DialogResult
 
-        'Displays the MessageBox
-        Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+            'Displays the MessageBox
+            Result = MessageBox.Show(Message, Caption, Buttons, Icon)
 
-        ' Gets the result of the MessageBox display.
-        'Si l'utilisateur répond oui
-        If Result = System.Windows.Forms.DialogResult.Yes Then
-            Dim cmd As New MySqlCommand
-            Dim da As New MySqlDataAdapter
+            ' Gets the result of the MessageBox display.
+            'Si l'utilisateur répond oui
+            If Result = System.Windows.Forms.DialogResult.Yes Then
 
-            Dim sql As String
+                Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
+                Dim DeleteQuery As String = "DELETE FROM Clefs WHERE CID LIKE @IDClef AND CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef;"
+                Dim Delete_command As New MySqlCommand(DeleteQuery, connecter)
+                Delete_command.CommandType = CommandType.Text
+                daSql.InsertCommand = Delete_command
 
-            Try
-                sql = "DELETE FROM Clefs WHERE CID=""" & stgKeyID & """"
-                With cmd
-                    .Connection = connecter()
-                    .CommandText = sql
-                    .ExecuteNonQuery()
+                With Delete_command
+                    .Parameters.Add("@IDClef", MySqlDbType.String)
+                    .Parameters.Add("@StatusClef", MySqlDbType.VarChar)
+                    .Parameters.Add("@TableauClef", MySqlDbType.VarChar)
+                    .Parameters.Add("@TrousseauxClef", MySqlDbType.VarChar)
                 End With
-                da.SelectCommand = cmd
-                connecter().Close()
-                'actualisation du tableau
-                'RefreshData()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+                Try
+                    For Each r As DataGridViewRow In dgvResultats.SelectedRows
+                        With Delete_command
+                            .Parameters("@IDClef").Value = r.Cells(strTitleCID).Value & "-%"
+                            .Parameters("@StatusClef").Value = r.Cells(strTitleCStatus).Value
+                            .Parameters("@TableauClef").Value = r.Cells(strTitleCPosition).Value
+                            .Parameters("@TrousseauxClef").Value = r.Cells(strTitleCTrousseau).Value
+                            .ExecuteNonQuery()
+                        End With
+                    Next
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                Finally
+                    connecter().Close()
+                    FillDataSource()
+                End Try
+            End If
         End If
     End Sub
 
@@ -940,6 +732,7 @@ Public Class frmMain
         Else
             SkinManager.Theme = MaterialSkinManager.Themes.DARK
             SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)
+
         End If
 
         If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
@@ -979,6 +772,7 @@ Public Class frmMain
             SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.Red)
             b = New Bitmap(My.Resources.round_info_button)
             PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.RoyalBlue)
+            'Me.lblAlertNotif.ForeColor = Color.Red
         Else
             For Each c As Control In GetAllChildren()
                 If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
@@ -1016,8 +810,11 @@ Public Class frmMain
             SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
             b = New Bitmap(My.Resources.round_info_button)
             PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
+            'Me.lblAlertNotif.ForeColor = Color.DarkRed
         End If
-
+        'Me.lblAlertNotif.AutoSize = True
+        'Me.lblAlertNotif.BackColor = System.Drawing.Color.Transparent
+        'Me.lblAlertNotif.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     End Sub
 
     Private Sub btnLightMode_Click(sender As Object, e As EventArgs) Handles btnLightMode.Click
