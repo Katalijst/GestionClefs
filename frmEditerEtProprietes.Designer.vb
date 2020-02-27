@@ -22,6 +22,7 @@ Partial Class frmEditerEtProprietes
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditerEtProprietes))
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.btnSave = New MaterialSkin.Controls.MaterialButton()
         Me.lblCID = New MaterialSkin.Controls.MaterialLabel()
@@ -704,6 +705,7 @@ Partial Class frmEditerEtProprietes
         Me.Controls.Add(Me.lblCID)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.dtpDate)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(614, 522)
         Me.MinimizeBox = False
@@ -711,6 +713,7 @@ Partial Class frmEditerEtProprietes
         Me.Name = "frmEditerEtProprietes"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.Sizable = False
         Me.Text = "Editer une clef..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

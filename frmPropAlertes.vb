@@ -20,7 +20,7 @@ Public Class frmPropAlertes
         Dim da As New MySqlDataAdapter
         Dim sql As String
 
-        stgKeyID = frmAlertes.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value.ToString()
+        stgKeyID = frmEmpruntsEtAlertes.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value.ToString()
         lblID.Text = stgKeyID
 
 

@@ -22,6 +22,7 @@ Partial Class frmEditerBatiment
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditerBatiment))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lblFonction = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -48,7 +49,7 @@ Partial Class frmEditerBatiment
         Me.GroupBox2.Controls.Add(Me.txtAdresse)
         Me.GroupBox2.Controls.Add(Me.txtNom)
         Me.GroupBox2.Controls.Add(Me.txtID)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 67)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(350, 227)
         Me.GroupBox2.TabIndex = 60
@@ -148,14 +149,15 @@ Partial Class frmEditerBatiment
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(374, 251)
+        Me.ClientSize = New System.Drawing.Size(374, 304)
         Me.Controls.Add(Me.GroupBox2)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmEditerBatiment"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.Sizable = False
         Me.Text = "Editer un batiment..."
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()

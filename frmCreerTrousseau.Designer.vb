@@ -22,6 +22,7 @@ Partial Class frmCreerTrousseau
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCreerTrousseau))
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.btnValider = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -62,9 +63,11 @@ Partial Class frmCreerTrousseau
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtName)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmCreerTrousseau"
+        Me.Sizable = False
         Me.Text = "Créer un trousseau..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -22,6 +22,7 @@ Partial Class frmEditerPersonne
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditerPersonne))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnAddType = New System.Windows.Forms.Button()
         Me.mtxtTel = New System.Windows.Forms.MaskedTextBox()
@@ -163,11 +164,13 @@ Partial Class frmEditerPersonne
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(374, 315)
         Me.Controls.Add(Me.GroupBox2)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmEditerPersonne"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.Sizable = False
         Me.Text = "Editer une personne..."
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()

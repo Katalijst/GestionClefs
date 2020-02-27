@@ -22,6 +22,7 @@ Partial Class frmAddUser
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAddUser))
         Me.btnChangePassword = New System.Windows.Forms.Button()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
@@ -104,10 +105,12 @@ Partial Class frmAddUser
         Me.Controls.Add(Me.txtID)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtPasswordConfirm)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmAddUser"
         Me.ShowIcon = False
+        Me.Sizable = False
         Me.Text = "Nouveau compte..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

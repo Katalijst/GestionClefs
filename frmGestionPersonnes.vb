@@ -1,13 +1,9 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class frmGestionPersonnes
+
     Private Sub frmAjouterPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
-        lblType.Text = strTitleNGenre & " :"
-        lblNom.Text = strTitleNNom & " :"
-        lblTelephone.Text = strTitleNTelephone & " :"
-        lblAutre.Text = strTitleNAutre & " :"
-
         RefreshGenre()
         RefreshList()
         If userType <> "Administrateur" Then
@@ -72,9 +68,14 @@ Public Class frmGestionPersonnes
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            cmbType.DataSource = dt
-            cmbType.ValueMember = "GGenre"
-            cmbType.DisplayMember = "GGenre"
+            Dim strCmbType(dt.Rows.Count) As String
+            Dim index As Integer = 0
+            For Each r As DataRow In dt.Rows
+                strCmbType(index) = r.Item(0)
+                index += 1
+            Next
+            cmbType.DataSource = strCmbType
+
             If cmbType.Items.Count > 0 Then
                 cmbType.SelectedIndex = 0
             End If
@@ -240,6 +241,6 @@ Public Class frmGestionPersonnes
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Close()
+        Me.Dispose()
     End Sub
 End Class

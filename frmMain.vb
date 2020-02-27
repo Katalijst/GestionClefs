@@ -139,6 +139,7 @@ Public Class frmMain
                 btnAlertes.Icon = TintBitmap(b, Color.Red, 1)
                 lblAlertNotif.Text = "" & dt.Rows.Count
                 lblAlertNotif.Visible = True
+                CorlorNotifLabel()
             Else
                 btnAlertes.Text = "Alertes"
                 'If SkinManager.Theme = MaterialSkinManager.Themes.DARK Then
@@ -146,7 +147,8 @@ Public Class frmMain
                 'Else
                 '    btnAlertes.ForeColor = Color.Black
                 'End If
-                btnAlertes.Icon = Nothing
+                Dim b As Bitmap = New Bitmap(My.Resources.round_error_symbol)
+                btnAlertes.Icon = b
                 lblAlertNotif.Text = ""
                 lblAlertNotif.Visible = False
             End If
@@ -744,7 +746,7 @@ Public Class frmMain
     Private Sub btnAlertes_Click(sender As Object, e As EventArgs) Handles btnAlertes.Click
         'ouverture du menu d'alerte
         AlertesEmpruntPerdu = 1
-        frmAlertes.ShowDialog()
+        frmEmpruntsEtAlertes.ShowDialog()
     End Sub
 
     Private Sub EmprunterToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EmprunterToolStripMenuItem1.Click
@@ -785,7 +787,7 @@ Public Class frmMain
         SkinManager.AddFormToManage(Me)
         If My.Settings.DarkMode = True Then
             SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.DeepOrange400, TextShade.WHITE)
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.DeepOrange400, TextShade.WHITE)
         Else
             SkinManager.Theme = MaterialSkinManager.Themes.DARK
             SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)
@@ -829,7 +831,6 @@ Public Class frmMain
             SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.Red)
             b = New Bitmap(My.Resources.round_info_button)
             PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.White, Color.RoyalBlue)
-            'Me.lblAlertNotif.ForeColor = Color.Red
         Else
             For Each c As Control In GetAllChildren()
                 If TypeOf c Is MaterialSkin.Controls.MaterialButton Then
@@ -867,11 +868,19 @@ Public Class frmMain
             SupprimerToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.Red)
             b = New Bitmap(My.Resources.round_info_button)
             PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
-            'Me.lblAlertNotif.ForeColor = Color.DarkRed
         End If
-        'Me.lblAlertNotif.AutoSize = True
-        'Me.lblAlertNotif.BackColor = System.Drawing.Color.Transparent
-        'Me.lblAlertNotif.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        CorlorNotifLabel()
+    End Sub
+
+    Public Sub CorlorNotifLabel()
+        If My.Settings.DarkMode = True Then
+            Me.lblAlertNotif.ForeColor = Color.Red
+        Else
+            Me.lblAlertNotif.ForeColor = ColorTranslator.FromHtml("#ff7043")
+        End If
+        Me.lblAlertNotif.AutoSize = True
+        Me.lblAlertNotif.BackColor = System.Drawing.Color.Transparent
+        Me.lblAlertNotif.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     End Sub
 
     Private Sub btnLightMode_Click(sender As Object, e As EventArgs) Handles btnLightMode.Click
@@ -1003,6 +1012,6 @@ Public Class frmMain
     Private Sub btnClefsPerdues_Click(sender As Object, e As EventArgs) Handles btnClefsPerdues.Click
         'ouverture du menu d'alerte
         AlertesEmpruntPerdu = 3
-        frmAlertes.ShowDialog()
+        frmEmpruntsEtAlertes.ShowDialog()
     End Sub
 End Class

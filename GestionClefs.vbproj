@@ -447,10 +447,10 @@
     <Compile Include="frmAddUser.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAlertes.Designer.vb">
-      <DependentUpon>frmAlertes.vb</DependentUpon>
+    <Compile Include="frmEmpruntsEtAlertes.Designer.vb">
+      <DependentUpon>frmEmpruntsEtAlertes.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAlertes.vb">
+    <Compile Include="frmEmpruntsEtAlertes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConnexion.Designer.vb">
@@ -594,8 +594,8 @@
     <EmbeddedResource Include="frmAddUser.resx">
       <DependentUpon>frmAddUser.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAlertes.resx">
-      <DependentUpon>frmAlertes.vb</DependentUpon>
+    <EmbeddedResource Include="frmEmpruntsEtAlertes.resx">
+      <DependentUpon>frmEmpruntsEtAlertes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConnexion.resx">
       <DependentUpon>frmConnexion.vb</DependentUpon>

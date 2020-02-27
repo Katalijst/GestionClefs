@@ -1,17 +1,17 @@
 ﻿Imports MaterialSkin
 Imports MySql.Data.MySqlClient
 
-Public Class frmAlertes
+Public Class frmEmpruntsEtAlertes
     Private Sub frmAlertes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If frmMain.AlertesEmpruntPerdu = 1 Then
             'Alertes
-            MaterialTabControl1.SelectedTab = tabAlertes
+            dgvEmpruntsEnCours.SelectedTab = tabAlertes
         ElseIf frmMain.AlertesEmpruntPerdu = 2 Then
             'Emprunt
-            MaterialTabControl1.SelectedTab = tabEnCours
+            dgvEmpruntsEnCours.SelectedTab = tabEnCours
         ElseIf frmMain.AlertesEmpruntPerdu = 3 Then
             'Perdues
-            MaterialTabControl1.SelectedTab = tabPerdues
+            dgvEmpruntsEnCours.SelectedTab = tabPerdues
         End If
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
@@ -23,7 +23,7 @@ Public Class frmAlertes
         strCBFiltre(2) = strTitleENomPersonne
         cbRechercher.DataSource = strCBFiltre
 
-        SearchAndRefresh()
+        RefreshAlertes()
         cbRechercher.SelectedIndex = 1
         chkAlertPopUp.Checked = My.Settings.ShowAlert
     End Sub
@@ -34,7 +34,7 @@ Public Class frmAlertes
         My.Settings.Save()
     End Sub
 
-    Public Sub SearchAndRefresh()
+    Public Sub RefreshAlertes()
         Dim dateNow As Date = Now
 
         Dim cmd As New MySqlCommand
@@ -42,12 +42,14 @@ Public Class frmAlertes
         Dim dtAlertes As New DataTable
         Dim da As New MySqlDataAdapter
 
+
         Dim sql As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
+
         Try
             dt.Reset()
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
             End With
             da.SelectCommand = cmd
             da.Fill(dt)
@@ -56,11 +58,10 @@ Public Class frmAlertes
                 lblAlertes.Text = dt.Rows.Count & " clefs non rendues !"
                 dtAlertes.Reset()
                 For i = 0 To dt.Rows.Count - 1
-                    sql = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef='" & dt.Rows(i)(0).ToString & "' AND CID=EIDClef"
                     With cmd
                         .Connection = connecter()
-                        .CommandText = sql
-                    End With
+                                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef='" & dt.Rows(i)(0).ToString & "' AND CID=EIDClef"
+                                    End With
                     da.SelectCommand = cmd
                     Dim dtTemp As New DataTable
                     da.Fill(dtTemp)
@@ -80,12 +81,14 @@ Public Class frmAlertes
                 dtAlertes.Columns("EDateFin").ColumnName = strTitleEDateFin
 
                 dgvResultats.DataSource = dtAlertes
-                connecter().Close()
             Else
-                'clear la dgv
+                dgvResultats.Rows.Clear()
+                dgvResultats.Refresh()
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+        Finally
+            connecter().Close()
         End Try
     End Sub
     Private Sub dgvResultats_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResultats.CellDoubleClick
@@ -231,7 +234,7 @@ Public Class frmAlertes
                 End If
             End If
             connecter().Close()
-            SearchAndRefresh()
+            RefreshAlertes()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -241,8 +244,8 @@ Public Class frmAlertes
         frmPropAlertes.ShowDialog()
     End Sub
 
-    Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
-        Dim searchValue As String = txtRechercher.Text
+    Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercherAlertes.TextChanged
+        Dim searchValue As String = txtRechercherAlertes.Text
         Dim intIndex As Integer = 1
 
         If cbRechercher.Text = strTitleCID Then
@@ -271,7 +274,7 @@ Public Class frmAlertes
         SkinManager.AddFormToManage(Me)
         If My.Settings.DarkMode = True Then
             SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
-            SkinManager.ColorScheme = New ColorScheme(Primary.Blue500, Primary.Blue600, Primary.Blue200, Accent.DeepOrange400, TextShade.WHITE)
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.DeepOrange400, TextShade.WHITE)
         Else
             SkinManager.Theme = MaterialSkinManager.Themes.DARK
             SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)

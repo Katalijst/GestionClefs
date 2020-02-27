@@ -175,10 +175,36 @@ Public Class frmCreerClefs
         End With
 
         Try
-            Dim i As Integer = 0
-            For i = 1 + LastKeyID To CUInt(txtQuantity.Text) + LastKeyID
+            Dim GetIDsNo As New MySqlCommand()
+            Dim daNb As MySqlDataAdapter = New MySqlDataAdapter()
+            Dim dtNb As New DataTable()
+            GetIDsNo.Parameters.Add("@KeyID", MySqlDbType.String)
+
+            With GetIDsNo
+                .Parameters("@KeyID").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-%"
+                .CommandText = "SELECT SUBSTRING(CID, INSTR(CID,'-')+1) From Clefs Where CID Like @KeyID"
+                .CommandType = CommandType.Text
+                .Connection = connecter()
+                .ExecuteNonQuery()
+            End With
+            daNb.SelectCommand() = GetIDsNo
+            daNb.Fill(dtNb)
+            Dim IndexIDClef As Integer = 1
+            Dim nbAvailable As New List(Of Integer)
+            Dim nbTaken As New List(Of Integer)
+            For Each r As DataRow In dtNb.Rows
+                nbTaken.Add(r.Item(0))
+            Next
+            While nbAvailable.Count < txtQuantity.Text
+                If nbTaken.Contains(IndexIDClef) = False Then
+                    nbAvailable.Add(IndexIDClef)
+                End If
+                IndexIDClef += 1
+            End While
+
+            For Each int As Integer In nbAvailable
                 With insert_command
-                    .Parameters("@id").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-" & i
+                    .Parameters("@id").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-" & int
                     .Parameters("@name").Value = stgNomClef
                     .Parameters("@pos").Value = cmbLoc.Text
                     .Parameters("@status").Value = "Disponible"

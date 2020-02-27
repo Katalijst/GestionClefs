@@ -22,6 +22,7 @@ Partial Class frmEmprunterEtAttribuer
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEmprunterEtAttribuer))
         Me.cbPersonnes = New MaterialSkin.Controls.MaterialComboBox()
         Me.btnValider = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddUser = New MaterialSkin.Controls.MaterialButton()
@@ -262,9 +263,11 @@ Partial Class frmEmprunterEtAttribuer
         Me.Controls.Add(Me.btnAddUser)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.cbPersonnes)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximumSize = New System.Drawing.Size(653, 2160)
-        Me.MinimumSize = New System.Drawing.Size(653, 526)
+        Me.MinimumSize = New System.Drawing.Size(653, 561)
         Me.Name = "frmEmprunterEtAttribuer"
+        Me.Sizable = False
         Me.Text = "Emprunter"
         Me.ResumeLayout(False)
         Me.PerformLayout()

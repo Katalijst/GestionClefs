@@ -22,6 +22,7 @@ Partial Class frmAjouterGenre
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAjouterGenre))
         Me.lblGenre = New System.Windows.Forms.Label()
         Me.btnValider = New System.Windows.Forms.Button()
         Me.txtType = New System.Windows.Forms.TextBox()
@@ -29,7 +30,7 @@ Partial Class frmAjouterGenre
         '
         'lblGenre
         '
-        Me.lblGenre.Location = New System.Drawing.Point(12, 9)
+        Me.lblGenre.Location = New System.Drawing.Point(12, 68)
         Me.lblGenre.Name = "lblGenre"
         Me.lblGenre.Size = New System.Drawing.Size(160, 13)
         Me.lblGenre.TabIndex = 5
@@ -38,7 +39,7 @@ Partial Class frmAjouterGenre
         '
         'btnValider
         '
-        Me.btnValider.Location = New System.Drawing.Point(12, 51)
+        Me.btnValider.Location = New System.Drawing.Point(12, 110)
         Me.btnValider.Name = "btnValider"
         Me.btnValider.Size = New System.Drawing.Size(160, 23)
         Me.btnValider.TabIndex = 4
@@ -47,7 +48,7 @@ Partial Class frmAjouterGenre
         '
         'txtType
         '
-        Me.txtType.Location = New System.Drawing.Point(12, 25)
+        Me.txtType.Location = New System.Drawing.Point(12, 84)
         Me.txtType.MaxLength = 255
         Me.txtType.Name = "txtType"
         Me.txtType.Size = New System.Drawing.Size(160, 20)
@@ -58,15 +59,16 @@ Partial Class frmAjouterGenre
         Me.AcceptButton = Me.btnValider
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(184, 81)
+        Me.ClientSize = New System.Drawing.Size(184, 141)
         Me.Controls.Add(Me.lblGenre)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtType)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmAjouterGenre"
         Me.ShowIcon = False
+        Me.Sizable = False
         Me.Text = "Ajouter un type..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

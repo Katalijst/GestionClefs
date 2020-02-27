@@ -141,7 +141,7 @@ Partial Class frmCreerClefs
         '
         'chkKeepOpen
         '
-        Me.chkKeepOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkKeepOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.chkKeepOpen.AutoSize = True
         Me.chkKeepOpen.Depth = 0
         Me.chkKeepOpen.Location = New System.Drawing.Point(465, 425)
@@ -159,9 +159,8 @@ Partial Class frmCreerClefs
         '
         Me.dgvListBatiment.AllowUserToAddRows = False
         Me.dgvListBatiment.AllowUserToDeleteRows = False
-        Me.dgvListBatiment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvListBatiment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.dgvListBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListBatiment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -188,8 +187,7 @@ Partial Class frmCreerClefs
         '
         Me.dgvSelBatiment.AllowUserToAddRows = False
         Me.dgvSelBatiment.AllowUserToDeleteRows = False
-        Me.dgvSelBatiment.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.dgvSelBatiment.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSelBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSelBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
@@ -482,6 +480,7 @@ Partial Class frmCreerClefs
         '
         'txtRefOrg
         '
+        Me.txtRefOrg.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtRefOrg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtRefOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRefOrg.Depth = 0
@@ -499,6 +498,7 @@ Partial Class frmCreerClefs
         '
         'MaterialLabel9
         '
+        Me.MaterialLabel9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.MaterialLabel9.AutoSize = True
         Me.MaterialLabel9.Depth = 0
         Me.MaterialLabel9.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
@@ -511,6 +511,7 @@ Partial Class frmCreerClefs
         '
         'txtCnInt
         '
+        Me.txtCnInt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtCnInt.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtCnInt.Depth = 0
         Me.txtCnInt.Font = New System.Drawing.Font("Roboto", 12.0!)
@@ -527,6 +528,7 @@ Partial Class frmCreerClefs
         '
         'txtCnExt
         '
+        Me.txtCnExt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtCnExt.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtCnExt.Depth = 0
         Me.txtCnExt.Font = New System.Drawing.Font("Roboto", 12.0!)
@@ -543,6 +545,7 @@ Partial Class frmCreerClefs
         '
         'txtCnOpt
         '
+        Me.txtCnOpt.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtCnOpt.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtCnOpt.Depth = 0
         Me.txtCnOpt.Font = New System.Drawing.Font("Roboto", 12.0!)
@@ -559,6 +562,7 @@ Partial Class frmCreerClefs
         '
         'MaterialLabel10
         '
+        Me.MaterialLabel10.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.MaterialLabel10.AutoSize = True
         Me.MaterialLabel10.Depth = 0
         Me.MaterialLabel10.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
@@ -571,8 +575,7 @@ Partial Class frmCreerClefs
         '
         'MaterialDivider3
         '
-        Me.MaterialDivider3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.MaterialDivider3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.MaterialDivider3.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.MaterialDivider3.Depth = 0
         Me.MaterialDivider3.Location = New System.Drawing.Point(439, 392)
@@ -622,9 +625,10 @@ Partial Class frmCreerClefs
         Me.Controls.Add(Me.btnAddBatiment)
         Me.Controls.Add(Me.txtID)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximumSize = New System.Drawing.Size(817, 504)
+        Me.MaximizeBox = False
         Me.MinimumSize = New System.Drawing.Size(817, 460)
         Me.Name = "frmCreerClefs"
+        Me.Sizable = False
         Me.Text = "Ajouter une clef au gestionnaire"
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()

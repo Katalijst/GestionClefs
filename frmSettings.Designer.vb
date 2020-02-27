@@ -22,6 +22,7 @@ Partial Class frmSettings
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSettings))
         Me.gbMySQL = New System.Windows.Forms.GroupBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtActPort = New System.Windows.Forms.TextBox()
@@ -294,11 +295,13 @@ Partial Class frmSettings
         Me.ClientSize = New System.Drawing.Size(471, 333)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbMySQL)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmSettings"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.Sizable = False
         Me.Text = "Paramètres..."
         Me.gbMySQL.ResumeLayout(False)
         Me.gbMySQL.PerformLayout()
