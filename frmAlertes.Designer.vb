@@ -32,13 +32,14 @@ Partial Class frmAlertes
         Me.lblAlertes = New MaterialSkin.Controls.MaterialLabel()
         Me.chkAlertPopUp = New MaterialSkin.Controls.MaterialSwitch()
         Me.MaterialTabControl1 = New MaterialSkin.Controls.MaterialTabControl()
-        Me.tabEmprunts = New System.Windows.Forms.TabPage()
+        Me.tabAlertes = New System.Windows.Forms.TabPage()
         Me.tabPerdues = New System.Windows.Forms.TabPage()
         Me.MaterialTabSelector1 = New MaterialSkin.Controls.MaterialTabSelector()
+        Me.tabEnCours = New System.Windows.Forms.TabPage()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuGrid.SuspendLayout()
         Me.MaterialTabControl1.SuspendLayout()
-        Me.tabEmprunts.SuspendLayout()
+        Me.tabAlertes.SuspendLayout()
         Me.SuspendLayout()
         '
         'dgvResultats
@@ -152,8 +153,9 @@ Partial Class frmAlertes
         '
         'MaterialTabControl1
         '
-        Me.MaterialTabControl1.Controls.Add(Me.tabEmprunts)
+        Me.MaterialTabControl1.Controls.Add(Me.tabEnCours)
         Me.MaterialTabControl1.Controls.Add(Me.tabPerdues)
+        Me.MaterialTabControl1.Controls.Add(Me.tabAlertes)
         Me.MaterialTabControl1.Depth = 0
         Me.MaterialTabControl1.Location = New System.Drawing.Point(1, 68)
         Me.MaterialTabControl1.Margin = New System.Windows.Forms.Padding(2)
@@ -164,27 +166,27 @@ Partial Class frmAlertes
         Me.MaterialTabControl1.Size = New System.Drawing.Size(823, 424)
         Me.MaterialTabControl1.TabIndex = 16
         '
-        'tabEmprunts
+        'tabAlertes
         '
-        Me.tabEmprunts.Controls.Add(Me.txtRechercher)
-        Me.tabEmprunts.Controls.Add(Me.dgvResultats)
-        Me.tabEmprunts.Controls.Add(Me.chkAlertPopUp)
-        Me.tabEmprunts.Controls.Add(Me.cbRechercher)
-        Me.tabEmprunts.Controls.Add(Me.lblAlertes)
-        Me.tabEmprunts.Location = New System.Drawing.Point(4, 22)
-        Me.tabEmprunts.Name = "tabEmprunts"
-        Me.tabEmprunts.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabEmprunts.Size = New System.Drawing.Size(815, 398)
-        Me.tabEmprunts.TabIndex = 0
-        Me.tabEmprunts.Text = "Emprunts"
-        Me.tabEmprunts.UseVisualStyleBackColor = True
+        Me.tabAlertes.Controls.Add(Me.txtRechercher)
+        Me.tabAlertes.Controls.Add(Me.dgvResultats)
+        Me.tabAlertes.Controls.Add(Me.chkAlertPopUp)
+        Me.tabAlertes.Controls.Add(Me.cbRechercher)
+        Me.tabAlertes.Controls.Add(Me.lblAlertes)
+        Me.tabAlertes.Location = New System.Drawing.Point(4, 22)
+        Me.tabAlertes.Name = "tabAlertes"
+        Me.tabAlertes.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabAlertes.Size = New System.Drawing.Size(815, 398)
+        Me.tabAlertes.TabIndex = 0
+        Me.tabAlertes.Text = "Alertes"
+        Me.tabAlertes.UseVisualStyleBackColor = True
         '
         'tabPerdues
         '
         Me.tabPerdues.Location = New System.Drawing.Point(4, 22)
         Me.tabPerdues.Name = "tabPerdues"
         Me.tabPerdues.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPerdues.Size = New System.Drawing.Size(805, 423)
+        Me.tabPerdues.Size = New System.Drawing.Size(815, 398)
         Me.tabPerdues.TabIndex = 1
         Me.tabPerdues.Text = "Clefs Perdues"
         Me.tabPerdues.UseVisualStyleBackColor = True
@@ -194,12 +196,22 @@ Partial Class frmAlertes
         Me.MaterialTabSelector1.BaseTabControl = Me.MaterialTabControl1
         Me.MaterialTabSelector1.Depth = 0
         Me.MaterialTabSelector1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialTabSelector1.Location = New System.Drawing.Point(147, 25)
+        Me.MaterialTabSelector1.Location = New System.Drawing.Point(209, 26)
         Me.MaterialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialTabSelector1.Name = "MaterialTabSelector1"
-        Me.MaterialTabSelector1.Size = New System.Drawing.Size(312, 38)
+        Me.MaterialTabSelector1.Size = New System.Drawing.Size(378, 38)
         Me.MaterialTabSelector1.TabIndex = 17
         Me.MaterialTabSelector1.Text = "MaterialTabSelector1"
+        '
+        'tabEnCours
+        '
+        Me.tabEnCours.Location = New System.Drawing.Point(4, 22)
+        Me.tabEnCours.Name = "tabEnCours"
+        Me.tabEnCours.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabEnCours.Size = New System.Drawing.Size(815, 398)
+        Me.tabEnCours.TabIndex = 2
+        Me.tabEnCours.Text = "En cours"
+        Me.tabEnCours.UseVisualStyleBackColor = True
         '
         'frmAlertes
         '
@@ -211,12 +223,12 @@ Partial Class frmAlertes
         Me.Name = "frmAlertes"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.Text = "Alertes"
+        Me.Text = "Emprunts et alertes"
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuGrid.ResumeLayout(False)
         Me.MaterialTabControl1.ResumeLayout(False)
-        Me.tabEmprunts.ResumeLayout(False)
-        Me.tabEmprunts.PerformLayout()
+        Me.tabAlertes.ResumeLayout(False)
+        Me.tabAlertes.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -230,7 +242,8 @@ Partial Class frmAlertes
     Friend WithEvents lblAlertes As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents chkAlertPopUp As MaterialSkin.Controls.MaterialSwitch
     Friend WithEvents MaterialTabControl1 As MaterialSkin.Controls.MaterialTabControl
-    Friend WithEvents tabEmprunts As TabPage
+    Friend WithEvents tabAlertes As TabPage
     Friend WithEvents tabPerdues As TabPage
     Friend WithEvents MaterialTabSelector1 As MaterialSkin.Controls.MaterialTabSelector
+    Friend WithEvents tabEnCours As TabPage
 End Class

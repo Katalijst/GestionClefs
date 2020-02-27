@@ -283,19 +283,12 @@ Public Class frmEmprunterEtAttribuer
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
 
-        Dim dtPredict As New DataTable
-        Dim daPredict As New MySqlDataAdapter
-
-        Dim sql As String = "Select * from NomPersonne"
-        Dim stgPredict As String = "Select * from NomPersonne"
-
-
         'sql = "Select NomPersonne from NomPersonne Where NNom like ""%" & txtRechercher.Text & "%"""
-        stgPredict = "Select NNom from NomPersonne"
+        Dim CmdSql As String = "Select NNom from NomPersonne where NNom <> 'Personne'"
         Try
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = CmdSql
             End With
             da.SelectCommand = cmd
             da.Fill(dt)

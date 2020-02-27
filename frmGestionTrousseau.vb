@@ -30,6 +30,8 @@ Public Class frmGestionTrousseau
     End Sub
 
     Private Sub frmAjoutTrousseau_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
         FilldgvListClef()
         RefreshTrousseau()
         FilldgvSelClefs()
@@ -180,13 +182,13 @@ Public Class frmGestionTrousseau
                 Dim drToAdd As DataRow = dtListClef.Rows(intSelIndex)
                 dtSelClef.ImportRow(drToAdd)
                 dtSelClef.AcceptChanges()
-                dtSelClef.DefaultView.Sort = strTitleBNom & " ASC"
+                dtSelClef.DefaultView.Sort = strTitleCBatiment & " ASC"
                 dtSelClef = dtSelClef.DefaultView.ToTable
                 dgvSelTrousseau.DataSource = dtSelClef
 
                 dtListClef.Rows(intSelIndex).Delete()
                 dtListClef.AcceptChanges()
-                dtListClef.DefaultView.Sort = strTitleBNom & " ASC"
+                dtListClef.DefaultView.Sort = strTitleCBatiment & " ASC"
                 dtListClef = dtListClef.DefaultView.ToTable
                 dgvListClefs.DataSource = dtListClef
             Next
@@ -202,13 +204,13 @@ Public Class frmGestionTrousseau
                 Dim drToAdd As DataRow = dtSelClef.Rows(intSelIndex)
                 dtListClef.ImportRow(drToAdd)
                 dtListClef.AcceptChanges()
-                dtListClef.DefaultView.Sort = strTitleBNom & " ASC"
+                dtListClef.DefaultView.Sort = strTitleCBatiment & " ASC"
                 dtListClef = dtListClef.DefaultView.ToTable
                 dgvListClefs.DataSource = dtListClef
 
                 dtSelClef.Rows(intSelIndex).Delete()
                 dtSelClef.AcceptChanges()
-                dtSelClef.DefaultView.Sort = strTitleBNom & " ASC"
+                dtSelClef.DefaultView.Sort = strTitleCBatiment & " ASC"
                 dtSelClef = dtSelClef.DefaultView.ToTable
                 dgvSelTrousseau.DataSource = dtSelClef
             Next

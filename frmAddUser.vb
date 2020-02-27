@@ -1,6 +1,8 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class frmAddUser
     Private Sub frmAddUser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
         txtUsername.SetWaterMark("Nom")
         txtID.SetWaterMark("Identifiant")
         txtPassword.SetWaterMark("Mot de passe")

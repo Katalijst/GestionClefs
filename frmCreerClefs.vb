@@ -146,7 +146,8 @@ Public Class frmCreerClefs
         Dim insert_gp_bt_command As New MySqlCommand(cmdGrpBat, connecter())
         insert_command.CommandType = CommandType.Text
         daSql.InsertCommand = insert_command
-        Dim cmdInfoTech As String = "INSERT INTO InfosTechniques(IDClef, RefOrg, CanonInte, CanonExte, CanonOpt) VALUES (@keyid,@RefOrg,@CanonInt,@CanonExte,@CanonOpt);"
+        Dim cmdInfoTech As String = "INSERT INTO InfosTechniques(IDClef, RefOrg, CanonInte, CanonExte, CanonOpt) VALUES (@keyid,@RefOrg,@CanonInte,@CanonExte,@CanonOpt) 
+                                     ON DUPLICATE KEY UPDATE IDClef = IDClef;"
         Dim insert_infotech As New MySqlCommand(cmdInfoTech, connecter())
         insert_infotech.CommandType = CommandType.Text
 
@@ -168,7 +169,7 @@ Public Class frmCreerClefs
         With insert_infotech
             .Parameters.Add("@keyid", MySqlDbType.VarChar)
             .Parameters.Add("@RefOrg", MySqlDbType.VarChar)
-            .Parameters.Add("@CanonInt", MySqlDbType.Float)
+            .Parameters.Add("@CanonInte", MySqlDbType.Float)
             .Parameters.Add("@CanonExte", MySqlDbType.Float)
             .Parameters.Add("@CanonOpt", MySqlDbType.VarChar)
         End With
@@ -223,7 +224,7 @@ Public Class frmCreerClefs
                     '@keyid,@RefOrg,@CanonInt,@CanonExte,@CanonOpt
                     .Parameters("@keyid").Value = txtID.Text.ToUpper
                     .Parameters("@RefOrg").Value = txtRefOrg.Text
-                    .Parameters("@CanonInt").Value = intCanonInt
+                    .Parameters("@CanonInte").Value = intCanonInt
                     .Parameters("@CanonExte").Value = intCanonExt
                     .Parameters("@CanonOpt").Value = txtCnOpt.Text
                     .ExecuteNonQuery()

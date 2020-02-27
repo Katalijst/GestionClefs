@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmGestionPosition
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -60,7 +60,7 @@ Partial Class frmGestionPosition
         Me.GroupBox2.Controls.Add(Me.lblPNom)
         Me.GroupBox2.Controls.Add(Me.lblPResponsable)
         Me.GroupBox2.Controls.Add(Me.txtNom)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 70)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(350, 307)
         Me.GroupBox2.TabIndex = 63
@@ -152,7 +152,7 @@ Partial Class frmGestionPosition
         'chkKeepOpen
         '
         Me.chkKeepOpen.AutoSize = True
-        Me.chkKeepOpen.Location = New System.Drawing.Point(360, 334)
+        Me.chkKeepOpen.Location = New System.Drawing.Point(360, 392)
         Me.chkKeepOpen.Name = "chkKeepOpen"
         Me.chkKeepOpen.Size = New System.Drawing.Size(144, 17)
         Me.chkKeepOpen.TabIndex = 46
@@ -161,7 +161,7 @@ Partial Class frmGestionPosition
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(12, 325)
+        Me.btnSave.Location = New System.Drawing.Point(12, 383)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(219, 32)
         Me.btnSave.TabIndex = 44
@@ -171,7 +171,7 @@ Partial Class frmGestionPosition
         'gbRechercher
         '
         Me.gbRechercher.Controls.Add(Me.txtRechercher)
-        Me.gbRechercher.Location = New System.Drawing.Point(368, 12)
+        Me.gbRechercher.Location = New System.Drawing.Point(368, 70)
         Me.gbRechercher.Name = "gbRechercher"
         Me.gbRechercher.Size = New System.Drawing.Size(404, 45)
         Me.gbRechercher.TabIndex = 65
@@ -191,7 +191,7 @@ Partial Class frmGestionPosition
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.dgvListTableau)
-        Me.GroupBox1.Location = New System.Drawing.Point(368, 63)
+        Me.GroupBox1.Location = New System.Drawing.Point(368, 121)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(404, 256)
         Me.GroupBox1.TabIndex = 66
@@ -230,7 +230,7 @@ Partial Class frmGestionPosition
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(237, 325)
+        Me.btnCancel.Location = New System.Drawing.Point(237, 383)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(117, 32)
         Me.btnCancel.TabIndex = 67
@@ -261,14 +261,13 @@ Partial Class frmGestionPosition
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(784, 369)
+        Me.ClientSize = New System.Drawing.Size(784, 425)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.gbRechercher)
         Me.Controls.Add(Me.chkKeepOpen)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnSave)
-        Me.DoubleBuffered = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmGestionPosition"

@@ -24,6 +24,7 @@ Public Class frmMain
     Public blnEmprunt As Boolean
     Public blnProperties As Boolean = False
     Public blnLightMode As Boolean = False
+    Public AlertesEmpruntPerdu As Integer = 0
 
     Private Shared Function Split(ByVal str As String, ByVal chunkSize As Integer) As IEnumerable(Of String)
         Return Enumerable.Range(0, str.Length / chunkSize).[Select](Function(i) str.Substring(i * chunkSize, chunkSize))
@@ -226,6 +227,7 @@ Public Class frmMain
             If cbRechercher.Text <> "Emprunteur" Then
                 dgvResultats.DataSource = srcKeyList
                 dtEmpty = dtKeyListSansGBat.Copy
+                dtEmpty.Columns.Add("Quantité")
                 dtEmpty.Rows.Clear()
                 dtEmpty.Columns("CID").ColumnName = strTitleCID
                 dtEmpty.Columns("CNom").ColumnName = strTitleCNom
@@ -242,6 +244,7 @@ Public Class frmMain
             dtPanier = dtEmpty.Copy
             srcPanier.DataSource = dtPanier
             dgvPanier.DataSource = srcPanier
+            dgvPanier.Columns("Quantité").Visible = False
             connecter().Close()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -340,11 +343,40 @@ Public Class frmMain
         dtKeyListSorted.Columns("CStatus").ColumnName = strTitleCStatus
         dtKeyListSorted.Columns("CTrousseau").ColumnName = strTitleCTrousseau
         dtKeyListSorted.Columns("CBatiment").ColumnName = strTitleCBatiment
+
         dtResultats.Clear()
+        dtKeyList.Clear()
+
         dgvResultats.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
         dgvResultats.RowHeadersVisible = False
+
         dtResultats = dtKeyListSorted.Copy
         dtKeyList = dtResultats.Copy
+
+        '================================================================================================
+        Dim rows_to_remove As List(Of DataRow) = New List(Of DataRow)()
+
+        For Each row1 As DataRow In dtKeyList.Rows
+            For Each row2 As DataGridViewRow In dgvPanier.Rows
+                Dim Similarities As Integer = 0
+                If row1.Item(strTitleCStatus).ToString = "Disponible" And row2.Cells(strTitleCStatus).Value.ToString = "Disponible" Then
+                    For i = 0 To (dgvPanier.Columns.Count - 1)
+                        If row1.Item(dgvPanier.Columns(i).HeaderText).ToString = row2.Cells(dgvPanier.Columns(i).HeaderText).Value.ToString Then
+                            Similarities += 1
+                        End If
+                    Next
+                End If
+                If Similarities > 5 Then
+                    rows_to_remove.Add(row1)
+                End If
+            Next
+        Next
+        For Each row As DataRow In rows_to_remove
+            dtKeyList.Rows.Remove(row)
+            dtKeyList.AcceptChanges()
+        Next
+        '================================================================================================
+
         srcKeyList.DataSource = dtKeyList
 
         '
@@ -514,7 +546,8 @@ Public Class frmMain
             If Result = System.Windows.Forms.DialogResult.Yes Then
 
                 Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
-                Dim DeleteQuery As String = "DELETE FROM Clefs WHERE CID LIKE @IDClef AND CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef;"
+                Dim dt As New DataTable
+                Dim DeleteQuery As String = "DELETE FROM Clefs WHERE CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef AND CID LIKE @IDClef;"
                 Dim Delete_command As New MySqlCommand(DeleteQuery, connecter)
                 Delete_command.CommandType = CommandType.Text
                 daSql.InsertCommand = Delete_command
@@ -532,8 +565,28 @@ Public Class frmMain
                             .Parameters("@StatusClef").Value = r.Cells(strTitleCStatus).Value
                             .Parameters("@TableauClef").Value = r.Cells(strTitleCPosition).Value
                             .Parameters("@TrousseauxClef").Value = r.Cells(strTitleCTrousseau).Value
+                            .CommandText = "DELETE FROM Clefs WHERE CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef AND  CID LIKE @IDClef;"
                             .ExecuteNonQuery()
                         End With
+                        With Delete_command
+                            .Parameters("@IDClef").Value = r.Cells(strTitleCID).Value & "-%"
+                            .CommandText = "SELECT COUNT(CID) FROM Clefs WHERE CID LIKE @IDClef;"
+                            .ExecuteNonQuery()
+                        End With
+                        daSql.SelectCommand = Delete_command
+                        daSql.Fill(dt)
+                        If dt.Rows(0).Item(0) < 1 Then
+                            With Delete_command
+                                .Parameters("@IDClef").Value = r.Cells(strTitleCID).Value
+                                .CommandText = "DELETE FROM InfosTechniques WHERE IDClef = @IDClef;"
+                                .ExecuteNonQuery()
+                            End With
+                            With Delete_command
+                                .Parameters("@IDClef").Value = r.Cells(strTitleCID).Value
+                                .CommandText = "DELETE From GroupeBat Where GIDBat = @IDClef;"
+                                .ExecuteNonQuery()
+                            End With
+                        End If
                     Next
                 Catch ex As Exception
                     MsgBox(ex.Message)
@@ -556,7 +609,7 @@ Public Class frmMain
                             Dim drToAdd As DataRow = dtKeyList.Rows(intSelIndex)
                             Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
                             rows.Add(row)
-                            dtPanier.ImportRow(drToAdd)
+                            dtPanier.ImportRow(row)
                             dtPanier.AcceptChanges()
                         End If
                     End If
@@ -565,6 +618,9 @@ Public Class frmMain
                     dtKeyList.Rows.Remove(r)
                     dtKeyList.AcceptChanges()
                 Next
+                srcKeyList.DataSource = dtKeyList
+                srcPanier.DataSource = dtPanier
+
                 dgvResultats.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
                 dgvResultats.RowHeadersVisible = False
                 dgvResultats.DataSource = srcKeyList
@@ -687,6 +743,7 @@ Public Class frmMain
 
     Private Sub btnAlertes_Click(sender As Object, e As EventArgs) Handles btnAlertes.Click
         'ouverture du menu d'alerte
+        AlertesEmpruntPerdu = 1
         frmAlertes.ShowDialog()
     End Sub
 
@@ -943,4 +1000,9 @@ Public Class frmMain
         lblNbDeClefs.Text = intKeyAmount & " clefs chargées"
     End Sub
 
+    Private Sub btnClefsPerdues_Click(sender As Object, e As EventArgs) Handles btnClefsPerdues.Click
+        'ouverture du menu d'alerte
+        AlertesEmpruntPerdu = 3
+        frmAlertes.ShowDialog()
+    End Sub
 End Class

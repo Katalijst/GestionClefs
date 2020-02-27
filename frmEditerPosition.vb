@@ -3,6 +3,8 @@
 Public Class frmEditerPosition
     Shared stgPosID
     Private Sub frmEditerPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
 
         lblPNom.Text = strTitlePNom & " :"
         lblPBatiment.Text = strTitlePBatiment & " :"

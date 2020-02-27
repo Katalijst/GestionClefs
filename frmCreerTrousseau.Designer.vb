@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmCreerTrousseau
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -29,26 +29,26 @@ Partial Class frmCreerTrousseau
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(12, 25)
+        Me.txtName.Location = New System.Drawing.Point(12, 84)
         Me.txtName.MaxLength = 255
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(160, 20)
+        Me.txtName.Size = New System.Drawing.Size(203, 20)
         Me.txtName.TabIndex = 0
         '
         'btnValider
         '
-        Me.btnValider.Location = New System.Drawing.Point(12, 51)
+        Me.btnValider.Location = New System.Drawing.Point(12, 110)
         Me.btnValider.Name = "btnValider"
-        Me.btnValider.Size = New System.Drawing.Size(160, 23)
+        Me.btnValider.Size = New System.Drawing.Size(203, 23)
         Me.btnValider.TabIndex = 1
         Me.btnValider.Text = "Valider"
         Me.btnValider.UseVisualStyleBackColor = True
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Location = New System.Drawing.Point(12, 68)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(160, 13)
+        Me.Label1.Size = New System.Drawing.Size(203, 13)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Nom du trousseau"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -58,11 +58,10 @@ Partial Class frmCreerTrousseau
         Me.AcceptButton = Me.btnValider
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(184, 81)
+        Me.ClientSize = New System.Drawing.Size(227, 139)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtName)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmCreerTrousseau"

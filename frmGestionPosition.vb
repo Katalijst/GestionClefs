@@ -103,6 +103,7 @@ Public Class frmGestionPosition
     End Sub
     Private Sub frmGestionPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         SetStyle(ControlStyles.UserPaint, True)
         lblPNom.Text = strTitlePNom & " :"

@@ -2,6 +2,8 @@
 
 Public Class frmGestionUtilisateur
     Private Sub frmGestionUtilisateur_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
         txtRechercher.SetWaterMark("Rechercher...")
         dgvListUser.Focus()
         RefreshList()

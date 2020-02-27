@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmGestionPersonnes
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -23,7 +23,7 @@ Partial Class frmGestionPersonnes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gbRechercher = New System.Windows.Forms.GroupBox()
         Me.txtRechercher = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -55,7 +55,7 @@ Partial Class frmGestionPersonnes
         'gbRechercher
         '
         Me.gbRechercher.Controls.Add(Me.txtRechercher)
-        Me.gbRechercher.Location = New System.Drawing.Point(368, 12)
+        Me.gbRechercher.Location = New System.Drawing.Point(368, 72)
         Me.gbRechercher.Name = "gbRechercher"
         Me.gbRechercher.Size = New System.Drawing.Size(404, 45)
         Me.gbRechercher.TabIndex = 61
@@ -87,7 +87,7 @@ Partial Class frmGestionPersonnes
         Me.GroupBox2.Controls.Add(Me.lblType)
         Me.GroupBox2.Controls.Add(Me.txtAutre)
         Me.GroupBox2.Controls.Add(Me.txtNom)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 72)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(350, 254)
         Me.GroupBox2.TabIndex = 62
@@ -214,7 +214,7 @@ Partial Class frmGestionPersonnes
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.dgvListPersonne)
-        Me.GroupBox1.Location = New System.Drawing.Point(368, 72)
+        Me.GroupBox1.Location = New System.Drawing.Point(368, 132)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(404, 244)
         Me.GroupBox1.TabIndex = 60
@@ -231,14 +231,14 @@ Partial Class frmGestionPersonnes
         Me.dgvListPersonne.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListPersonne.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListPersonne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListPersonne.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListPersonne.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvListPersonne.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListPersonne.Location = New System.Drawing.Point(6, 21)
         Me.dgvListPersonne.MultiSelect = False
@@ -274,7 +274,7 @@ Partial Class frmGestionPersonnes
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(784, 323)
+        Me.ClientSize = New System.Drawing.Size(784, 384)
         Me.Controls.Add(Me.gbRechercher)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)

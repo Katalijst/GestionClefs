@@ -3,6 +3,8 @@
 Public Class frmPropAlertes
         Dim stgKeyID As String
     Private Sub frmPropAlertes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
         lblCID.Text = strTitleCID & " :"
         lblCNom.Text = strTitleCNom & " :"
         lblCPosition.Text = strTitleCPosition & " :"

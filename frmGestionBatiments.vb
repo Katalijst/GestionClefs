@@ -2,6 +2,8 @@
 Imports System.Text.RegularExpressions
 Public Class frmGestionBatiments
     Private Sub frmAjouterBatiment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
         lblID.Text = strTitleBNum & " :"
         lblAdresse.Text = strTitleBAdresse & " :"
         lblFonction.Text = strTitleBFonction & " :"
@@ -85,10 +87,8 @@ Public Class frmGestionBatiments
     End Sub
 
     Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
-        Dim intIndexBat As Integer = dgvListBatiment.Columns(strTitleBNum).Index
-        Dim stgToDelete As String = dgvListBatiment.SelectedRows(0).Cells(intIndexBat).Value.ToString()
-        Dim intIndexNomBat As Integer = dgvListBatiment.Columns(strTitleBNom).Index
-        Dim stgNameToDelete As String = dgvListBatiment.SelectedRows(0).Cells(intIndexNomBat).Value.ToString()
+        Dim stgToDelete As String = dgvListBatiment.SelectedRows(0).Cells(strTitleBNum).Value.ToString()
+        Dim stgNameToDelete As String = dgvListBatiment.SelectedRows(0).Cells(strTitleBNom).Value.ToString()
         ' Initializes variables to pass to the MessageBox.Show method.
         Dim Message As String = "Voulez vous vraiment supprimer """ & stgNameToDelete & """ ?"
         Dim Caption As String = "Supprimer " & stgNameToDelete

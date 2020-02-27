@@ -13,6 +13,8 @@ Public Class frmSettings
         txtID.Text = userID
     End Sub
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        'SkinManager.AddFormToManage(Me)
         RefreshMySQL()
         txtOldPassword.SetWaterMark("Mot de passe actuel")
         txtNewPassword.SetWaterMark("Nouveau mot de passe")

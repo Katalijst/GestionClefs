@@ -3,6 +3,16 @@ Imports MySql.Data.MySqlClient
 
 Public Class frmAlertes
     Private Sub frmAlertes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If frmMain.AlertesEmpruntPerdu = 1 Then
+            'Alertes
+            MaterialTabControl1.SelectedTab = tabAlertes
+        ElseIf frmMain.AlertesEmpruntPerdu = 2 Then
+            'Emprunt
+            MaterialTabControl1.SelectedTab = tabEnCours
+        ElseIf frmMain.AlertesEmpruntPerdu = 3 Then
+            'Perdues
+            MaterialTabControl1.SelectedTab = tabPerdues
+        End If
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
         BrightOrDarkMode()

@@ -51,6 +51,8 @@ Public Class frmEditerEtProprietes
             dtpFin.Enabled = False
             btnNewLoc.Enabled = False
             btnNewTrousseau.Enabled = False
+            btnNewLoc.Visible = False
+            btnNewTrousseau.Visible = False
             Me.Text = "Informations"
         End If
 
@@ -145,9 +147,9 @@ Public Class frmEditerEtProprietes
             .Parameters.Add("@TableauClef", MySqlDbType.VarChar)
             .Parameters.Add("@TrousseauxClef", MySqlDbType.VarChar)
         End With
-
-        dt.Reset()
-        sql = "SELECT CID FROM Clefs WHERE CID LIKE @IDClef AND CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef LIMIT 1;"
+        Try
+            dt.Reset()
+            sql = "SELECT CID FROM Clefs WHERE CID LIKE @IDClef AND CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef LIMIT 1;"
             With cmd
                 .Parameters("@IDClef").Value = IDToLookFor
                 .Parameters("@StatusClef").Value = stgStatus
@@ -208,9 +210,9 @@ Public Class frmEditerEtProprietes
                     txtCnExt.Text = ""
                 End If
                 txtCnOpt.Text = dt.Rows(0).Item(3)
-                End If
+            End If
 
-                If stgStatus <> "Disponible" And stgStatus <> "Perdue" Then
+            If stgStatus <> "Disponible" And stgStatus <> "Perdue" Then
                 dt.Reset()
                 sql = "SELECT EIDGenre, ENomPersonne, EDateDebut, EDateFin, NTelephone FROM Emprunts, NomPersonne WHERE EIDClef=@IDClef AND ENomPersonne = NNom;"
                 With cmd
@@ -248,7 +250,6 @@ Public Class frmEditerEtProprietes
                 lblDateFin.Visible = False
                 txtTel.Visible = False
             End If
-        Try
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
@@ -525,4 +526,5 @@ Public Class frmEditerEtProprietes
         End If
 
     End Sub
+
 End Class

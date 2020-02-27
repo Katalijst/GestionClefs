@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmAddUser
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -33,7 +33,7 @@ Partial Class frmAddUser
         '
         'btnChangePassword
         '
-        Me.btnChangePassword.Location = New System.Drawing.Point(12, 169)
+        Me.btnChangePassword.Location = New System.Drawing.Point(12, 228)
         Me.btnChangePassword.Name = "btnChangePassword"
         Me.btnChangePassword.Size = New System.Drawing.Size(222, 23)
         Me.btnChangePassword.TabIndex = 5
@@ -42,14 +42,14 @@ Partial Class frmAddUser
         '
         'txtID
         '
-        Me.txtID.Location = New System.Drawing.Point(12, 38)
+        Me.txtID.Location = New System.Drawing.Point(12, 97)
         Me.txtID.Name = "txtID"
         Me.txtID.Size = New System.Drawing.Size(222, 20)
         Me.txtID.TabIndex = 1
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(12, 64)
+        Me.txtPassword.Location = New System.Drawing.Point(12, 123)
         Me.txtPassword.MaxLength = 50
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(222, 20)
@@ -58,7 +58,7 @@ Partial Class frmAddUser
         '
         'txtPasswordConfirm
         '
-        Me.txtPasswordConfirm.Location = New System.Drawing.Point(12, 90)
+        Me.txtPasswordConfirm.Location = New System.Drawing.Point(12, 149)
         Me.txtPasswordConfirm.MaxLength = 50
         Me.txtPasswordConfirm.Name = "txtPasswordConfirm"
         Me.txtPasswordConfirm.Size = New System.Drawing.Size(222, 20)
@@ -70,14 +70,14 @@ Partial Class frmAddUser
         Me.cbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbUserType.FormattingEnabled = True
         Me.cbUserType.Items.AddRange(New Object() {"Administrateur", "Utilisateur"})
-        Me.cbUserType.Location = New System.Drawing.Point(12, 129)
+        Me.cbUserType.Location = New System.Drawing.Point(12, 188)
         Me.cbUserType.Name = "cbUserType"
         Me.cbUserType.Size = New System.Drawing.Size(222, 21)
         Me.cbUserType.TabIndex = 4
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(12, 12)
+        Me.txtUsername.Location = New System.Drawing.Point(12, 71)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(222, 20)
         Me.txtUsername.TabIndex = 0
@@ -85,7 +85,7 @@ Partial Class frmAddUser
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(9, 113)
+        Me.Label1.Location = New System.Drawing.Point(9, 172)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(92, 13)
         Me.Label1.TabIndex = 34
@@ -96,7 +96,7 @@ Partial Class frmAddUser
         Me.AcceptButton = Me.btnChangePassword
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(251, 203)
+        Me.ClientSize = New System.Drawing.Size(251, 267)
         Me.Controls.Add(Me.txtUsername)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cbUserType)

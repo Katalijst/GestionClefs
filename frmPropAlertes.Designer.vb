@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmPropAlertes
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -30,31 +30,31 @@ Partial Class frmPropAlertes
         Me.lblDateDebut = New System.Windows.Forms.Label()
         Me.lblTel = New System.Windows.Forms.Label()
         Me.gbEmprunt = New System.Windows.Forms.GroupBox()
-        Me.lblGenre = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblNbClef = New System.Windows.Forms.Label()
-        Me.btnGrpBatiment = New System.Windows.Forms.Button()
-        Me.lblNom = New System.Windows.Forms.Label()
-        Me.lblBatiment = New System.Windows.Forms.Label()
-        Me.lblTrousseau = New System.Windows.Forms.Label()
-        Me.lblDateAjout = New System.Windows.Forms.Label()
-        Me.lblStatus = New System.Windows.Forms.Label()
-        Me.lblLoc = New System.Windows.Forms.Label()
-        Me.lblID = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.lblCID = New System.Windows.Forms.Label()
-        Me.lblCNom = New System.Windows.Forms.Label()
-        Me.lblCPosition = New System.Windows.Forms.Label()
-        Me.lblCStatus = New System.Windows.Forms.Label()
-        Me.lblCDate = New System.Windows.Forms.Label()
-        Me.lblCTrousseau = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.lblENomPersonne = New System.Windows.Forms.Label()
         Me.lblNTelephone = New System.Windows.Forms.Label()
         Me.lblNAutre = New System.Windows.Forms.Label()
         Me.lblTitleDateDebut = New System.Windows.Forms.Label()
         Me.lblTitleDateFin = New System.Windows.Forms.Label()
+        Me.lblGenre = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblNbClef = New System.Windows.Forms.Label()
+        Me.lblCID = New System.Windows.Forms.Label()
+        Me.lblCNom = New System.Windows.Forms.Label()
+        Me.btnGrpBatiment = New System.Windows.Forms.Button()
+        Me.lblCPosition = New System.Windows.Forms.Label()
+        Me.lblNom = New System.Windows.Forms.Label()
+        Me.lblCStatus = New System.Windows.Forms.Label()
+        Me.lblBatiment = New System.Windows.Forms.Label()
+        Me.lblCDate = New System.Windows.Forms.Label()
+        Me.lblTrousseau = New System.Windows.Forms.Label()
+        Me.lblCTrousseau = New System.Windows.Forms.Label()
+        Me.lblDateAjout = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.lblLoc = New System.Windows.Forms.Label()
+        Me.lblID = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.gbEmprunt.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,7 +63,7 @@ Partial Class frmPropAlertes
         'btnOK
         '
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnOK.Location = New System.Drawing.Point(407, 265)
+        Me.btnOK.Location = New System.Drawing.Point(407, 325)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(103, 23)
         Me.btnOK.TabIndex = 28
@@ -124,197 +124,12 @@ Partial Class frmPropAlertes
         Me.gbEmprunt.Controls.Add(Me.lblDateDebut)
         Me.gbEmprunt.Controls.Add(Me.lblTel)
         Me.gbEmprunt.Controls.Add(Me.lblGenre)
-        Me.gbEmprunt.Location = New System.Drawing.Point(288, 12)
+        Me.gbEmprunt.Location = New System.Drawing.Point(288, 72)
         Me.gbEmprunt.Name = "gbEmprunt"
         Me.gbEmprunt.Size = New System.Drawing.Size(222, 247)
         Me.gbEmprunt.TabIndex = 27
         Me.gbEmprunt.TabStop = False
         Me.gbEmprunt.Text = "Emprunter/Attribuer"
-        '
-        'lblGenre
-        '
-        Me.lblGenre.AutoSize = True
-        Me.lblGenre.Location = New System.Drawing.Point(93, 16)
-        Me.lblGenre.Name = "lblGenre"
-        Me.lblGenre.Size = New System.Drawing.Size(0, 13)
-        Me.lblGenre.TabIndex = 16
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Controls.Add(Me.lblNbClef)
-        Me.GroupBox1.Controls.Add(Me.lblCID)
-        Me.GroupBox1.Controls.Add(Me.lblCNom)
-        Me.GroupBox1.Controls.Add(Me.btnGrpBatiment)
-        Me.GroupBox1.Controls.Add(Me.lblCPosition)
-        Me.GroupBox1.Controls.Add(Me.lblNom)
-        Me.GroupBox1.Controls.Add(Me.lblCStatus)
-        Me.GroupBox1.Controls.Add(Me.lblBatiment)
-        Me.GroupBox1.Controls.Add(Me.lblCDate)
-        Me.GroupBox1.Controls.Add(Me.lblTrousseau)
-        Me.GroupBox1.Controls.Add(Me.lblCTrousseau)
-        Me.GroupBox1.Controls.Add(Me.lblDateAjout)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.lblStatus)
-        Me.GroupBox1.Controls.Add(Me.lblLoc)
-        Me.GroupBox1.Controls.Add(Me.lblID)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(270, 276)
-        Me.GroupBox1.TabIndex = 26
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Identité de la clefs"
-        '
-        'lblNbClef
-        '
-        Me.lblNbClef.Location = New System.Drawing.Point(93, 68)
-        Me.lblNbClef.Name = "lblNbClef"
-        Me.lblNbClef.Size = New System.Drawing.Size(171, 62)
-        Me.lblNbClef.TabIndex = 28
-        Me.lblNbClef.Text = "x exemplaires disponibles"
-        '
-        'btnGrpBatiment
-        '
-        Me.btnGrpBatiment.Location = New System.Drawing.Point(93, 229)
-        Me.btnGrpBatiment.Name = "btnGrpBatiment"
-        Me.btnGrpBatiment.Size = New System.Drawing.Size(122, 23)
-        Me.btnGrpBatiment.TabIndex = 26
-        Me.btnGrpBatiment.Text = "Groupe de batiments"
-        Me.btnGrpBatiment.UseVisualStyleBackColor = True
-        '
-        'lblNom
-        '
-        Me.lblNom.AutoSize = True
-        Me.lblNom.Location = New System.Drawing.Point(93, 42)
-        Me.lblNom.Name = "lblNom"
-        Me.lblNom.Size = New System.Drawing.Size(75, 13)
-        Me.lblNom.TabIndex = 22
-        Me.lblNom.Text = "Nom de la clef"
-        '
-        'lblBatiment
-        '
-        Me.lblBatiment.Location = New System.Drawing.Point(93, 234)
-        Me.lblBatiment.Name = "lblBatiment"
-        Me.lblBatiment.Size = New System.Drawing.Size(122, 39)
-        Me.lblBatiment.TabIndex = 21
-        Me.lblBatiment.Text = "Groupe de Batiment"
-        '
-        'lblTrousseau
-        '
-        Me.lblTrousseau.AutoSize = True
-        Me.lblTrousseau.Location = New System.Drawing.Point(93, 208)
-        Me.lblTrousseau.Name = "lblTrousseau"
-        Me.lblTrousseau.Size = New System.Drawing.Size(38, 13)
-        Me.lblTrousseau.TabIndex = 20
-        Me.lblTrousseau.Text = "Aucun"
-        '
-        'lblDateAjout
-        '
-        Me.lblDateAjout.AutoSize = True
-        Me.lblDateAjout.Location = New System.Drawing.Point(93, 182)
-        Me.lblDateAjout.Name = "lblDateAjout"
-        Me.lblDateAjout.Size = New System.Drawing.Size(65, 13)
-        Me.lblDateAjout.TabIndex = 19
-        Me.lblDateAjout.Text = "25/12/2019"
-        '
-        'lblStatus
-        '
-        Me.lblStatus.AutoSize = True
-        Me.lblStatus.Location = New System.Drawing.Point(93, 156)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(56, 13)
-        Me.lblStatus.TabIndex = 18
-        Me.lblStatus.Text = "Disponible"
-        '
-        'lblLoc
-        '
-        Me.lblLoc.AutoSize = True
-        Me.lblLoc.Location = New System.Drawing.Point(93, 130)
-        Me.lblLoc.Name = "lblLoc"
-        Me.lblLoc.Size = New System.Drawing.Size(97, 13)
-        Me.lblLoc.TabIndex = 17
-        Me.lblLoc.Text = "Tableaux de la clef"
-        '
-        'lblID
-        '
-        Me.lblID.AutoSize = True
-        Me.lblID.Location = New System.Drawing.Point(93, 16)
-        Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(39, 13)
-        Me.lblID.TabIndex = 16
-        Me.lblID.Text = "IDKEY"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 68)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(53, 13)
-        Me.Label9.TabIndex = 36
-        Me.Label9.Text = "Quantité :"
-        '
-        'lblCID
-        '
-        Me.lblCID.AutoSize = True
-        Me.lblCID.Location = New System.Drawing.Point(6, 16)
-        Me.lblCID.Name = "lblCID"
-        Me.lblCID.Size = New System.Drawing.Size(24, 13)
-        Me.lblCID.TabIndex = 29
-        Me.lblCID.Text = "ID :"
-        '
-        'lblCNom
-        '
-        Me.lblCNom.AutoSize = True
-        Me.lblCNom.Location = New System.Drawing.Point(6, 42)
-        Me.lblCNom.Name = "lblCNom"
-        Me.lblCNom.Size = New System.Drawing.Size(35, 13)
-        Me.lblCNom.TabIndex = 30
-        Me.lblCNom.Text = "Nom :"
-        '
-        'lblCPosition
-        '
-        Me.lblCPosition.AutoSize = True
-        Me.lblCPosition.Location = New System.Drawing.Point(6, 130)
-        Me.lblCPosition.Name = "lblCPosition"
-        Me.lblCPosition.Size = New System.Drawing.Size(69, 13)
-        Me.lblCPosition.TabIndex = 31
-        Me.lblCPosition.Text = "Localisation :"
-        '
-        'lblCStatus
-        '
-        Me.lblCStatus.AutoSize = True
-        Me.lblCStatus.Location = New System.Drawing.Point(6, 156)
-        Me.lblCStatus.Name = "lblCStatus"
-        Me.lblCStatus.Size = New System.Drawing.Size(43, 13)
-        Me.lblCStatus.TabIndex = 32
-        Me.lblCStatus.Text = "Status :"
-        '
-        'lblCDate
-        '
-        Me.lblCDate.AutoSize = True
-        Me.lblCDate.Location = New System.Drawing.Point(6, 182)
-        Me.lblCDate.Name = "lblCDate"
-        Me.lblCDate.Size = New System.Drawing.Size(70, 13)
-        Me.lblCDate.TabIndex = 33
-        Me.lblCDate.Text = "Date d'ajout :"
-        '
-        'lblCTrousseau
-        '
-        Me.lblCTrousseau.AutoSize = True
-        Me.lblCTrousseau.Location = New System.Drawing.Point(6, 208)
-        Me.lblCTrousseau.Name = "lblCTrousseau"
-        Me.lblCTrousseau.Size = New System.Drawing.Size(63, 13)
-        Me.lblCTrousseau.TabIndex = 34
-        Me.lblCTrousseau.Text = "Trousseau :"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 234)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(81, 13)
-        Me.Label6.TabIndex = 35
-        Me.Label6.Text = "Utilisable dans :"
         '
         'lblENomPersonne
         '
@@ -361,15 +176,199 @@ Partial Class frmPropAlertes
         Me.lblTitleDateFin.TabIndex = 33
         Me.lblTitleDateFin.Text = "Date de retour :"
         '
+        'lblGenre
+        '
+        Me.lblGenre.AutoSize = True
+        Me.lblGenre.Location = New System.Drawing.Point(93, 16)
+        Me.lblGenre.Name = "lblGenre"
+        Me.lblGenre.Size = New System.Drawing.Size(0, 13)
+        Me.lblGenre.TabIndex = 16
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Label9)
+        Me.GroupBox1.Controls.Add(Me.lblNbClef)
+        Me.GroupBox1.Controls.Add(Me.lblCID)
+        Me.GroupBox1.Controls.Add(Me.lblCNom)
+        Me.GroupBox1.Controls.Add(Me.btnGrpBatiment)
+        Me.GroupBox1.Controls.Add(Me.lblCPosition)
+        Me.GroupBox1.Controls.Add(Me.lblNom)
+        Me.GroupBox1.Controls.Add(Me.lblCStatus)
+        Me.GroupBox1.Controls.Add(Me.lblBatiment)
+        Me.GroupBox1.Controls.Add(Me.lblCDate)
+        Me.GroupBox1.Controls.Add(Me.lblTrousseau)
+        Me.GroupBox1.Controls.Add(Me.lblCTrousseau)
+        Me.GroupBox1.Controls.Add(Me.lblDateAjout)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.lblStatus)
+        Me.GroupBox1.Controls.Add(Me.lblLoc)
+        Me.GroupBox1.Controls.Add(Me.lblID)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 72)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(270, 276)
+        Me.GroupBox1.TabIndex = 26
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Identité de la clefs"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 68)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(53, 13)
+        Me.Label9.TabIndex = 36
+        Me.Label9.Text = "Quantité :"
+        '
+        'lblNbClef
+        '
+        Me.lblNbClef.Location = New System.Drawing.Point(93, 68)
+        Me.lblNbClef.Name = "lblNbClef"
+        Me.lblNbClef.Size = New System.Drawing.Size(171, 62)
+        Me.lblNbClef.TabIndex = 28
+        Me.lblNbClef.Text = "x exemplaires disponibles"
+        '
+        'lblCID
+        '
+        Me.lblCID.AutoSize = True
+        Me.lblCID.Location = New System.Drawing.Point(6, 16)
+        Me.lblCID.Name = "lblCID"
+        Me.lblCID.Size = New System.Drawing.Size(24, 13)
+        Me.lblCID.TabIndex = 29
+        Me.lblCID.Text = "ID :"
+        '
+        'lblCNom
+        '
+        Me.lblCNom.AutoSize = True
+        Me.lblCNom.Location = New System.Drawing.Point(6, 42)
+        Me.lblCNom.Name = "lblCNom"
+        Me.lblCNom.Size = New System.Drawing.Size(35, 13)
+        Me.lblCNom.TabIndex = 30
+        Me.lblCNom.Text = "Nom :"
+        '
+        'btnGrpBatiment
+        '
+        Me.btnGrpBatiment.Location = New System.Drawing.Point(93, 229)
+        Me.btnGrpBatiment.Name = "btnGrpBatiment"
+        Me.btnGrpBatiment.Size = New System.Drawing.Size(122, 23)
+        Me.btnGrpBatiment.TabIndex = 26
+        Me.btnGrpBatiment.Text = "Groupe de batiments"
+        Me.btnGrpBatiment.UseVisualStyleBackColor = True
+        '
+        'lblCPosition
+        '
+        Me.lblCPosition.AutoSize = True
+        Me.lblCPosition.Location = New System.Drawing.Point(6, 130)
+        Me.lblCPosition.Name = "lblCPosition"
+        Me.lblCPosition.Size = New System.Drawing.Size(69, 13)
+        Me.lblCPosition.TabIndex = 31
+        Me.lblCPosition.Text = "Localisation :"
+        '
+        'lblNom
+        '
+        Me.lblNom.AutoSize = True
+        Me.lblNom.Location = New System.Drawing.Point(93, 42)
+        Me.lblNom.Name = "lblNom"
+        Me.lblNom.Size = New System.Drawing.Size(75, 13)
+        Me.lblNom.TabIndex = 22
+        Me.lblNom.Text = "Nom de la clef"
+        '
+        'lblCStatus
+        '
+        Me.lblCStatus.AutoSize = True
+        Me.lblCStatus.Location = New System.Drawing.Point(6, 156)
+        Me.lblCStatus.Name = "lblCStatus"
+        Me.lblCStatus.Size = New System.Drawing.Size(43, 13)
+        Me.lblCStatus.TabIndex = 32
+        Me.lblCStatus.Text = "Status :"
+        '
+        'lblBatiment
+        '
+        Me.lblBatiment.Location = New System.Drawing.Point(93, 234)
+        Me.lblBatiment.Name = "lblBatiment"
+        Me.lblBatiment.Size = New System.Drawing.Size(122, 39)
+        Me.lblBatiment.TabIndex = 21
+        Me.lblBatiment.Text = "Groupe de Batiment"
+        '
+        'lblCDate
+        '
+        Me.lblCDate.AutoSize = True
+        Me.lblCDate.Location = New System.Drawing.Point(6, 182)
+        Me.lblCDate.Name = "lblCDate"
+        Me.lblCDate.Size = New System.Drawing.Size(70, 13)
+        Me.lblCDate.TabIndex = 33
+        Me.lblCDate.Text = "Date d'ajout :"
+        '
+        'lblTrousseau
+        '
+        Me.lblTrousseau.AutoSize = True
+        Me.lblTrousseau.Location = New System.Drawing.Point(93, 208)
+        Me.lblTrousseau.Name = "lblTrousseau"
+        Me.lblTrousseau.Size = New System.Drawing.Size(38, 13)
+        Me.lblTrousseau.TabIndex = 20
+        Me.lblTrousseau.Text = "Aucun"
+        '
+        'lblCTrousseau
+        '
+        Me.lblCTrousseau.AutoSize = True
+        Me.lblCTrousseau.Location = New System.Drawing.Point(6, 208)
+        Me.lblCTrousseau.Name = "lblCTrousseau"
+        Me.lblCTrousseau.Size = New System.Drawing.Size(63, 13)
+        Me.lblCTrousseau.TabIndex = 34
+        Me.lblCTrousseau.Text = "Trousseau :"
+        '
+        'lblDateAjout
+        '
+        Me.lblDateAjout.AutoSize = True
+        Me.lblDateAjout.Location = New System.Drawing.Point(93, 182)
+        Me.lblDateAjout.Name = "lblDateAjout"
+        Me.lblDateAjout.Size = New System.Drawing.Size(65, 13)
+        Me.lblDateAjout.TabIndex = 19
+        Me.lblDateAjout.Text = "25/12/2019"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(6, 234)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(81, 13)
+        Me.Label6.TabIndex = 35
+        Me.Label6.Text = "Utilisable dans :"
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Location = New System.Drawing.Point(93, 156)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(56, 13)
+        Me.lblStatus.TabIndex = 18
+        Me.lblStatus.Text = "Disponible"
+        '
+        'lblLoc
+        '
+        Me.lblLoc.AutoSize = True
+        Me.lblLoc.Location = New System.Drawing.Point(93, 130)
+        Me.lblLoc.Name = "lblLoc"
+        Me.lblLoc.Size = New System.Drawing.Size(97, 13)
+        Me.lblLoc.TabIndex = 17
+        Me.lblLoc.Text = "Tableaux de la clef"
+        '
+        'lblID
+        '
+        Me.lblID.AutoSize = True
+        Me.lblID.Location = New System.Drawing.Point(93, 16)
+        Me.lblID.Name = "lblID"
+        Me.lblID.Size = New System.Drawing.Size(39, 13)
+        Me.lblID.TabIndex = 16
+        Me.lblID.Text = "IDKEY"
+        '
         'frmPropAlertes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(521, 300)
+        Me.ClientSize = New System.Drawing.Size(521, 360)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.gbEmprunt)
         Me.Controls.Add(Me.GroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmPropAlertes"

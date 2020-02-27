@@ -35,4 +35,9 @@ Public Class frmCreerTrousseau
             Valider()
         End If
     End Sub
+
+    Private Sub frmCreerTrousseau_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
+    End Sub
 End Class

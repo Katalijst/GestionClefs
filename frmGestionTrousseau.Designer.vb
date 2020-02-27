@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmGestionTrousseau
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -22,8 +22,8 @@ Partial Class frmGestionTrousseau
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.gbListeClefs = New System.Windows.Forms.GroupBox()
         Me.dgvListClefs = New System.Windows.Forms.DataGridView()
         Me.gbTrousseau = New System.Windows.Forms.GroupBox()
@@ -54,7 +54,7 @@ Partial Class frmGestionTrousseau
         'gbListeClefs
         '
         Me.gbListeClefs.Controls.Add(Me.dgvListClefs)
-        Me.gbListeClefs.Location = New System.Drawing.Point(3, 99)
+        Me.gbListeClefs.Location = New System.Drawing.Point(3, 155)
         Me.gbListeClefs.Name = "gbListeClefs"
         Me.gbListeClefs.Size = New System.Drawing.Size(364, 328)
         Me.gbListeClefs.TabIndex = 17
@@ -71,14 +71,14 @@ Partial Class frmGestionTrousseau
         Me.dgvListClefs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListClefs.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListClefs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListClefs.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListClefs.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvListClefs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListClefs.Location = New System.Drawing.Point(6, 19)
         Me.dgvListClefs.MultiSelect = False
@@ -93,7 +93,7 @@ Partial Class frmGestionTrousseau
         'gbTrousseau
         '
         Me.gbTrousseau.Controls.Add(Me.dgvSelTrousseau)
-        Me.gbTrousseau.Location = New System.Drawing.Point(421, 99)
+        Me.gbTrousseau.Location = New System.Drawing.Point(421, 155)
         Me.gbTrousseau.Name = "gbTrousseau"
         Me.gbTrousseau.Size = New System.Drawing.Size(355, 328)
         Me.gbTrousseau.TabIndex = 18
@@ -110,14 +110,14 @@ Partial Class frmGestionTrousseau
         Me.dgvSelTrousseau.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSelTrousseau.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvSelTrousseau.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSelTrousseau.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSelTrousseau.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvSelTrousseau.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvSelTrousseau.Location = New System.Drawing.Point(6, 19)
         Me.dgvSelTrousseau.MultiSelect = False
@@ -132,7 +132,7 @@ Partial Class frmGestionTrousseau
         'gbRechercher
         '
         Me.gbRechercher.Controls.Add(Me.txtRechercher)
-        Me.gbRechercher.Location = New System.Drawing.Point(3, 14)
+        Me.gbRechercher.Location = New System.Drawing.Point(3, 70)
         Me.gbRechercher.Name = "gbRechercher"
         Me.gbRechercher.Size = New System.Drawing.Size(396, 42)
         Me.gbRechercher.TabIndex = 23
@@ -155,7 +155,7 @@ Partial Class frmGestionTrousseau
         Me.GroupBox3.Controls.Add(Me.btnAfficher)
         Me.GroupBox3.Controls.Add(Me.cmbTrousseauListe)
         Me.GroupBox3.Controls.Add(Me.btnSupprimerTrousseau)
-        Me.GroupBox3.Location = New System.Drawing.Point(405, 14)
+        Me.GroupBox3.Location = New System.Drawing.Point(405, 70)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(371, 79)
         Me.GroupBox3.TabIndex = 24
@@ -201,7 +201,7 @@ Partial Class frmGestionTrousseau
         '
         'btnCreerTrousseau
         '
-        Me.btnCreerTrousseau.Location = New System.Drawing.Point(9, 62)
+        Me.btnCreerTrousseau.Location = New System.Drawing.Point(9, 118)
         Me.btnCreerTrousseau.Name = "btnCreerTrousseau"
         Me.btnCreerTrousseau.Size = New System.Drawing.Size(223, 23)
         Me.btnCreerTrousseau.TabIndex = 24
@@ -210,7 +210,7 @@ Partial Class frmGestionTrousseau
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(397, 433)
+        Me.btnSave.Location = New System.Drawing.Point(397, 489)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(243, 32)
         Me.btnSave.TabIndex = 49
@@ -220,7 +220,7 @@ Partial Class frmGestionTrousseau
         'chkKeepOpen
         '
         Me.chkKeepOpen.AutoSize = True
-        Me.chkKeepOpen.Location = New System.Drawing.Point(235, 440)
+        Me.chkKeepOpen.Location = New System.Drawing.Point(235, 496)
         Me.chkKeepOpen.Name = "chkKeepOpen"
         Me.chkKeepOpen.Size = New System.Drawing.Size(144, 17)
         Me.chkKeepOpen.TabIndex = 51
@@ -230,7 +230,7 @@ Partial Class frmGestionTrousseau
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(646, 433)
+        Me.btnCancel.Location = New System.Drawing.Point(646, 489)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(130, 32)
         Me.btnCancel.TabIndex = 50
@@ -241,7 +241,7 @@ Partial Class frmGestionTrousseau
         '
         Me.pbRemSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pbRemSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.left_arrow_key
-        Me.pbRemSelBatiment.Location = New System.Drawing.Point(373, 273)
+        Me.pbRemSelBatiment.Location = New System.Drawing.Point(373, 329)
         Me.pbRemSelBatiment.Name = "pbRemSelBatiment"
         Me.pbRemSelBatiment.Size = New System.Drawing.Size(42, 42)
         Me.pbRemSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -252,7 +252,7 @@ Partial Class frmGestionTrousseau
         '
         Me.pbAddSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pbAddSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.keyboard_right_arrow_button
-        Me.pbAddSelBatiment.Location = New System.Drawing.Point(373, 222)
+        Me.pbAddSelBatiment.Location = New System.Drawing.Point(373, 278)
         Me.pbAddSelBatiment.Name = "pbAddSelBatiment"
         Me.pbAddSelBatiment.Size = New System.Drawing.Size(42, 42)
         Me.pbAddSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -265,7 +265,7 @@ Partial Class frmGestionTrousseau
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(780, 471)
+        Me.ClientSize = New System.Drawing.Size(780, 527)
         Me.Controls.Add(Me.pbRemSelBatiment)
         Me.Controls.Add(Me.pbAddSelBatiment)
         Me.Controls.Add(Me.btnSave)
@@ -276,7 +276,6 @@ Partial Class frmGestionTrousseau
         Me.Controls.Add(Me.gbRechercher)
         Me.Controls.Add(Me.gbTrousseau)
         Me.Controls.Add(Me.gbListeClefs)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmGestionTrousseau"
         Me.ShowIcon = False

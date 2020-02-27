@@ -442,7 +442,7 @@ Partial Class frmMain
         Me.btnClefsPerdues.Depth = 0
         Me.btnClefsPerdues.DrawShadows = True
         Me.btnClefsPerdues.HighEmphasis = False
-        Me.btnClefsPerdues.Icon = Global.GestionClefs.My.Resources.Resources.trousseaux
+        Me.btnClefsPerdues.Icon = Global.GestionClefs.My.Resources.Resources.clefperdue
         Me.btnClefsPerdues.Location = New System.Drawing.Point(142, 54)
         Me.btnClefsPerdues.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnClefsPerdues.MouseState = MaterialSkin.MouseState.HOVER
@@ -631,7 +631,7 @@ Partial Class frmMain
         Me.cbRechercher.IntegralHeight = False
         Me.cbRechercher.ItemHeight = 29
         Me.cbRechercher.Location = New System.Drawing.Point(358, 176)
-        Me.cbRechercher.MaxDropDownItems = 4
+        Me.cbRechercher.MaxDropDownItems = 6
         Me.cbRechercher.MouseState = MaterialSkin.MouseState.OUT
         Me.cbRechercher.Name = "cbRechercher"
         Me.cbRechercher.Size = New System.Drawing.Size(221, 35)

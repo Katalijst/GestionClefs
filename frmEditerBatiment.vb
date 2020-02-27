@@ -8,8 +8,7 @@ Public Class frmEditerBatiment
         lblFonction.Text = strTitleBFonction & " :"
         lblNom.Text = strTitleBNom & " :"
 
-        Dim intIndexNom As Integer = frmGestionBatiments.dgvListBatiment.Columns("Num").Index
-        stgBatID = frmGestionBatiments.dgvListBatiment.SelectedRows(0).Cells(intIndexNom).Value.ToString()
+        stgBatID = frmGestionBatiments.dgvListBatiment.SelectedRows(0).Cells(strTitleBNum).Value.ToString()
         txtID.Text = stgBatID
 
         Dim cmd As New MySqlCommand

@@ -3,6 +3,8 @@ Public Class frmEditerPersonne
     Shared stgPersonne As String
 
     Private Sub frmEditerPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
         lblType.Text = strTitleNGenre & " :"
         lblNom.Text = strTitleNNom & " :"
         lblTelephone.Text = strTitleNTelephone & " :"

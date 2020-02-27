@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmEditerPosition
-    Inherits System.Windows.Forms.Form
+    Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -40,7 +40,7 @@ Partial Class frmEditerPosition
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(237, 325)
+        Me.btnCancel.Location = New System.Drawing.Point(237, 383)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(117, 32)
         Me.btnCancel.TabIndex = 70
@@ -56,7 +56,7 @@ Partial Class frmEditerPosition
         Me.GroupBox2.Controls.Add(Me.lblPNom)
         Me.GroupBox2.Controls.Add(Me.lblPResponsable)
         Me.GroupBox2.Controls.Add(Me.txtNom)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 70)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(350, 307)
         Me.GroupBox2.TabIndex = 69
@@ -147,7 +147,7 @@ Partial Class frmEditerPosition
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(12, 325)
+        Me.btnSave.Location = New System.Drawing.Point(12, 383)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(219, 32)
         Me.btnSave.TabIndex = 68
@@ -160,11 +160,10 @@ Partial Class frmEditerPosition
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(373, 364)
+        Me.ClientSize = New System.Drawing.Size(373, 428)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnSave)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmEditerPosition"
