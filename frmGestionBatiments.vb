@@ -1,13 +1,20 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Text.RegularExpressions
 Public Class frmGestionBatiments
+    Private Sub frmGestionBatiments_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
     Private Sub frmAjouterBatiment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
         lblID.Text = strTitleBNum & " :"
+        txtID.Hint = strTitleBNum
         lblAdresse.Text = strTitleBAdresse & " :"
+        txtAdresse.Hint = strTitleBAdresse
         lblFonction.Text = strTitleBFonction & " :"
+        txtFonction.Hint = strTitleBFonction
         lblNom.Text = strTitleBNom & " :"
+        txtNom.Hint = strTitleBNom
 
         RefreshList()
     End Sub
@@ -33,7 +40,8 @@ Public Class frmGestionBatiments
             dtBatiments.Columns("BAdresse").ColumnName = strTitleBAdresse
             dtBatiments.Columns("BFonction").ColumnName = strTitleBFonction
 
-
+            dgvListBatiment.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing
+            dgvListBatiment.RowHeadersVisible = False
             dgvListBatiment.DataSource = dtBatiments
 
             For i = 0 To dgvListBatiment.ColumnCount - 2
@@ -42,15 +50,15 @@ Public Class frmGestionBatiments
             dgvListBatiment.Columns(dgvListBatiment.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             connecter().Close()
 
-            Dim r As DataRow
-            'CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
-            txtRechercher.AutoCompleteCustomSource.Clear()
-            'LOOPING THE ROW OF DATA IN THE DATATABLE
-            Dim intIndexNomBat As Integer = dgvListBatiment.Columns(strTitleBNom).Index
-            For Each r In dtBatiments.Rows
-                'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
-                txtRechercher.AutoCompleteCustomSource.Add(r.Item(intIndexNomBat).ToString)
-            Next
+            'Dim r As DataRow
+            ''CLEARING THE AUTOCOMPLETE SOURCE OF THE TEXTBOX
+            'txtRechercher.AutoCompleteCustomSource.Clear()
+            ''LOOPING THE ROW OF DATA IN THE DATATABLE
+            'Dim intIndexNomBat As Integer = dgvListBatiment.Columns(strTitleBNom).Index
+            'For Each r In dtBatiments.Rows
+            '    'ADDING THE DATA IN THE AUTO COMPLETE SOURCE OF THE TEXTBOX
+            '    txtRechercher.AutoCompleteCustomSource.Add(r.Item(intIndexNomBat).ToString)
+            'Next
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try

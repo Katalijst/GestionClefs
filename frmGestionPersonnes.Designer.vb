@@ -63,7 +63,7 @@ Partial Class frmGestionPersonnes
         Me.gbRechercher.Controls.Add(Me.txtRechercher)
         Me.gbRechercher.Location = New System.Drawing.Point(5, 5)
         Me.gbRechercher.Name = "gbRechercher"
-        Me.gbRechercher.Size = New System.Drawing.Size(404, 45)
+        Me.gbRechercher.Size = New System.Drawing.Size(417, 45)
         Me.gbRechercher.TabIndex = 61
         Me.gbRechercher.TabStop = False
         Me.gbRechercher.Text = "Rechercher une personne"
@@ -75,7 +75,7 @@ Partial Class frmGestionPersonnes
         Me.txtRechercher.Location = New System.Drawing.Point(6, 17)
         Me.txtRechercher.MaxLength = 255
         Me.txtRechercher.Name = "txtRechercher"
-        Me.txtRechercher.Size = New System.Drawing.Size(384, 20)
+        Me.txtRechercher.Size = New System.Drawing.Size(405, 20)
         Me.txtRechercher.TabIndex = 0
         '
         'GroupBox1
@@ -83,7 +83,7 @@ Partial Class frmGestionPersonnes
         Me.GroupBox1.Controls.Add(Me.dgvListPersonne)
         Me.GroupBox1.Location = New System.Drawing.Point(5, 56)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(404, 229)
+        Me.GroupBox1.Size = New System.Drawing.Size(417, 263)
         Me.GroupBox1.TabIndex = 60
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Liste des personnes"
@@ -114,7 +114,7 @@ Partial Class frmGestionPersonnes
         Me.dgvListPersonne.RowHeadersVisible = False
         Me.dgvListPersonne.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvListPersonne.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvListPersonne.Size = New System.Drawing.Size(392, 202)
+        Me.dgvListPersonne.Size = New System.Drawing.Size(405, 236)
         Me.dgvListPersonne.TabIndex = 45
         '
         'ContextMenuStrip1
@@ -140,11 +140,11 @@ Partial Class frmGestionPersonnes
         Me.MaterialTabControl1.Controls.Add(Me.tabAjouter)
         Me.MaterialTabControl1.Controls.Add(Me.tabRechercher)
         Me.MaterialTabControl1.Depth = 0
-        Me.MaterialTabControl1.Location = New System.Drawing.Point(12, 73)
+        Me.MaterialTabControl1.Location = New System.Drawing.Point(4, 70)
         Me.MaterialTabControl1.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialTabControl1.Name = "MaterialTabControl1"
         Me.MaterialTabControl1.SelectedIndex = 0
-        Me.MaterialTabControl1.Size = New System.Drawing.Size(422, 317)
+        Me.MaterialTabControl1.Size = New System.Drawing.Size(436, 356)
         Me.MaterialTabControl1.TabIndex = 46
         '
         'tabAjouter
@@ -152,7 +152,9 @@ Partial Class frmGestionPersonnes
         Me.tabAjouter.BackColor = System.Drawing.SystemColors.Control
         Me.tabAjouter.Controls.Add(Me.btnDelType)
         Me.tabAjouter.Controls.Add(Me.btnAddType)
+        Me.tabAjouter.Controls.Add(Me.btnCancel)
         Me.tabAjouter.Controls.Add(Me.MaterialLabel4)
+        Me.tabAjouter.Controls.Add(Me.btnSave)
         Me.tabAjouter.Controls.Add(Me.txtAutre)
         Me.tabAjouter.Controls.Add(Me.chkKeepOpen)
         Me.tabAjouter.Controls.Add(Me.MaterialLabel3)
@@ -164,7 +166,7 @@ Partial Class frmGestionPersonnes
         Me.tabAjouter.Location = New System.Drawing.Point(4, 22)
         Me.tabAjouter.Name = "tabAjouter"
         Me.tabAjouter.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabAjouter.Size = New System.Drawing.Size(414, 291)
+        Me.tabAjouter.Size = New System.Drawing.Size(428, 330)
         Me.tabAjouter.TabIndex = 0
         Me.tabAjouter.Text = "Ajouter"
         '
@@ -265,7 +267,7 @@ Partial Class frmGestionPersonnes
         Me.mtxtTel.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.mtxtTel.Hint = "Téléphone"
         Me.mtxtTel.Location = New System.Drawing.Point(6, 150)
-        Me.mtxtTel.MaxLength = 50
+        Me.mtxtTel.MaxLength = 12
         Me.mtxtTel.MouseState = MaterialSkin.MouseState.OUT
         Me.mtxtTel.Multiline = False
         Me.mtxtTel.Name = "mtxtTel"
@@ -344,7 +346,7 @@ Partial Class frmGestionPersonnes
         Me.tabRechercher.Location = New System.Drawing.Point(4, 22)
         Me.tabRechercher.Name = "tabRechercher"
         Me.tabRechercher.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabRechercher.Size = New System.Drawing.Size(414, 291)
+        Me.tabRechercher.Size = New System.Drawing.Size(428, 319)
         Me.tabRechercher.TabIndex = 1
         Me.tabRechercher.Text = "Rechercher"
         Me.tabRechercher.UseVisualStyleBackColor = True
@@ -356,7 +358,7 @@ Partial Class frmGestionPersonnes
         Me.btnSave.DrawShadows = True
         Me.btnSave.HighEmphasis = True
         Me.btnSave.Icon = Nothing
-        Me.btnSave.Location = New System.Drawing.Point(351, 375)
+        Me.btnSave.Location = New System.Drawing.Point(339, 288)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnSave.Name = "btnSave"
@@ -374,7 +376,7 @@ Partial Class frmGestionPersonnes
         Me.btnCancel.DrawShadows = True
         Me.btnCancel.HighEmphasis = True
         Me.btnCancel.Icon = Nothing
-        Me.btnCancel.Location = New System.Drawing.Point(254, 375)
+        Me.btnCancel.Location = New System.Drawing.Point(5, 288)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnCancel.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnCancel.Name = "btnCancel"
@@ -401,10 +403,8 @@ Partial Class frmGestionPersonnes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(445, 422)
+        Me.ClientSize = New System.Drawing.Size(445, 416)
         Me.Controls.Add(Me.MaterialTabSelector1)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.MaterialTabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -423,7 +423,6 @@ Partial Class frmGestionPersonnes
         Me.tabAjouter.PerformLayout()
         Me.tabRechercher.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

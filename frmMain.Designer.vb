@@ -731,7 +731,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1024, 768)
-        Me.Controls.Add(Me.lblAlertNotif)
+        Me.Controls.Add(Me.MaterialTabSelector1)
         Me.Controls.Add(Me.pbClearPanier)
         Me.Controls.Add(Me.lblNbDeClefs)
         Me.Controls.Add(Me.cbRechercher)
@@ -746,7 +746,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.MaterialTabControl1)
         Me.Controls.Add(Me.dgvPanier)
         Me.Controls.Add(Me.dgvResultats)
-        Me.Controls.Add(Me.MaterialTabSelector1)
+        Me.Controls.Add(Me.lblAlertNotif)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMain"
         Me.Text = "GestionClefs"

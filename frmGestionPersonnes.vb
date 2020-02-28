@@ -243,4 +243,11 @@ Public Class frmGestionPersonnes
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Dispose()
     End Sub
+
+    Private Sub mtxtTel_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles mtxtTel.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
 End Class

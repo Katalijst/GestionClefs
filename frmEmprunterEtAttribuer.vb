@@ -418,7 +418,8 @@ Public Class frmEmprunterEtAttribuer
                                 UPDATE
                                     Clefs
                                 SET
-                                    CStatus = @newStatut
+                                    CStatus = @newStatut,
+                                    CTrousseau = @newTrousseau
                                 WHERE
                                     CID = (
                                     SELECT
@@ -452,17 +453,20 @@ Public Class frmEmprunterEtAttribuer
             .Parameters.Add("@datedebut", MySqlDbType.Date)
             .Parameters.Add("@datefin", MySqlDbType.Date)
             .Parameters.Add("@newStatut", MySqlDbType.VarChar)
+            .Parameters.Add("@newTrousseau", MySqlDbType.VarChar)
         End With
 
         Try
             Dim i As Integer = 0
+            Dim ListTrID As List(Of String) = frmMain.listADetacher
+            Dim ListTrousseaux As New List(Of String)
             For Each r As DataRow In frmMain.dtPanier.Rows
                 Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
                 Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
-                Dim STRdtDebut As String = "dtDebut-" & i
-                Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
-                Dim STRdtFin As String = "dtFin-" & i
-                Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
+                    Dim STRdtDebut As String = "dtDebut-" & i
+                    Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
+                    Dim STRdtFin As String = "dtFin-" & i
+                    Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
 
                 With CommandeAjouterEmprunt
                     .Parameters("@IDClef").Value = r.Item(strTitleCID).ToString & "-%"
@@ -481,10 +485,45 @@ Public Class frmEmprunterEtAttribuer
                     Else
                         .Parameters("@newStatut").Value = "Attribuée"
                     End If
+                    If ListTrID.Contains(r.Item(strTitleCTrousseau).ToString & r.Item(strTitleCID).ToString) Then
+                        .Parameters("@newTrousseau").Value = "Aucun"
+                        ListTrousseaux.Add(r.Item(strTitleCTrousseau).ToString)
+                    Else
+                        .Parameters("@newTrousseau").Value = r.Item(strTitleCTrousseau).ToString
+                    End If
                 End With
                 CommandeAjouterEmprunt.ExecuteNonQuery()
+                    i += 1
+                Next
+            For Each str As String In ListTrousseaux
+                'supprimer trousseaux vides
+                Dim cmdCheckTrousseaux As New MySqlCommand
+                Dim dt As New DataTable
+                Dim da As New MySqlDataAdapter
+                Dim dt1 As New DataTable
+                Dim da1 As New MySqlDataAdapter
+                Dim sql As String
 
-                i += 1
+                cmdCheckTrousseaux.Parameters.Add("@TrousseauxClef", MySqlDbType.VarChar)
+
+                sql = "Select CID from Clefs where CTrousseau = @TrousseauxClef"
+                With cmdCheckTrousseaux
+                    .Parameters("@TrousseauxClef").Value = str
+                    .Connection = connecter()
+                    .CommandText = sql
+                    .ExecuteNonQuery()
+                End With
+                da.SelectCommand = cmdCheckTrousseaux
+                da.Fill(dt)
+                If dt.Rows.Count < 1 Then
+                    sql = "DELETE FROM Trousseaux where TNom = @TrousseauxClef"
+                    With cmdCheckTrousseaux
+                        .Parameters("@TrousseauxClef").Value = str
+                        .Connection = connecter()
+                        .CommandText = sql
+                        .ExecuteNonQuery()
+                    End With
+                End If
             Next
 
         Catch ex As MySqlException

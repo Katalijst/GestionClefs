@@ -5,13 +5,13 @@ Public Class frmEmpruntsEtAlertes
     Private Sub frmAlertes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If frmMain.AlertesEmpruntPerdu = 1 Then
             'Alertes
-            dgvEmpruntsEnCours.SelectedTab = tabAlertes
+            TabCtrlAlertesPerduesEmprunts.SelectedTab = tabAlertes
         ElseIf frmMain.AlertesEmpruntPerdu = 2 Then
             'Emprunt
-            dgvEmpruntsEnCours.SelectedTab = tabEnCours
+            TabCtrlAlertesPerduesEmprunts.SelectedTab = tabEnCours
         ElseIf frmMain.AlertesEmpruntPerdu = 3 Then
             'Perdues
-            dgvEmpruntsEnCours.SelectedTab = tabPerdues
+            TabCtrlAlertesPerduesEmprunts.SelectedTab = tabPerdues
         End If
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
@@ -49,7 +49,7 @@ Public Class frmEmpruntsEtAlertes
             dt.Reset()
             With cmd
                 .Connection = connecter()
-                .CommandText = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
+                .CommandText = "Select EIDClef, EDateFin From Emprunts Where EDateFin < DATE(NOW())"
             End With
             da.SelectCommand = cmd
             da.Fill(dt)
@@ -57,11 +57,13 @@ Public Class frmEmpruntsEtAlertes
             If dt.Rows.Count > 0 Then
                 lblAlertes.Text = dt.Rows.Count & " clefs non rendues !"
                 dtAlertes.Reset()
+                cmd.Parameters.Add("@IDClef", MySqlDbType.VarChar)
                 For i = 0 To dt.Rows.Count - 1
                     With cmd
                         .Connection = connecter()
-                                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef='" & dt.Rows(i)(0).ToString & "' AND CID=EIDClef"
-                                    End With
+                        .Parameters("@IDClef").Value = dt.Rows(i)(0).ToString
+                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef=@IDClef AND CID=EIDClef AND EDatefin < DATE(NOW() + 1);"
+                    End With
                     da.SelectCommand = cmd
                     Dim dtTemp As New DataTable
                     da.Fill(dtTemp)
@@ -80,10 +82,10 @@ Public Class frmEmpruntsEtAlertes
                 dtAlertes.Columns("EDateDebut").ColumnName = strTitleEDateDebut
                 dtAlertes.Columns("EDateFin").ColumnName = strTitleEDateFin
 
-                dgvResultats.DataSource = dtAlertes
+                dgvAlertes.DataSource = dtAlertes
             Else
-                dgvResultats.Rows.Clear()
-                dgvResultats.Refresh()
+                dgvAlertes.Rows.Clear()
+                dgvAlertes.Refresh()
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -91,25 +93,83 @@ Public Class frmEmpruntsEtAlertes
             connecter().Close()
         End Try
     End Sub
-    Private Sub dgvResultats_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResultats.CellDoubleClick
-        If dgvResultats.SelectedRows.Count > 0 Then
+
+    Public Sub RefreshEmprunt()
+        Dim dateNow As Date = Now
+
+        Dim cmd As New MySqlCommand
+        Dim dt As New DataTable
+        Dim dtEmprunt As New DataTable
+        Dim da As New MySqlDataAdapter
+
+
+        Dim sql As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
+
+        Try
+            dt.Reset()
+            With cmd
+                .Connection = connecter()
+                .CommandText = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dt)
+            If dt.Rows.Count > 0 Then
+                dtEmprunt.Reset()
+                cmd.Parameters.Add("@IDClef", MySqlDbType.VarChar)
+                For i = 0 To dt.Rows.Count - 1
+                    With cmd
+                        .Connection = connecter()
+                        .Parameters("@IDClef").Value = dt.Rows(i)(0).ToString
+                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef=@IDClef AND CID=EIDClef"
+                    End With
+                    da.SelectCommand = cmd
+                    Dim dtTemp As New DataTable
+                    da.Fill(dtTemp)
+                    For Each dr As DataRow In dtTemp.Rows
+                        If dtEmprunt.Rows.Count < 1 Then
+                            dtEmprunt = dtTemp
+                        Else
+                            dtEmprunt.Rows.Add(dr.ItemArray)
+                        End If
+                    Next
+                Next
+                dtEmprunt.Columns("EIDClef").ColumnName = strTitleCID
+                dtEmprunt.Columns("CNom").ColumnName = strTitleCNom
+                dtEmprunt.Columns("EIDGenre").ColumnName = strTitleEGenre
+                dtEmprunt.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
+                dtEmprunt.Columns("EDateDebut").ColumnName = strTitleEDateDebut
+                dtEmprunt.Columns("EDateFin").ColumnName = strTitleEDateFin
+                dgvEmpruntsEnCours.DataSource = dtEmprunt
+            Else
+                dgvEmpruntsEnCours.Rows.Clear()
+                dgvEmpruntsEnCours.Refresh()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            connecter().Close()
+        End Try
+    End Sub
+
+    Private Sub dgvResultats_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAlertes.CellDoubleClick
+        If dgvAlertes.SelectedRows.Count > 0 Then
             frmPropAlertes.ShowDialog()
         End If
     End Sub
-    Private Sub dgvResultats_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvResultats.CellMouseDown
+    Private Sub dgvResultats_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvAlertes.CellMouseDown
         If e.RowIndex <> -1 AndAlso e.ColumnIndex <> -1 Then
             If e.Button = MouseButtons.Right Then
                 Dim clickedRow As DataGridViewRow = (TryCast(sender, DataGridView)).Rows(e.RowIndex)
-                If Not clickedRow.Selected Then dgvResultats.CurrentCell = clickedRow.Cells(e.ColumnIndex)
-                Dim mousePosition = dgvResultats.PointToClient(Cursor.Position)
-                menuGrid.Show(dgvResultats, mousePosition)
+                If Not clickedRow.Selected Then dgvAlertes.CurrentCell = clickedRow.Cells(e.ColumnIndex)
+                Dim mousePosition = dgvAlertes.PointToClient(Cursor.Position)
+                menuGrid.Show(dgvAlertes, mousePosition)
             End If
         End If
     End Sub
 
     Private Sub RetourToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RetourToolStripMenuItem.Click
-        If dgvResultats.SelectedRows.Count > 0 Then
-            RetourClef(dgvResultats.SelectedRows(0).Cells(strTitleCID).Value.ToString())
+        If dgvAlertes.SelectedRows.Count > 0 Then
+            RetourClef(dgvAlertes.SelectedRows(0).Cells(strTitleCID).Value.ToString())
         End If
     End Sub
 
@@ -257,10 +317,10 @@ Public Class frmEmpruntsEtAlertes
         End If
 
         Try
-            For i = 0 To dgvResultats.RowCount - 1
-                If dgvResultats.Rows(i).Cells(intIndex).Value.ToString.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
-                    dgvResultats.Rows(i).Selected = True
-                    dgvResultats.FirstDisplayedScrollingRowIndex = i
+            For i = 0 To dgvAlertes.RowCount - 1
+                If dgvAlertes.Rows(i).Cells(intIndex).Value.ToString.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
+                    dgvAlertes.Rows(i).Selected = True
+                    dgvAlertes.FirstDisplayedScrollingRowIndex = i
                     Exit For
                 End If
             Next

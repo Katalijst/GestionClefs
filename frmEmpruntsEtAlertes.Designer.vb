@@ -24,7 +24,7 @@ Partial Class frmEmpruntsEtAlertes
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEmpruntsEtAlertes))
-        Me.dgvResultats = New System.Windows.Forms.DataGridView()
+        Me.dgvAlertes = New System.Windows.Forms.DataGridView()
         Me.menuGrid = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RetourToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropriétésToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -32,45 +32,45 @@ Partial Class frmEmpruntsEtAlertes
         Me.cbRechercher = New MaterialSkin.Controls.MaterialComboBox()
         Me.lblAlertes = New MaterialSkin.Controls.MaterialLabel()
         Me.chkAlertPopUp = New MaterialSkin.Controls.MaterialSwitch()
-        Me.dgvEmpruntsEnCours = New MaterialSkin.Controls.MaterialTabControl()
+        Me.TabCtrlAlertesPerduesEmprunts = New MaterialSkin.Controls.MaterialTabControl()
         Me.tabEnCours = New System.Windows.Forms.TabPage()
+        Me.MaterialTextBox2 = New MaterialSkin.Controls.MaterialTextBox()
+        Me.dgvEmpruntsEnCours = New System.Windows.Forms.DataGridView()
+        Me.MaterialComboBox2 = New MaterialSkin.Controls.MaterialComboBox()
         Me.tabPerdues = New System.Windows.Forms.TabPage()
-        Me.tabAlertes = New System.Windows.Forms.TabPage()
-        Me.MaterialTabSelector1 = New MaterialSkin.Controls.MaterialTabSelector()
         Me.MaterialTextBox1 = New MaterialSkin.Controls.MaterialTextBox()
         Me.dgvClefsPerdues = New System.Windows.Forms.DataGridView()
         Me.MaterialComboBox1 = New MaterialSkin.Controls.MaterialComboBox()
-        Me.MaterialTextBox2 = New MaterialSkin.Controls.MaterialTextBox()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.MaterialComboBox2 = New MaterialSkin.Controls.MaterialComboBox()
-        CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabAlertes = New System.Windows.Forms.TabPage()
+        Me.MaterialTabSelector1 = New MaterialSkin.Controls.MaterialTabSelector()
+        CType(Me.dgvAlertes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuGrid.SuspendLayout()
-        Me.dgvEmpruntsEnCours.SuspendLayout()
+        Me.TabCtrlAlertesPerduesEmprunts.SuspendLayout()
         Me.tabEnCours.SuspendLayout()
+        CType(Me.dgvEmpruntsEnCours, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPerdues.SuspendLayout()
-        Me.tabAlertes.SuspendLayout()
         CType(Me.dgvClefsPerdues, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabAlertes.SuspendLayout()
         Me.SuspendLayout()
         '
-        'dgvResultats
+        'dgvAlertes
         '
-        Me.dgvResultats.AllowUserToAddRows = False
-        Me.dgvResultats.AllowUserToDeleteRows = False
-        Me.dgvResultats.AllowUserToResizeRows = False
-        Me.dgvResultats.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.dgvResultats.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvResultats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvResultats.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvResultats.Location = New System.Drawing.Point(7, 55)
-        Me.dgvResultats.MultiSelect = False
-        Me.dgvResultats.Name = "dgvResultats"
-        Me.dgvResultats.ReadOnly = True
-        Me.dgvResultats.RowHeadersVisible = False
-        Me.dgvResultats.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgvResultats.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvResultats.Size = New System.Drawing.Size(802, 341)
-        Me.dgvResultats.TabIndex = 1
+        Me.dgvAlertes.AllowUserToAddRows = False
+        Me.dgvAlertes.AllowUserToDeleteRows = False
+        Me.dgvAlertes.AllowUserToResizeRows = False
+        Me.dgvAlertes.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.dgvAlertes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvAlertes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvAlertes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.dgvAlertes.Location = New System.Drawing.Point(7, 55)
+        Me.dgvAlertes.MultiSelect = False
+        Me.dgvAlertes.Name = "dgvAlertes"
+        Me.dgvAlertes.ReadOnly = True
+        Me.dgvAlertes.RowHeadersVisible = False
+        Me.dgvAlertes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvAlertes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvAlertes.Size = New System.Drawing.Size(802, 341)
+        Me.dgvAlertes.TabIndex = 1
         '
         'menuGrid
         '
@@ -81,13 +81,13 @@ Partial Class frmEmpruntsEtAlertes
         'RetourToolStripMenuItem
         '
         Me.RetourToolStripMenuItem.Name = "RetourToolStripMenuItem"
-        Me.RetourToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RetourToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
         Me.RetourToolStripMenuItem.Text = "Rendre la clef"
         '
         'PropriétésToolStripMenuItem
         '
         Me.PropriétésToolStripMenuItem.Name = "PropriétésToolStripMenuItem"
-        Me.PropriétésToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PropriétésToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
         Me.PropriétésToolStripMenuItem.Text = "Informations"
         '
         'txtRechercherAlertes
@@ -162,25 +162,25 @@ Partial Class frmEmpruntsEtAlertes
         Me.chkAlertPopUp.Text = "Pop-up d'alerte au démarrage"
         Me.chkAlertPopUp.UseVisualStyleBackColor = True
         '
-        'dgvEmpruntsEnCours
+        'TabCtrlAlertesPerduesEmprunts
         '
-        Me.dgvEmpruntsEnCours.Controls.Add(Me.tabEnCours)
-        Me.dgvEmpruntsEnCours.Controls.Add(Me.tabPerdues)
-        Me.dgvEmpruntsEnCours.Controls.Add(Me.tabAlertes)
-        Me.dgvEmpruntsEnCours.Depth = 0
-        Me.dgvEmpruntsEnCours.Location = New System.Drawing.Point(1, 68)
-        Me.dgvEmpruntsEnCours.Margin = New System.Windows.Forms.Padding(2)
-        Me.dgvEmpruntsEnCours.MouseState = MaterialSkin.MouseState.HOVER
-        Me.dgvEmpruntsEnCours.Name = "dgvEmpruntsEnCours"
-        Me.dgvEmpruntsEnCours.Padding = New System.Drawing.Point(0, 0)
-        Me.dgvEmpruntsEnCours.SelectedIndex = 0
-        Me.dgvEmpruntsEnCours.Size = New System.Drawing.Size(823, 424)
-        Me.dgvEmpruntsEnCours.TabIndex = 16
+        Me.TabCtrlAlertesPerduesEmprunts.Controls.Add(Me.tabEnCours)
+        Me.TabCtrlAlertesPerduesEmprunts.Controls.Add(Me.tabPerdues)
+        Me.TabCtrlAlertesPerduesEmprunts.Controls.Add(Me.tabAlertes)
+        Me.TabCtrlAlertesPerduesEmprunts.Depth = 0
+        Me.TabCtrlAlertesPerduesEmprunts.Location = New System.Drawing.Point(1, 68)
+        Me.TabCtrlAlertesPerduesEmprunts.Margin = New System.Windows.Forms.Padding(2)
+        Me.TabCtrlAlertesPerduesEmprunts.MouseState = MaterialSkin.MouseState.HOVER
+        Me.TabCtrlAlertesPerduesEmprunts.Name = "TabCtrlAlertesPerduesEmprunts"
+        Me.TabCtrlAlertesPerduesEmprunts.Padding = New System.Drawing.Point(0, 0)
+        Me.TabCtrlAlertesPerduesEmprunts.SelectedIndex = 0
+        Me.TabCtrlAlertesPerduesEmprunts.Size = New System.Drawing.Size(823, 424)
+        Me.TabCtrlAlertesPerduesEmprunts.TabIndex = 16
         '
         'tabEnCours
         '
         Me.tabEnCours.Controls.Add(Me.MaterialTextBox2)
-        Me.tabEnCours.Controls.Add(Me.DataGridView2)
+        Me.tabEnCours.Controls.Add(Me.dgvEmpruntsEnCours)
         Me.tabEnCours.Controls.Add(Me.MaterialComboBox2)
         Me.tabEnCours.Location = New System.Drawing.Point(4, 22)
         Me.tabEnCours.Name = "tabEnCours"
@@ -189,6 +189,67 @@ Partial Class frmEmpruntsEtAlertes
         Me.tabEnCours.TabIndex = 2
         Me.tabEnCours.Text = "En cours"
         Me.tabEnCours.UseVisualStyleBackColor = True
+        '
+        'MaterialTextBox2
+        '
+        Me.MaterialTextBox2.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.MaterialTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.MaterialTextBox2.Depth = 0
+        Me.MaterialTextBox2.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.MaterialTextBox2.Hint = "Rechercher..."
+        Me.MaterialTextBox2.Location = New System.Drawing.Point(7, -4)
+        Me.MaterialTextBox2.MaxLength = 50
+        Me.MaterialTextBox2.MouseState = MaterialSkin.MouseState.OUT
+        Me.MaterialTextBox2.Multiline = False
+        Me.MaterialTextBox2.Name = "MaterialTextBox2"
+        Me.MaterialTextBox2.Size = New System.Drawing.Size(347, 36)
+        Me.MaterialTextBox2.TabIndex = 17
+        Me.MaterialTextBox2.Text = ""
+        Me.MaterialTextBox2.UseTallSize = False
+        '
+        'dgvEmpruntsEnCours
+        '
+        Me.dgvEmpruntsEnCours.AllowUserToAddRows = False
+        Me.dgvEmpruntsEnCours.AllowUserToDeleteRows = False
+        Me.dgvEmpruntsEnCours.AllowUserToResizeRows = False
+        Me.dgvEmpruntsEnCours.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.dgvEmpruntsEnCours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvEmpruntsEnCours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvEmpruntsEnCours.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.dgvEmpruntsEnCours.Location = New System.Drawing.Point(7, 55)
+        Me.dgvEmpruntsEnCours.MultiSelect = False
+        Me.dgvEmpruntsEnCours.Name = "dgvEmpruntsEnCours"
+        Me.dgvEmpruntsEnCours.ReadOnly = True
+        Me.dgvEmpruntsEnCours.RowHeadersVisible = False
+        Me.dgvEmpruntsEnCours.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvEmpruntsEnCours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvEmpruntsEnCours.Size = New System.Drawing.Size(802, 341)
+        Me.dgvEmpruntsEnCours.TabIndex = 16
+        '
+        'MaterialComboBox2
+        '
+        Me.MaterialComboBox2.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.MaterialComboBox2.AutoResize = False
+        Me.MaterialComboBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.MaterialComboBox2.Depth = 0
+        Me.MaterialComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.MaterialComboBox2.DropDownHeight = 118
+        Me.MaterialComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.MaterialComboBox2.DropDownWidth = 121
+        Me.MaterialComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.MaterialComboBox2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.MaterialComboBox2.FormattingEnabled = True
+        Me.MaterialComboBox2.Hint = "Type de recherche"
+        Me.MaterialComboBox2.IntegralHeight = False
+        Me.MaterialComboBox2.ItemHeight = 29
+        Me.MaterialComboBox2.Items.AddRange(New Object() {"ID", "Nom", "Emprunteur", "Lieu"})
+        Me.MaterialComboBox2.Location = New System.Drawing.Point(360, -4)
+        Me.MaterialComboBox2.MaxDropDownItems = 4
+        Me.MaterialComboBox2.MouseState = MaterialSkin.MouseState.OUT
+        Me.MaterialComboBox2.Name = "MaterialComboBox2"
+        Me.MaterialComboBox2.Size = New System.Drawing.Size(181, 35)
+        Me.MaterialComboBox2.TabIndex = 18
+        Me.MaterialComboBox2.UseTallSize = False
         '
         'tabPerdues
         '
@@ -202,33 +263,6 @@ Partial Class frmEmpruntsEtAlertes
         Me.tabPerdues.TabIndex = 1
         Me.tabPerdues.Text = "Clefs Perdues"
         Me.tabPerdues.UseVisualStyleBackColor = True
-        '
-        'tabAlertes
-        '
-        Me.tabAlertes.Controls.Add(Me.txtRechercherAlertes)
-        Me.tabAlertes.Controls.Add(Me.dgvResultats)
-        Me.tabAlertes.Controls.Add(Me.chkAlertPopUp)
-        Me.tabAlertes.Controls.Add(Me.cbRechercher)
-        Me.tabAlertes.Controls.Add(Me.lblAlertes)
-        Me.tabAlertes.Location = New System.Drawing.Point(4, 22)
-        Me.tabAlertes.Name = "tabAlertes"
-        Me.tabAlertes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabAlertes.Size = New System.Drawing.Size(815, 398)
-        Me.tabAlertes.TabIndex = 0
-        Me.tabAlertes.Text = "Alertes"
-        Me.tabAlertes.UseVisualStyleBackColor = True
-        '
-        'MaterialTabSelector1
-        '
-        Me.MaterialTabSelector1.BaseTabControl = Me.dgvEmpruntsEnCours
-        Me.MaterialTabSelector1.Depth = 0
-        Me.MaterialTabSelector1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialTabSelector1.Location = New System.Drawing.Point(209, 26)
-        Me.MaterialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER
-        Me.MaterialTabSelector1.Name = "MaterialTabSelector1"
-        Me.MaterialTabSelector1.Size = New System.Drawing.Size(378, 38)
-        Me.MaterialTabSelector1.TabIndex = 17
-        Me.MaterialTabSelector1.Text = "MaterialTabSelector1"
         '
         'MaterialTextBox1
         '
@@ -291,66 +325,32 @@ Partial Class frmEmpruntsEtAlertes
         Me.MaterialComboBox1.TabIndex = 18
         Me.MaterialComboBox1.UseTallSize = False
         '
-        'MaterialTextBox2
+        'tabAlertes
         '
-        Me.MaterialTextBox2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MaterialTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.MaterialTextBox2.Depth = 0
-        Me.MaterialTextBox2.Font = New System.Drawing.Font("Roboto", 12.0!)
-        Me.MaterialTextBox2.Hint = "Rechercher..."
-        Me.MaterialTextBox2.Location = New System.Drawing.Point(7, -4)
-        Me.MaterialTextBox2.MaxLength = 50
-        Me.MaterialTextBox2.MouseState = MaterialSkin.MouseState.OUT
-        Me.MaterialTextBox2.Multiline = False
-        Me.MaterialTextBox2.Name = "MaterialTextBox2"
-        Me.MaterialTextBox2.Size = New System.Drawing.Size(347, 36)
-        Me.MaterialTextBox2.TabIndex = 17
-        Me.MaterialTextBox2.Text = ""
-        Me.MaterialTextBox2.UseTallSize = False
+        Me.tabAlertes.Controls.Add(Me.txtRechercherAlertes)
+        Me.tabAlertes.Controls.Add(Me.dgvAlertes)
+        Me.tabAlertes.Controls.Add(Me.chkAlertPopUp)
+        Me.tabAlertes.Controls.Add(Me.cbRechercher)
+        Me.tabAlertes.Controls.Add(Me.lblAlertes)
+        Me.tabAlertes.Location = New System.Drawing.Point(4, 22)
+        Me.tabAlertes.Name = "tabAlertes"
+        Me.tabAlertes.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabAlertes.Size = New System.Drawing.Size(815, 398)
+        Me.tabAlertes.TabIndex = 0
+        Me.tabAlertes.Text = "Alertes"
+        Me.tabAlertes.UseVisualStyleBackColor = True
         '
-        'DataGridView2
+        'MaterialTabSelector1
         '
-        Me.DataGridView2.AllowUserToAddRows = False
-        Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.AllowUserToResizeRows = False
-        Me.DataGridView2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView2.Location = New System.Drawing.Point(7, 55)
-        Me.DataGridView2.MultiSelect = False
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.RowHeadersVisible = False
-        Me.DataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView2.Size = New System.Drawing.Size(802, 341)
-        Me.DataGridView2.TabIndex = 16
-        '
-        'MaterialComboBox2
-        '
-        Me.MaterialComboBox2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.MaterialComboBox2.AutoResize = False
-        Me.MaterialComboBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.MaterialComboBox2.Depth = 0
-        Me.MaterialComboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.MaterialComboBox2.DropDownHeight = 118
-        Me.MaterialComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.MaterialComboBox2.DropDownWidth = 121
-        Me.MaterialComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialComboBox2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.MaterialComboBox2.FormattingEnabled = True
-        Me.MaterialComboBox2.Hint = "Type de recherche"
-        Me.MaterialComboBox2.IntegralHeight = False
-        Me.MaterialComboBox2.ItemHeight = 29
-        Me.MaterialComboBox2.Items.AddRange(New Object() {"ID", "Nom", "Emprunteur", "Lieu"})
-        Me.MaterialComboBox2.Location = New System.Drawing.Point(360, -4)
-        Me.MaterialComboBox2.MaxDropDownItems = 4
-        Me.MaterialComboBox2.MouseState = MaterialSkin.MouseState.OUT
-        Me.MaterialComboBox2.Name = "MaterialComboBox2"
-        Me.MaterialComboBox2.Size = New System.Drawing.Size(181, 35)
-        Me.MaterialComboBox2.TabIndex = 18
-        Me.MaterialComboBox2.UseTallSize = False
+        Me.MaterialTabSelector1.BaseTabControl = Me.TabCtrlAlertesPerduesEmprunts
+        Me.MaterialTabSelector1.Depth = 0
+        Me.MaterialTabSelector1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MaterialTabSelector1.Location = New System.Drawing.Point(209, 26)
+        Me.MaterialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialTabSelector1.Name = "MaterialTabSelector1"
+        Me.MaterialTabSelector1.Size = New System.Drawing.Size(378, 38)
+        Me.MaterialTabSelector1.TabIndex = 17
+        Me.MaterialTabSelector1.Text = "MaterialTabSelector1"
         '
         'frmEmpruntsEtAlertes
         '
@@ -358,26 +358,26 @@ Partial Class frmEmpruntsEtAlertes
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(826, 497)
         Me.Controls.Add(Me.MaterialTabSelector1)
-        Me.Controls.Add(Me.dgvEmpruntsEnCours)
+        Me.Controls.Add(Me.TabCtrlAlertesPerduesEmprunts)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmEmpruntsEtAlertes"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Text = "Emprunts et alertes"
-        CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvAlertes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuGrid.ResumeLayout(False)
-        Me.dgvEmpruntsEnCours.ResumeLayout(False)
+        Me.TabCtrlAlertesPerduesEmprunts.ResumeLayout(False)
         Me.tabEnCours.ResumeLayout(False)
+        CType(Me.dgvEmpruntsEnCours, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPerdues.ResumeLayout(False)
+        CType(Me.dgvClefsPerdues, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabAlertes.ResumeLayout(False)
         Me.tabAlertes.PerformLayout()
-        CType(Me.dgvClefsPerdues, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents dgvResultats As DataGridView
+    Friend WithEvents dgvAlertes As DataGridView
     Friend WithEvents menuGrid As ContextMenuStrip
     Friend WithEvents RetourToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PropriétésToolStripMenuItem As ToolStripMenuItem
@@ -385,13 +385,13 @@ Partial Class frmEmpruntsEtAlertes
     Friend WithEvents cbRechercher As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents lblAlertes As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents chkAlertPopUp As MaterialSkin.Controls.MaterialSwitch
-    Friend WithEvents dgvEmpruntsEnCours As MaterialSkin.Controls.MaterialTabControl
+    Friend WithEvents TabCtrlAlertesPerduesEmprunts As MaterialSkin.Controls.MaterialTabControl
     Friend WithEvents tabAlertes As TabPage
     Friend WithEvents tabPerdues As TabPage
     Friend WithEvents MaterialTabSelector1 As MaterialSkin.Controls.MaterialTabSelector
     Friend WithEvents tabEnCours As TabPage
     Friend WithEvents MaterialTextBox2 As MaterialSkin.Controls.MaterialTextBox
-    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents dgvEmpruntsEnCours As DataGridView
     Friend WithEvents MaterialComboBox2 As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents MaterialTextBox1 As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents dgvClefsPerdues As DataGridView

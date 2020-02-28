@@ -22,6 +22,7 @@ Partial Class frmEditerEtProprietes
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditerEtProprietes))
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.btnSave = New MaterialSkin.Controls.MaterialButton()
@@ -32,14 +33,12 @@ Partial Class frmEditerEtProprietes
         Me.txtID = New MaterialSkin.Controls.MaterialTextBox()
         Me.txtNom = New MaterialSkin.Controls.MaterialTextBox()
         Me.cmbLoc = New MaterialSkin.Controls.MaterialComboBox()
-        Me.cmbTrousseauListe = New MaterialSkin.Controls.MaterialComboBox()
         Me.btnGrpBatiment = New MaterialSkin.Controls.MaterialButton()
         Me.lblCDate = New MaterialSkin.Controls.MaterialLabel()
         Me.lblCTrousseau = New MaterialSkin.Controls.MaterialLabel()
         Me.lblCBatiment = New MaterialSkin.Controls.MaterialLabel()
         Me.MaterialDivider1 = New MaterialSkin.Controls.MaterialDivider()
         Me.btnNewLoc = New MaterialSkin.Controls.MaterialButton()
-        Me.btnNewTrousseau = New MaterialSkin.Controls.MaterialButton()
         Me.MaterialCheckbox1 = New MaterialSkin.Controls.MaterialCheckbox()
         Me.MaterialCheckbox2 = New MaterialSkin.Controls.MaterialCheckbox()
         Me.MaterialCheckbox3 = New MaterialSkin.Controls.MaterialCheckbox()
@@ -64,16 +63,19 @@ Partial Class frmEditerEtProprietes
         Me.lblDateFin = New MaterialSkin.Controls.MaterialLabel()
         Me.dtpFin = New System.Windows.Forms.DateTimePicker()
         Me.txtTel = New MaterialSkin.Controls.MaterialTextBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblTrousseauInfo = New MaterialSkin.Controls.MaterialLabel()
+        Me.MaterialLabel2 = New MaterialSkin.Controls.MaterialLabel()
         Me.SuspendLayout()
         '
         'dtpDate
         '
         Me.dtpDate.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDate.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpDate.Location = New System.Drawing.Point(137, 286)
         Me.dtpDate.Name = "dtpDate"
-        Me.dtpDate.Size = New System.Drawing.Size(182, 26)
+        Me.dtpDate.Size = New System.Drawing.Size(182, 27)
         Me.dtpDate.TabIndex = 12
         '
         'btnSave
@@ -197,28 +199,6 @@ Partial Class frmEditerEtProprietes
         Me.cmbLoc.TabIndex = 42
         Me.cmbLoc.UseTallSize = False
         '
-        'cmbTrousseauListe
-        '
-        Me.cmbTrousseauListe.AutoResize = False
-        Me.cmbTrousseauListe.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbTrousseauListe.Depth = 0
-        Me.cmbTrousseauListe.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.cmbTrousseauListe.DropDownHeight = 118
-        Me.cmbTrousseauListe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTrousseauListe.DropDownWidth = 121
-        Me.cmbTrousseauListe.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
-        Me.cmbTrousseauListe.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.cmbTrousseauListe.FormattingEnabled = True
-        Me.cmbTrousseauListe.IntegralHeight = False
-        Me.cmbTrousseauListe.ItemHeight = 29
-        Me.cmbTrousseauListe.Location = New System.Drawing.Point(137, 324)
-        Me.cmbTrousseauListe.MaxDropDownItems = 4
-        Me.cmbTrousseauListe.MouseState = MaterialSkin.MouseState.OUT
-        Me.cmbTrousseauListe.Name = "cmbTrousseauListe"
-        Me.cmbTrousseauListe.Size = New System.Drawing.Size(182, 35)
-        Me.cmbTrousseauListe.TabIndex = 44
-        Me.cmbTrousseauListe.UseTallSize = False
-        '
         'btnGrpBatiment
         '
         Me.btnGrpBatiment.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -301,23 +281,6 @@ Partial Class frmEditerEtProprietes
         Me.btnNewLoc.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnNewLoc.UseAccentColor = False
         Me.btnNewLoc.UseVisualStyleBackColor = True
-        '
-        'btnNewTrousseau
-        '
-        Me.btnNewTrousseau.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnNewTrousseau.Depth = 0
-        Me.btnNewTrousseau.DrawShadows = True
-        Me.btnNewTrousseau.HighEmphasis = True
-        Me.btnNewTrousseau.Icon = Global.GestionClefs.My.Resources.Resources.plus
-        Me.btnNewTrousseau.Location = New System.Drawing.Point(326, 323)
-        Me.btnNewTrousseau.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.btnNewTrousseau.MouseState = MaterialSkin.MouseState.HOVER
-        Me.btnNewTrousseau.Name = "btnNewTrousseau"
-        Me.btnNewTrousseau.Size = New System.Drawing.Size(44, 36)
-        Me.btnNewTrousseau.TabIndex = 51
-        Me.btnNewTrousseau.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
-        Me.btnNewTrousseau.UseAccentColor = False
-        Me.btnNewTrousseau.UseVisualStyleBackColor = True
         '
         'MaterialCheckbox1
         '
@@ -429,11 +392,11 @@ Partial Class frmEditerEtProprietes
         '
         Me.lblBatiment.Depth = 0
         Me.lblBatiment.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.lblBatiment.Location = New System.Drawing.Point(134, 395)
-        Me.lblBatiment.MaximumSize = New System.Drawing.Size(235, 71)
+        Me.lblBatiment.Location = New System.Drawing.Point(137, 374)
+        Me.lblBatiment.MaximumSize = New System.Drawing.Size(235, 85)
         Me.lblBatiment.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblBatiment.Name = "lblBatiment"
-        Me.lblBatiment.Size = New System.Drawing.Size(235, 71)
+        Me.lblBatiment.Size = New System.Drawing.Size(232, 85)
         Me.lblBatiment.TabIndex = 55
         Me.lblBatiment.Text = "Bâtiment"
         '
@@ -570,7 +533,6 @@ Partial Class frmEditerEtProprietes
         '
         Me.txtEmprunteur.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtEmprunteur.Depth = 0
-        Me.txtEmprunteur.DetectUrls = False
         Me.txtEmprunteur.Enabled = False
         Me.txtEmprunteur.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtEmprunteur.Hint = "Emprunteur"
@@ -612,11 +574,11 @@ Partial Class frmEditerEtProprietes
         '
         Me.dtpDebut.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDebut.Enabled = False
-        Me.dtpDebut.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDebut.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDebut.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpDebut.Location = New System.Drawing.Point(465, 396)
         Me.dtpDebut.Name = "dtpDebut"
-        Me.dtpDebut.Size = New System.Drawing.Size(128, 26)
+        Me.dtpDebut.Size = New System.Drawing.Size(128, 27)
         Me.dtpDebut.TabIndex = 80
         '
         'lblDateFin
@@ -636,11 +598,11 @@ Partial Class frmEditerEtProprietes
         '
         Me.dtpFin.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFin.Enabled = False
-        Me.dtpFin.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpFin.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpFin.Location = New System.Drawing.Point(465, 432)
         Me.dtpFin.Name = "dtpFin"
-        Me.dtpFin.Size = New System.Drawing.Size(128, 26)
+        Me.dtpFin.Size = New System.Drawing.Size(128, 27)
         Me.dtpFin.TabIndex = 82
         Me.dtpFin.Visible = False
         '
@@ -648,7 +610,6 @@ Partial Class frmEditerEtProprietes
         '
         Me.txtTel.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtTel.Depth = 0
-        Me.txtTel.DetectUrls = False
         Me.txtTel.Enabled = False
         Me.txtTel.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtTel.Hint = "Téléphone"
@@ -662,12 +623,44 @@ Partial Class frmEditerEtProprietes
         Me.txtTel.Text = ""
         Me.txtTel.UseTallSize = False
         '
+        'ToolTip1
+        '
+        Me.ToolTip1.ShowAlways = True
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        '
+        'lblTrousseauInfo
+        '
+        Me.lblTrousseauInfo.AutoSize = True
+        Me.lblTrousseauInfo.Depth = 0
+        Me.lblTrousseauInfo.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblTrousseauInfo.Location = New System.Drawing.Point(137, 332)
+        Me.lblTrousseauInfo.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblTrousseauInfo.Name = "lblTrousseauInfo"
+        Me.lblTrousseauInfo.Size = New System.Drawing.Size(46, 19)
+        Me.lblTrousseauInfo.TabIndex = 85
+        Me.lblTrousseauInfo.Text = "Aucun"
+        '
+        'MaterialLabel2
+        '
+        Me.MaterialLabel2.AutoSize = True
+        Me.MaterialLabel2.Depth = 0
+        Me.MaterialLabel2.Font = New System.Drawing.Font("Roboto", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MaterialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.Overline
+        Me.MaterialLabel2.Location = New System.Drawing.Point(137, 351)
+        Me.MaterialLabel2.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialLabel2.Name = "MaterialLabel2"
+        Me.MaterialLabel2.Size = New System.Drawing.Size(184, 13)
+        Me.MaterialLabel2.TabIndex = 86
+        Me.MaterialLabel2.Text = "Modifiable dans la gestion des trousseaux"
+        '
         'frmEditerEtProprietes
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(614, 522)
+        Me.Controls.Add(Me.MaterialLabel2)
+        Me.Controls.Add(Me.lblTrousseauInfo)
         Me.Controls.Add(Me.txtTel)
         Me.Controls.Add(Me.lblDateFin)
         Me.Controls.Add(Me.dtpFin)
@@ -688,14 +681,12 @@ Partial Class frmEditerEtProprietes
         Me.Controls.Add(Me.cmbStatus)
         Me.Controls.Add(Me.txtQuantity)
         Me.Controls.Add(Me.lblQuantity)
-        Me.Controls.Add(Me.btnNewTrousseau)
         Me.Controls.Add(Me.btnNewLoc)
         Me.Controls.Add(Me.MaterialDivider1)
         Me.Controls.Add(Me.lblCBatiment)
         Me.Controls.Add(Me.lblCTrousseau)
         Me.Controls.Add(Me.lblCDate)
         Me.Controls.Add(Me.btnGrpBatiment)
-        Me.Controls.Add(Me.cmbTrousseauListe)
         Me.Controls.Add(Me.cmbLoc)
         Me.Controls.Add(Me.txtNom)
         Me.Controls.Add(Me.txtID)
@@ -728,14 +719,12 @@ Partial Class frmEditerEtProprietes
     Friend WithEvents txtID As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents txtNom As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents cmbLoc As MaterialSkin.Controls.MaterialComboBox
-    Friend WithEvents cmbTrousseauListe As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents btnGrpBatiment As MaterialSkin.Controls.MaterialButton
     Friend WithEvents lblCDate As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents lblCTrousseau As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents lblCBatiment As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents MaterialDivider1 As MaterialSkin.Controls.MaterialDivider
     Friend WithEvents btnNewLoc As MaterialSkin.Controls.MaterialButton
-    Friend WithEvents btnNewTrousseau As MaterialSkin.Controls.MaterialButton
     Friend WithEvents MaterialCheckbox1 As MaterialSkin.Controls.MaterialCheckbox
     Friend WithEvents MaterialCheckbox2 As MaterialSkin.Controls.MaterialCheckbox
     Friend WithEvents MaterialCheckbox3 As MaterialSkin.Controls.MaterialCheckbox
@@ -760,4 +749,7 @@ Partial Class frmEditerEtProprietes
     Friend WithEvents lblDateFin As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents dtpFin As DateTimePicker
     Friend WithEvents txtTel As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents lblTrousseauInfo As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents MaterialLabel2 As MaterialSkin.Controls.MaterialLabel
 End Class

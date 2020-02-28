@@ -7,6 +7,7 @@ Public Class frmEditerEtProprietes
     Public IDToLookFor As String
     Public IDClef As String = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value
     Private Sub frmEditKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         intOldQuantity = frmMain.dgvResultats.SelectedRows(0).Cells("Quantité").Value
         stgStatus = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCStatus).Value
         IDToLookFor = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value & "-%"
@@ -27,7 +28,6 @@ Public Class frmEditerEtProprietes
         txtNom.Hint = strTitleCNom
         cmbLoc.Hint = strTitleCPosition
         'txtStatus.Hint = strTitleCStatus
-        cmbTrousseauListe.Hint = strTitleCTrousseau
         If frmMain.blnProperties = False Then
             AddHandler btnSave.Click, AddressOf Edit_btnSave_Click
         Else
@@ -40,7 +40,6 @@ Public Class frmEditerEtProprietes
             cmbLoc.Enabled = False
             cmbStatus.Enabled = False
             dtpDate.Enabled = False
-            cmbTrousseauListe.Enabled = False
             txtRefOrg.Enabled = False
             txtCnInt.Enabled = False
             txtCnExt.Enabled = False
@@ -50,47 +49,13 @@ Public Class frmEditerEtProprietes
             dtpDebut.Enabled = False
             dtpFin.Enabled = False
             btnNewLoc.Enabled = False
-            btnNewTrousseau.Enabled = False
             btnNewLoc.Visible = False
-            btnNewTrousseau.Visible = False
             Me.Text = "Informations"
         End If
 
         LoadAndRefresh()
     End Sub
 
-    Public Sub RefreshTrousseau()
-        cmbTrousseauListe.Items.Clear()
-        Dim cmd As New MySqlCommand
-        Dim dt As New DataTable
-        Dim da As New MySqlDataAdapter
-        Dim sql As String
-
-        Try
-            sql = "Select * from Trousseau where TNom <> 'Aucun';"
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dt)
-
-            Dim newRow As DataRow = dt.NewRow()
-            newRow(0) = "Aucun"
-            dt.Rows.InsertAt(newRow, 0)
-            For Each r As DataRow In dt.Rows
-                cmbTrousseauListe.Items.Add(r.Item(0).ToString)
-            Next
-
-            'cmbTrousseauListe.DataSource = dt
-            'cmbTrousseauListe.ValueMember = dt.Columns(0).ToString
-            'cmbTrousseauListe.DisplayMember = strTitleTNom
-
-            connecter().Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
     Public Sub RefreshPosition()
         cmbLoc.Items.Clear()
         Dim cmd As New MySqlCommand
@@ -131,14 +96,13 @@ Public Class frmEditerEtProprietes
         cmd.CommandType = CommandType.Text
 
         txtID.Text = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value
-        RefreshTrousseau()
         RefreshPosition()
 
         cmbStatus.Items.Add(frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCStatus).Value)
         cmbStatus.Items.Add("Perdue")
         cmbStatus.SelectedIndex() = 0
         cmbLoc.SelectedItem = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
-        cmbTrousseauListe.SelectedItem = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
+        lblTrousseauInfo.Text = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value.ToString
         txtQuantity.Text = frmMain.dgvResultats.SelectedRows(0).Cells("Quantité").Value
 
         With cmd
@@ -223,7 +187,7 @@ Public Class frmEditerEtProprietes
                 da.SelectCommand = cmd
                 da.Fill(dt)
                 txtEmprunteur.Text = dt.Rows(0).Item(1)
-                txtTel.Text = dt.Rows(0).Item(4)
+                txtTel.Text = dt.Rows(0).Item(4).ToString
                 dtpDebut.Value = dt.Rows(0).Item(2)
 
                 txtTel.Visible = True
@@ -309,7 +273,7 @@ Public Class frmEditerEtProprietes
                     .Parameters("@Nom").Value = txtNom.Text
                     .Parameters("@Tableau").Value = cmbLoc.Text
                     .Parameters("@Date").Value = dtpDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
-                    .Parameters("@Trousseau").Value = cmbTrousseauListe.Text
+                    .Parameters("@Trousseau").Value = lblTrousseauInfo.Text
                     .Parameters("@OldStatusClef").Value = stgStatus
                     .Parameters("@OldTableauClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
                     .Parameters("@OldTrousseauxClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
@@ -451,15 +415,11 @@ Public Class frmEditerEtProprietes
                                 .Parameters("@pos").Value = cmbLoc.Text
                                 .Parameters("@status").Value = cmbStatus.Text
                                 .Parameters("@date").Value = dtpDate.Value
-                                If cmbTrousseauListe.SelectedIndex <> -1 Then
-                                    .Parameters("@trousseau").Value = cmbTrousseauListe.Text
-                                Else
-                                    .Parameters("@trousseau").Value = "Aucun"
-                                End If
+                                .Parameters("@trousseau").Value = lblTrousseauInfo.Text
                                 If lblBatiment.Visible = True Then
-                                    .Parameters("@batiment").Value = lblBatiment.Text
-                                Else
-                                    .Parameters("@batiment").Value = "Groupe de Batiments"
+                                        .Parameters("@batiment").Value = lblBatiment.Text
+                                    Else
+                                        .Parameters("@batiment").Value = "Groupe de Batiments"
                                 End If
                                 .ExecuteNonQuery()
                             End With
@@ -482,11 +442,7 @@ Public Class frmEditerEtProprietes
                             .Parameters("@IDClef").Value = txtID.Text & "-%"
                             .Parameters("@StatusClef").Value = cmbStatus.Text
                             .Parameters("@TableauClef").Value = cmbLoc.Text
-                            If cmbTrousseauListe.SelectedIndex <> -1 Then
-                                .Parameters("@TrousseauxClef").Value = cmbTrousseauListe.Text
-                            Else
-                                .Parameters("@TrousseauxClef").Value = "Aucun"
-                            End If
+                            .Parameters("@TrousseauxClef").Value = lblTrousseauInfo.Text
                             .ExecuteNonQuery()
                         End With
                     End If
@@ -510,7 +466,7 @@ Public Class frmEditerEtProprietes
         Me.Close()
     End Sub
 
-    Private Sub btnNewTrousseau_Click(sender As Object, e As EventArgs) Handles btnNewTrousseau.Click
+    Private Sub btnNewTrousseau_Click(sender As Object, e As EventArgs)
         frmCreerTrousseau.ShowDialog()
     End Sub
 
@@ -552,6 +508,14 @@ Public Class frmEditerEtProprietes
             txtQuantity.Enabled = False
         End If
 
+    End Sub
+    Private Sub frmEditerEtProprietes_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseMove
+        Dim control As Control = GetChildAtPoint(e.Location)
+        If control IsNot Nothing Then
+            Dim toolTipString As String = ToolTip1.GetToolTip(control)
+            ToolTip1.ShowAlways = True
+                ToolTip1.Show(toolTipString, control, control.Width / 2, control.Height / 2)
+            End If
     End Sub
 
 End Class

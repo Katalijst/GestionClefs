@@ -118,6 +118,30 @@ Public Class frmCreerClefs
             End If
         End If
 
+        If cmbTrousseauListe.Text <> "Aucun" Then
+            Dim cmdVerifTrousseau As New MySqlCommand()
+            Dim daTr As MySqlDataAdapter = New MySqlDataAdapter()
+            Dim dtTr As New DataTable()
+            cmdVerifTrousseau.Parameters.Add("@KeyID", MySqlDbType.String)
+            cmdVerifTrousseau.Parameters.Add("@Trousseau", MySqlDbType.VarChar)
+
+            With cmdVerifTrousseau
+                .Parameters("@KeyID").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-%"
+                .Parameters("@Trousseau").Value = cmbTrousseauListe.Text
+                .CommandText = "SELECT CID From Clefs WHERE CTrousseau=@Trousseau AND CID like @KeyID;"
+                .CommandType = CommandType.Text
+                .Connection = connecter()
+                .ExecuteNonQuery()
+            End With
+            daTr.SelectCommand() = cmdVerifTrousseau
+            daTr.Fill(dtTr)
+            If dtTr.Rows.Count > 0 Then
+                MsgBox("Cette clef existe déjà dans le trousseau sélectionné !", MsgBoxStyle.Critical, "Erreur lors de la création de " & txtID.Text)
+                Exit Sub
+            End If
+        End If
+
+
         Dim blnGroupeBatiment As Boolean = False
         Dim intQuantity As Integer
         Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
@@ -530,6 +554,16 @@ Public Class frmCreerClefs
     Private Sub txtID_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtID.KeyPress
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsLetter(e.KeyChar) Then
             e.Handled = True
+        End If
+    End Sub
+
+    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrousseauListe.SelectedIndexChanged
+        If cmbTrousseauListe.Text <> "Aucun" Then
+            txtQuantity.Enabled = False
+            txtQuantity.Text = 1
+            ToolTip1.Show("Si vous ajouter une clef à un trousseau," & System.Environment.NewLine & "la quantité ne peut être supérieur à 1.", cmbTrousseauListe, cmbTrousseauListe.Width / 2, cmbTrousseauListe.Height / 2)
+        Else
+            txtQuantity.Enabled = True
         End If
     End Sub
 End Class

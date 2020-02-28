@@ -5,7 +5,7 @@ Imports System.Collections.Specialized
 
 'Formulaire principal, peut être optimisé
 Public Class frmMain
-
+    Public listADetacher As New List(Of String)
     'Déclaration des sources de données pour la DataGridView
     Dim dtKeyListSansGBat As DataTable = New DataTable()
     Dim dtKeyListAvecGBat As DataTable = New DataTable()
@@ -49,7 +49,6 @@ Public Class frmMain
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim bmp As Bitmap = My.Resources.clear_button
         pbClearPanier.Image = setColorToBitmap(bmp, Color.Black, Color.Red)
-
 
         FillDataSource()
 
@@ -96,7 +95,7 @@ Public Class frmMain
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         'Déclaration de la requète
-        Dim SqlCommand As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
+        Dim SqlCommand As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin < DATE(NOW() + 1)"
         'Try permet de renvoyer l'erreur si la requète échoue au lieu de freeze le logiciel
         Try
             'reset de la datatable, pas nécessaire à l'initialisation, mais pour les refresh oui
@@ -601,18 +600,47 @@ Public Class frmMain
     End Sub
 
     Private Sub addToPanier()
+        Dim listDeTrousseau As New List(Of String)
+        Dim rows As New List(Of DataRow)
+
         If cbRechercher.Text <> "Emprunteur" Then
             If dgvResultats.SelectedRows.Count > 0 Then
-                Dim rows As New List(Of DataRow)
                 For Each selRow As DataGridViewRow In dgvResultats.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
-                    If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
-                        Dim intSelIndex As Integer = selRow.Index
-                        If selRow.Index >= 0 Then
-                            Dim drToAdd As DataRow = dtKeyList.Rows(intSelIndex)
-                            Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
-                            rows.Add(row)
-                            dtPanier.ImportRow(row)
-                            dtPanier.AcceptChanges()
+                    If selRow.Cells(strTitleCTrousseau).Value <> "Aucun" Then
+                        Dim Message As String = "Une ou plusieurs des clefs emprunter fait partie d'un trousseau, voulez vous emprunter tout le trousseau ?" & System.Environment.NewLine & "(Cliquez sur ""non"" pour la détacher du trousseau)"
+                        Dim Caption As String = "Attention !"
+                        Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
+                        Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+                        Dim Result As DialogResult
+                        'Affichage de la message box
+                        Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+                        If Result = DialogResult.Yes Then
+                            For Each row As DataRow In dtKeyList.Rows
+                                If row.Item(strTitleCTrousseau).ToString = selRow.Cells(strTitleCTrousseau).Value.ToString And row.Item(strTitleCStatus).ToString = "Disponible" Then
+                                    rows.Add(row)
+                                    dtPanier.ImportRow(row)
+                                    dtPanier.AcceptChanges()
+                                End If
+                            Next
+                        Else
+                            listADetacher.Add(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value)
+                            If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
+                                If selRow.Index >= 0 Then
+                                    Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                                    rows.Add(row)
+                                    dtPanier.ImportRow(row)
+                                    dtPanier.AcceptChanges()
+                                End If
+                            End If
+                        End If
+                    Else
+                        If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
+                            If selRow.Index >= 0 Then
+                                Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                                rows.Add(row)
+                                dtPanier.ImportRow(row)
+                                dtPanier.AcceptChanges()
+                            End If
                         End If
                     End If
                 Next
@@ -638,6 +666,23 @@ Public Class frmMain
         If dgvPanier.SelectedRows.Count > 0 Then
             Dim rows As New List(Of DataRow)
             For Each selRow As DataGridViewRow In dgvPanier.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
+                If listADetacher.Contains(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value) Then
+                    listADetacher.Remove(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value)
+                ElseIf selRow.Cells(strTitleCTrousseau).Value <> "" Then
+                    Dim ListRowToDelete As New List(Of DataRow)
+                    For Each dr As DataRow In dtPanier.Rows
+                        If dr.Item(strTitleCTrousseau).ToString = selRow.Cells(strTitleCTrousseau).Value.ToString Then
+                            ListRowToDelete.Add(dr)
+                        End If
+                    Next
+                    For Each dr As DataRow In ListRowToDelete
+                        dtKeyList.ImportRow(dr)
+                        dtKeyList.AcceptChanges()
+                        dtPanier.Rows.Remove(dr)
+                        dtPanier.AcceptChanges()
+                        dgvResultats.Refresh()
+                    Next
+                End If
                 Dim intSelIndex As Integer = selRow.Index
                 If selRow.Index >= 0 Then
                     Dim drToAdd As DataRow = dtPanier.Rows(intSelIndex)

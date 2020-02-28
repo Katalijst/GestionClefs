@@ -22,6 +22,7 @@ Partial Class frmCreerClefs
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCreerClefs))
@@ -57,6 +58,7 @@ Partial Class frmCreerClefs
         Me.txtCnOpt = New MaterialSkin.Controls.MaterialTextBox()
         Me.MaterialLabel10 = New MaterialSkin.Controls.MaterialLabel()
         Me.MaterialDivider3 = New MaterialSkin.Controls.MaterialDivider()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -586,6 +588,11 @@ Partial Class frmCreerClefs
         Me.MaterialDivider3.TabIndex = 69
         Me.MaterialDivider3.Text = "MaterialDivider3"
         '
+        'ToolTip1
+        '
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTip1.ToolTipTitle = "Trousseau"
+        '
         'frmCreerClefs
         '
         Me.AcceptButton = Me.btnSave
@@ -668,4 +675,5 @@ Partial Class frmCreerClefs
     Friend WithEvents txtCnOpt As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents MaterialLabel10 As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents MaterialDivider3 As MaterialSkin.Controls.MaterialDivider
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
