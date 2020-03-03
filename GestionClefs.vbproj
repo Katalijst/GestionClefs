@@ -102,8 +102,14 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -113,6 +119,9 @@
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.11.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.11.4\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="LoadingIndicator.WinForms, Version=1.0.3.0, Culture=neutral, PublicKeyToken=1b7ed145d0f47614, processorArchitecture=MSIL">
       <HintPath>packages\LoadingIndicator.WinForms.1.0.3\lib\net45\LoadingIndicator.WinForms.dll</HintPath>
@@ -195,6 +204,15 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.Rendering-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.RtfRendering-gdi.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.8.0.19\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -212,6 +230,12 @@
     </Reference>
     <Reference Include="MySql.Web, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Web.8.0.19\lib\net452\MySql.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp.Charting-gdi.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
@@ -441,16 +465,16 @@
     <Compile Include="frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAddUser.Designer.vb">
-      <DependentUpon>frmAddUser.vb</DependentUpon>
+    <Compile Include="frmUtilisateursAjouter.Designer.vb">
+      <DependentUpon>frmUtilisateursAjouter.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAddUser.vb">
+    <Compile Include="frmUtilisateursAjouter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEmpruntsEtAlertes.Designer.vb">
-      <DependentUpon>frmEmpruntsEtAlertes.vb</DependentUpon>
+    <Compile Include="frmClefsEmpruntsEtAlertes.Designer.vb">
+      <DependentUpon>frmClefsEmpruntsEtAlertes.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEmpruntsEtAlertes.vb">
+    <Compile Include="frmClefsEmpruntsEtAlertes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConnexion.Designer.vb">
@@ -459,76 +483,76 @@
     <Compile Include="frmConnexion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCreerClefs.Designer.vb">
-      <DependentUpon>frmCreerClefs.vb</DependentUpon>
+    <Compile Include="frmClefsAjout.Designer.vb">
+      <DependentUpon>frmClefsAjout.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmCreerClefs.vb">
+    <Compile Include="frmClefsAjout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditerPosition.Designer.vb">
-      <DependentUpon>frmEditerPosition.vb</DependentUpon>
+    <Compile Include="frmPositionsEditer.Designer.vb">
+      <DependentUpon>frmPositionsEditer.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEditerPosition.vb">
+    <Compile Include="frmPositionsEditer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEmprunterEtAttribuer.Designer.vb">
-      <DependentUpon>frmEmprunterEtAttribuer.vb</DependentUpon>
+    <Compile Include="frmClefsEmprunterEtAttribuer.Designer.vb">
+      <DependentUpon>frmClefsEmprunterEtAttribuer.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEmprunterEtAttribuer.vb">
+    <Compile Include="frmClefsEmprunterEtAttribuer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGestionBatiments.Designer.vb">
-      <DependentUpon>frmGestionBatiments.vb</DependentUpon>
+    <Compile Include="frmBatimentsAjoutGestion.Designer.vb">
+      <DependentUpon>frmBatimentsAjoutGestion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmGestionBatiments.vb">
+    <Compile Include="frmBatimentsAjoutGestion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAjouterGenre.Designer.vb">
-      <DependentUpon>frmAjouterGenre.vb</DependentUpon>
+    <Compile Include="frmGenreAjout.Designer.vb">
+      <DependentUpon>frmGenreAjout.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAjouterGenre.vb">
+    <Compile Include="frmGenreAjout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGestionPersonnes.Designer.vb">
-      <DependentUpon>frmGestionPersonnes.vb</DependentUpon>
+    <Compile Include="frmPersonnesGestion.Designer.vb">
+      <DependentUpon>frmPersonnesGestion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmGestionPersonnes.vb">
+    <Compile Include="frmPersonnesGestion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditerBatiment.Designer.vb">
-      <DependentUpon>frmEditerBatiment.vb</DependentUpon>
+    <Compile Include="frmBatimentsEditer.Designer.vb">
+      <DependentUpon>frmBatimentsEditer.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEditerBatiment.vb">
+    <Compile Include="frmBatimentsEditer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEditerPersonne.Designer.vb">
-      <DependentUpon>frmEditerPersonne.vb</DependentUpon>
+    <Compile Include="frmPersonnesEditer.Designer.vb">
+      <DependentUpon>frmPersonnesEditer.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEditerPersonne.vb">
+    <Compile Include="frmPersonnesEditer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGestionPosition.Designer.vb">
-      <DependentUpon>frmGestionPosition.vb</DependentUpon>
+    <Compile Include="frmPositionsGestion.Designer.vb">
+      <DependentUpon>frmPositionsGestion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmGestionPosition.vb">
+    <Compile Include="frmPositionsGestion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGestionTrousseau.Designer.vb">
-      <DependentUpon>frmGestionTrousseau.vb</DependentUpon>
+    <Compile Include="frmTrousseauxGestion.Designer.vb">
+      <DependentUpon>frmTrousseauxGestion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmGestionTrousseau.vb">
+    <Compile Include="frmTrousseauxGestion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCreerTrousseau.Designer.vb">
-      <DependentUpon>frmCreerTrousseau.vb</DependentUpon>
+    <Compile Include="frmTrousseauxAjout.Designer.vb">
+      <DependentUpon>frmTrousseauxAjout.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmCreerTrousseau.vb">
+    <Compile Include="frmTrousseauxAjout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGestionUtilisateur.Designer.vb">
-      <DependentUpon>frmGestionUtilisateur.vb</DependentUpon>
+    <Compile Include="frmUtilisateursGestion.Designer.vb">
+      <DependentUpon>frmUtilisateursGestion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmGestionUtilisateur.vb">
+    <Compile Include="frmUtilisateursGestion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.vb">
@@ -537,22 +561,22 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPropAlertes.Designer.vb">
-      <DependentUpon>frmPropAlertes.vb</DependentUpon>
+    <Compile Include="frmAlertesProprietes.Designer.vb">
+      <DependentUpon>frmAlertesProprietes.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPropAlertes.vb">
+    <Compile Include="frmAlertesProprietes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPropGpBat.Designer.vb">
-      <DependentUpon>frmPropGpBat.vb</DependentUpon>
+    <Compile Include="frmClefsEditerEtProprietesGroupeBat.Designer.vb">
+      <DependentUpon>frmClefsEditerEtProprietesGroupeBat.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPropGpBat.vb">
+    <Compile Include="frmClefsEditerEtProprietesGroupeBat.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSettings.Designer.vb">
-      <DependentUpon>frmSettings.vb</DependentUpon>
+    <Compile Include="frmParametres.Designer.vb">
+      <DependentUpon>frmParametres.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmSettings.vb">
+    <Compile Include="frmParametres.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="modAES.vb" />
@@ -573,16 +597,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="frmEditerEtProprietes.Designer.vb">
-      <DependentUpon>frmEditerEtProprietes.vb</DependentUpon>
+    <Compile Include="frmClefsEditerEtProprietes.Designer.vb">
+      <DependentUpon>frmClefsEditerEtProprietes.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEditerEtProprietes.vb">
+    <Compile Include="frmClefsEditerEtProprietes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSetDataBase.Designer.vb">
-      <DependentUpon>frmSetDataBase.vb</DependentUpon>
+    <Compile Include="frmParametresBDD.Designer.vb">
+      <DependentUpon>frmParametresBDD.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmSetDataBase.vb">
+    <Compile Include="frmParametresBDD.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Simple3Des.vb" />
@@ -591,62 +615,62 @@
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddUser.resx">
-      <DependentUpon>frmAddUser.vb</DependentUpon>
+    <EmbeddedResource Include="frmUtilisateursAjouter.resx">
+      <DependentUpon>frmUtilisateursAjouter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEmpruntsEtAlertes.resx">
-      <DependentUpon>frmEmpruntsEtAlertes.vb</DependentUpon>
+    <EmbeddedResource Include="frmClefsEmpruntsEtAlertes.resx">
+      <DependentUpon>frmClefsEmpruntsEtAlertes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConnexion.resx">
       <DependentUpon>frmConnexion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCreerClefs.resx">
-      <DependentUpon>frmCreerClefs.vb</DependentUpon>
+    <EmbeddedResource Include="frmClefsAjout.resx">
+      <DependentUpon>frmClefsAjout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditerBatiment.resx">
-      <DependentUpon>frmEditerBatiment.vb</DependentUpon>
+    <EmbeddedResource Include="frmBatimentsEditer.resx">
+      <DependentUpon>frmBatimentsEditer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditerPosition.resx">
-      <DependentUpon>frmEditerPosition.vb</DependentUpon>
+    <EmbeddedResource Include="frmPositionsEditer.resx">
+      <DependentUpon>frmPositionsEditer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEmprunterEtAttribuer.resx">
-      <DependentUpon>frmEmprunterEtAttribuer.vb</DependentUpon>
+    <EmbeddedResource Include="frmClefsEmprunterEtAttribuer.resx">
+      <DependentUpon>frmClefsEmprunterEtAttribuer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGestionBatiments.resx">
-      <DependentUpon>frmGestionBatiments.vb</DependentUpon>
+    <EmbeddedResource Include="frmBatimentsAjoutGestion.resx">
+      <DependentUpon>frmBatimentsAjoutGestion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAjouterGenre.resx">
-      <DependentUpon>frmAjouterGenre.vb</DependentUpon>
+    <EmbeddedResource Include="frmGenreAjout.resx">
+      <DependentUpon>frmGenreAjout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGestionPersonnes.resx">
-      <DependentUpon>frmGestionPersonnes.vb</DependentUpon>
+    <EmbeddedResource Include="frmPersonnesGestion.resx">
+      <DependentUpon>frmPersonnesGestion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditerPersonne.resx">
-      <DependentUpon>frmEditerPersonne.vb</DependentUpon>
+    <EmbeddedResource Include="frmPersonnesEditer.resx">
+      <DependentUpon>frmPersonnesEditer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGestionPosition.resx">
-      <DependentUpon>frmGestionPosition.vb</DependentUpon>
+    <EmbeddedResource Include="frmPositionsGestion.resx">
+      <DependentUpon>frmPositionsGestion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGestionTrousseau.resx">
-      <DependentUpon>frmGestionTrousseau.vb</DependentUpon>
+    <EmbeddedResource Include="frmTrousseauxGestion.resx">
+      <DependentUpon>frmTrousseauxGestion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCreerTrousseau.resx">
-      <DependentUpon>frmCreerTrousseau.vb</DependentUpon>
+    <EmbeddedResource Include="frmTrousseauxAjout.resx">
+      <DependentUpon>frmTrousseauxAjout.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGestionUtilisateur.resx">
-      <DependentUpon>frmGestionUtilisateur.vb</DependentUpon>
+    <EmbeddedResource Include="frmUtilisateursGestion.resx">
+      <DependentUpon>frmUtilisateursGestion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPropAlertes.resx">
-      <DependentUpon>frmPropAlertes.vb</DependentUpon>
+    <EmbeddedResource Include="frmAlertesProprietes.resx">
+      <DependentUpon>frmAlertesProprietes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPropGpBat.resx">
-      <DependentUpon>frmPropGpBat.vb</DependentUpon>
+    <EmbeddedResource Include="frmClefsEditerEtProprietesGroupeBat.resx">
+      <DependentUpon>frmClefsEditerEtProprietesGroupeBat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSettings.resx">
-      <DependentUpon>frmSettings.vb</DependentUpon>
+    <EmbeddedResource Include="frmParametres.resx">
+      <DependentUpon>frmParametres.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -654,11 +678,11 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEditerEtProprietes.resx">
-      <DependentUpon>frmEditerEtProprietes.vb</DependentUpon>
+    <EmbeddedResource Include="frmClefsEditerEtProprietes.resx">
+      <DependentUpon>frmClefsEditerEtProprietes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSetDataBase.resx">
-      <DependentUpon>frmSetDataBase.vb</DependentUpon>
+    <EmbeddedResource Include="frmParametresBDD.resx">
+      <DependentUpon>frmParametresBDD.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -681,6 +705,7 @@
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
     <Content Include="LogoICO.ico" />
+    <None Include="Resources\printer-printing-document.png" />
     <None Include="Resources\clefperdue.png" />
     <None Include="Resources\clear-icon-0.png" />
     <None Include="Resources\shopping-cart-clear.png" />

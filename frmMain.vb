@@ -95,7 +95,7 @@ Public Class frmMain
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         'Déclaration de la requète
-        Dim SqlCommand As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin < DATE(NOW() + 1)"
+        Dim SqlCommand As String = "Select EIDClef From Emprunts Where EDateFin < DATE(NOW() + 1)"
         'Try permet de renvoyer l'erreur si la requète échoue au lieu de freeze le logiciel
         Try
             'reset de la datatable, pas nécessaire à l'initialisation, mais pour les refresh oui
@@ -607,6 +607,9 @@ Public Class frmMain
             If dgvResultats.SelectedRows.Count > 0 Then
                 For Each selRow As DataGridViewRow In dgvResultats.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
                     If selRow.Cells(strTitleCTrousseau).Value <> "Aucun" Then
+                        If listDeTrousseau.Contains(selRow.Cells(strTitleCTrousseau).Value) Then
+                            Continue For
+                        End If
                         Dim Message As String = "Une ou plusieurs des clefs emprunter fait partie d'un trousseau, voulez vous emprunter tout le trousseau ?" & System.Environment.NewLine & "(Cliquez sur ""non"" pour la détacher du trousseau)"
                         Dim Caption As String = "Attention !"
                         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
@@ -615,6 +618,7 @@ Public Class frmMain
                         'Affichage de la message box
                         Result = MessageBox.Show(Message, Caption, Buttons, Icon)
                         If Result = DialogResult.Yes Then
+                            listDeTrousseau.Add(selRow.Cells(strTitleCTrousseau).Value)
                             For Each row As DataRow In dtKeyList.Rows
                                 If row.Item(strTitleCTrousseau).ToString = selRow.Cells(strTitleCTrousseau).Value.ToString And row.Item(strTitleCStatus).ToString = "Disponible" Then
                                     rows.Add(row)
@@ -624,17 +628,17 @@ Public Class frmMain
                             Next
                         Else
                             listADetacher.Add(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value)
-                            If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
-                                If selRow.Index >= 0 Then
-                                    Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
-                                    rows.Add(row)
-                                    dtPanier.ImportRow(row)
-                                    dtPanier.AcceptChanges()
+                                If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
+                                    If selRow.Index >= 0 Then
+                                        Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                                        rows.Add(row)
+                                        dtPanier.ImportRow(row)
+                                        dtPanier.AcceptChanges()
+                                    End If
                                 End If
                             End If
-                        End If
-                    Else
-                        If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
+                        Else
+                            If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
                             If selRow.Index >= 0 Then
                                 Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
                                 rows.Add(row)
@@ -663,33 +667,44 @@ Public Class frmMain
     End Sub
 
     Private Sub removeFromPanier()
+        Dim listDeTrousseau As New List(Of String)
+
         If dgvPanier.SelectedRows.Count > 0 Then
             Dim rows As New List(Of DataRow)
             For Each selRow As DataGridViewRow In dgvPanier.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
                 If listADetacher.Contains(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value) Then
                     listADetacher.Remove(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value)
-                ElseIf selRow.Cells(strTitleCTrousseau).Value <> "" Then
-                    Dim ListRowToDelete As New List(Of DataRow)
+                ElseIf selRow.Cells(strTitleCTrousseau).Value <> "Aucun" Then
+                    If listDeTrousseau.Contains(selRow.Cells(strTitleCTrousseau).Value) Then
+                        Continue For
+                    Else
+                        listDeTrousseau.Add(selRow.Cells(strTitleCTrousseau).Value)
+                    End If
+                    'Dim ListRowToDelete As New List(Of DataRow)
                     For Each dr As DataRow In dtPanier.Rows
                         If dr.Item(strTitleCTrousseau).ToString = selRow.Cells(strTitleCTrousseau).Value.ToString Then
-                            ListRowToDelete.Add(dr)
+                            rows.Add(dr)
+                            dtKeyList.ImportRow(dr)
+                            dtKeyList.AcceptChanges()
                         End If
                     Next
-                    For Each dr As DataRow In ListRowToDelete
-                        dtKeyList.ImportRow(dr)
+                    'For Each dr As DataRow In ListRowToDelete
+                    '    dtKeyList.ImportRow(dr)
+                    '    dtKeyList.AcceptChanges()
+                    '    dtPanier.Rows.Remove(dr)
+                    '    dtPanier.AcceptChanges()
+                    '    dgvResultats.Refresh()
+                    '    dgvPanier.Refresh()
+                    'Next
+                Else
+                    Dim intSelIndex As Integer = selRow.Index
+                    If selRow.Index >= 0 Then
+                        Dim drToAdd As DataRow = dtPanier.Rows(intSelIndex)
+                        Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                        rows.Add(row)
+                        dtKeyList.ImportRow(drToAdd)
                         dtKeyList.AcceptChanges()
-                        dtPanier.Rows.Remove(dr)
-                        dtPanier.AcceptChanges()
-                        dgvResultats.Refresh()
-                    Next
-                End If
-                Dim intSelIndex As Integer = selRow.Index
-                If selRow.Index >= 0 Then
-                    Dim drToAdd As DataRow = dtPanier.Rows(intSelIndex)
-                    Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
-                    rows.Add(row)
-                    dtKeyList.ImportRow(drToAdd)
-                    dtKeyList.AcceptChanges()
+                    End If
                 End If
             Next
             For Each r As DataRow In rows
@@ -713,11 +728,11 @@ Public Class frmMain
         If dtPanier.Rows.Count > 0 Then
             'Ouverture du menu emprunt/attribution de clef en mode Emprunt
             blnEmprunt = True
-            frmEmprunterEtAttribuer.ShowDialog()
+            frmClefsEmprunterEtAttribuer.ShowDialog()
         Else
             blnEmprunt = True
             addToPanier()
-            frmEmprunterEtAttribuer.ShowDialog()
+            frmClefsEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
 
@@ -725,11 +740,11 @@ Public Class frmMain
         If dtPanier.Rows.Count > 0 Then
             'Ouverture du menu emprunt/attribution de clef en mode attribution
             blnEmprunt = False
-            frmEmprunterEtAttribuer.ShowDialog()
+            frmClefsEmprunterEtAttribuer.ShowDialog()
         Else
             blnEmprunt = False
             addToPanier()
-            frmEmprunterEtAttribuer.ShowDialog()
+            frmClefsEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
 
@@ -737,20 +752,20 @@ Public Class frmMain
         If dgvResultats.SelectedRows.Count > 0 Then
             'Menu propriété de la clef
             blnProperties = True
-            frmEditerEtProprietes.ShowDialog()
+            frmClefsEditerEtProprietes.ShowDialog()
         End If
     End Sub
 
     Private Sub btnEditer_Click(sender As Object, e As EventArgs) Handles btnEditer.Click
         If dgvResultats.SelectedRows.Count > 0 Then
             blnProperties = False
-            frmEditerEtProprietes.ShowDialog()
+            frmClefsEditerEtProprietes.ShowDialog()
         End If
     End Sub
 
     Private Sub btnAddKey_Click(sender As Object, e As EventArgs) Handles btnAddKey.Click
         'afficher la fenêtre d'ajout de clef
-        frmCreerClefs.ShowDialog()
+        frmClefsAjout.ShowDialog()
     End Sub
 
     Private Sub btnSupprimer_Click(sender As Object, e As EventArgs) Handles btnSupprimer.Click
@@ -762,11 +777,11 @@ Public Class frmMain
 
     Private Sub btnPersonnes_Click(sender As Object, e As EventArgs) Handles btnPersonnes.Click
         'Menu gestion des personnes
-        frmGestionPersonnes.ShowDialog()
+        frmPersonnesGestion.ShowDialog()
     End Sub
 
     Private Sub btnTrousseaux_Click(sender As Object, e As EventArgs) Handles btnTrousseaux.Click
-        frmGestionTrousseau.ShowDialog()
+        frmTrousseauxGestion.ShowDialog()
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
@@ -774,50 +789,50 @@ Public Class frmMain
     End Sub
 
     Private Sub btnTableaux_Click(sender As Object, e As EventArgs) Handles btnTableaux.Click
-        frmGestionPosition.ShowDialog()
+        frmPositionsGestion.ShowDialog()
     End Sub
 
 
     Private Sub btnBatiments_Click(sender As Object, e As EventArgs) Handles btnBatiments.Click
         'Menu gestion des batiments
-        frmGestionBatiments.ShowDialog()
+        frmBatimentsAjoutGestion.ShowDialog()
     End Sub
 
     Private Sub btnParametres_Click_1(sender As Object, e As EventArgs) Handles btnParametres.Click
         'Ouverture des paramètres
-        frmSettings.ShowDialog()
+        frmParametres.ShowDialog()
     End Sub
 
     Private Sub btnAlertes_Click(sender As Object, e As EventArgs) Handles btnAlertes.Click
         'ouverture du menu d'alerte
         AlertesEmpruntPerdu = 1
-        frmEmpruntsEtAlertes.ShowDialog()
+        frmClefsEmpruntsEtAlertes.ShowDialog()
     End Sub
 
     Private Sub EmprunterToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EmprunterToolStripMenuItem1.Click
         'Ouverture du menu emprunt/attribution de clef en mode emprunt
         blnEmprunt = True
         addToPanier()
-        frmEmprunterEtAttribuer.ShowDialog()
+        frmClefsEmprunterEtAttribuer.ShowDialog()
     End Sub
 
     Private Sub AttribuerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AttribuerToolStripMenuItem1.Click
         'Ouverture du menu emprunt/attribution de clef en mode attribution
         blnEmprunt = False
         addToPanier()
-        frmEmprunterEtAttribuer.ShowDialog()
+        frmClefsEmprunterEtAttribuer.ShowDialog()
     End Sub
 
     Private Sub EditerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditerToolStripMenuItem1.Click
         'Ouverture de l'edition de clef (à finir)
         blnProperties = False
-        frmEditerEtProprietes.ShowDialog()
+        frmClefsEditerEtProprietes.ShowDialog()
     End Sub
 
     Private Sub PropriétésToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PropriétésToolStripMenuItem1.Click
         'Menu propriété de la clef
         blnProperties = True
-        frmEditerEtProprietes.ShowDialog()
+        frmClefsEditerEtProprietes.ShowDialog()
     End Sub
 
     Private Sub SupprimerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem1.Click
@@ -1057,6 +1072,6 @@ Public Class frmMain
     Private Sub btnClefsPerdues_Click(sender As Object, e As EventArgs) Handles btnClefsPerdues.Click
         'ouverture du menu d'alerte
         AlertesEmpruntPerdu = 3
-        frmEmpruntsEtAlertes.ShowDialog()
+        frmClefsEmpruntsEtAlertes.ShowDialog()
     End Sub
 End Class

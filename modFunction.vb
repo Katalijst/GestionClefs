@@ -29,7 +29,7 @@ Module modFunction
             Result = MessageBox.Show(Message, Caption, Buttons, Icon)
 
             Using FormShow As New Form
-                frmSetDataBase.ShowDialog()
+                frmParametresBDD.ShowDialog()
             End Using
         End Try
         Return con

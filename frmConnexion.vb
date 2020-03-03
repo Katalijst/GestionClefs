@@ -38,7 +38,7 @@ Public Class frmConnexion
             da.Fill(dt)
             If dt.Rows.Count < 1 Then
                 MsgBox("Aucun utilisateur enregistré ! Veuillez choisir un nom d'utilisateur et un mot de passe.")
-                frmAddUser.ShowDialog()
+                frmUtilisateursAjouter.ShowDialog()
             End If
         Catch ex As Exception
 
@@ -67,7 +67,7 @@ Public Class frmConnexion
             da.Fill(dt)
             If dt.Rows.Count < 1 Then
                 MsgBox("Aucun utilisateur enregistré ! Veuillez choisir un nom d'utilisateur et un mot de passe.")
-                frmAddUser.ShowDialog()
+                frmUtilisateursAjouter.ShowDialog()
             Else
                 Cursor = Cursors.WaitCursor
                 Application.DoEvents()

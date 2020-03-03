@@ -1,0 +1,40 @@
+﻿Imports MySql.Data.MySqlClient
+Public Class frmTrousseauxAjout
+    Private Sub Valider()
+        If txtName.Text <> "" And txtName.Text <> "Aucun" Then
+            Try
+                Dim insert_command As New MySqlCommand("INSERT INTO `Trousseau`(`TNom`,`TPersonne`) VALUES (@name,@personne)", connecter())
+                insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtName.Text
+                insert_command.Parameters.Add("@personne", MySqlDbType.VarChar).Value = DBNull.Value
+                insert_command.ExecuteNonQuery()
+                connecter().Close()
+                Me.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Else
+            Me.Close()
+        End If
+
+        If frmTrousseauxGestion.IsHandleCreated Then
+            frmTrousseauxGestion.RefreshTrousseau()
+        End If
+        If frmClefsAjout.IsHandleCreated Then
+            frmClefsAjout.RefreshTrousseau()
+        End If
+    End Sub
+    Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click
+        Valider()
+    End Sub
+
+    Private Sub txtName_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Valider()
+        End If
+    End Sub
+
+    Private Sub frmCreerTrousseau_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
+    End Sub
+End Class
