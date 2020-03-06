@@ -93,7 +93,7 @@ Partial Class frmParametresBDD
         Me.txtID.Location = New System.Drawing.Point(6, 150)
         Me.txtID.Name = "txtID"
         Me.txtID.Size = New System.Drawing.Size(238, 20)
-        Me.txtID.TabIndex = 4
+        Me.txtID.TabIndex = 3
         '
         'Label4
         '
@@ -110,7 +110,7 @@ Partial Class frmParametresBDD
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(238, 20)
-        Me.txtPassword.TabIndex = 6
+        Me.txtPassword.TabIndex = 4
         '
         'GroupBox1
         '
@@ -146,7 +146,7 @@ Partial Class frmParametresBDD
         Me.txtPort.Location = New System.Drawing.Point(6, 72)
         Me.txtPort.Name = "txtPort"
         Me.txtPort.Size = New System.Drawing.Size(238, 20)
-        Me.txtPort.TabIndex = 13
+        Me.txtPort.TabIndex = 1
         '
         'GroupBox2
         '
@@ -168,7 +168,7 @@ Partial Class frmParametresBDD
         Me.txtActPort.Location = New System.Drawing.Point(6, 72)
         Me.txtActPort.Name = "txtActPort"
         Me.txtActPort.Size = New System.Drawing.Size(167, 20)
-        Me.txtActPort.TabIndex = 15
+        Me.txtActPort.TabIndex = 99
         '
         'txtActPassword
         '
@@ -177,7 +177,7 @@ Partial Class frmParametresBDD
         Me.txtActPassword.Name = "txtActPassword"
         Me.txtActPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtActPassword.Size = New System.Drawing.Size(167, 20)
-        Me.txtActPassword.TabIndex = 14
+        Me.txtActPassword.TabIndex = 99
         '
         'txtActID
         '
@@ -185,7 +185,7 @@ Partial Class frmParametresBDD
         Me.txtActID.Location = New System.Drawing.Point(6, 150)
         Me.txtActID.Name = "txtActID"
         Me.txtActID.Size = New System.Drawing.Size(167, 20)
-        Me.txtActID.TabIndex = 13
+        Me.txtActID.TabIndex = 99
         '
         'txtActDatabase
         '
@@ -193,7 +193,7 @@ Partial Class frmParametresBDD
         Me.txtActDatabase.Location = New System.Drawing.Point(6, 111)
         Me.txtActDatabase.Name = "txtActDatabase"
         Me.txtActDatabase.Size = New System.Drawing.Size(167, 20)
-        Me.txtActDatabase.TabIndex = 12
+        Me.txtActDatabase.TabIndex = 99
         '
         'txtActServeur
         '
@@ -201,14 +201,14 @@ Partial Class frmParametresBDD
         Me.txtActServeur.Location = New System.Drawing.Point(6, 33)
         Me.txtActServeur.Name = "txtActServeur"
         Me.txtActServeur.Size = New System.Drawing.Size(167, 20)
-        Me.txtActServeur.TabIndex = 11
+        Me.txtActServeur.TabIndex = 99
         '
         'btnSave
         '
         Me.btnSave.Location = New System.Drawing.Point(324, 253)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(117, 23)
-        Me.btnSave.TabIndex = 9
+        Me.btnSave.TabIndex = 6
         Me.btnSave.Text = "Enregistrer"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -218,7 +218,7 @@ Partial Class frmParametresBDD
         Me.btnCancel.Location = New System.Drawing.Point(201, 253)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(117, 23)
-        Me.btnCancel.TabIndex = 10
+        Me.btnCancel.TabIndex = 5
         Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -233,7 +233,7 @@ Partial Class frmParametresBDD
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "ATTENTION ! Ne modifier les paramètres que si vous savez ce que vous faîtes !"
         '
-        'frmSetDataBase
+        'frmParametresBDD
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -251,7 +251,7 @@ Partial Class frmParametresBDD
         Me.MaximumSize = New System.Drawing.Size(469, 324)
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(469, 324)
-        Me.Name = "frmSetDataBase"
+        Me.Name = "frmParametresBDD"
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Paramètres"

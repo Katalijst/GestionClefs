@@ -22,7 +22,6 @@ Partial Class frmMain
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -62,7 +61,6 @@ Partial Class frmMain
         Me.dgvResultats = New System.Windows.Forms.DataGridView()
         Me.cbRechercher = New MaterialSkin.Controls.MaterialComboBox()
         Me.lblNbDeClefs = New MaterialSkin.Controls.MaterialLabel()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.btnRemoveToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddToPanier = New MaterialSkin.Controls.MaterialButton()
         Me.btnRefresh = New MaterialSkin.Controls.MaterialButton()
@@ -178,7 +176,6 @@ Partial Class frmMain
         Me.btnEmprunter.Size = New System.Drawing.Size(136, 36)
         Me.btnEmprunter.TabIndex = 118
         Me.btnEmprunter.Text = "Emprunter"
-        Me.ToolTip1.SetToolTip(Me.btnEmprunter, "Le panier est vide !")
         Me.btnEmprunter.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnEmprunter.UseAccentColor = False
         Me.btnEmprunter.UseVisualStyleBackColor = True
@@ -197,7 +194,6 @@ Partial Class frmMain
         Me.btnAttribuer.Size = New System.Drawing.Size(127, 36)
         Me.btnAttribuer.TabIndex = 119
         Me.btnAttribuer.Text = "Attribuer"
-        Me.ToolTip1.SetToolTip(Me.btnAttribuer, "Le panier est vide !")
         Me.btnAttribuer.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnAttribuer.UseAccentColor = False
         Me.btnAttribuer.UseVisualStyleBackColor = True
@@ -748,6 +744,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.dgvResultats)
         Me.Controls.Add(Me.lblAlertNotif)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "frmMain"
         Me.Text = "GestionClefs"
         Me.MaterialTabControl1.ResumeLayout(False)
@@ -803,7 +800,6 @@ Partial Class frmMain
     Friend WithEvents cbRechercher As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents tlytGestion As TableLayoutPanel
     Friend WithEvents lblNbDeClefs As MaterialSkin.Controls.MaterialLabel
-    Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
     Friend WithEvents pbClearPanier As PictureBox
     Friend WithEvents lblAlertNotif As Label

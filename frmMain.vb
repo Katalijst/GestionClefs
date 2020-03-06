@@ -26,6 +26,15 @@ Public Class frmMain
     Public blnLightMode As Boolean = False
     Public AlertesEmpruntPerdu As Integer = 0
 
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Shared Function Split(ByVal str As String, ByVal chunkSize As Integer) As IEnumerable(Of String)
         Return Enumerable.Range(0, str.Length / chunkSize).[Select](Function(i) str.Substring(i * chunkSize, chunkSize))
     End Function
@@ -95,7 +104,7 @@ Public Class frmMain
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         'Déclaration de la requète
-        Dim SqlCommand As String = "Select EIDClef From Emprunts Where EDateFin < DATE(NOW() + 1)"
+        Dim SqlCommand As String = "Select EIDClef From Emprunts Where EDateFin < DATE(NOW())"
         'Try permet de renvoyer l'erreur si la requète échoue au lieu de freeze le logiciel
         Try
             'reset de la datatable, pas nécessaire à l'initialisation, mais pour les refresh oui
@@ -367,7 +376,7 @@ Public Class frmMain
                         End If
                     Next
                 End If
-                If Similarities > 5 Then
+                If Similarities >= dgvPanier.Columns.Count Then
                     rows_to_remove.Add(row1)
                 End If
             Next
@@ -475,17 +484,20 @@ Public Class frmMain
             End If
         End If
         Dim nbResultats As Integer = 0
-        For Each r As DataGridViewRow In dgvResultats.Rows
-            nbResultats += r.Cells("Quantité").Value
-        Next
-        If nbResultats > 1 Then
-            lblNbDeClefs.Text = nbResultats & " clefs trouvées, " & intKeyAmount & " clefs enregistrées."
-        ElseIf nbResultats = 1 Then
-            lblNbDeClefs.Text = nbResultats & " clef trouvée, " & intKeyAmount & " clefs enregistrées."
+        If cbRechercher.Text <> "Emprunteur" Then
+            For Each r As DataGridViewRow In dgvResultats.Rows
+                nbResultats += r.Cells("Quantité").Value
+            Next
+            If nbResultats > 1 Then
+                lblNbDeClefs.Text = nbResultats & " clefs trouvées, " & intKeyAmount & " clefs enregistrées."
+            ElseIf nbResultats = 1 Then
+                lblNbDeClefs.Text = nbResultats & " clef trouvée, " & intKeyAmount & " clefs enregistrées."
+            Else
+                lblNbDeClefs.Text = "Aucune clef trouvée, " & intKeyAmount & " clefs enregistrées."
+            End If
         Else
-            lblNbDeClefs.Text = "Aucune clef trouvée, " & intKeyAmount & " clefs enregistrées."
+            lblNbDeClefs.Text = dgvResultats.Rows.Count & " clefs trouvées, " & intKeyAmount & " clefs enregistrées."
         End If
-
     End Sub
 
     Private Sub chkDisponibles_CheckedChanged_1(sender As Object, e As EventArgs) Handles chkDisponibles.CheckedChanged
@@ -606,28 +618,29 @@ Public Class frmMain
         If cbRechercher.Text <> "Emprunteur" Then
             If dgvResultats.SelectedRows.Count > 0 Then
                 For Each selRow As DataGridViewRow In dgvResultats.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
-                    If selRow.Cells(strTitleCTrousseau).Value <> "Aucun" Then
-                        If listDeTrousseau.Contains(selRow.Cells(strTitleCTrousseau).Value) Then
-                            Continue For
-                        End If
-                        Dim Message As String = "Une ou plusieurs des clefs emprunter fait partie d'un trousseau, voulez vous emprunter tout le trousseau ?" & System.Environment.NewLine & "(Cliquez sur ""non"" pour la détacher du trousseau)"
-                        Dim Caption As String = "Attention !"
-                        Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
-                        Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
-                        Dim Result As DialogResult
-                        'Affichage de la message box
-                        Result = MessageBox.Show(Message, Caption, Buttons, Icon)
-                        If Result = DialogResult.Yes Then
-                            listDeTrousseau.Add(selRow.Cells(strTitleCTrousseau).Value)
-                            For Each row As DataRow In dtKeyList.Rows
-                                If row.Item(strTitleCTrousseau).ToString = selRow.Cells(strTitleCTrousseau).Value.ToString And row.Item(strTitleCStatus).ToString = "Disponible" Then
-                                    rows.Add(row)
-                                    dtPanier.ImportRow(row)
-                                    dtPanier.AcceptChanges()
-                                End If
-                            Next
-                        Else
-                            listADetacher.Add(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value)
+                    If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
+                        If selRow.Cells(strTitleCTrousseau).Value <> "Aucun" Then
+                            If listDeTrousseau.Contains(selRow.Cells(strTitleCTrousseau).Value) Then
+                                Continue For
+                            End If
+                            Dim Message As String = "Une ou plusieurs des clefs emprunter fait partie d'un trousseau, voulez vous emprunter tout le trousseau ?" & System.Environment.NewLine & "(Cliquez sur ""non"" pour la détacher du trousseau)"
+                            Dim Caption As String = "Attention !"
+                            Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
+                            Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+                            Dim Result As DialogResult
+                            'Affichage de la message box
+                            Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+                            If Result = DialogResult.Yes Then
+                                listDeTrousseau.Add(selRow.Cells(strTitleCTrousseau).Value)
+                                For Each row As DataRow In dtKeyList.Rows
+                                    If row.Item(strTitleCTrousseau).ToString = selRow.Cells(strTitleCTrousseau).Value.ToString And row.Item(strTitleCStatus).ToString = "Disponible" Then
+                                        rows.Add(row)
+                                        dtPanier.ImportRow(row)
+                                        dtPanier.AcceptChanges()
+                                    End If
+                                Next
+                            Else
+                                listADetacher.Add(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value)
                                 If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
                                     If selRow.Index >= 0 Then
                                         Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
@@ -639,19 +652,22 @@ Public Class frmMain
                             End If
                         Else
                             If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
-                            If selRow.Index >= 0 Then
-                                Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
-                                rows.Add(row)
-                                dtPanier.ImportRow(row)
-                                dtPanier.AcceptChanges()
+                                If selRow.Index >= 0 Then
+                                    Dim row As DataRow = (TryCast(selRow.DataBoundItem, DataRowView)).Row
+                                    rows.Add(row)
+                                    dtPanier.ImportRow(row)
+                                    dtPanier.AcceptChanges()
+                                End If
                             End If
                         End If
                     End If
                 Next
-                For Each r As DataRow In rows
-                    dtKeyList.Rows.Remove(r)
-                    dtKeyList.AcceptChanges()
-                Next
+                If rows.Count > 0 Then
+                    For Each r As DataRow In rows
+                        dtKeyList.Rows.Remove(r)
+                        dtKeyList.AcceptChanges()
+                    Next
+                End If
                 srcKeyList.DataSource = dtKeyList
                 srcPanier.DataSource = dtPanier
 
@@ -789,7 +805,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnTableaux_Click(sender As Object, e As EventArgs) Handles btnTableaux.Click
-        frmPositionsGestion.ShowDialog()
+        frmTableauxGestion.ShowDialog()
     End Sub
 
 

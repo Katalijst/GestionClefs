@@ -81,6 +81,36 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property ATTRIBUTION_CLE() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ATTRIBUTION_CLE", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property ATTRIBUTION_CLE_P1() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ATTRIBUTION_CLE_P1", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property ATTRIBUTION_CLE_PX() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ATTRIBUTION_CLE_PX", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property city_buildings_silhouette() As System.Drawing.Bitmap
@@ -237,6 +267,36 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("plus", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property PRET_CLE() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("PRET_CLE", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property PRET_CLE_P1() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("PRET_CLE_P1", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property PRET_CLE_PX() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("PRET_CLE_PX", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         
@@ -416,6 +476,26 @@ Namespace My.Resources
         Friend ReadOnly Property rubbish_bin_delete_button() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("rubbish-bin-delete-button", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property rubbish_bin_delete_button1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("rubbish-bin-delete-button1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property searching_magnifying_glass() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("searching-magnifying-glass", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

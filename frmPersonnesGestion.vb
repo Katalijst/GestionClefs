@@ -1,10 +1,19 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class frmPersonnesGestion
 
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub frmAjouterPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
-        RefreshGenre()
+        RefreshFonction()
         RefreshList()
         If userType <> "Administrateur" Then
             btnDelType.Enabled = False
@@ -53,7 +62,7 @@ Public Class frmPersonnesGestion
         End Try
     End Sub
 
-    Public Sub RefreshGenre()
+    Public Sub RefreshFonction(ByVal Optional name As String = "Empty")
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -74,11 +83,16 @@ Public Class frmPersonnesGestion
                 strCmbType(index) = r.Item(0)
                 index += 1
             Next
-            cmbType.DataSource = strCmbType
+            cbFonction.DataSource = strCmbType
 
-            If cmbType.Items.Count > 0 Then
-                cmbType.SelectedIndex = 0
+            If cbFonction.Items.Count > 0 Then
+                cbFonction.SelectedIndex = 0
             End If
+
+            If name <> "Empty" Then
+                cbFonction.Text = name
+            End If
+
             connecter().Close()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -86,13 +100,13 @@ Public Class frmPersonnesGestion
     End Sub
 
     Private Sub btnAddType_Click(sender As Object, e As EventArgs) Handles btnAddType.Click
-        frmGenreAjout.ShowDialog()
+        frmFonctionAjout.ShowDialog()
     End Sub
 
     Private Sub btnDelType_Click(sender As Object, e As EventArgs) Handles btnDelType.Click
         ' Initializes variables to pass to the MessageBox.Show method.
-        Dim Message As String = "Voulez vous vraiment supprimer le type """ & cmbType.Text & """ ?"
-        Dim Caption As String = "Supprimer " & cmbType.Text
+        Dim Message As String = "Voulez vous vraiment supprimer le type """ & cbFonction.Text & """ ?"
+        Dim Caption As String = "Supprimer " & cbFonction.Text
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
         Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
 
@@ -110,7 +124,7 @@ Public Class frmPersonnesGestion
             Dim sql As String
 
             Try
-                sql = "DELETE FROM Genre WHERE GGenre=""" & cmbType.Text & """"
+                sql = "DELETE FROM Genre WHERE GGenre=""" & cbFonction.Text & """"
                 With cmd
                     .Connection = connecter()
                     .CommandText = sql
@@ -121,7 +135,7 @@ Public Class frmPersonnesGestion
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-            RefreshGenre()
+            RefreshFonction()
         End If
     End Sub
 
@@ -144,7 +158,7 @@ Public Class frmPersonnesGestion
                                                             ", connecter())
             If txtNom.Text <> "" And mtxtTel.Text <> "" Then
                 insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtNom.Text
-                insert_command.Parameters.Add("@genre", MySqlDbType.VarChar).Value = cmbType.Text
+                insert_command.Parameters.Add("@genre", MySqlDbType.VarChar).Value = cbFonction.Text
                 insert_command.Parameters.Add("@tel", MySqlDbType.VarChar).Value = mtxtTel.Text
                 insert_command.Parameters.Add("@autre", MySqlDbType.VarChar).Value = txtAutre.Text
             Else
@@ -155,11 +169,11 @@ Public Class frmPersonnesGestion
 
             insert_command.ExecuteNonQuery()
             connecter().Close()
-            If frmPositionsGestion.IsHandleCreated Then
-                frmPositionsGestion.RefreshResponsable()
+            If frmTableauxGestion.IsHandleCreated Then
+                frmTableauxGestion.RefreshResponsable(txtNom.Text)
             End If
             If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
-                frmClefsEmprunterEtAttribuer.LoadPersonnes()
+                frmClefsEmprunterEtAttribuer.LoadPersonnes(txtNom.Text)
             End If
             If chkKeepOpen.Checked = False Then
                 Me.Close()
@@ -230,6 +244,12 @@ Public Class frmPersonnesGestion
                 da.SelectCommand = cmd
                 connecter().Close()
                 RefreshList()
+                If frmTableauxGestion.IsHandleCreated Then
+                    frmTableauxGestion.RefreshResponsable()
+                End If
+                If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
+                    frmClefsEmprunterEtAttribuer.LoadPersonnes()
+                End If
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
@@ -248,6 +268,20 @@ Public Class frmPersonnesGestion
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
             e.Handled = True
         End If
+    End Sub
+
+    Private Sub dgvListPersonne_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListPersonne.CellDoubleClick
+        If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
+            frmClefsEmprunterEtAttribuer.cbPersonnes.Text = dgvListPersonne.SelectedRows(0).Cells(strTitlePNom).Value
+            Me.Close()
+        End If
+        If frmTableauxGestion.IsHandleCreated Then
+            frmTableauxGestion.cbResponsable.Text = dgvListPersonne.SelectedRows(0).Cells(strTitlePNom).Value
+        End If
+    End Sub
+
+    Private Sub frmPersonnesGestion_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Me.Dispose()
     End Sub
 
 End Class

@@ -28,8 +28,8 @@ Partial Class frmClefsAjout
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmClefsAjout))
         Me.txtID = New MaterialSkin.Controls.MaterialTextBox()
         Me.txtNom = New MaterialSkin.Controls.MaterialTextBox()
-        Me.cmbLoc = New MaterialSkin.Controls.MaterialComboBox()
-        Me.cmbTrousseauListe = New MaterialSkin.Controls.MaterialComboBox()
+        Me.cbTableau = New MaterialSkin.Controls.MaterialComboBox()
+        Me.cbTrousseau = New MaterialSkin.Controls.MaterialComboBox()
         Me.chkKeepOpen = New MaterialSkin.Controls.MaterialCheckbox()
         Me.dgvListBatiment = New System.Windows.Forms.DataGridView()
         Me.dgvSelBatiment = New System.Windows.Forms.DataGridView()
@@ -95,51 +95,51 @@ Partial Class frmClefsAjout
         Me.txtNom.Text = ""
         Me.txtNom.UseTallSize = False
         '
-        'cmbLoc
+        'cbTableau
         '
-        Me.cmbLoc.AutoResize = False
-        Me.cmbLoc.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbLoc.Depth = 0
-        Me.cmbLoc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.cmbLoc.DropDownHeight = 118
-        Me.cmbLoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbLoc.DropDownWidth = 121
-        Me.cmbLoc.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
-        Me.cmbLoc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.cmbLoc.FormattingEnabled = True
-        Me.cmbLoc.Hint = "Tableau"
-        Me.cmbLoc.IntegralHeight = False
-        Me.cmbLoc.ItemHeight = 29
-        Me.cmbLoc.Location = New System.Drawing.Point(12, 218)
-        Me.cmbLoc.MaxDropDownItems = 4
-        Me.cmbLoc.MouseState = MaterialSkin.MouseState.OUT
-        Me.cmbLoc.Name = "cmbLoc"
-        Me.cmbLoc.Size = New System.Drawing.Size(203, 35)
-        Me.cmbLoc.TabIndex = 3
-        Me.cmbLoc.UseTallSize = False
+        Me.cbTableau.AutoResize = False
+        Me.cbTableau.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbTableau.Depth = 0
+        Me.cbTableau.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cbTableau.DropDownHeight = 118
+        Me.cbTableau.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTableau.DropDownWidth = 121
+        Me.cbTableau.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cbTableau.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbTableau.FormattingEnabled = True
+        Me.cbTableau.Hint = "Tableau"
+        Me.cbTableau.IntegralHeight = False
+        Me.cbTableau.ItemHeight = 29
+        Me.cbTableau.Location = New System.Drawing.Point(12, 218)
+        Me.cbTableau.MaxDropDownItems = 4
+        Me.cbTableau.MouseState = MaterialSkin.MouseState.OUT
+        Me.cbTableau.Name = "cbTableau"
+        Me.cbTableau.Size = New System.Drawing.Size(203, 35)
+        Me.cbTableau.TabIndex = 3
+        Me.cbTableau.UseTallSize = False
         '
-        'cmbTrousseauListe
+        'cbTrousseau
         '
-        Me.cmbTrousseauListe.AutoResize = False
-        Me.cmbTrousseauListe.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbTrousseauListe.Depth = 0
-        Me.cmbTrousseauListe.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.cmbTrousseauListe.DropDownHeight = 118
-        Me.cmbTrousseauListe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTrousseauListe.DropDownWidth = 121
-        Me.cmbTrousseauListe.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
-        Me.cmbTrousseauListe.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.cmbTrousseauListe.FormattingEnabled = True
-        Me.cmbTrousseauListe.Hint = "Trousseau"
-        Me.cmbTrousseauListe.IntegralHeight = False
-        Me.cmbTrousseauListe.ItemHeight = 29
-        Me.cmbTrousseauListe.Location = New System.Drawing.Point(12, 278)
-        Me.cmbTrousseauListe.MaxDropDownItems = 4
-        Me.cmbTrousseauListe.MouseState = MaterialSkin.MouseState.OUT
-        Me.cmbTrousseauListe.Name = "cmbTrousseauListe"
-        Me.cmbTrousseauListe.Size = New System.Drawing.Size(203, 35)
-        Me.cmbTrousseauListe.TabIndex = 5
-        Me.cmbTrousseauListe.UseTallSize = False
+        Me.cbTrousseau.AutoResize = False
+        Me.cbTrousseau.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbTrousseau.Depth = 0
+        Me.cbTrousseau.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cbTrousseau.DropDownHeight = 118
+        Me.cbTrousseau.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTrousseau.DropDownWidth = 121
+        Me.cbTrousseau.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cbTrousseau.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbTrousseau.FormattingEnabled = True
+        Me.cbTrousseau.Hint = "Trousseau"
+        Me.cbTrousseau.IntegralHeight = False
+        Me.cbTrousseau.ItemHeight = 29
+        Me.cbTrousseau.Location = New System.Drawing.Point(12, 278)
+        Me.cbTrousseau.MaxDropDownItems = 4
+        Me.cbTrousseau.MouseState = MaterialSkin.MouseState.OUT
+        Me.cbTrousseau.Name = "cbTrousseau"
+        Me.cbTrousseau.Size = New System.Drawing.Size(203, 35)
+        Me.cbTrousseau.TabIndex = 5
+        Me.cbTrousseau.UseTallSize = False
         '
         'chkKeepOpen
         '
@@ -593,7 +593,7 @@ Partial Class frmClefsAjout
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTip1.ToolTipTitle = "Trousseau"
         '
-        'frmCreerClefs
+        'frmClefsAjout
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -626,15 +626,15 @@ Partial Class frmClefsAjout
         Me.Controls.Add(Me.dgvSelBatiment)
         Me.Controls.Add(Me.dgvListBatiment)
         Me.Controls.Add(Me.txtRechercher)
-        Me.Controls.Add(Me.cmbTrousseauListe)
-        Me.Controls.Add(Me.cmbLoc)
+        Me.Controls.Add(Me.cbTrousseau)
+        Me.Controls.Add(Me.cbTableau)
         Me.Controls.Add(Me.txtNom)
         Me.Controls.Add(Me.btnAddBatiment)
         Me.Controls.Add(Me.txtID)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimumSize = New System.Drawing.Size(817, 460)
-        Me.Name = "frmCreerClefs"
+        Me.Name = "frmClefsAjout"
         Me.Sizable = False
         Me.Text = "Ajouter une clef au gestionnaire"
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
@@ -645,8 +645,8 @@ Partial Class frmClefsAjout
     End Sub
     Friend WithEvents txtID As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents txtNom As MaterialSkin.Controls.MaterialTextBox
-    Friend WithEvents cmbLoc As MaterialSkin.Controls.MaterialComboBox
-    Friend WithEvents cmbTrousseauListe As MaterialSkin.Controls.MaterialComboBox
+    Friend WithEvents cbTableau As MaterialSkin.Controls.MaterialComboBox
+    Friend WithEvents cbTrousseau As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents chkKeepOpen As MaterialSkin.Controls.MaterialCheckbox
     Friend WithEvents dgvListBatiment As DataGridView
     Friend WithEvents dgvSelBatiment As DataGridView

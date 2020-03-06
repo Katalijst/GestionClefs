@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmPositionsGestion
+Partial Class frmTableauxGestion
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
@@ -23,14 +23,14 @@ Partial Class frmPositionsGestion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPositionsGestion))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTableauxGestion))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lblPBatiment = New System.Windows.Forms.Label()
         Me.dgvListBatiment = New System.Windows.Forms.DataGridView()
         Me.btnAddPersonne = New System.Windows.Forms.Button()
-        Me.cmbResponsable = New System.Windows.Forms.ComboBox()
+        Me.cbResponsable = New System.Windows.Forms.ComboBox()
         Me.lblPNom = New System.Windows.Forms.Label()
         Me.lblPResponsable = New System.Windows.Forms.Label()
         Me.txtNom = New System.Windows.Forms.TextBox()
@@ -57,7 +57,7 @@ Partial Class frmPositionsGestion
         Me.GroupBox2.Controls.Add(Me.lblPBatiment)
         Me.GroupBox2.Controls.Add(Me.dgvListBatiment)
         Me.GroupBox2.Controls.Add(Me.btnAddPersonne)
-        Me.GroupBox2.Controls.Add(Me.cmbResponsable)
+        Me.GroupBox2.Controls.Add(Me.cbResponsable)
         Me.GroupBox2.Controls.Add(Me.lblPNom)
         Me.GroupBox2.Controls.Add(Me.lblPResponsable)
         Me.GroupBox2.Controls.Add(Me.txtNom)
@@ -87,14 +87,14 @@ Partial Class frmPositionsGestion
         Me.dgvListBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListBatiment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvListBatiment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListBatiment.Location = New System.Drawing.Point(9, 112)
         Me.dgvListBatiment.MultiSelect = False
@@ -115,14 +115,14 @@ Partial Class frmPositionsGestion
         Me.btnAddPersonne.Text = "+"
         Me.btnAddPersonne.UseVisualStyleBackColor = True
         '
-        'cmbResponsable
+        'cbResponsable
         '
-        Me.cmbResponsable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbResponsable.FormattingEnabled = True
-        Me.cmbResponsable.Location = New System.Drawing.Point(9, 33)
-        Me.cmbResponsable.Name = "cmbResponsable"
-        Me.cmbResponsable.Size = New System.Drawing.Size(234, 21)
-        Me.cmbResponsable.TabIndex = 57
+        Me.cbResponsable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbResponsable.FormattingEnabled = True
+        Me.cbResponsable.Location = New System.Drawing.Point(9, 33)
+        Me.cbResponsable.Name = "cbResponsable"
+        Me.cbResponsable.Size = New System.Drawing.Size(234, 21)
+        Me.cbResponsable.TabIndex = 57
         '
         'lblPNom
         '
@@ -209,14 +209,14 @@ Partial Class frmPositionsGestion
         Me.dgvListTableau.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListTableau.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListTableau.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListTableau.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListTableau.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvListTableau.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListTableau.Location = New System.Drawing.Point(6, 21)
         Me.dgvListTableau.MultiSelect = False
@@ -256,7 +256,7 @@ Partial Class frmPositionsGestion
         Me.SupprimerToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
         Me.SupprimerToolStripMenuItem.Text = "Supprimer"
         '
-        'frmGestionPosition
+        'frmTableauxGestion
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -272,7 +272,7 @@ Partial Class frmPositionsGestion
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmGestionPosition"
+        Me.Name = "frmTableauxGestion"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
@@ -292,7 +292,7 @@ Partial Class frmPositionsGestion
 
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnAddPersonne As Button
-    Friend WithEvents cmbResponsable As ComboBox
+    Friend WithEvents cbResponsable As ComboBox
     Friend WithEvents chkKeepOpen As CheckBox
     Friend WithEvents btnSave As Button
     Friend WithEvents lblPNom As Label

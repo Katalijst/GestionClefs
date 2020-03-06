@@ -1,7 +1,17 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class frmTrousseauxGestion
-    Public Sub RefreshTrousseau()
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
+    Public Sub RefreshTrousseau(ByVal Optional name As String = "Empty")
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -16,13 +26,15 @@ Public Class frmTrousseauxGestion
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            cmbTrousseauListe.DataSource = dt
-            cmbTrousseauListe.ValueMember = "TNom"
-            cmbTrousseauListe.DisplayMember = strTitleTNom
-            If cmbTrousseauListe.Items.Count > 0 Then
-                cmbTrousseauListe.SelectedIndex = 0
+            cbTrousseau.DataSource = dt
+            cbTrousseau.ValueMember = "TNom"
+            cbTrousseau.DisplayMember = strTitleTNom
+            If cbTrousseau.Items.Count > 0 Then
+                cbTrousseau.SelectedIndex = 0
             End If
-
+            If name <> "Empty" Then
+                cbTrousseau.Text = name
+            End If
             connecter().Close()
         Catch ex As MySqlException
             MsgBox(ex.Message)
@@ -84,12 +96,12 @@ Public Class frmTrousseauxGestion
         Dim dtKeyList As New DataTable
         Dim sql As String
 
-        gbTrousseau.Text = cmbTrousseauListe.Text
-        lblTrousseauAfficher.Text = "Trousseau afficher : " & cmbTrousseauListe.Text
+        gbTrousseau.Text = cbTrousseau.Text
+        lblTrousseauAfficher.Text = "Trousseau afficher : " & cbTrousseau.Text
 
         Try
 
-            sql = "Select CID, CNom, CPosition, CBatiment From Clefs Where CTrousseau='" & cmbTrousseauListe.Text & "'"
+            sql = "Select CID, CNom, CPosition, CBatiment From Clefs Where CTrousseau='" & cbTrousseau.Text & "'"
 
             With cmd
                 .Connection = connecter()
@@ -123,8 +135,8 @@ Public Class frmTrousseauxGestion
 
     Private Sub btnSupprimerTrousseau_Click(sender As Object, e As EventArgs) Handles btnSupprimerTrousseau.Click
         ' Initializes variables to pass to the MessageBox.Show method.
-        Dim Message As String = "Voulez vous vraiment supprimer le trousseau """ & cmbTrousseauListe.Text & """ ?"
-        Dim Caption As String = "Supprimer " & cmbTrousseauListe.Text
+        Dim Message As String = "Voulez vous vraiment supprimer le trousseau """ & cbTrousseau.Text & """ ?"
+        Dim Caption As String = "Supprimer " & cbTrousseau.Text
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
         Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
 
@@ -142,14 +154,14 @@ Public Class frmTrousseauxGestion
             Dim sql As String
 
             Try
-                sql = "UPDATE Clefs SET CTrousseau='Aucun' WHERE CTrousseau='" & cmbTrousseauListe.Text & "'"
+                sql = "UPDATE Clefs SET CTrousseau='Aucun' WHERE CTrousseau='" & cbTrousseau.Text & "'"
                 With cmd
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
                 End With
 
-                sql = "DELETE FROM Trousseau WHERE TNom=""" & cmbTrousseauListe.Text & """"
+                sql = "DELETE FROM Trousseau WHERE TNom=""" & cbTrousseau.Text & """"
                 With cmd
                     .Connection = connecter()
                     .CommandText = sql
@@ -158,9 +170,9 @@ Public Class frmTrousseauxGestion
                 da.SelectCommand = cmd
 
                 da.Fill(dt)
-                cmbTrousseauListe.DataSource = dt
-                cmbTrousseauListe.ValueMember = "TNom"
-                cmbTrousseauListe.DisplayMember = "TNom"
+                cbTrousseau.DataSource = dt
+                cbTrousseau.ValueMember = "TNom"
+                cbTrousseau.DisplayMember = "TNom"
 
                 connecter().Close()
             Catch ex As Exception
@@ -173,7 +185,7 @@ Public Class frmTrousseauxGestion
         If dgvListClefs.SelectedRows.Count > 0 Then
             For Each selRow As DataGridViewRow In dgvListClefs.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
                 Dim dt2 As New DataTable
-                Dim gv2r As DataRow = dt2.newrow()
+                Dim gv2r As DataRow = dt2.NewRow()
                 'A finir ! Optimisation pour l'envois entre deux dgv
 
                 Dim intSelIndex As Integer = selRow.Index
@@ -248,7 +260,7 @@ Public Class frmTrousseauxGestion
         FilldgvSelClefs()
     End Sub
 
-    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrousseauListe.SelectedIndexChanged
+    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTrousseau.SelectedIndexChanged
         FilldgvSelClefs()
     End Sub
 

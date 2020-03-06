@@ -1,5 +1,15 @@
 ﻿Imports MySql.Data.MySqlClient
-Public Class frmPositionsGestion
+Public Class frmTableauxGestion
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Public Sub RefreshList()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
@@ -43,7 +53,7 @@ Public Class frmPositionsGestion
             connecter().Close()
         End Try
     End Sub
-    Public Sub RefreshResponsable()
+    Public Sub RefreshResponsable(ByVal Optional name As String = "Empty")
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -58,12 +68,17 @@ Public Class frmPositionsGestion
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            cmbResponsable.DataSource = dt
-            cmbResponsable.ValueMember = "NNom"
-            cmbResponsable.DisplayMember = "NNom"
-            If cmbResponsable.Items.Count > 0 Then
-                cmbResponsable.SelectedIndex = 0
+            cbResponsable.DataSource = dt
+            cbResponsable.ValueMember = "NNom"
+            cbResponsable.DisplayMember = "NNom"
+            If cbResponsable.Items.Count > 0 Then
+                cbResponsable.SelectedIndex = 0
             End If
+
+            If name <> "Empty" Then
+                cbResponsable.Text = name
+            End If
+
             connecter().Close()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -151,7 +166,7 @@ Public Class frmPositionsGestion
     End Sub
 
     Private Sub EditerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditerToolStripMenuItem.Click
-        frmPositionsEditer.ShowDialog()
+        frmTableauxEditer.ShowDialog()
     End Sub
 
     Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
@@ -211,7 +226,7 @@ Public Class frmPositionsGestion
                                                             ", connecter())
             If txtNom.Text <> "" Then
                 insert_command.Parameters.Add("@nom", MySqlDbType.VarChar).Value = txtNom.Text
-                insert_command.Parameters.Add("@responsable", MySqlDbType.VarChar).Value = cmbResponsable.Text
+                insert_command.Parameters.Add("@responsable", MySqlDbType.VarChar).Value = cbResponsable.Text
                 insert_command.Parameters.Add("@batiment", MySqlDbType.VarChar).Value = stgBatNom
             Else
                 MsgBox("Veuillez remplir tout les champs !")
@@ -221,7 +236,7 @@ Public Class frmPositionsGestion
             insert_command.ExecuteNonQuery()
             connecter().Close()
             If frmClefsAjout.IsHandleCreated Then
-                frmClefsAjout.RefreshPosition()
+                frmClefsAjout.RefreshTableau(txtNom.Text)
             End If
             If chkKeepOpen.Checked = False Then
                 Me.Close()

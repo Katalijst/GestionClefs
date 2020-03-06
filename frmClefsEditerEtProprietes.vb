@@ -6,6 +6,16 @@ Public Class frmClefsEditerEtProprietes
     Shared stgStatus As String
     Public IDToLookFor As String
     Public IDClef As String = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCID).Value
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub frmEditKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         intOldQuantity = frmMain.dgvResultats.SelectedRows(0).Cells("Quantité").Value
@@ -540,7 +550,7 @@ Public Class frmClefsEditerEtProprietes
     End Sub
 
     Private Sub btnNewLoc_Click(sender As Object, e As EventArgs) Handles btnNewLoc.Click
-        frmPositionsGestion.ShowDialog()
+        frmTableauxGestion.ShowDialog()
     End Sub
 
     Private Sub txtQuantity_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtQuantity.KeyPress

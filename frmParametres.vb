@@ -1,104 +1,73 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports MaterialSkin
 
 Public Class frmParametres
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
+    Private Sub frmParametres_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If userType <> "Administrateur" Then
+            btnGestionUtilisateurs.Enabled = False
+            btnMySQL.Enabled = False
+        End If
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SkinManager.AddFormToManage(Me)
+        swtDarkMode.Checked = Not (My.Settings.DarkMode)
+        swtAlertPopUp.Checked = My.Settings.ShowAlert
+    End Sub
+
+    Private Sub frmParametres_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
+        Me.Dispose()
+    End Sub
+
+    Private Sub btnChangerMotDePasse_Click(sender As Object, e As EventArgs) Handles btnChangerMotDePasse.Click
+        frmUtilisateursPassword.ShowDialog()
+    End Sub
+
+    Private Sub btnGestionUtilisateurs_Click(sender As Object, e As EventArgs) Handles btnGestionUtilisateurs.Click
+        frmUtilisateursGestion.ShowDialog()
+    End Sub
+
     Private Sub btnMySQL_Click(sender As Object, e As EventArgs) Handles btnMySQL.Click
         frmParametresBDD.ShowDialog()
     End Sub
-    Public Sub RefreshMySQL()
-        txtActServeur.Text = My.Settings.MySQL_Serveur
-        txtActPort.Text = My.Settings.MySQL_Port
-        txtActDatabase.Text = My.Settings.MySQL_Database
-        txtActID.Text = My.Settings.MySQL_ID
-        txtActPassword.Text = My.Settings.MySQL_Password
-        txtID.Text = userID
-    End Sub
-    Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-        'SkinManager.AddFormToManage(Me)
-        RefreshMySQL()
-        txtOldPassword.SetWaterMark("Mot de passe actuel")
-        txtNewPassword.SetWaterMark("Nouveau mot de passe")
-        txtNewPasswordConfirm.SetWaterMark("Confimer le nouveau mot de passe")
-        If userType <> "Administrateur" Then
-            btnAddUser.Enabled = False
-            btnMySQL.Enabled = False
-            btnUserManager.Enabled = False
-        End If
+
+    Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
+        frmAbout.ShowDialog()
     End Sub
 
-    Private Sub btnChangePassword_Click(sender As Object, e As EventArgs) Handles btnChangePassword.Click
-        If txtNewPassword.Text <> txtNewPasswordConfirm.Text Then
-            MsgBox("Les mots de passes saisis ne correspondent pas !")
-            Exit Sub
-        ElseIf txtNewPassword.Text.Length < 6 Then
-            MsgBox("Le mot de passe doit être composé d'au moins 6 caractères !")
-            Exit Sub
-        Else
-            Try
-                Dim stgID As String = txtID.Text
-                Dim stgOldPassword As String = txtOldPassword.Text
-                Dim oldWrapper As New Simple3Des(stgOldPassword)
-                Dim oldCipherText As String = oldWrapper.EncryptData(stgID)
-
-                'Vérifier le mot de passe
-                Dim cmd As New MySqlCommand
-                Dim dt As New DataTable
-                Dim da As New MySqlDataAdapter
-                Dim sql As String
-
-                sql = "Select LCipher FROM Login WHERE LCipher=""" & oldCipherText & """"
-                With cmd
-                    .Connection = connecter()
-                    .CommandText = sql
-                End With
-                da.SelectCommand = cmd
-                da.Fill(dt)
-                If dt.Rows.Count < 1 Then
-                    MsgBox("Le mot de passe actuel saisi est invalide !")
-                    connecter().Close()
-                Else
-                    'Encryption avec nouveaux mot de passe
-                    Dim stgNewPassword As String = txtNewPassword.Text
-                    Dim newWrapper As New Simple3Des(stgNewPassword)
-                    Dim newCipherText As String = newWrapper.EncryptData(stgID)
-
-                    dt.Reset()
-                    sql = "DELETE FROM Login WHERE LCipher='" & oldCipherText & "'"
-                    With cmd
-                        .Connection = connecter()
-                        .CommandText = sql
-                        .ExecuteNonQuery()
-                    End With
-
-                    Dim insert_command As New MySqlCommand("INSERT INTO `Login`(`LCipher`,`LUserType`) VALUES (@cipher,@UserType)", connecter())
-                    insert_command.Parameters.Add("@cipher", MySqlDbType.VarChar).Value = newCipherText
-                    insert_command.Parameters.Add("@UserType", MySqlDbType.VarChar).Value = userType
-                    insert_command.ExecuteNonQuery()
-                    connecter().Close()
-
-                    MsgBox("Mot de passe changé avec succès !")
-                    txtOldPassword.Text = String.Empty
-                    txtNewPassword.Text = String.Empty
-                    txtNewPasswordConfirm.Text = String.Empty
-                    Me.Close()
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-
-        End If
-
-    End Sub
-
-    Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
-        frmUtilisateursAjouter.ShowDialog()
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Me.Close()
     End Sub
 
-    Private Sub btnUserManager_Click(sender As Object, e As EventArgs) Handles btnUserManager.Click
-        frmUtilisateursGestion.ShowDialog()
+    Private Sub swtDarkMode_CheckedChanged(sender As Object, e As EventArgs) Handles swtDarkMode.CheckedChanged
+        If swtDarkMode.Checked = False Then
+            SkinManager.Theme = MaterialSkinManager.Themes.LIGHT
+            SkinManager.ColorScheme = New ColorScheme(Primary.Blue800, Primary.Blue900, Primary.Blue500, Accent.DeepOrange400, TextShade.WHITE)
+            My.Settings.DarkMode = True
+        Else
+            SkinManager.Theme = MaterialSkinManager.Themes.DARK
+            SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)
+            My.Settings.DarkMode = False
+        End If
+        If frmMain.IsHandleCreated Then
+            frmMain.BrightOrDarkMode()
+        End If
+        My.Settings.Save()
     End Sub
+
+    Private Sub swtAlertPopUp_CheckedChanged(sender As Object, e As EventArgs) Handles swtAlertPopUp.CheckedChanged
+        If swtAlertPopUp.Checked = True Then
+            My.Settings.ShowAlert = True
+        Else
+            My.Settings.ShowAlert = False
+        End If
+        My.Settings.Save()
+    End Sub
+
 End Class

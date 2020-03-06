@@ -1,10 +1,17 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Text.RegularExpressions
 Public Class frmBatimentsAjoutGestion
-    Private Sub frmGestionBatiments_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
-    Private Sub frmAjouterBatiment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
+    Private Sub frmGestionBatiments_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
         lblID.Text = strTitleBNum & " :"

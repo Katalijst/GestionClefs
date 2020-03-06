@@ -22,8 +22,8 @@ Partial Class frmTrousseauxGestion
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTrousseauxGestion))
         Me.gbListeClefs = New System.Windows.Forms.GroupBox()
         Me.dgvListClefs = New System.Windows.Forms.DataGridView()
@@ -34,7 +34,7 @@ Partial Class frmTrousseauxGestion
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.lblTrousseauAfficher = New System.Windows.Forms.Label()
         Me.btnAfficher = New System.Windows.Forms.Button()
-        Me.cmbTrousseauListe = New System.Windows.Forms.ComboBox()
+        Me.cbTrousseau = New System.Windows.Forms.ComboBox()
         Me.btnSupprimerTrousseau = New System.Windows.Forms.Button()
         Me.btnCreerTrousseau = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -72,14 +72,14 @@ Partial Class frmTrousseauxGestion
         Me.dgvListClefs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListClefs.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListClefs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListClefs.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListClefs.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvListClefs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListClefs.Location = New System.Drawing.Point(6, 19)
         Me.dgvListClefs.MultiSelect = False
@@ -111,14 +111,14 @@ Partial Class frmTrousseauxGestion
         Me.dgvSelTrousseau.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvSelTrousseau.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvSelTrousseau.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSelTrousseau.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSelTrousseau.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvSelTrousseau.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvSelTrousseau.Location = New System.Drawing.Point(6, 19)
         Me.dgvSelTrousseau.MultiSelect = False
@@ -154,7 +154,7 @@ Partial Class frmTrousseauxGestion
         '
         Me.GroupBox3.Controls.Add(Me.lblTrousseauAfficher)
         Me.GroupBox3.Controls.Add(Me.btnAfficher)
-        Me.GroupBox3.Controls.Add(Me.cmbTrousseauListe)
+        Me.GroupBox3.Controls.Add(Me.cbTrousseau)
         Me.GroupBox3.Controls.Add(Me.btnSupprimerTrousseau)
         Me.GroupBox3.Location = New System.Drawing.Point(405, 70)
         Me.GroupBox3.Name = "GroupBox3"
@@ -181,15 +181,15 @@ Partial Class frmTrousseauxGestion
         Me.btnAfficher.Text = "Afficher"
         Me.btnAfficher.UseVisualStyleBackColor = True
         '
-        'cmbTrousseauListe
+        'cbTrousseau
         '
-        Me.cmbTrousseauListe.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.cmbTrousseauListe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTrousseauListe.FormattingEnabled = True
-        Me.cmbTrousseauListe.Location = New System.Drawing.Point(6, 19)
-        Me.cmbTrousseauListe.Name = "cmbTrousseauListe"
-        Me.cmbTrousseauListe.Size = New System.Drawing.Size(223, 21)
-        Me.cmbTrousseauListe.TabIndex = 23
+        Me.cbTrousseau.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.cbTrousseau.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTrousseau.FormattingEnabled = True
+        Me.cbTrousseau.Location = New System.Drawing.Point(6, 19)
+        Me.cbTrousseau.Name = "cbTrousseau"
+        Me.cbTrousseau.Size = New System.Drawing.Size(223, 21)
+        Me.cbTrousseau.TabIndex = 23
         '
         'btnSupprimerTrousseau
         '
@@ -260,7 +260,7 @@ Partial Class frmTrousseauxGestion
         Me.pbAddSelBatiment.TabIndex = 52
         Me.pbAddSelBatiment.TabStop = False
         '
-        'frmGestionTrousseau
+        'frmTrousseauxGestion
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -279,7 +279,7 @@ Partial Class frmTrousseauxGestion
         Me.Controls.Add(Me.gbListeClefs)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "frmGestionTrousseau"
+        Me.Name = "frmTrousseauxGestion"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
@@ -306,7 +306,7 @@ Partial Class frmTrousseauxGestion
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents btnSupprimerTrousseau As Button
     Friend WithEvents btnCreerTrousseau As Button
-    Friend WithEvents cmbTrousseauListe As ComboBox
+    Friend WithEvents cbTrousseau As ComboBox
     Friend WithEvents btnAfficher As Button
     Friend WithEvents dgvListClefs As DataGridView
     Friend WithEvents dgvSelTrousseau As DataGridView

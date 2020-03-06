@@ -1,7 +1,17 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Public Class frmPositionsEditer
+Public Class frmTableauxEditer
     Shared stgPosID
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub frmEditerPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
@@ -15,8 +25,8 @@ Public Class frmPositionsEditer
         RemplissageAuto()
     End Sub
     Public Sub RemplissageAuto()
-        Dim intIndexNom As Integer = frmPositionsGestion.dgvListTableau.Columns("Nom").Index
-        stgPosID = frmPositionsGestion.dgvListTableau.SelectedRows(0).Cells(intIndexNom).Value.ToString()
+        Dim intIndexNom As Integer = frmTableauxGestion.dgvListTableau.Columns("Nom").Index
+        stgPosID = frmTableauxGestion.dgvListTableau.SelectedRows(0).Cells(intIndexNom).Value.ToString()
         txtNom.Text = stgPosID
 
         Dim cmd As New MySqlCommand
@@ -162,10 +172,10 @@ Public Class frmPositionsEditer
             MsgBox(ex.Message)
         End Try
         If frmClefsAjout.IsHandleCreated Then
-            frmClefsAjout.RefreshPosition()
+            frmClefsAjout.RefreshTableau()
         End If
-        If frmPositionsGestion.IsHandleCreated Then
-            frmPositionsGestion.RefreshList()
+        If frmTableauxGestion.IsHandleCreated Then
+            frmTableauxGestion.RefreshList()
         End If
     End Sub
 End Class

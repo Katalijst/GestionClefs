@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmPersonnesGestion
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmPersonnesGestion
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -36,18 +36,18 @@ Partial Class frmPersonnesGestion
         Me.tabAjouter = New System.Windows.Forms.TabPage()
         Me.btnDelType = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddType = New MaterialSkin.Controls.MaterialButton()
+        Me.btnCancel = New MaterialSkin.Controls.MaterialButton()
         Me.MaterialLabel4 = New MaterialSkin.Controls.MaterialLabel()
+        Me.btnSave = New MaterialSkin.Controls.MaterialButton()
         Me.txtAutre = New MaterialSkin.Controls.MaterialTextBox()
         Me.chkKeepOpen = New MaterialSkin.Controls.MaterialCheckbox()
         Me.MaterialLabel3 = New MaterialSkin.Controls.MaterialLabel()
         Me.mtxtTel = New MaterialSkin.Controls.MaterialTextBox()
         Me.MaterialLabel2 = New MaterialSkin.Controls.MaterialLabel()
-        Me.cmbType = New MaterialSkin.Controls.MaterialComboBox()
+        Me.cbFonction = New MaterialSkin.Controls.MaterialComboBox()
         Me.MaterialLabel1 = New MaterialSkin.Controls.MaterialLabel()
         Me.txtNom = New MaterialSkin.Controls.MaterialTextBox()
         Me.tabRechercher = New System.Windows.Forms.TabPage()
-        Me.btnSave = New MaterialSkin.Controls.MaterialButton()
-        Me.btnCancel = New MaterialSkin.Controls.MaterialButton()
         Me.MaterialTabSelector1 = New MaterialSkin.Controls.MaterialTabSelector()
         Me.gbRechercher.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -160,7 +160,7 @@ Partial Class frmPersonnesGestion
         Me.tabAjouter.Controls.Add(Me.MaterialLabel3)
         Me.tabAjouter.Controls.Add(Me.mtxtTel)
         Me.tabAjouter.Controls.Add(Me.MaterialLabel2)
-        Me.tabAjouter.Controls.Add(Me.cmbType)
+        Me.tabAjouter.Controls.Add(Me.cbFonction)
         Me.tabAjouter.Controls.Add(Me.MaterialLabel1)
         Me.tabAjouter.Controls.Add(Me.txtNom)
         Me.tabAjouter.Location = New System.Drawing.Point(4, 22)
@@ -176,14 +176,13 @@ Partial Class frmPersonnesGestion
         Me.btnDelType.Depth = 0
         Me.btnDelType.DrawShadows = True
         Me.btnDelType.HighEmphasis = True
-        Me.btnDelType.Icon = Global.GestionClefs.My.Resources.Resources.clear_button
-        Me.btnDelType.Location = New System.Drawing.Point(265, 28)
+        Me.btnDelType.Icon = Global.GestionClefs.My.Resources.Resources.rubbish_bin_delete_button1
+        Me.btnDelType.Location = New System.Drawing.Point(262, 28)
         Me.btnDelType.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnDelType.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnDelType.Name = "btnDelType"
-        Me.btnDelType.Size = New System.Drawing.Size(130, 36)
+        Me.btnDelType.Size = New System.Drawing.Size(44, 36)
         Me.btnDelType.TabIndex = 10
-        Me.btnDelType.Text = "Supprimer"
         Me.btnDelType.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
         Me.btnDelType.UseAccentColor = False
         Me.btnDelType.UseVisualStyleBackColor = True
@@ -205,6 +204,25 @@ Partial Class frmPersonnesGestion
         Me.btnAddType.UseAccentColor = False
         Me.btnAddType.UseVisualStyleBackColor = True
         '
+        'btnCancel
+        '
+        Me.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnCancel.Depth = 0
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.DrawShadows = True
+        Me.btnCancel.HighEmphasis = True
+        Me.btnCancel.Icon = Nothing
+        Me.btnCancel.Location = New System.Drawing.Point(5, 288)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnCancel.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(87, 36)
+        Me.btnCancel.TabIndex = 64
+        Me.btnCancel.Text = "Annuler"
+        Me.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
+        Me.btnCancel.UseAccentColor = False
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
         'MaterialLabel4
         '
         Me.MaterialLabel4.AutoSize = True
@@ -216,6 +234,24 @@ Partial Class frmPersonnesGestion
         Me.MaterialLabel4.Size = New System.Drawing.Size(99, 19)
         Me.MaterialLabel4.TabIndex = 8
         Me.MaterialLabel4.Text = "Complément :"
+        '
+        'btnSave
+        '
+        Me.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnSave.Depth = 0
+        Me.btnSave.DrawShadows = True
+        Me.btnSave.HighEmphasis = True
+        Me.btnSave.Icon = Nothing
+        Me.btnSave.Location = New System.Drawing.Point(339, 288)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(85, 36)
+        Me.btnSave.TabIndex = 63
+        Me.btnSave.Text = "Ajouter"
+        Me.btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
+        Me.btnSave.UseAccentColor = False
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'txtAutre
         '
@@ -288,28 +324,28 @@ Partial Class frmPersonnesGestion
         Me.MaterialLabel2.TabIndex = 3
         Me.MaterialLabel2.Text = "Nom :"
         '
-        'cmbType
+        'cbFonction
         '
-        Me.cmbType.AutoResize = False
-        Me.cmbType.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbType.Depth = 0
-        Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.cmbType.DropDownHeight = 118
-        Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbType.DropDownWidth = 121
-        Me.cmbType.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
-        Me.cmbType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.cmbType.FormattingEnabled = True
-        Me.cmbType.Hint = "Fonction"
-        Me.cmbType.IntegralHeight = False
-        Me.cmbType.ItemHeight = 29
-        Me.cmbType.Location = New System.Drawing.Point(6, 29)
-        Me.cmbType.MaxDropDownItems = 4
-        Me.cmbType.MouseState = MaterialSkin.MouseState.OUT
-        Me.cmbType.Name = "cmbType"
-        Me.cmbType.Size = New System.Drawing.Size(200, 35)
-        Me.cmbType.TabIndex = 2
-        Me.cmbType.UseTallSize = False
+        Me.cbFonction.AutoResize = False
+        Me.cbFonction.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbFonction.Depth = 0
+        Me.cbFonction.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cbFonction.DropDownHeight = 118
+        Me.cbFonction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbFonction.DropDownWidth = 121
+        Me.cbFonction.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cbFonction.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbFonction.FormattingEnabled = True
+        Me.cbFonction.Hint = "Fonction"
+        Me.cbFonction.IntegralHeight = False
+        Me.cbFonction.ItemHeight = 29
+        Me.cbFonction.Location = New System.Drawing.Point(6, 29)
+        Me.cbFonction.MaxDropDownItems = 4
+        Me.cbFonction.MouseState = MaterialSkin.MouseState.OUT
+        Me.cbFonction.Name = "cbFonction"
+        Me.cbFonction.Size = New System.Drawing.Size(200, 35)
+        Me.cbFonction.TabIndex = 2
+        Me.cbFonction.UseTallSize = False
         '
         'MaterialLabel1
         '
@@ -346,70 +382,36 @@ Partial Class frmPersonnesGestion
         Me.tabRechercher.Location = New System.Drawing.Point(4, 22)
         Me.tabRechercher.Name = "tabRechercher"
         Me.tabRechercher.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabRechercher.Size = New System.Drawing.Size(428, 319)
+        Me.tabRechercher.Size = New System.Drawing.Size(428, 330)
         Me.tabRechercher.TabIndex = 1
         Me.tabRechercher.Text = "Rechercher"
         Me.tabRechercher.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnSave.Depth = 0
-        Me.btnSave.DrawShadows = True
-        Me.btnSave.HighEmphasis = True
-        Me.btnSave.Icon = Nothing
-        Me.btnSave.Location = New System.Drawing.Point(339, 288)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(85, 36)
-        Me.btnSave.TabIndex = 63
-        Me.btnSave.Text = "Ajouter"
-        Me.btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
-        Me.btnSave.UseAccentColor = False
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnCancel
-        '
-        Me.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnCancel.Depth = 0
-        Me.btnCancel.DrawShadows = True
-        Me.btnCancel.HighEmphasis = True
-        Me.btnCancel.Icon = Nothing
-        Me.btnCancel.Location = New System.Drawing.Point(5, 288)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.btnCancel.MouseState = MaterialSkin.MouseState.HOVER
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(87, 36)
-        Me.btnCancel.TabIndex = 64
-        Me.btnCancel.Text = "Annuler"
-        Me.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
-        Me.btnCancel.UseAccentColor = False
-        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'MaterialTabSelector1
         '
         Me.MaterialTabSelector1.BaseTabControl = Me.MaterialTabControl1
         Me.MaterialTabSelector1.Depth = 0
         Me.MaterialTabSelector1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MaterialTabSelector1.Location = New System.Drawing.Point(197, 27)
+        Me.MaterialTabSelector1.Location = New System.Drawing.Point(197, 26)
         Me.MaterialTabSelector1.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialTabSelector1.Name = "MaterialTabSelector1"
         Me.MaterialTabSelector1.Size = New System.Drawing.Size(239, 38)
         Me.MaterialTabSelector1.TabIndex = 65
         Me.MaterialTabSelector1.Text = "MaterialTabSelector1"
         '
-        'frmGestionPersonnes
+        'frmPersonnesGestion
         '
+        Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(445, 416)
         Me.Controls.Add(Me.MaterialTabSelector1)
         Me.Controls.Add(Me.MaterialTabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmGestionPersonnes"
+        Me.Name = "frmPersonnesGestion"
         Me.ShowIcon = False
         Me.Sizable = False
         Me.Text = "Gérer les personnes"
@@ -441,7 +443,7 @@ Partial Class frmPersonnesGestion
     Friend WithEvents MaterialLabel3 As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents mtxtTel As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents MaterialLabel2 As MaterialSkin.Controls.MaterialLabel
-    Friend WithEvents cmbType As MaterialSkin.Controls.MaterialComboBox
+    Friend WithEvents cbFonction As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents MaterialLabel1 As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents txtNom As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents tabRechercher As TabPage

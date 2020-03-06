@@ -1,30 +1,39 @@
-﻿'Imports MigraDoc.DocumentObjectModel
-'Imports MigraDoc.DocumentObjectModel.Shapes
-'Imports MigraDoc.DocumentObjectModel.Tables
-'Imports PdfSharp
-'Imports PdfSharp.Drawing
-'Imports PdfSharp.Pdf
-Imports System.IO
+﻿Imports System.IO
 Imports System.Text
+Imports iText.Forms
+Imports iText.Forms.Fields
+Imports iText.Kernel.Colors
 Imports iText.Kernel.Pdf
 Imports iText.Layout
-Imports iTextSharp.text.pdf
+Imports iText.Layout.Element
+Imports iText.Layout.Layout
+Imports iText.Layout.Properties
 Imports MySql.Data.MySqlClient
 
 Public Class frmClefsEmprunterEtAttribuer
     'Voir comment faire si clef dans trousseau
+    Dim dtNomTel As New DataTable
+    Dim nbPages As Integer = 1
+    Dim nbLignePremièrePage As Integer = 15
+    Dim nbLigneAutresPages As Integer = 19
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
 
     Private Sub frmEmprunterEtAttribuer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
 
         SkinManager.AddFormToManage(Me)
+        ChkTemplatesExists()
         CreateKeyControls()
-        If frmMain.blnEmprunt = True Then
-            cbEmprunterAttribuerGlobal.SelectedIndex = 0
-        Else
-            cbEmprunterAttribuerGlobal.SelectedIndex = 1
-        End If
+
         dtDebutGlobal.Font = New System.Drawing.Font("Noto Sans", 12.0!)
         dtDebutGlobal.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         dtDebutGlobal.Size = New System.Drawing.Size(127, 29)
@@ -46,7 +55,7 @@ Public Class frmClefsEmprunterEtAttribuer
         For Each r As DataRow In dt.Rows
             Dim intY As Integer = (29 + 30) * i
             Dim dvLigne = New MaterialSkin.Controls.MaterialDivider()
-            Dim cbEmprunterAttribuer = New MaterialSkin.Controls.MaterialComboBox()
+            'Dim lblEmprunterAttribuer = New MaterialSkin.Controls.MaterialLabel()
             Dim txtKeyID = New MaterialSkin.Controls.MaterialTextBox()
             Dim dtFin = New System.Windows.Forms.DateTimePicker()
             Dim dtDebut = New System.Windows.Forms.DateTimePicker()
@@ -60,34 +69,9 @@ Public Class frmClefsEmprunterEtAttribuer
             dvLigne.Location = New System.Drawing.Point(4, (0 + intY))
             dvLigne.MouseState = MaterialSkin.MouseState.HOVER
             dvLigne.Name = "dvLigne-" & i
-            dvLigne.Size = New System.Drawing.Size(615, 1)
+            dvLigne.Size = New System.Drawing.Size(462, 1)
             dvLigne.TabIndex = 0
             dvLigne.Text = ""
-            '
-            'cbEmprunterAttribuer
-            '
-            cbEmprunterAttribuer.AutoResize = False
-            cbEmprunterAttribuer.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-            cbEmprunterAttribuer.Depth = 0
-            cbEmprunterAttribuer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-            cbEmprunterAttribuer.DropDownHeight = 118
-            cbEmprunterAttribuer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            cbEmprunterAttribuer.DropDownWidth = 121
-            cbEmprunterAttribuer.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
-            cbEmprunterAttribuer.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-            cbEmprunterAttribuer.FormattingEnabled = True
-            cbEmprunterAttribuer.Hint = "Emprunt"
-            cbEmprunterAttribuer.IntegralHeight = False
-            cbEmprunterAttribuer.ItemHeight = 29
-            cbEmprunterAttribuer.Items.AddRange(New Object() {"Emprunt", "Attribution"})
-            cbEmprunterAttribuer.Location = New System.Drawing.Point(13, (14 + intY))
-            cbEmprunterAttribuer.MaxDropDownItems = 4
-            cbEmprunterAttribuer.MouseState = MaterialSkin.MouseState.OUT
-            cbEmprunterAttribuer.Name = "cbEmprunterAttribuer-" & i
-            cbEmprunterAttribuer.Size = New System.Drawing.Size(146, 35)
-            cbEmprunterAttribuer.TabIndex = 4 + i
-            cbEmprunterAttribuer.UseAccent = False
-            cbEmprunterAttribuer.UseTallSize = False
             '
             'txtKeyID
             '
@@ -95,7 +79,7 @@ Public Class frmClefsEmprunterEtAttribuer
             txtKeyID.Depth = 0
             txtKeyID.Enabled = False
             txtKeyID.Font = New System.Drawing.Font("Roboto", 12.0!)
-            txtKeyID.Location = New System.Drawing.Point(165, (14 + intY))
+            txtKeyID.Location = New System.Drawing.Point(12, (14 + intY)) 'Passer de x: 165 à x: 12 = 153 d'ecart
             txtKeyID.MaxLength = 50
             txtKeyID.MouseState = MaterialSkin.MouseState.OUT
             txtKeyID.Multiline = False
@@ -108,7 +92,7 @@ Public Class frmClefsEmprunterEtAttribuer
             '
             dtFin.Font = New System.Drawing.Font("Noto Sans", 12.0!)
             dtFin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-            dtFin.Location = New System.Drawing.Point(435, (17 + intY))
+            dtFin.Location = New System.Drawing.Point(282, (17 + intY))
             dtFin.Name = "dtFin-" & i
             dtFin.Size = New System.Drawing.Size(127, 29)
             dtFin.TabIndex = 6 + i
@@ -117,7 +101,7 @@ Public Class frmClefsEmprunterEtAttribuer
             '
             dtDebut.Font = New System.Drawing.Font("Noto Sans", 12.0!)
             dtDebut.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-            dtDebut.Location = New System.Drawing.Point(302, (17 + intY))
+            dtDebut.Location = New System.Drawing.Point(149, (17 + intY))
             dtDebut.Name = "dtDebut-" & i
             dtDebut.Size = New System.Drawing.Size(127, 29)
             dtDebut.TabIndex = 5 + i
@@ -129,7 +113,7 @@ Public Class frmClefsEmprunterEtAttribuer
             btnDelete.DrawShadows = True
             btnDelete.HighEmphasis = False
             btnDelete.Icon = Global.GestionClefs.My.Resources.Resources.rubbish_bin_delete_button
-            btnDelete.Location = New System.Drawing.Point(569, (13 + intY))
+            btnDelete.Location = New System.Drawing.Point(416, (13 + intY))
             btnDelete.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
             btnDelete.MouseState = MaterialSkin.MouseState.HOVER
             btnDelete.Name = "btnDelete-" & i
@@ -143,48 +127,49 @@ Public Class frmClefsEmprunterEtAttribuer
             dtFin.Value = Now.AddDays(1)
 
             Panel1.Controls.Add(dvLigne)
-            Panel1.Controls.Add(cbEmprunterAttribuer)
             Panel1.Controls.Add(txtKeyID)
             Panel1.Controls.Add(dtFin)
             Panel1.Controls.Add(dtDebut)
             Panel1.Controls.Add(btnDelete)
 
             AddHandler btnDelete.Click, AddressOf btnDelete_click
-            AddHandler cbEmprunterAttribuer.SelectedIndexChanged, AddressOf cbEmprunterAttribuer_SelectedIndexChanged
             AddHandler dtDebut.ValueChanged, AddressOf dtDebut_ValueChanged
             AddHandler dtFin.ValueChanged, AddressOf dtFin_ValueChanged
 
-            If frmMain.blnEmprunt = True Then
-                cbEmprunterAttribuer.SelectedIndex = 0
-            Else
-                cbEmprunterAttribuer.SelectedIndex = 1
-            End If
-
             txtKeyID.Text = r.Item(strTitleCID)
 
-            If swtReglageIndividuelle.Checked = False Then
-                cbEmprunterAttribuer.Enabled = False
+            If swtReglageIndividuelle.Checked = True Then
                 dtDebut.Enabled = False
                 dtFin.Enabled = False
-                If cbEmprunterAttribuer.SelectedIndex = 0 Then
-                    dtFin.Visible = True
-                Else
-                    dtFin.Visible = False
-                End If
             Else
-                cbEmprunterAttribuer.Enabled = True
                 dtDebut.Enabled = True
-                If cbEmprunterAttribuer.SelectedIndex = 0 Then
-                    dtFin.Enabled = True
-                    dtFin.Visible = True
-                Else
-                    dtFin.Enabled = False
-                    dtFin.Visible = False
-                End If
+                dtFin.Enabled = True
             End If
-
+            If frmMain.blnEmprunt = False Then
+                dtFin.Visible = False
+            Else
+                dtFin.Visible = True
+            End If
             i += 1
         Next
+        If frmMain.blnEmprunt = False Then
+            dtFinGlobal.Visible = False
+        Else
+            dtFinGlobal.Visible = True
+        End If
+
+        '15 lignes + 1 ligne d'entête sur 1ere pages, 22 + 1 sur les autres
+        If i > 1 Then
+            lblNombreDeClef.Text = i & " clefs sélectionnées"
+        ElseIf i < 1 Then
+            lblNombreDeClef.Text = "Aucune clef sélectionnée"
+        Else
+            lblNombreDeClef.Text = "1 clef sélectionnée"
+        End If
+        nbPages = 1 + Math.Ceiling((i - nbLignePremièrePage) / nbLigneAutresPages)
+
+        swtReglageIndividuelle.Checked = True
+
     End Sub
 
     Private Sub btnDelete_click(sender As Object, e As EventArgs)
@@ -210,38 +195,6 @@ Public Class frmClefsEmprunterEtAttribuer
                 frmMain.dgvResultats.DataSource = frmMain.srcKeyList
                 Panel1.Controls.Clear()
                 CreateKeyControls()
-            End If
-        End If
-    End Sub
-
-    Private Sub cbEmprunterAttribuer_SelectedIndexChanged(sender As Object, e As EventArgs)
-        Dim stgNomControle As String = sender.name
-        Dim intIndexControle As Integer
-        Dim index As Integer = CInt(stgNomControle.LastIndexOf("-"))
-        If index > 0 Then
-            intIndexControle = stgNomControle.Substring((index + 1))
-        End If
-
-        Dim strCbEmprunterName As String = "cbEmprunterAttribuer-" & intIndexControle
-        Dim controls0 As Control() = Me.Controls.Find(strCbEmprunterName, True)
-        If controls0.Length = 1 Then
-            Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = TryCast(controls0(0), MaterialSkin.Controls.MaterialComboBox)
-            If cbEmprunterAttribuer IsNot Nothing Then
-                Dim controls1 As Control() = Me.Controls.Find("dtFin-" & intIndexControle, True)
-                If controls1.Length = 1 Then
-                    Dim dtFin As DateTimePicker = TryCast(controls1(0), DateTimePicker)
-                    If dtFin IsNot Nothing Then
-                        If cbEmprunterAttribuer.Text = "Emprunt" Then
-                            If swtReglageIndividuelle.Checked = True Then
-                                dtFin.Enabled = True
-                            End If
-                            dtFin.Visible = True
-                        Else
-                            dtFin.Enabled = False
-                            dtFin.Visible = False
-                        End If
-                    End If
-                End If
             End If
         End If
     End Sub
@@ -287,31 +240,31 @@ Public Class frmClefsEmprunterEtAttribuer
         End If
     End Sub
 
-    Public Sub LoadPersonnes()
+    Public Sub LoadPersonnes(ByVal Optional name As String = "Empty")
         Dim cmd As New MySqlCommand
-        Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
 
         'sql = "Select NomPersonne from NomPersonne Where NNom like ""%" & txtRechercher.Text & "%"""
-        Dim CmdSql As String = "Select NNom from NomPersonne where NNom <> 'Personne'"
+        Dim CmdSql As String = "Select NNom, NTelephone from NomPersonne where NNom <> 'Personne'"
         Try
             With cmd
                 .Connection = connecter()
                 .CommandText = CmdSql
             End With
             da.SelectCommand = cmd
-            da.Fill(dt)
+            da.Fill(dtNomTel)
+            'dtNomTel.Columns("NNom").ColumnName = strTitleNNom
 
-            dt.Columns("NNom").ColumnName = strTitleNNom
-
-            Dim strCbPersonne As String() = New String(dt.Rows.Count) {}
+            Dim strCbPersonne As String() = New String(dtNomTel.Rows.Count) {}
             Dim i As Integer = 0
-            For Each r As DataRow In dt.Rows
+            For Each r As DataRow In dtNomTel.Rows
                 strCbPersonne(i) = r.Item(0).ToString
                 i += 1
             Next
             cbPersonnes.DataSource = strCbPersonne
-
+            If name <> "Empty" Then
+                cbPersonnes.Text = name
+            End If
             connecter().Close()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -320,13 +273,11 @@ Public Class frmClefsEmprunterEtAttribuer
 
     Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
         frmPersonnesGestion.ShowDialog()
+        frmPersonnesGestion.MaterialTabControl1.SelectTab(frmPersonnesGestion.tabAjouter)
     End Sub
 
     Private Sub swtReglageIndividuelle_CheckedChanged(sender As Object, e As EventArgs) Handles swtReglageIndividuelle.CheckedChanged
         For i = 0 To frmMain.dtPanier.Rows.Count - 1
-            Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
-            Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
-
             Dim STRdtDebut As String = "dtDebut-" & i
             Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
 
@@ -334,51 +285,23 @@ Public Class frmClefsEmprunterEtAttribuer
             Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
 
 
-            If swtReglageIndividuelle.Checked = False Then
-                cbEmprunterAttribuer.Enabled = False
+            If swtReglageIndividuelle.Checked = True Then
                 dtDebut.Enabled = False
                 dtFin.Enabled = False
-                If cbEmprunterAttribuer.Text = "Emprunt" Then
-                    dtFin.Visible = True
-                Else
-                    dtFin.Visible = False
-                End If
             Else
-                cbEmprunterAttribuer.Enabled = True
                 dtDebut.Enabled = True
-                If cbEmprunterAttribuer.Text = "Emprunt" Then
-                    dtFin.Enabled = True
-                    dtFin.Visible = True
-                Else
-                    dtFin.Enabled = False
-                    dtFin.Visible = False
-                End If
+                dtFin.Enabled = True
             End If
         Next
 
         If swtReglageIndividuelle.Checked = True Then
-            cbEmprunterAttribuerGlobal.Enabled = False
+            dtDebutGlobal.Enabled = True
+            dtFinGlobal.Enabled = True
+        Else
             dtDebutGlobal.Enabled = False
             dtFinGlobal.Enabled = False
-            cbEmprunterAttribuerGlobal.Visible = False
-            dtDebutGlobal.Visible = False
-            dtFinGlobal.Visible = False
-            lblDateFin.Visible = True
-        Else
-            cbEmprunterAttribuerGlobal.Enabled = True
-            dtDebutGlobal.Enabled = True
-            cbEmprunterAttribuerGlobal.Visible = True
-            dtDebutGlobal.Visible = True
-            If cbEmprunterAttribuerGlobal.Text <> "Attribution" Then
-                dtFinGlobal.Enabled = True
-                dtFinGlobal.Visible = True
-                lblDateFin.Visible = True
-            Else
-                dtFinGlobal.Enabled = False
-                dtFinGlobal.Visible = False
-                lblDateFin.Visible = False
-            End If
         End If
+
     End Sub
 
     Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click
@@ -484,12 +407,12 @@ Public Class frmClefsEmprunterEtAttribuer
                     .Parameters("@TrousseauxClef").Value = r.Item(strTitleCTrousseau).ToString
                     .Parameters("@personne").Value = cbPersonnes.Text
                     .Parameters("@datedebut").Value = dtDebut.Value
-                    If cbEmprunterAttribuer.Text <> "Attribution" Then
+                    If frmMain.blnEmprunt = True Then
                         .Parameters("@datefin").Value = dtFin.Value
-                    ElseIf cbEmprunterAttribuer.Text = "Attribution" Then
+                    Else
                         .Parameters("@datefin").Value = DBNull.Value
                     End If
-                    If cbEmprunterAttribuer.Text <> "Attribution" Then
+                    If frmMain.blnEmprunt = True Then
                         .Parameters("@newStatut").Value = "Empruntée"
                     Else
                         .Parameters("@newStatut").Value = "Attribuée"
@@ -540,43 +463,24 @@ Public Class frmClefsEmprunterEtAttribuer
             MsgBox((ex.Number & " - " & ex.Message))
         Finally
             connecter().Close()
-            frmMain.FillDataSource()
             If chkPrint.Checked = True Then
-                PrintDoc()
+                If frmMain.blnEmprunt = True Then
+                    PrintDocEmprunt()
+                Else
+                    PrintDocAttribuer()
+                End If
+            Else
+                frmMain.FillDataSource()
             End If
-            Me.Dispose()
+            Me.Close()
         End Try
-    End Sub
-
-    Private Sub cbEmprunterAttribuerGlobal_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEmprunterAttribuerGlobal.SelectedIndexChanged
-        If cbEmprunterAttribuerGlobal.SelectedIndex <> 1 Then
-            dtFinGlobal.Enabled = True
-            dtFinGlobal.Visible = True
-            lblDateFin.Visible = True
-        Else
-            dtFinGlobal.Enabled = False
-            dtFinGlobal.Visible = False
-            lblDateFin.Visible = False
-        End If
-        For i = 0 To frmMain.dtPanier.Rows.Count - 1
-            Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
-            Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
-
-            Dim STRdtDebut As String = "dtDebut-" & i
-            Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
-
-            Dim STRdtFin As String = "dtFin-" & i
-            Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
-
-            cbEmprunterAttribuer.Text = cbEmprunterAttribuerGlobal.Text
-        Next
     End Sub
 
     Private Sub dtDebutGlobal_ValueChanged(sender As Object, e As EventArgs) Handles dtDebutGlobal.ValueChanged
         dtFinGlobal.MinDate = dtDebutGlobal.Value
         For i = 0 To frmMain.dtPanier.Rows.Count - 1
-            Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
-            Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
+            'Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
+            'Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
 
             Dim STRdtDebut As String = "dtDebut-" & i
             Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
@@ -584,7 +488,7 @@ Public Class frmClefsEmprunterEtAttribuer
             Dim STRdtFin As String = "dtFin-" & i
             Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
 
-            cbEmprunterAttribuer.Text = cbEmprunterAttribuerGlobal.Text
+            'cbEmprunterAttribuer.Text = lblEmprunterAttribuerGlobal.Text
             dtDebut.Value = dtDebutGlobal.Value
             dtFin.Value = dtFinGlobal.Value
         Next
@@ -593,8 +497,8 @@ Public Class frmClefsEmprunterEtAttribuer
     Private Sub dtFinGlobal_ValueChanged(sender As Object, e As EventArgs) Handles dtFinGlobal.ValueChanged
         dtDebutGlobal.MaxDate = dtFinGlobal.Value
         For i = 0 To frmMain.dtPanier.Rows.Count - 1
-            Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
-            Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
+            'Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
+            'Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
 
             Dim STRdtDebut As String = "dtDebut-" & i
             Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
@@ -602,124 +506,466 @@ Public Class frmClefsEmprunterEtAttribuer
             Dim STRdtFin As String = "dtFin-" & i
             Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
 
-            cbEmprunterAttribuer.Text = cbEmprunterAttribuerGlobal.Text
+            'cbEmprunterAttribuer.Text = lblEmprunterAttribuerGlobal.Text
             dtDebut.Value = dtDebutGlobal.Value
             dtFin.Value = dtFinGlobal.Value
         Next
     End Sub
 
-    Public Sub PrintDoc()
-        'Dim myDoc As Document = New Document
-        'Dim mySect As Section = myDoc.AddSection()
+    Public Sub PrintDocEmprunt()
+        Dim TemplatePremièrePage As String = My.Application.Info.DirectoryPath & "\Templates\PRET_CLE_P1.pdf"
+        Dim TemplateAutresPages As String = My.Application.Info.DirectoryPath & "\Templates\PRET_CLE_PX.pdf"
+        Dim strFolder As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\GestionClefs\"
+        If (Not System.IO.Directory.Exists(strFolder)) Then
+            System.IO.Directory.CreateDirectory(strFolder)
+        End If
+        Dim FinalFileName As String = strFolder & cbPersonnes.Text & "_EMPRUNT_" & Now.ToString("dd-MM-yyyy")
 
-        '' Properties set for "Normal" will be inherited by all other styles.
-        'Dim myStyle As Style = myDoc.Styles.Item(StyleNames.Normal)
-        'myStyle.Font.Name = "Book Antiqua"
-
-        '' The font set for "Heading1" will be inherited by all other headings.
-        'myStyle = myDoc.Styles.Item(StyleNames.Heading1)
-        'myStyle.Font.Name = "Arial"
-        'myStyle.Font.Size = 16
-        'myStyle.Font.Bold = True
-
-        'Dim myPara As Paragraph = mySect.AddParagraph("GestionClefs")
-        'myPara.Style = StyleNames.Heading1
-
-        ''===============================================================================================================
-        'mySect.AddParagraph("")
-        'mySect.AddParagraph("Je soussigné, " & cbPersonnes.Text & ", emprunte les clefs suivantes le " & Now.ToString("dd/MM/yyyy") &
-        '            " et m'engage à les rendre à la date indiquée : ")
-        'mySect.AddParagraph("")
-
-        'For i = 0 To frmMain.dtPanier.Rows.Count - 1
-        '    Dim STRcbEmprunterAttribuer As String = "cbEmprunterAttribuer-" & i
-        '    Dim cbEmprunterAttribuer As MaterialSkin.Controls.MaterialComboBox = Me.Controls.Find(STRcbEmprunterAttribuer, True).FirstOrDefault()
-
-        '    Dim STRtxtKeyID As String = "txtKeyID-" & i
-        '    Dim txtKeyID As MaterialSkin.Controls.MaterialTextBox = Me.Controls.Find(STRtxtKeyID, True).FirstOrDefault()
-
-        '    Dim STRdtDebut As String = "dtDebut-" & i
-        '    Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
-
-        '    Dim STRdtFin As String = "dtFin-" & i
-        '    Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
-
-        '    mySect.AddParagraph(txtKeyID.Text & " " & cbEmprunterAttribuer.Text & " du " & dtDebut.Value.ToString("dd/MM/yyyy") & " au " & dtFin.Value.ToString("dd/MM/yyyy"))
-        'Next
-
-        ''===============================================================================================================
-        'Dim myRenderer As PdfDocumentRenderer = New PdfDocumentRenderer(True, PdfFontEmbedding.Always)
-        'myRenderer.Document = myDoc
-        'myRenderer.RenderDocument()
-
-        'Const filename As String = "Test.pdf" 'cbPersonnes.Text & " - " & Now.ToString & ".pdf"
-
-        'myRenderer.PdfDocument.Save(filename)
-
-        'Process.Start(filename)
-
-        Dim stgFonction As String = ""
-        Dim cmd As New MySqlCommand
-        Dim dt As New DataTable
-        Dim da As New MySqlDataAdapter
-        cmd.Parameters.Add("@Personne", MySqlDbType.VarChar)
-        Try
-            With cmd
-                .Parameters("@Personne").Value = cbPersonnes.Text
-                .Connection = connecter()
-                .CommandText = "Select NGenre from NomPersonne where NNom=@Personne LIMIT 1"
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dt)
-            If dt.Rows.Count > 0 Then
-                stgFonction = dt.Rows(0).Item(0).ToString
-            End If
-            connecter().Close()
-        Catch ex As MySqlException
-            MsgBox(ex.Message)
-        End Try
-
-        Dim pdfTemplate As String = "C:\Users\Utilisateur\source\repos\GestionClefs\bin\Debug\ATTRIBUTION_CLE.pdf"
-        Dim strFolder As String = My.Computer.FileSystem.SpecialDirectories.Desktop.ToString
-        Dim newFile As String = strFolder & "\" & cbPersonnes.Text & "_" & Now.ToString("dd-MM-yyyy")
         Dim counter As Integer = 2
-
-        Dim newFileName As String = newFile & ".pdf"
-
+        Dim newFileName As String = FinalFileName & ".pdf"
         While File.Exists(newFileName)
-            newFileName = newFile & " (" & counter & ")" & ".pdf"
+            newFileName = FinalFileName & " (" & counter & ")" & ".pdf"
             counter = counter + 1
         End While
+        FinalFileName = newFileName
 
-        newFile = newFileName
+        Dim StreamPremièrePage As New MemoryStream
+        Dim ReaderPremièrePage As New PdfReader(TemplatePremièrePage)
+        Dim WriterPremièrePage As New PdfWriter(StreamPremièrePage)
+        WriterPremièrePage.SetCloseStream(False)
 
-        Dim pdfReader As New PdfReader(pdfTemplate)
-        ' ----Obtenir le nom des champs----
-        'Dim sb As New StringBuilder()
-        'Dim de As New KeyValuePair(Of String, AcroFields.Item)
-        'For Each de In pdfReader.AcroFields.Fields
-        '   sb.Append(de.Key.ToString() + Environment.NewLine)
-        'Next
+        Dim WriterFinalDocument As New PdfWriter(FinalFileName)
+
+        Dim PremièrePageEmprunt As New PdfDocument(ReaderPremièrePage, WriterPremièrePage)
+        Dim FinalDocument As New PdfDocument(WriterFinalDocument)
+
+
+        '#######################
+        '#### PREMIERE PAGE ####
+        '#######################
+        '====================== RECUPERATION ET REMPLISSAGE DES CHAMPS ======================
+        Dim Acroform As PdfAcroForm = PdfAcroForm.GetAcroForm(PremièrePageEmprunt, True)
+        Dim fields As IDictionary(Of String, PdfFormField) = Acroform.GetFormFields()
+        'Obtenir les noms des champs
+        Dim sb As StringBuilder = New StringBuilder()
+        For Each de As KeyValuePair(Of String, PdfFormField) In fields
+            sb.Append(de.Key.ToString() + Environment.NewLine)
+        Next
         'MsgBox(sb.ToString)
 
-        Dim pdfStamper As New PdfStamper(pdfReader, New FileStream(newFile, FileMode.Create))
-        Dim pdfFormFields As AcroFields = pdfStamper.AcroFields
+        'Acroform.GetField("cle")
+        fields("date").SetValue(Now.ToString("d MMMM yyyy"))
+        fields("page").SetValue("1/" & nbPages)
+        If cbPersonnes.SelectedIndex <> -1 Then
+            fields("nom").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NNom"))
+            fields("tel").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone"))
+        End If
 
-        pdfFormFields.SetField("date", Now.ToString("dd/MM/yyyy"), Now.ToString("dd/MM/yyyy"))
-        pdfFormFields.SetField("nom", cbPersonnes.Text, cbPersonnes.Text)
-        pdfFormFields.SetField("fonction", stgFonction, stgFonction)
+        '====================== CREATION DU TABLEAU D'EMPRUNT ======================
+        Dim tailleRow As Integer = 18
+        Dim position As Double() = Acroform.GetField("cle").GetWidgets.FirstOrDefault.GetRectangle().ToDoubleArray
 
-        pdfStamper.FormFlattening = True
-        pdfStamper.Close()
+        Dim NbreDeRow As Integer = frmMain.dtPanier.Rows.Count
+
+        Dim table As Table = New Table(3, True).UseAllAvailableWidth()
+        table.SetMaxHeight((position(3) - position(1)))
+        table.SetMargin(0)
+        Dim cell As Cell
+        Dim doc As Document = New Document(PremièrePageEmprunt)
+        cell = New Cell().Add(New Paragraph("Date de retour"))
+        cell.SetHeight(tailleRow)
+        table.AddCell("N° de clef")
+        table.AddCell("Date d'emprunt")
+        table.AddCell(cell.Clone(True))
+        Dim LigneACopier As Integer
+
+        If NbreDeRow > nbLignePremièrePage Then
+            LigneACopier = nbLignePremièrePage - 1
+        Else
+            LigneACopier = frmMain.dtPanier.Rows.Count - 1
+        End If
+
+        For i = 0 To LigneACopier
+            Dim STRtxtKeyID As String = "txtKeyID-" & i
+            Dim txtKeyID As MaterialSkin.Controls.MaterialTextBox = Me.Controls.Find(STRtxtKeyID, True).FirstOrDefault()
+
+            Dim STRdtDebut As String = "dtDebut-" & i
+            Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
+
+            Dim STRdtFin As String = "dtFin-" & i
+            Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
+
+            cell = New Cell().Add(New Paragraph(dtFin.Value.ToString("dd/MM/yy")))
+            cell.SetHeight(tailleRow)
+            table.AddCell(txtKeyID.Text)
+            table.AddCell(dtDebut.Value.ToString("dd/MM/yy"))
+            table.AddCell(cell.Clone(True))
+        Next
+
+        Dim result As LayoutResult = table.CreateRendererSubTree().SetParent(doc.GetRenderer()).Layout(New LayoutContext(New LayoutArea(1, New iText.Kernel.Geom.Rectangle(0, 0, 400, 10000.0F))))
+        Dim tableHeight As Single = result.GetOccupiedArea().GetBBox().GetHeight()
+        Dim bottom As Single = position(3) - tableHeight
+        Dim width As Single = position(2) - position(0)
+        table.SetFixedPosition(position(0), bottom, width)
+        doc.Add(table)
+        table.Complete()
+        '======================END TABLE CREATION======================
+        Acroform.FlattenFields()
+        PremièrePageEmprunt.Close()
+        StreamPremièrePage.Position = 0
+        Dim tempReader As New PdfReader(StreamPremièrePage)
+        Dim tempPage As New PdfDocument(tempReader)
+        FinalDocument.AddPage(tempPage.GetPage(1).CopyTo(FinalDocument))
+        tempPage.Close()
+        StreamPremièrePage.Close()
+
+        '###########################
+        '#### FIN PREMIERE PAGE ####
+        '###########################
+
+        If nbPages > 1 Then
+            For n = 2 To nbPages
+
+                '#######################
+                '#### AUTRES PAGES #####
+                '#######################
+
+                Dim StreamAutresPages As New MemoryStream
+                Dim ReaderAutrePages As New PdfReader(TemplateAutresPages)
+                Dim WriterAutrePages As New PdfWriter(StreamAutresPages)
+                WriterAutrePages.SetCloseStream(False)
+                Dim AutresPagesEmprunt As New PdfDocument(ReaderAutrePages, WriterAutrePages)
+
+                '====================== RECUPERATION ET REMPLISSAGE DES CHAMPS ======================
+                Acroform = PdfAcroForm.GetAcroForm(AutresPagesEmprunt, True)
+                fields.Clear()
+                fields = Acroform.GetFormFields()
+                'Obtenir les noms des champs
+                sb.Clear()
+                sb = New StringBuilder()
+                For Each de As KeyValuePair(Of String, PdfFormField) In fields
+                    sb.Append(de.Key.ToString() + Environment.NewLine)
+                Next
+                'MsgBox(sb.ToString)
+
+                'Acroform.GetField("cle")
+                fields("date").SetValue(Now.ToString("d MMMM yyyy"))
+                fields("page").SetValue((FinalDocument.GetNumberOfPages() + 1) & "/" & nbPages)
+
+                '====================== CREATION DU TABLEAU D'EMPRUNT ======================
+                position = Acroform.GetField("cle").GetWidgets.FirstOrDefault.GetRectangle().ToDoubleArray
+
+                table = New Table(3, True).UseAllAvailableWidth()
+                table.SetMaxHeight((position(3) - position(1)))
+                table.SetMargin(0)
+                doc = New Document(AutresPagesEmprunt)
+                cell = New Cell().Add(New Paragraph("Date de retour"))
+                cell.SetHeight(tailleRow)
+                table.AddCell("N° de clef")
+                table.AddCell("Date d'emprunt")
+                table.AddCell(cell.Clone(True))
+
+                If NbreDeRow > (15 + (nbLigneAutresPages * FinalDocument.GetNumberOfPages())) Then
+                    LigneACopier = nbLigneAutresPages
+                Else
+                    LigneACopier = ((frmMain.dtPanier.Rows.Count - 15) Mod nbLigneAutresPages)
+                End If
+                Dim StartIndex As Integer = 15
+                If FinalDocument.GetNumberOfPages() > 1 Then
+                    StartIndex = 15 + (nbLigneAutresPages * (FinalDocument.GetNumberOfPages() - 1))
+                End If
+
+                For i = StartIndex To (StartIndex + LigneACopier - 1)
+                    Dim STRtxtKeyID As String = "txtKeyID-" & i
+                    Dim txtKeyID As MaterialSkin.Controls.MaterialTextBox = Me.Controls.Find(STRtxtKeyID, True).FirstOrDefault()
+
+                    Dim STRdtDebut As String = "dtDebut-" & i
+                    Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
+
+                    Dim STRdtFin As String = "dtFin-" & i
+                    Dim dtFin As DateTimePicker = Me.Controls.Find(STRdtFin, True).FirstOrDefault()
+
+                    cell = New Cell().Add(New Paragraph(dtFin.Value.ToString("dd/MM/yy")))
+                    cell.SetHeight(tailleRow)
+                    table.AddCell(txtKeyID.Text)
+                    table.AddCell(dtDebut.Value.ToString("dd/MM/yy"))
+                    table.AddCell(cell.Clone(True))
+                Next
+
+                result = table.CreateRendererSubTree().SetParent(doc.GetRenderer()).Layout(New LayoutContext(New LayoutArea(1, New iText.Kernel.Geom.Rectangle(0, 0, 400, 10000.0F))))
+                tableHeight = result.GetOccupiedArea().GetBBox().GetHeight()
+                bottom = position(3) - tableHeight
+                width = position(2) - position(0)
+                table.SetFixedPosition(position(0), bottom, width)
+                doc.Add(table)
+                table.Complete()
+                '======================END TABLE CREATION======================
+                Acroform.FlattenFields()
+                AutresPagesEmprunt.Close()
+                StreamAutresPages.Position = 0
+                Dim tempReader2 As New PdfReader(StreamAutresPages)
+                Dim tempPage2 As New PdfDocument(tempReader2)
+                FinalDocument.AddPage(tempPage2.GetPage(1).CopyTo(FinalDocument))
+                tempPage2.Close()
+                StreamAutresPages.Close()
+
+                '###########################
+                '#### FIN AUTRES PAGES #####
+                '###########################
+
+            Next
+        End If
+
+        FinalDocument.Close()
+
         Dim PrintProcess As New Process()
-        PrintProcess.StartInfo.FileName = newFile
-        PrintProcess.StartInfo.Verb = "printto"
+        PrintProcess.StartInfo.FileName = FinalFileName
+        'Décommenter pour lancer l'impression directement
+        'PrintProcess.StartInfo.Verb = "printto"
         PrintProcess.Start()
 
+        frmMain.FillDataSource()
+
+    End Sub
+
+    Public Sub PrintDocAttribuer()
+        Dim TemplatePremièrePage As String = My.Application.Info.DirectoryPath & "\Templates\ATTRIBUTION_CLE_P1.pdf"
+        Dim TemplateAutresPages As String = My.Application.Info.DirectoryPath & "\Templates\ATTRIBUTION_CLE_PX.pdf"
+        Dim strFolder As String = My.Computer.FileSystem.SpecialDirectories.Temp & "\GestionClefs\"
+        If (Not System.IO.Directory.Exists(strFolder)) Then
+            System.IO.Directory.CreateDirectory(strFolder)
+        End If
+        Dim FinalFileName As String = strFolder & cbPersonnes.Text & "_ATTRIBUTION_" & Now.ToString("dd-MM-yyyy")
+
+        Dim counter As Integer = 2
+        Dim newFileName As String = FinalFileName & ".pdf"
+        While File.Exists(newFileName)
+            newFileName = FinalFileName & " (" & counter & ")" & ".pdf"
+            counter = counter + 1
+        End While
+        FinalFileName = newFileName
+
+        Dim StreamPremièrePage As New MemoryStream
+        Dim ReaderPremièrePage As New PdfReader(TemplatePremièrePage)
+        Dim WriterPremièrePage As New PdfWriter(StreamPremièrePage)
+        WriterPremièrePage.SetCloseStream(False)
+
+        Dim WriterFinalDocument As New PdfWriter(FinalFileName)
+
+        Dim PremièrePageEmprunt As New PdfDocument(ReaderPremièrePage, WriterPremièrePage)
+        Dim FinalDocument As New PdfDocument(WriterFinalDocument)
+
+
+        '#######################
+        '#### PREMIERE PAGE ####
+        '#######################
+        '====================== RECUPERATION ET REMPLISSAGE DES CHAMPS ======================
+        Dim Acroform As PdfAcroForm = PdfAcroForm.GetAcroForm(PremièrePageEmprunt, True)
+        Dim fields As IDictionary(Of String, PdfFormField) = Acroform.GetFormFields()
+        'Obtenir les noms des champs
+        Dim sb As StringBuilder = New StringBuilder()
+        For Each de As KeyValuePair(Of String, PdfFormField) In fields
+            sb.Append(de.Key.ToString() + Environment.NewLine)
+        Next
+        'MsgBox(sb.ToString)
+
+        'Acroform.GetField("cle")
+        fields("date").SetValue(Now.ToString("d MMMM yyyy"))
+        fields("page").SetValue("1/" & nbPages)
+        If cbPersonnes.SelectedIndex <> -1 Then
+            fields("nom").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NNom"))
+            fields("tel").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone"))
+        End If
+
+        '====================== CREATION DU TABLEAU D'EMPRUNT ======================
+        Dim tailleRow As Integer = 18
+        Dim position As Double() = Acroform.GetField("cle").GetWidgets.FirstOrDefault.GetRectangle().ToDoubleArray
+
+        Dim NbreDeRow As Integer = frmMain.dtPanier.Rows.Count
+
+        Dim table As Table = New Table(2, True).UseAllAvailableWidth()
+        table.SetMaxHeight((position(3) - position(1)))
+        table.SetMargin(0)
+        Dim cell As Cell
+        Dim doc As Document = New Document(PremièrePageEmprunt)
+        cell = New Cell().Add(New Paragraph("Date d'attribution"))
+        cell.SetHeight(tailleRow)
+        table.AddCell("N° de clef")
+        table.AddCell(cell.Clone(True))
+        Dim LigneACopier As Integer
+
+        If NbreDeRow > nbLignePremièrePage Then
+            LigneACopier = nbLignePremièrePage - 1
+        Else
+            LigneACopier = frmMain.dtPanier.Rows.Count - 1
+        End If
+
+        For i = 0 To LigneACopier
+            Dim STRtxtKeyID As String = "txtKeyID-" & i
+            Dim txtKeyID As MaterialSkin.Controls.MaterialTextBox = Me.Controls.Find(STRtxtKeyID, True).FirstOrDefault()
+
+            Dim STRdtDebut As String = "dtDebut-" & i
+            Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
+
+
+            cell = New Cell().Add(New Paragraph(dtDebut.Value.ToString("dd/MM/yy")))
+            cell.SetHeight(tailleRow)
+            table.AddCell(txtKeyID.Text)
+            table.AddCell(cell.Clone(True))
+        Next
+
+        Dim result As LayoutResult = table.CreateRendererSubTree().SetParent(doc.GetRenderer()).Layout(New LayoutContext(New LayoutArea(1, New iText.Kernel.Geom.Rectangle(0, 0, 400, 10000.0F))))
+        Dim tableHeight As Single = result.GetOccupiedArea().GetBBox().GetHeight()
+        Dim bottom As Single = position(3) - tableHeight
+        Dim width As Single = position(2) - position(0)
+        table.SetFixedPosition(position(0), bottom, width)
+        doc.Add(table)
+        table.Complete()
+        '======================END TABLE CREATION======================
+        Acroform.FlattenFields()
+        PremièrePageEmprunt.Close()
+        StreamPremièrePage.Position = 0
+        Dim tempReader As New PdfReader(StreamPremièrePage)
+        Dim tempPage As New PdfDocument(tempReader)
+        FinalDocument.AddPage(tempPage.GetPage(1).CopyTo(FinalDocument))
+        tempPage.Close()
+        StreamPremièrePage.Close()
+
+        '###########################
+        '#### FIN PREMIERE PAGE ####
+        '###########################
+
+        If nbPages > 1 Then
+            For n = 2 To nbPages
+
+                '#######################
+                '#### AUTRES PAGES #####
+                '#######################
+
+                Dim StreamAutresPages As New MemoryStream
+                Dim ReaderAutrePages As New PdfReader(TemplateAutresPages)
+                Dim WriterAutrePages As New PdfWriter(StreamAutresPages)
+                WriterAutrePages.SetCloseStream(False)
+                Dim AutresPagesEmprunt As New PdfDocument(ReaderAutrePages, WriterAutrePages)
+
+                '====================== RECUPERATION ET REMPLISSAGE DES CHAMPS ======================
+                Acroform = PdfAcroForm.GetAcroForm(AutresPagesEmprunt, True)
+                fields.Clear()
+                fields = Acroform.GetFormFields()
+                'Obtenir les noms des champs
+                sb.Clear()
+                sb = New StringBuilder()
+                For Each de As KeyValuePair(Of String, PdfFormField) In fields
+                    sb.Append(de.Key.ToString() + Environment.NewLine)
+                Next
+                'MsgBox(sb.ToString)
+
+                'Acroform.GetField("cle")
+                fields("date").SetValue(Now.ToString("d MMMM yyyy"))
+                fields("page").SetValue((FinalDocument.GetNumberOfPages() + 1) & "/" & nbPages)
+
+                '====================== CREATION DU TABLEAU D'EMPRUNT ======================
+                position = Acroform.GetField("cle").GetWidgets.FirstOrDefault.GetRectangle().ToDoubleArray
+
+                table = New Table(2, True).UseAllAvailableWidth()
+                table.SetMaxHeight((position(3) - position(1)))
+                table.SetMargin(0)
+                doc = New Document(AutresPagesEmprunt)
+                cell = New Cell().Add(New Paragraph("Date d'attribution"))
+                cell.SetHeight(tailleRow)
+                table.AddCell("N° de clef")
+                table.AddCell(cell.Clone(True))
+
+                If NbreDeRow > (15 + (nbLigneAutresPages * FinalDocument.GetNumberOfPages())) Then
+                    LigneACopier = nbLigneAutresPages
+                Else
+                    LigneACopier = ((frmMain.dtPanier.Rows.Count - 15) Mod nbLigneAutresPages)
+                End If
+                Dim StartIndex As Integer = 15
+                If FinalDocument.GetNumberOfPages() > 1 Then
+                    StartIndex = 15 + (nbLigneAutresPages * (FinalDocument.GetNumberOfPages() - 1))
+                End If
+
+                For i = StartIndex To (StartIndex + LigneACopier - 1)
+                    Dim STRtxtKeyID As String = "txtKeyID-" & i
+                    Dim txtKeyID As MaterialSkin.Controls.MaterialTextBox = Me.Controls.Find(STRtxtKeyID, True).FirstOrDefault()
+
+                    Dim STRdtDebut As String = "dtDebut-" & i
+                    Dim dtDebut As DateTimePicker = Me.Controls.Find(STRdtDebut, True).FirstOrDefault()
+
+                    cell = New Cell().Add(New Paragraph(dtDebut.Value.ToString("dd/MM/yy")))
+                    cell.SetHeight(tailleRow)
+                    table.AddCell(txtKeyID.Text)
+                    table.AddCell(cell.Clone(True))
+                Next
+
+                result = table.CreateRendererSubTree().SetParent(doc.GetRenderer()).Layout(New LayoutContext(New LayoutArea(1, New iText.Kernel.Geom.Rectangle(0, 0, 400, 10000.0F))))
+                tableHeight = result.GetOccupiedArea().GetBBox().GetHeight()
+                bottom = position(3) - tableHeight
+                width = position(2) - position(0)
+                table.SetFixedPosition(position(0), bottom, width)
+                doc.Add(table)
+                table.Complete()
+                '======================END TABLE CREATION======================
+                Acroform.FlattenFields()
+                AutresPagesEmprunt.Close()
+                StreamAutresPages.Position = 0
+                Dim tempReader2 As New PdfReader(StreamAutresPages)
+                Dim tempPage2 As New PdfDocument(tempReader2)
+                FinalDocument.AddPage(tempPage2.GetPage(1).CopyTo(FinalDocument))
+                tempPage2.Close()
+                StreamAutresPages.Close()
+
+                '###########################
+                '#### FIN AUTRES PAGES #####
+                '###########################
+
+            Next
+        End If
+
+        FinalDocument.Close()
+
+        Dim PrintProcess As New Process()
+        PrintProcess.StartInfo.FileName = FinalFileName
+        'Décommenter pour lancer l'impression directement
+        'PrintProcess.StartInfo.Verb = "printto"
+        PrintProcess.Start()
+
+        frmMain.FillDataSource()
+
+    End Sub
+
+    Private Sub ChkTemplatesExists()
+        If (Not System.IO.Directory.Exists(My.Application.Info.DirectoryPath & "\Templates\")) Then
+            System.IO.Directory.CreateDirectory(My.Application.Info.DirectoryPath & "\Templates\")
+        End If
+        Dim TemplateAttriPremièrePage As String = My.Application.Info.DirectoryPath & "\Templates\ATTRIBUTION_CLE_P1.pdf"
+        Dim TemplateAttriAutresPages As String = My.Application.Info.DirectoryPath & "\Templates\ATTRIBUTION_CLE_PX.pdf"
+        Dim TemplateEmpruPremièrePage As String = My.Application.Info.DirectoryPath & "\Templates\PRET_CLE_P1.pdf"
+        Dim TemplateEmpruAutresPages As String = My.Application.Info.DirectoryPath & "\Templates\PRET_CLE_PX.pdf"
+        If File.Exists(TemplateAttriPremièrePage) = False Then
+            File.WriteAllBytes(TemplateAttriPremièrePage, My.Resources.ATTRIBUTION_CLE_P1)
+        End If
+        If File.Exists(TemplateAttriAutresPages) = False Then
+            File.WriteAllBytes(TemplateAttriAutresPages, My.Resources.ATTRIBUTION_CLE_PX)
+        End If
+        If File.Exists(TemplateEmpruPremièrePage) = False Then
+            File.WriteAllBytes(TemplateEmpruPremièrePage, My.Resources.PRET_CLE_P1)
+        End If
+        If File.Exists(TemplateEmpruAutresPages) = False Then
+            File.WriteAllBytes(TemplateEmpruAutresPages, My.Resources.PRET_CLE_PX)
+        End If
     End Sub
 
     Private Sub MaterialFloatingActionButton1_Click(sender As Object, e As EventArgs) Handles MaterialFloatingActionButton1.Click
-        PrintDoc()
+        If frmMain.blnEmprunt = True Then
+            PrintDocEmprunt()
+        Else
+            PrintDocAttribuer()
+        End If
     End Sub
 
+    Private Sub btnSearchPeople_Click(sender As Object, e As EventArgs) Handles btnSearchPeople.Click
+        frmPersonnesGestion.ShowDialog()
+    End Sub
 End Class

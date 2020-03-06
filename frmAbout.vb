@@ -1,6 +1,20 @@
-﻿Public Class frmAbout
+﻿Imports System.Reflection
+
+Public Class frmAbout
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub frmAbout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "A propos de " & My.Application.Info.Title.ToString & " " & My.Application.Info.Version.ToString
+        Me.Text = "A propos de " & My.Application.Info.Title.ToString & "..."
+        lblVersion.Text = My.Application.Info.Version.ToString
+        lblDate.Text = "2020 - " & My.Application.Info.CompanyName
     End Sub
 
     Private Sub ContextMenuStrip1_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening

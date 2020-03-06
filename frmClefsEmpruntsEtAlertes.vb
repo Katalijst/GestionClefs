@@ -7,6 +7,15 @@ Public Class frmClefsEmpruntsEtAlertes
     Shared nbPerdues As Integer = 0
     Shared nbNonRendues As Integer = 0
 
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub frmAlertes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If frmMain.AlertesEmpruntPerdu = 1 Then
             'Alertes
@@ -61,15 +70,14 @@ Public Class frmClefsEmpruntsEtAlertes
             da.SelectCommand = cmd
             da.Fill(dt)
             lblInfoRecherche.Text = "Aucune alerte."
-            If dt.Rows.Count > 0 Then
-                nbNonRendues = dt.Rows.Count
-                dtAlertes.Reset()
+            nbNonRendues = dt.Rows.Count
+            dtAlertes.Reset()
                 cmd.Parameters.Add("@IDClef", MySqlDbType.VarChar)
                 For i = 0 To dt.Rows.Count - 1
                     With cmd
                         .Connection = connecter()
                         .Parameters("@IDClef").Value = dt.Rows(i)(0).ToString
-                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef=@IDClef AND CID=EIDClef AND EDatefin < DATE(NOW() + 1);"
+                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef=@IDClef AND CID=EIDClef AND EDatefin < DATE(NOW());"
                     End With
                     da.SelectCommand = cmd
                     Dim dtTemp As New DataTable
@@ -98,9 +106,8 @@ Public Class frmClefsEmpruntsEtAlertes
 
                 dgvAlertes.DataSource = dtAlertes
                 dgvAlertes.Columns("ID").Visible = False
-            Else
                 dgvAlertes.Refresh()
-            End If
+
         Catch ex As MySQLException
             MessageBox.Show(ex.Message)
         Finally
@@ -123,9 +130,8 @@ Public Class frmClefsEmpruntsEtAlertes
             End With
             da.SelectCommand = cmd
             da.Fill(dtEmprunt)
-            If dtEmprunt.Rows.Count > 0 Then
-                nbEmprunts = dtEmprunt.Rows.Count
-                Dim intAttribuees As Integer = 0
+            nbEmprunts = dtEmprunt.Rows.Count
+            Dim intAttribuees As Integer = 0
                 dtEmprunt.Columns.Add("ID")
                 For Each dr As DataRow In dtEmprunt.Rows
                     Dim input As String = dr.Item("EIDClef")
@@ -150,9 +156,7 @@ Public Class frmClefsEmpruntsEtAlertes
 
                 dgvEmpruntsEnCours.DataSource = dtEmprunt
                 dgvEmpruntsEnCours.Columns("ID").Visible = False
-            Else
                 dgvEmpruntsEnCours.Refresh()
-            End If
         Catch ex As MySQLException
             MessageBox.Show(ex.Message)
         Finally
@@ -175,27 +179,25 @@ Public Class frmClefsEmpruntsEtAlertes
             da.Fill(dtPerdues)
             nbPerdues = dtPerdues.Rows.Count
 
-            If dtPerdues.Rows.Count > 0 Then
-                dtPerdues.Columns.Add("ID")
-                For Each dr As DataRow In dtPerdues.Rows
-                    Dim input As String = dr.Item("CID")
-                    Dim index As Integer = input.LastIndexOf("-")
-                    If index > 0 Then
-                        dr.Item("CID") = input.Substring(0, index)
-                        dr.Item("ID") = input.Substring(index + 1)
-                    End If
-                Next
+            dtPerdues.Columns.Add("ID")
+            For Each dr As DataRow In dtPerdues.Rows
+                Dim input As String = dr.Item("CID")
+                Dim index As Integer = input.LastIndexOf("-")
+                If index > 0 Then
+                    dr.Item("CID") = input.Substring(0, index)
+                    dr.Item("ID") = input.Substring(index + 1)
+                End If
+            Next
 
-                dtPerdues.Columns("CID").ColumnName = strTitleCID
-                dtPerdues.Columns("CNom").ColumnName = strTitleCNom
-                dtPerdues.Columns("CPosition").ColumnName = strTitleCPosition
-                dtPerdues.Columns("CBatiment").ColumnName = strTitleCBatiment
+            dtPerdues.Columns("CID").ColumnName = strTitleCID
+            dtPerdues.Columns("CNom").ColumnName = strTitleCNom
+            dtPerdues.Columns("CPosition").ColumnName = strTitleCPosition
+            dtPerdues.Columns("CBatiment").ColumnName = strTitleCBatiment
 
-                dgvClefsPerdues.DataSource = dtPerdues
-                dgvClefsPerdues.Columns("ID").Visible = False
-            Else
-                dgvClefsPerdues.Refresh()
-            End If
+            dgvClefsPerdues.DataSource = dtPerdues
+            dgvClefsPerdues.Columns("ID").Visible = False
+            dgvClefsPerdues.Refresh()
+
         Catch ex As MySqlException
             MessageBox.Show(ex.Message)
         Finally
@@ -412,7 +414,7 @@ Public Class frmClefsEmpruntsEtAlertes
         Dim stgTrousseau As String = "Aucun"
         cmd.Parameters.Add("@IDClef", MySqlDbType.VarChar)
         Try
-            sql = "Select CTrousseau From Clefs WHERE CID=@IDClef"
+            sql = "Select CTrousseau From Clefs WHERE CID=@IDClef;"
             With cmd
                 .Connection = connecter()
                 .Parameters("@IDClef").Value = stgKeyID
@@ -422,7 +424,7 @@ Public Class frmClefsEmpruntsEtAlertes
             da.SelectCommand = cmd
             da.Fill(dt)
             If dt.Rows.Count > 0 Then
-                stgTrousseau = dt.Rows(0)(0).ToString
+                stgTrousseau = dt.Rows(0).Item(0).ToString
             End If
         Catch ex As MySqlException
             MsgBox(ex.Message)
@@ -443,7 +445,7 @@ Public Class frmClefsEmpruntsEtAlertes
             ' Gets the result of the MessageBox display.
             If Result = System.Windows.Forms.DialogResult.Yes Then
                 Try
-                    sql = "UPDATE Clefs SET CStatus = 'Disponible' WHERE CID=@IDClef"
+                    sql = "UPDATE Clefs SET CStatus = 'Disponible' WHERE CID=@IDClef;"
                     With cmd
                         .Connection = connecter()
                         .Parameters("@IDClef").Value = stgKeyID
@@ -461,7 +463,8 @@ Public Class frmClefsEmpruntsEtAlertes
         Else
             Dim AmountLost As Integer = 0
             Try
-                sql = "Select COUNT(CID) From Clefs WHERE CTrousseau=(Select CTrousseau From Clefs WHERE CID=@IDClef) AND CStatus=(Select CStatus From Clefs WHERE CID=@IDClef) AND CTrousseau <> 'Aucun'"
+                dt.Clear()
+                sql = "Select COUNT(CID) From Clefs WHERE CTrousseau=(Select CTrousseau From Clefs WHERE CID=@IDClef) AND CStatus=(Select CStatus From Clefs WHERE CID=@IDClef) AND CTrousseau <> 'Aucun';"
                 With cmd
                     .Connection = connecter()
                     .Parameters("@IDClef").Value = stgKeyID
@@ -471,7 +474,7 @@ Public Class frmClefsEmpruntsEtAlertes
                 da.SelectCommand = cmd
                 da.Fill(dt)
                 If dt.Rows.Count > 0 Then
-                    AmountLost = dt.Rows(0)(0)
+                    AmountLost = dt.Rows(0).Item("COUNT(CID)")
                 End If
             Catch ex As MySqlException
                 MsgBox(ex.Message)

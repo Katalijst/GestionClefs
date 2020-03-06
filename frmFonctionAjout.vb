@@ -1,6 +1,16 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Public Class frmGenreAjout
+Public Class frmFonctionAjout
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub valider()
         If txtType.Text <> "" Then
             Try
@@ -17,7 +27,7 @@ Public Class frmGenreAjout
         End If
 
         If frmPersonnesGestion.IsHandleCreated Then
-            frmPersonnesGestion.RefreshGenre()
+            frmPersonnesGestion.RefreshFonction(txtType.Text)
         End If
         If frmPersonnesEditer.IsHandleCreated Then
             frmPersonnesEditer.RefreshGenre()

@@ -2,6 +2,15 @@
 Public Class frmPersonnesEditer
     Shared stgPersonne As String
 
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub frmEditerPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
@@ -94,7 +103,7 @@ Public Class frmPersonnesEditer
     End Sub
 
     Private Sub btnAddType_Click(sender As Object, e As EventArgs) Handles btnAddType.Click
-        frmGenreAjout.ShowDialog()
+        frmFonctionAjout.ShowDialog()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -129,8 +138,8 @@ Public Class frmPersonnesEditer
         If frmPersonnesGestion.IsHandleCreated Then
             frmPersonnesGestion.RefreshList()
         End If
-        If frmPositionsGestion.IsHandleCreated Then
-            frmPositionsGestion.RefreshResponsable()
+        If frmTableauxGestion.IsHandleCreated Then
+            frmTableauxGestion.RefreshResponsable()
         End If
     End Sub
 End Class

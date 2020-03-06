@@ -61,10 +61,6 @@
                 My.Settings.MySQL_ID = txtID.Text
                 My.Settings.MySQL_Password = txtPassword.Text
                 My.Settings.Save()
-                If frmParametres.IsHandleCreated Then
-                    frmParametres.RefreshMySQL()
-                End If
-
                 Me.Close()
             End If
         Else

@@ -2,6 +2,16 @@
 Imports MySql.Data.MySqlClient
 
 Public Class frmClefsAjout
+
+    Protected Overrides ReadOnly Property CreateParams As CreateParams
+        Get
+            Const CS_DROPSHADOW As Integer = &H20000
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ClassStyle = cp.ClassStyle Or CS_DROPSHADOW
+            Return cp
+        End Get
+    End Property
+
     Private Sub frmCreerClefs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
@@ -50,10 +60,10 @@ Public Class frmClefsAjout
         ElseIf txtNom.Text = "" Then
             MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
             blnIncompleteForm = True
-        ElseIf cmbLoc.SelectedIndex = -1 Then
+        ElseIf cbTableau.SelectedIndex = -1 Then
             MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
             blnIncompleteForm = True
-        ElseIf cmbTrousseauListe.SelectedIndex = -1 Then
+        ElseIf cbTrousseau.SelectedIndex = -1 Then
             MsgBox("Vous n'avez pas remplis tout les champs", MsgBoxStyle.OkOnly)
             blnIncompleteForm = True
         ElseIf dgvSelBatiment.RowCount < 1 Then
@@ -118,7 +128,7 @@ Public Class frmClefsAjout
             End If
         End If
 
-        If cmbTrousseauListe.Text <> "Aucun" Then
+        If cbTrousseau.Text <> "Aucun" Then
             Dim cmdVerifTrousseau As New MySqlCommand()
             Dim daTr As MySqlDataAdapter = New MySqlDataAdapter()
             Dim dtTr As New DataTable()
@@ -127,7 +137,7 @@ Public Class frmClefsAjout
 
             With cmdVerifTrousseau
                 .Parameters("@KeyID").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-%"
-                .Parameters("@Trousseau").Value = cmbTrousseauListe.Text
+                .Parameters("@Trousseau").Value = cbTrousseau.Text
                 .CommandText = "SELECT CID From Clefs WHERE CTrousseau=@Trousseau AND CID like @KeyID;"
                 .CommandType = CommandType.Text
                 .Connection = connecter()
@@ -230,11 +240,11 @@ Public Class frmClefsAjout
                 With insert_command
                     .Parameters("@id").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-" & int
                     .Parameters("@name").Value = stgNomClef
-                    .Parameters("@pos").Value = cmbLoc.Text
+                    .Parameters("@pos").Value = cbTableau.Text
                     .Parameters("@status").Value = "Disponible"
                     .Parameters("@date").Value = Now
-                    If cmbTrousseauListe.SelectedItem IsNot Nothing Or cmbTrousseauListe.Text = "Aucun" Then
-                        .Parameters("@trousseau").Value = cmbTrousseauListe.Text
+                    If cbTrousseau.SelectedItem IsNot Nothing Or cbTrousseau.Text = "Aucun" Then
+                        .Parameters("@trousseau").Value = cbTrousseau.Text
                     Else
                         .Parameters("@trousseau").Value = "Aucun"
                     End If
@@ -374,8 +384,8 @@ Public Class frmClefsAjout
         End Try
     End Sub
 
-    Public Sub RefreshTrousseau()
-        cmbTrousseauListe.Items.Clear()
+    Public Sub RefreshTrousseau(ByVal Optional name As String = "Empty")
+        cbTrousseau.Items.Clear()
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -395,9 +405,11 @@ Public Class frmClefsAjout
             dt.Rows.InsertAt(newRow, 0)
 
             For Each r As DataRow In dt.Rows
-                cmbTrousseauListe.Items.Add(r.Item(0).ToString)
+                cbTrousseau.Items.Add(r.Item(0).ToString)
             Next
-
+            If name <> "Empty" Then
+                cbTrousseau.Text = name
+            End If
             'cmbTrousseauListe.DataSource = dt
             'cmbTrousseauListe.ValueMember = dt.Columns(0).ToString
             'cmbTrousseauListe.DisplayMember = strTitleTNom
@@ -407,8 +419,8 @@ Public Class frmClefsAjout
             MsgBox(ex.Message)
         End Try
     End Sub
-    Public Sub RefreshPosition()
-        cmbLoc.Items.Clear()
+    Public Sub RefreshTableau(ByVal Optional name As String = "Empty")
+        cbTableau.Items.Clear()
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -424,9 +436,11 @@ Public Class frmClefsAjout
             da.Fill(dt)
 
             For Each r As DataRow In dt.Rows
-                cmbLoc.Items.Add(r.Item(0).ToString)
+                cbTableau.Items.Add(r.Item(0).ToString)
             Next
-
+            If name <> "Empty" Then
+                cbTableau.Text = name
+            End If
             'cmbLoc.DataSource = dt
             'cmbLoc.ValueMember = dt.Columns(0).ToString
             'cmbLoc.DisplayMember = strTitlePNom
@@ -437,7 +451,7 @@ Public Class frmClefsAjout
         End Try
     End Sub
     Public Sub LoadAndRefresh()
-        RefreshPosition()
+        RefreshTableau()
         RefreshTrousseau()
         FilldgSelBatiment()
     End Sub
@@ -522,7 +536,7 @@ Public Class frmClefsAjout
     End Sub
 
     Private Sub btnNewLoc_Click(sender As Object, e As EventArgs) Handles btnNewLoc.Click
-        frmPositionsGestion.ShowDialog()
+        frmTableauxGestion.ShowDialog()
     End Sub
 
     Private Sub btnRemSelBatiment_Click(sender As Object, e As EventArgs) Handles btnRemSelBatiment.Click
@@ -557,11 +571,11 @@ Public Class frmClefsAjout
         End If
     End Sub
 
-    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTrousseauListe.SelectedIndexChanged
-        If cmbTrousseauListe.Text <> "Aucun" Then
+    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTrousseau.SelectedIndexChanged
+        If cbTrousseau.Text <> "Aucun" Then
             txtQuantity.Enabled = False
             txtQuantity.Text = 1
-            ToolTip1.Show("Si vous ajouter une clef à un trousseau," & System.Environment.NewLine & "la quantité ne peut être supérieur à 1.", cmbTrousseauListe, cmbTrousseauListe.Width / 2, cmbTrousseauListe.Height / 2)
+            ToolTip1.Show("Si vous ajouter une clef à un trousseau," & System.Environment.NewLine & "la quantité ne peut être supérieur à 1.", cbTrousseau, cbTrousseau.Width / 2, cbTrousseau.Height / 2)
         Else
             txtQuantity.Enabled = True
         End If

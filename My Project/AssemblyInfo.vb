@@ -13,10 +13,10 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Logiciel de gestion de clefs au sein d'un organisme.")>
 <Assembly: AssemblyCompany("Mairie de Coutras")>
 <Assembly: AssemblyProduct("GestionClefs")>
-<Assembly: AssemblyCopyright("© 2020 Quentin Bédarride")>
+<Assembly: AssemblyCopyright("Réalisé par Quentin Bédarride")>
 <Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(True)>
 
 'Le GUID suivant est pour l'ID de la typelib si ce projet est exposé à COM
 <Assembly: Guid("3e55d606-6052-4e77-9477-1da3de8b4a52")>
