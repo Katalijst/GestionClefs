@@ -20,6 +20,9 @@ Public Class frmTableauxEditer
         lblPBatiment.Text = strTitlePBatiment & " :"
         lblPResponsable.Text = strTitlePResponsable & " :"
 
+        cbResponsable.Hint = strTitlePResponsable
+        txtNom.Hint = strTitlePNom
+
         RefreshResponsable()
         RefreshBatiment()
         RemplissageAuto()
@@ -43,9 +46,9 @@ Public Class frmTableauxEditer
             da.SelectCommand = cmd
             da.Fill(dt)
             Dim stgType As String = dt.Rows(0)(0)
-            For i As Integer = 0 To (cmbResponsable.Items.Count - 1)
-                If cmbResponsable.GetItemText(cmbResponsable.Items(i)) = stgType Then
-                    cmbResponsable.SelectedIndex = i
+            For i As Integer = 0 To (cbResponsable.Items.Count - 1)
+                If cbResponsable.GetItemText(cbResponsable.Items(i)) = stgType Then
+                    cbResponsable.SelectedIndex = i
                 End If
             Next
             connecter().Close()
@@ -92,11 +95,11 @@ Public Class frmTableauxEditer
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            cmbResponsable.DataSource = dt
-            cmbResponsable.ValueMember = "NNom"
-            cmbResponsable.DisplayMember = "NNom"
-            If cmbResponsable.Items.Count > 0 Then
-                cmbResponsable.SelectedIndex = 0
+            cbResponsable.DataSource = dt
+            cbResponsable.ValueMember = "NNom"
+            cbResponsable.DisplayMember = "NNom"
+            If cbResponsable.Items.Count > 0 Then
+                cbResponsable.SelectedIndex = 0
             End If
             connecter().Close()
         Catch ex As Exception
@@ -136,7 +139,7 @@ Public Class frmTableauxEditer
         End Try
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click2(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 
@@ -144,7 +147,7 @@ Public Class frmTableauxEditer
         frmPersonnesEditer.ShowDialog()
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click2(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
@@ -155,7 +158,7 @@ Public Class frmTableauxEditer
 
         Try
             If txtNom.Text <> "" Then
-                sql = "UPDATE Position SET PNom = '" & txtNom.Text & "', PResponsable = '" & cmbResponsable.Text & "', PBatiment = '" & stgBatNom & "' WHERE PNom = '" & stgPosID & "'"
+                sql = "UPDATE Position SET PNom = '" & txtNom.Text & "', PResponsable = '" & cbResponsable.Text & "', PBatiment = '" & stgBatNom & "' WHERE PNom = '" & stgPosID & "'"
                 With cmd
                     .Connection = connecter()
                     .CommandText = sql
@@ -178,4 +181,5 @@ Public Class frmTableauxEditer
             frmTableauxGestion.RefreshList()
         End If
     End Sub
+
 End Class

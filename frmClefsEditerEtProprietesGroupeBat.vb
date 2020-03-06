@@ -44,4 +44,32 @@ Public Class frmClefsEditerEtProprietesGroupeBat
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
         Me.Dispose()
     End Sub
+
+    Private NewPoint As New Point
+    Private New_X, New_Y As Integer
+
+    Private Sub DragForm_Label_MouseUp(sender As Object, e As MouseEventArgs) Handles dgvListBatiment.MouseUp
+        Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub DragForm_Label_MouseDown(sender As Object, e As MouseEventArgs) Handles dgvListBatiment.MouseDown
+        If Not Me.WindowState = FormWindowState.Maximized Then
+            If e.Button = Windows.Forms.MouseButtons.Left Then
+                New_X = Control.MousePosition.X - Me.Location.X
+                New_Y = Control.MousePosition.Y - Me.Location.Y
+                Me.Cursor = Cursors.NoMove2D
+            End If
+        End If
+    End Sub
+
+    Private Sub DragForm_Label_MouseMove(sender As Object, e As MouseEventArgs) Handles dgvListBatiment.MouseMove
+        If Not Me.WindowState = FormWindowState.Maximized Then
+            If e.Button = Windows.Forms.MouseButtons.Left Then
+                NewPoint = Control.MousePosition
+                NewPoint.X -= (New_X)
+                NewPoint.Y -= (New_Y)
+                Me.Location = NewPoint
+            End If
+        End If
+    End Sub
 End Class

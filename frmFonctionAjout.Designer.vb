@@ -23,50 +23,69 @@ Partial Class frmFonctionAjout
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFonctionAjout))
-        Me.lblGenre = New System.Windows.Forms.Label()
-        Me.btnValider = New System.Windows.Forms.Button()
-        Me.txtType = New System.Windows.Forms.TextBox()
+        Me.lblGenre = New MaterialSkin.Controls.MaterialLabel()
+        Me.txtType = New MaterialSkin.Controls.MaterialTextBox()
+        Me.btnValider = New MaterialSkin.Controls.MaterialButton()
         Me.SuspendLayout()
         '
         'lblGenre
         '
-        Me.lblGenre.Location = New System.Drawing.Point(12, 68)
+        Me.lblGenre.AutoSize = True
+        Me.lblGenre.Depth = 0
+        Me.lblGenre.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblGenre.Location = New System.Drawing.Point(12, 75)
+        Me.lblGenre.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblGenre.Name = "lblGenre"
-        Me.lblGenre.Size = New System.Drawing.Size(206, 13)
-        Me.lblGenre.TabIndex = 5
-        Me.lblGenre.Text = "Type de personne"
-        Me.lblGenre.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'btnValider
-        '
-        Me.btnValider.Location = New System.Drawing.Point(12, 110)
-        Me.btnValider.Name = "btnValider"
-        Me.btnValider.Size = New System.Drawing.Size(206, 23)
-        Me.btnValider.TabIndex = 4
-        Me.btnValider.Text = "Valider"
-        Me.btnValider.UseVisualStyleBackColor = True
+        Me.lblGenre.Size = New System.Drawing.Size(143, 19)
+        Me.lblGenre.TabIndex = 6
+        Me.lblGenre.Text = "Ajout d'une fonction"
         '
         'txtType
         '
-        Me.txtType.Location = New System.Drawing.Point(12, 84)
+        Me.txtType.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtType.Depth = 0
+        Me.txtType.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtType.Hint = "Fonction"
+        Me.txtType.Location = New System.Drawing.Point(12, 97)
         Me.txtType.MaxLength = 255
+        Me.txtType.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtType.Multiline = False
         Me.txtType.Name = "txtType"
-        Me.txtType.Size = New System.Drawing.Size(206, 20)
-        Me.txtType.TabIndex = 3
+        Me.txtType.Size = New System.Drawing.Size(206, 36)
+        Me.txtType.TabIndex = 7
+        Me.txtType.Text = ""
+        Me.txtType.UseTallSize = False
         '
-        'frmAjouterGenre
+        'btnValider
         '
-        Me.AcceptButton = Me.btnValider
+        Me.btnValider.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnValider.Depth = 0
+        Me.btnValider.DrawShadows = True
+        Me.btnValider.HighEmphasis = True
+        Me.btnValider.Icon = Nothing
+        Me.btnValider.Location = New System.Drawing.Point(75, 142)
+        Me.btnValider.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnValider.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnValider.Name = "btnValider"
+        Me.btnValider.Size = New System.Drawing.Size(80, 36)
+        Me.btnValider.TabIndex = 8
+        Me.btnValider.Text = "Valider"
+        Me.btnValider.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
+        Me.btnValider.UseAccentColor = False
+        Me.btnValider.UseVisualStyleBackColor = True
+        '
+        'frmFonctionAjout
+        '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(230, 140)
-        Me.Controls.Add(Me.lblGenre)
+        Me.ClientSize = New System.Drawing.Size(230, 188)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtType)
+        Me.Controls.Add(Me.lblGenre)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmAjouterGenre"
+        Me.Name = "frmFonctionAjout"
         Me.ShowIcon = False
         Me.Sizable = False
         Me.Text = "Ajouter un type..."
@@ -74,8 +93,7 @@ Partial Class frmFonctionAjout
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents lblGenre As Label
-    Friend WithEvents btnValider As Button
-    Friend WithEvents txtType As TextBox
+    Friend WithEvents lblGenre As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents txtType As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents btnValider As MaterialSkin.Controls.MaterialButton
 End Class

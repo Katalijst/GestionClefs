@@ -23,157 +23,211 @@ Partial Class frmBatimentsEditer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBatimentsEditer))
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.lblFonction = New System.Windows.Forms.Label()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.lblAdresse = New System.Windows.Forms.Label()
-        Me.lblNom = New System.Windows.Forms.Label()
-        Me.lblID = New System.Windows.Forms.Label()
-        Me.txtFonction = New System.Windows.Forms.TextBox()
-        Me.txtAdresse = New System.Windows.Forms.TextBox()
-        Me.txtNom = New System.Windows.Forms.TextBox()
-        Me.txtID = New System.Windows.Forms.TextBox()
-        Me.GroupBox2.SuspendLayout()
+        Me.txtID = New MaterialSkin.Controls.MaterialTextBox()
+        Me.lblID = New MaterialSkin.Controls.MaterialLabel()
+        Me.lblNom = New MaterialSkin.Controls.MaterialLabel()
+        Me.txtNom = New MaterialSkin.Controls.MaterialTextBox()
+        Me.lblAdresse = New MaterialSkin.Controls.MaterialLabel()
+        Me.txtAdresse = New MaterialSkin.Controls.MaterialTextBox()
+        Me.lblFonction = New MaterialSkin.Controls.MaterialLabel()
+        Me.txtFonction = New MaterialSkin.Controls.MaterialTextBox()
+        Me.btnSave = New MaterialSkin.Controls.MaterialButton()
+        Me.MaterialDivider1 = New MaterialSkin.Controls.MaterialDivider()
+        Me.btnCancel = New MaterialSkin.Controls.MaterialButton()
         Me.SuspendLayout()
         '
-        'GroupBox2
+        'txtID
         '
-        Me.GroupBox2.Controls.Add(Me.lblFonction)
-        Me.GroupBox2.Controls.Add(Me.btnSave)
-        Me.GroupBox2.Controls.Add(Me.btnCancel)
-        Me.GroupBox2.Controls.Add(Me.lblAdresse)
-        Me.GroupBox2.Controls.Add(Me.lblNom)
-        Me.GroupBox2.Controls.Add(Me.lblID)
-        Me.GroupBox2.Controls.Add(Me.txtFonction)
-        Me.GroupBox2.Controls.Add(Me.txtAdresse)
-        Me.GroupBox2.Controls.Add(Me.txtNom)
-        Me.GroupBox2.Controls.Add(Me.txtID)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 67)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(350, 227)
-        Me.GroupBox2.TabIndex = 60
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Editer un bâtiment"
-        '
-        'lblFonction
-        '
-        Me.lblFonction.AutoSize = True
-        Me.lblFonction.Location = New System.Drawing.Point(6, 146)
-        Me.lblFonction.Name = "lblFonction"
-        Me.lblFonction.Size = New System.Drawing.Size(54, 13)
-        Me.lblFonction.TabIndex = 56
-        Me.lblFonction.Text = "Fonction :"
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(6, 188)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(237, 32)
-        Me.btnSave.TabIndex = 44
-        Me.btnSave.Text = "Enregistrer"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnCancel
-        '
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(249, 188)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(95, 32)
-        Me.btnCancel.TabIndex = 45
-        Me.btnCancel.Text = "Annuler"
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'lblAdresse
-        '
-        Me.lblAdresse.AutoSize = True
-        Me.lblAdresse.Location = New System.Drawing.Point(6, 103)
-        Me.lblAdresse.Name = "lblAdresse"
-        Me.lblAdresse.Size = New System.Drawing.Size(51, 13)
-        Me.lblAdresse.TabIndex = 55
-        Me.lblAdresse.Text = "Adresse :"
-        '
-        'lblNom
-        '
-        Me.lblNom.AutoSize = True
-        Me.lblNom.Location = New System.Drawing.Point(6, 60)
-        Me.lblNom.Name = "lblNom"
-        Me.lblNom.Size = New System.Drawing.Size(78, 13)
-        Me.lblNom.TabIndex = 54
-        Me.lblNom.Text = "Dénomination :"
+        Me.txtID.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtID.Depth = 0
+        Me.txtID.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtID.Location = New System.Drawing.Point(15, 92)
+        Me.txtID.MaxLength = 20
+        Me.txtID.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtID.Multiline = False
+        Me.txtID.Name = "txtID"
+        Me.txtID.Size = New System.Drawing.Size(168, 36)
+        Me.txtID.TabIndex = 61
+        Me.txtID.Text = ""
+        Me.txtID.UseTallSize = False
         '
         'lblID
         '
         Me.lblID.AutoSize = True
-        Me.lblID.Location = New System.Drawing.Point(6, 17)
+        Me.lblID.Depth = 0
+        Me.lblID.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblID.Location = New System.Drawing.Point(12, 70)
+        Me.lblID.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(25, 13)
-        Me.lblID.TabIndex = 53
+        Me.lblID.Size = New System.Drawing.Size(26, 19)
+        Me.lblID.TabIndex = 65
         Me.lblID.Text = "N° :"
         '
-        'txtFonction
+        'lblNom
         '
-        Me.txtFonction.Location = New System.Drawing.Point(9, 162)
-        Me.txtFonction.MaxLength = 255
-        Me.txtFonction.Name = "txtFonction"
-        Me.txtFonction.Size = New System.Drawing.Size(335, 20)
-        Me.txtFonction.TabIndex = 51
-        '
-        'txtAdresse
-        '
-        Me.txtAdresse.Location = New System.Drawing.Point(9, 119)
-        Me.txtAdresse.MaxLength = 255
-        Me.txtAdresse.Name = "txtAdresse"
-        Me.txtAdresse.Size = New System.Drawing.Size(335, 20)
-        Me.txtAdresse.TabIndex = 50
+        Me.lblNom.AutoSize = True
+        Me.lblNom.Depth = 0
+        Me.lblNom.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblNom.Location = New System.Drawing.Point(12, 131)
+        Me.lblNom.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblNom.Name = "lblNom"
+        Me.lblNom.Size = New System.Drawing.Size(109, 19)
+        Me.lblNom.TabIndex = 67
+        Me.lblNom.Text = "Dénomination :"
         '
         'txtNom
         '
-        Me.txtNom.Location = New System.Drawing.Point(9, 76)
+        Me.txtNom.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtNom.Depth = 0
+        Me.txtNom.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtNom.Location = New System.Drawing.Point(15, 153)
         Me.txtNom.MaxLength = 255
+        Me.txtNom.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtNom.Multiline = False
         Me.txtNom.Name = "txtNom"
-        Me.txtNom.Size = New System.Drawing.Size(335, 20)
-        Me.txtNom.TabIndex = 49
+        Me.txtNom.Size = New System.Drawing.Size(323, 36)
+        Me.txtNom.TabIndex = 66
+        Me.txtNom.Text = ""
+        Me.txtNom.UseTallSize = False
         '
-        'txtID
+        'lblAdresse
         '
-        Me.txtID.Location = New System.Drawing.Point(9, 33)
-        Me.txtID.MaxLength = 20
-        Me.txtID.Name = "txtID"
-        Me.txtID.Size = New System.Drawing.Size(100, 20)
-        Me.txtID.TabIndex = 48
+        Me.lblAdresse.AutoSize = True
+        Me.lblAdresse.Depth = 0
+        Me.lblAdresse.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblAdresse.Location = New System.Drawing.Point(12, 192)
+        Me.lblAdresse.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblAdresse.Name = "lblAdresse"
+        Me.lblAdresse.Size = New System.Drawing.Size(65, 19)
+        Me.lblAdresse.TabIndex = 69
+        Me.lblAdresse.Text = "Adresse :"
         '
-        'frmEditerBatiment
+        'txtAdresse
         '
-        Me.AcceptButton = Me.btnSave
+        Me.txtAdresse.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtAdresse.Depth = 0
+        Me.txtAdresse.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtAdresse.Location = New System.Drawing.Point(15, 214)
+        Me.txtAdresse.MaxLength = 255
+        Me.txtAdresse.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtAdresse.Multiline = False
+        Me.txtAdresse.Name = "txtAdresse"
+        Me.txtAdresse.Size = New System.Drawing.Size(323, 36)
+        Me.txtAdresse.TabIndex = 68
+        Me.txtAdresse.Text = ""
+        Me.txtAdresse.UseTallSize = False
+        '
+        'lblFonction
+        '
+        Me.lblFonction.AutoSize = True
+        Me.lblFonction.Depth = 0
+        Me.lblFonction.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblFonction.Location = New System.Drawing.Point(12, 253)
+        Me.lblFonction.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblFonction.Name = "lblFonction"
+        Me.lblFonction.Size = New System.Drawing.Size(71, 19)
+        Me.lblFonction.TabIndex = 71
+        Me.lblFonction.Text = "Fonction :"
+        '
+        'txtFonction
+        '
+        Me.txtFonction.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFonction.Depth = 0
+        Me.txtFonction.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtFonction.Location = New System.Drawing.Point(15, 275)
+        Me.txtFonction.MaxLength = 255
+        Me.txtFonction.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtFonction.Multiline = False
+        Me.txtFonction.Name = "txtFonction"
+        Me.txtFonction.Size = New System.Drawing.Size(323, 36)
+        Me.txtFonction.TabIndex = 70
+        Me.txtFonction.Text = ""
+        Me.txtFonction.UseTallSize = False
+        '
+        'btnSave
+        '
+        Me.btnSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnSave.Depth = 0
+        Me.btnSave.DrawShadows = True
+        Me.btnSave.HighEmphasis = True
+        Me.btnSave.Icon = Nothing
+        Me.btnSave.Location = New System.Drawing.Point(222, 327)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(117, 36)
+        Me.btnSave.TabIndex = 73
+        Me.btnSave.Text = "Enregistrer"
+        Me.btnSave.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
+        Me.btnSave.UseAccentColor = False
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'MaterialDivider1
+        '
+        Me.MaterialDivider1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.MaterialDivider1.Depth = 0
+        Me.MaterialDivider1.Location = New System.Drawing.Point(12, 317)
+        Me.MaterialDivider1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialDivider1.Name = "MaterialDivider1"
+        Me.MaterialDivider1.Size = New System.Drawing.Size(328, 1)
+        Me.MaterialDivider1.TabIndex = 74
+        Me.MaterialDivider1.Text = "MaterialDivider1"
+        '
+        'btnCancel
+        '
+        Me.btnCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnCancel.Depth = 0
+        Me.btnCancel.DrawShadows = True
+        Me.btnCancel.HighEmphasis = True
+        Me.btnCancel.Icon = Nothing
+        Me.btnCancel.Location = New System.Drawing.Point(13, 327)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnCancel.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(87, 36)
+        Me.btnCancel.TabIndex = 72
+        Me.btnCancel.Text = "Annuler"
+        Me.btnCancel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
+        Me.btnCancel.UseAccentColor = False
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'frmBatimentsEditer
+        '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(374, 304)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.ClientSize = New System.Drawing.Size(352, 372)
+        Me.Controls.Add(Me.MaterialDivider1)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.lblFonction)
+        Me.Controls.Add(Me.txtFonction)
+        Me.Controls.Add(Me.lblAdresse)
+        Me.Controls.Add(Me.txtAdresse)
+        Me.Controls.Add(Me.lblNom)
+        Me.Controls.Add(Me.txtNom)
+        Me.Controls.Add(Me.lblID)
+        Me.Controls.Add(Me.txtID)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmEditerBatiment"
+        Me.Name = "frmBatimentsEditer"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
         Me.Text = "Editer un batiment..."
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents lblFonction As Label
-    Friend WithEvents btnSave As Button
-    Friend WithEvents btnCancel As Button
-    Friend WithEvents lblAdresse As Label
-    Friend WithEvents lblNom As Label
-    Friend WithEvents lblID As Label
-    Friend WithEvents txtFonction As TextBox
-    Friend WithEvents txtAdresse As TextBox
-    Friend WithEvents txtNom As TextBox
-    Friend WithEvents txtID As TextBox
+    Friend WithEvents txtID As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents lblID As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents lblNom As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents txtNom As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents lblAdresse As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents txtAdresse As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents lblFonction As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents txtFonction As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents btnSave As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents MaterialDivider1 As MaterialSkin.Controls.MaterialDivider
+    Friend WithEvents btnCancel As MaterialSkin.Controls.MaterialButton
 End Class

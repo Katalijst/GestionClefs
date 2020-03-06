@@ -18,6 +18,11 @@ Public Class frmBatimentsEditer
         lblFonction.Text = strTitleBFonction & " :"
         lblNom.Text = strTitleBNom & " :"
 
+        txtID.Hint = strTitleBNum
+        txtAdresse.Hint = strTitleBAdresse
+        txtFonction.Hint = strTitleBFonction
+        txtNom.Hint = strTitleBNom
+
         stgBatID = frmBatimentsAjoutGestion.dgvListBatiment.SelectedRows(0).Cells(strTitleBNum).Value.ToString()
         txtID.Text = stgBatID
 

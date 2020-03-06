@@ -19,6 +19,11 @@ Public Class frmPersonnesEditer
         lblTelephone.Text = strTitleNTelephone & " :"
         lblAutre.Text = strTitleNAutre & " :"
 
+        cbType.Hint = strTitleNGenre
+        txtNom.Hint = strTitleNNom
+        txtTel.Hint = strTitleNTelephone
+        txtAutre.Hint = strTitleNAutre
+
         Dim intIndexNom As Integer = frmPersonnesGestion.dgvListPersonne.Columns(strTitleNNom).Index
         stgPersonne = frmPersonnesGestion.dgvListPersonne.SelectedRows(0).Cells(intIndexNom).Value.ToString()
         txtNom.Text = stgPersonne
@@ -41,7 +46,7 @@ Public Class frmPersonnesEditer
             For Each s As String In dt.Rows(0)(0).ToString.SplitBy(2)
                 tel = tel & s & " "
             Next
-            mtxtTel.Text = tel
+            txtTel.Text = tel
 
             dt.Reset()
             sql = "Select NAutre FROM NomPersonne WHERE NNom=""" & stgPersonne & """"
@@ -75,11 +80,11 @@ Public Class frmPersonnesEditer
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            cmbType.DataSource = dt
-            cmbType.ValueMember = "GGenre"
-            cmbType.DisplayMember = "GGenre"
-            If cmbType.Items.Count > 0 Then
-                cmbType.SelectedIndex = 0
+            cbType.DataSource = dt
+            cbType.ValueMember = "GGenre"
+            cbType.DisplayMember = "GGenre"
+            If cbType.Items.Count > 0 Then
+                cbType.SelectedIndex = 0
             End If
 
             sql = "Select NGenre FROM NomPersonne WHERE NNom=""" & stgPersonne & """"
@@ -91,9 +96,9 @@ Public Class frmPersonnesEditer
             da1.Fill(dt1)
 
             Dim stgType As String = dt1.Rows(0)(0)
-            For i As Integer = 0 To (cmbType.Items.Count - 1)
-                If cmbType.GetItemText(cmbType.Items(i)) = stgType Then
-                    cmbType.SelectedIndex = i
+            For i As Integer = 0 To (cbType.Items.Count - 1)
+                If cbType.GetItemText(cbType.Items(i)) = stgType Then
+                    cbType.SelectedIndex = i
                 End If
             Next
             connecter().Close()
@@ -118,8 +123,8 @@ Public Class frmPersonnesEditer
         Dim sql As String
 
         Try
-            If txtNom.Text <> "" And mtxtTel.Text <> "" Then
-                sql = "UPDATE NomPersonne SET NNom = '" & txtNom.Text & "', NGenre = '" & cmbType.Text & "', NTelephone = '" & mtxtTel.Text & "', NAutre = '" & txtAutre.Text & "' WHERE NNom = '" & stgPersonne & "'"
+            If txtNom.Text <> "" And txtTel.Text <> "" Then
+                sql = "UPDATE NomPersonne SET NNom = '" & txtNom.Text & "', NGenre = '" & cbType.Text & "', NTelephone = '" & txtTel.Text & "', NAutre = '" & txtAutre.Text & "' WHERE NNom = '" & stgPersonne & "'"
                 With cmd
                     .Connection = connecter()
                     .CommandText = sql
