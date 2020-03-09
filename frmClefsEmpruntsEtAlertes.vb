@@ -34,7 +34,7 @@ Public Class frmClefsEmpruntsEtAlertes
         Dim strCBFiltre As String() = New String(2) {}
         strCBFiltre(0) = strTitleCID
         strCBFiltre(1) = strTitleCNom
-        strCBFiltre(2) = strTitleENomPersonne
+        strCBFiltre(2) = "Emprunteur"
         cbRechercher.DataSource = strCBFiltre
 
         RefreshAlertes()
@@ -536,7 +536,7 @@ Public Class frmClefsEmpruntsEtAlertes
             intIndex = 0
         ElseIf cbRechercher.Text = strTitleCNom Then
             intIndex = 1
-        ElseIf cbRechercher.Text = strTitleENomPersonne Then
+        ElseIf cbRechercher.Text = "Emprunteur" Then
             intIndex = 3
         End If
 

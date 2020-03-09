@@ -62,13 +62,15 @@ Public Class frmTrousseauCreerOuRemplir
     End Sub
 
 
-    Public Sub ValiderAjoutOuCreation()
+    Private Sub ValiderAjoutOuCreation()
         If chkAjouter.Checked = True Then
-            If cbTrousseaux.SelectedIndex < 0 Then Exit Sub
+            If cbTrousseaux.SelectedIndex < 0 Then Exit Sub Else Ajouter()
         ElseIf chkCreer.Checked = True Then
-            If txtNomTrousseau.Text.Replace(" ", "") <> "" Then Exit Sub
+            If txtNomTrousseau.Text.Replace(" ", "") <> "" Then Exit Sub Else CreerTrousseau()
         End If
-            Dim blnClefDejaDansTrousseau As Boolean = False
+    End Sub
+    Private Sub Ajouter()
+        Dim blnClefDejaDansTrousseau As Boolean = False
         If frmMain.dgvPanier.SelectedRows.Count > 0 Then
             Dim cmdUpdateClef As New MySqlCommand
             cmdUpdateClef.CommandType = CommandType.Text
@@ -122,6 +124,29 @@ Public Class frmTrousseauCreerOuRemplir
         Me.Close()
     End Sub
 
+    Private Sub CreerTrousseau()
+        If txtNomTrousseau.Text <> "" And txtNomTrousseau.Text <> "Aucun" Then
+            Try
+                Dim insert_command As New MySqlCommand("INSERT INTO `Trousseau`(`TNom`) VALUES (@name)", connecter())
+                insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtNomTrousseau.Text
+                insert_command.ExecuteNonQuery()
+                connecter().Close()
+                Me.Close()
+            Catch ex As MySqlException
+                MsgBox(ex.ErrorCode & " - " & ex.Message)
+            End Try
+        Else
+            Me.Close()
+        End If
+
+        If frmTrousseauxGestion.IsHandleCreated Then
+            frmTrousseauxGestion.RefreshTrousseau(txtNomTrousseau.Text)
+        End If
+        If frmClefsAjout.IsHandleCreated Then
+            frmClefsAjout.RefreshTrousseau(txtNomTrousseau.Text)
+        End If
+        Ajouter()
+    End Sub
 
     Private Sub chkAjouter_CheckedChanged(sender As Object, e As EventArgs) Handles chkAjouter.CheckedChanged
         CreerOuSelectionner()

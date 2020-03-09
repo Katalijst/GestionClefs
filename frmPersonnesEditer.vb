@@ -24,10 +24,8 @@ Public Class frmPersonnesEditer
         txtTel.Hint = strTitleNTelephone
         txtAutre.Hint = strTitleNAutre
 
-        Dim intIndexNom As Integer = frmPersonnesGestion.dgvListPersonne.Columns(strTitleNNom).Index
-        stgPersonne = frmPersonnesGestion.dgvListPersonne.SelectedRows(0).Cells(intIndexNom).Value.ToString()
+        stgPersonne = frmPersonnesGestion.dgvListPersonne.SelectedRows(0).Cells(strTitleNNom).Value.ToString()
         txtNom.Text = stgPersonne
-        RefreshGenre()
 
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
@@ -57,22 +55,32 @@ Public Class frmPersonnesEditer
             da.SelectCommand = cmd
             da.Fill(dt)
             txtAutre.Text = dt.Rows(0)(0).ToString
+
+            dt.Reset()
+            sql = "Select NGenre FROM NomPersonne WHERE NNom=""" & stgPersonne & """"
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dt)
+            RefreshGenre(dt.Rows(0).Item(0).ToString)
+
             connecter().Close()
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.ErrorCode & " - " & ex.Message)
         End Try
     End Sub
-    Public Sub RefreshGenre()
+    Public Sub RefreshGenre(ByVal Optional name As String = "Empty")
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
-        Dim dt1 As New DataTable
-        Dim da1 As New MySqlDataAdapter
         Dim sql As String
 
         Try
             sql = "Select * from Genre"
+
             With cmd
                 .Connection = connecter()
                 .CommandText = sql
@@ -80,30 +88,21 @@ Public Class frmPersonnesEditer
             da.SelectCommand = cmd
             da.Fill(dt)
 
-            cbType.DataSource = dt
-            cbType.ValueMember = "GGenre"
-            cbType.DisplayMember = "GGenre"
-            If cbType.Items.Count > 0 Then
-                cbType.SelectedIndex = 0
+            Dim strCmbType(dt.Rows.Count) As String
+            Dim index As Integer = 0
+            For Each r As DataRow In dt.Rows
+                strCmbType(index) = r.Item(0)
+                index += 1
+            Next
+            cbType.DataSource = strCmbType
+
+            If name <> "Empty" Then
+                cbType.Text = name
             End If
 
-            sql = "Select NGenre FROM NomPersonne WHERE NNom=""" & stgPersonne & """"
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da1.SelectCommand = cmd
-            da1.Fill(dt1)
-
-            Dim stgType As String = dt1.Rows(0)(0)
-            For i As Integer = 0 To (cbType.Items.Count - 1)
-                If cbType.GetItemText(cbType.Items(i)) = stgType Then
-                    cbType.SelectedIndex = i
-                End If
-            Next
             connecter().Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.ErrorCode & " - " & ex.Message)
         End Try
     End Sub
 
@@ -137,8 +136,8 @@ Public Class frmPersonnesEditer
                 MsgBox("Veuillez remplir tout les champs !")
                 Exit Sub
             End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.ErrorCode & " - " & ex.Message)
         End Try
         If frmPersonnesGestion.IsHandleCreated Then
             frmPersonnesGestion.RefreshList()

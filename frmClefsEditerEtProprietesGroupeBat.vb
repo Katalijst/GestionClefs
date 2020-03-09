@@ -52,7 +52,8 @@ Public Class frmClefsEditerEtProprietesGroupeBat
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub DragForm_Label_MouseDown(sender As Object, e As MouseEventArgs) Handles dgvListBatiment.MouseDown
+    Private Sub dgvListBatiment_MouseDown(sender As Object, e As MouseEventArgs) Handles dgvListBatiment.MouseDown
+        dgvListBatiment.ClearSelection()
         If Not Me.WindowState = FormWindowState.Maximized Then
             If e.Button = Windows.Forms.MouseButtons.Left Then
                 New_X = Control.MousePosition.X - Me.Location.X
@@ -62,7 +63,7 @@ Public Class frmClefsEditerEtProprietesGroupeBat
         End If
     End Sub
 
-    Private Sub DragForm_Label_MouseMove(sender As Object, e As MouseEventArgs) Handles dgvListBatiment.MouseMove
+    Private Sub dgvListBatiment_MouseMove(sender As Object, e As MouseEventArgs) Handles dgvListBatiment.MouseMove
         If Not Me.WindowState = FormWindowState.Maximized Then
             If e.Button = Windows.Forms.MouseButtons.Left Then
                 NewPoint = Control.MousePosition

@@ -55,7 +55,7 @@ Partial Class frmPersonnesEditer
         Me.cbType.MaxDropDownItems = 4
         Me.cbType.MouseState = MaterialSkin.MouseState.OUT
         Me.cbType.Name = "cbType"
-        Me.cbType.Size = New System.Drawing.Size(121, 35)
+        Me.cbType.Size = New System.Drawing.Size(273, 35)
         Me.cbType.TabIndex = 64
         Me.cbType.UseTallSize = False
         '
@@ -196,7 +196,7 @@ Partial Class frmPersonnesEditer
         Me.btnAddType.DrawShadows = True
         Me.btnAddType.HighEmphasis = True
         Me.btnAddType.Icon = Global.GestionClefs.My.Resources.Resources.plus
-        Me.btnAddType.Location = New System.Drawing.Point(143, 90)
+        Me.btnAddType.Location = New System.Drawing.Point(295, 90)
         Me.btnAddType.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnAddType.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnAddType.Name = "btnAddType"

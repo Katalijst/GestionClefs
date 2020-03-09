@@ -558,7 +558,9 @@ Public Class frmClefsEmprunterEtAttribuer
         fields("page").SetValue("1/" & nbPages)
         If cbPersonnes.SelectedIndex <> -1 Then
             fields("nom").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NNom"))
-            fields("tel").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone"))
+            If IsDBNull(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone")) = False Then
+                fields("tel").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone"))
+            End If
         End If
 
         '====================== CREATION DU TABLEAU D'EMPRUNT ======================
@@ -774,11 +776,13 @@ Public Class frmClefsEmprunterEtAttribuer
         fields("page").SetValue("1/" & nbPages)
         If cbPersonnes.SelectedIndex <> -1 Then
             fields("nom").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NNom"))
-            fields("tel").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone"))
+            If IsDBNull(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone")) = False Then
+                fields("tel").SetValue(dtNomTel.Rows(cbPersonnes.SelectedIndex).Item("NTelephone"))
+            End If
         End If
 
-        '====================== CREATION DU TABLEAU D'EMPRUNT ======================
-        Dim tailleRow As Integer = 18
+            '====================== CREATION DU TABLEAU D'EMPRUNT ======================
+            Dim tailleRow As Integer = 18
         Dim position As Double() = Acroform.GetField("cle").GetWidgets.FirstOrDefault.GetRectangle().ToDoubleArray
 
         Dim NbreDeRow As Integer = frmMain.dtPanier.Rows.Count

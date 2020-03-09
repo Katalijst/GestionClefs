@@ -294,7 +294,7 @@ Partial Class frmClefsEmprunterEtAttribuer
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.cbPersonnes)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximumSize = New System.Drawing.Size(501, 561)
+        Me.MaximumSize = New System.Drawing.Size(501, 2160)
         Me.MinimumSize = New System.Drawing.Size(501, 561)
         Me.Name = "frmClefsEmprunterEtAttribuer"
         Me.Sizable = False

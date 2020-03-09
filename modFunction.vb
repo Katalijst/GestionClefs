@@ -9,7 +9,7 @@ Module modFunction
     Public Function connecter()
         'Création du string de connexion
         'Voir pour ajouter port éventuellement
-        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Port=" & My.Settings.MySQL_Port & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password & ";Allow User Variables=True"
+        Dim myConnectionString As String = "Server=" & My.Settings.MySQL_Serveur & ";Port=" & My.Settings.MySQL_Port & ";Database=" & My.Settings.MySQL_Database & ";Uid=" & My.Settings.MySQL_ID & ";Pwd=" & My.Settings.MySQL_Password & ";Allow User Variables=True;SslMode=none"
         Dim con As MySqlConnection = New MySqlConnection With {
             .ConnectionString = myConnectionString
         }

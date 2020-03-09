@@ -85,17 +85,13 @@ Public Class frmPersonnesGestion
             Next
             cbFonction.DataSource = strCmbType
 
-            If cbFonction.Items.Count > 0 Then
-                cbFonction.SelectedIndex = 0
-            End If
-
             If name <> "Empty" Then
                 cbFonction.Text = name
             End If
 
             connecter().Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.ErrorCode & " - " & ex.Message)
         End Try
     End Sub
 
@@ -140,8 +136,9 @@ Public Class frmPersonnesGestion
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Try
-            Dim insert_command As New MySqlCommand("INSERT INTO
+        If cbFonction.SelectedIndex <> -1 And txtNom.Text.Replace(" ", "") <> "" Then
+            Try
+                Dim insert_command As New MySqlCommand("INSERT INTO
                                                               `NomPersonne`(
                                                                 `NNom`,
                                                                 `NGenre`,
@@ -156,36 +153,39 @@ Public Class frmPersonnesGestion
                                                                 @autre
                                                               )
                                                             ", connecter())
-            If txtNom.Text <> "" And mtxtTel.Text <> "" Then
-                insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtNom.Text
-                insert_command.Parameters.Add("@genre", MySqlDbType.VarChar).Value = cbFonction.Text
-                insert_command.Parameters.Add("@tel", MySqlDbType.VarChar).Value = mtxtTel.Text
-                insert_command.Parameters.Add("@autre", MySqlDbType.VarChar).Value = txtAutre.Text
-            Else
-                MsgBox("Veuillez remplir tout les champs !")
-                Exit Sub
-            End If
+                If txtNom.Text <> "" And mtxtTel.Text <> "" Then
+                    insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtNom.Text
+                    insert_command.Parameters.Add("@genre", MySqlDbType.VarChar).Value = cbFonction.Text
+                    insert_command.Parameters.Add("@tel", MySqlDbType.VarChar).Value = mtxtTel.Text
+                    insert_command.Parameters.Add("@autre", MySqlDbType.VarChar).Value = txtAutre.Text
+                Else
+                    MsgBox("Veuillez remplir tout les champs !")
+                    Exit Sub
+                End If
 
 
-            insert_command.ExecuteNonQuery()
-            connecter().Close()
-            If frmTableauxGestion.IsHandleCreated Then
-                frmTableauxGestion.RefreshResponsable(txtNom.Text)
-            End If
-            If frmTableauxEditer.IsHandleCreated Then
-                frmTableauxEditer.RefreshResponsable(txtNom.Text)
-            End If
-            If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
-                frmClefsEmprunterEtAttribuer.LoadPersonnes(txtNom.Text)
-            End If
-            If chkKeepOpen.Checked = False Then
-                Me.Close()
-            Else
-                RefreshList()
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+                insert_command.ExecuteNonQuery()
+                connecter().Close()
+                If frmTableauxGestion.IsHandleCreated Then
+                    frmTableauxGestion.RefreshResponsable(txtNom.Text)
+                End If
+                If frmTableauxEditer.IsHandleCreated Then
+                    frmTableauxEditer.RefreshResponsable(txtNom.Text)
+                End If
+                If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
+                    frmClefsEmprunterEtAttribuer.LoadPersonnes(txtNom.Text)
+                End If
+                If chkKeepOpen.Checked = False Then
+                    Me.Close()
+                Else
+                    RefreshList()
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        Else
+            MsgBox("Attention", MessageBoxButtons.OK, "Vous devez entrer le nom de la personne ainsi que sa fonction.")
+        End If
     End Sub
 
     Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged

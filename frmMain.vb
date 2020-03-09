@@ -1096,4 +1096,5 @@ Public Class frmMain
             frmTrousseauCreerOuRemplir.ShowDialog()
         End If
     End Sub
+
 End Class
