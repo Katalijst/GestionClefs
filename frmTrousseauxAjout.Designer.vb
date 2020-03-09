@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmTrousseauxAjout
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,53 +20,59 @@ Partial Class frmTrousseauxAjout
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTrousseauxAjout))
-        Me.txtName = New System.Windows.Forms.TextBox()
-        Me.btnValider = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtName = New MaterialSkin.Controls.MaterialTextBox()
+        Me.btnValider = New MaterialSkin.Controls.MaterialButton()
         Me.SuspendLayout()
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(12, 86)
-        Me.txtName.MaxLength = 255
+        Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtName.Depth = 0
+        Me.txtName.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtName.Hint = "Nom du trousseau..."
+        Me.txtName.Location = New System.Drawing.Point(12, 72)
+        Me.txtName.MaxLength = 50
+        Me.txtName.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtName.Multiline = False
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(206, 20)
-        Me.txtName.TabIndex = 0
+        Me.txtName.Size = New System.Drawing.Size(276, 36)
+        Me.txtName.TabIndex = 2
+        Me.txtName.Text = ""
+        Me.txtName.UseTallSize = False
         '
         'btnValider
         '
-        Me.btnValider.Location = New System.Drawing.Point(12, 112)
+        Me.btnValider.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnValider.Depth = 0
+        Me.btnValider.DrawShadows = True
+        Me.btnValider.HighEmphasis = True
+        Me.btnValider.Icon = Nothing
+        Me.btnValider.Location = New System.Drawing.Point(295, 72)
+        Me.btnValider.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnValider.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnValider.Name = "btnValider"
-        Me.btnValider.Size = New System.Drawing.Size(206, 23)
-        Me.btnValider.TabIndex = 1
-        Me.btnValider.Text = "Valider"
+        Me.btnValider.Size = New System.Drawing.Size(41, 36)
+        Me.btnValider.TabIndex = 3
+        Me.btnValider.Text = "OK"
+        Me.btnValider.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
+        Me.btnValider.UseAccentColor = False
         Me.btnValider.UseVisualStyleBackColor = True
         '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(12, 68)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(206, 15)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Nom du trousseau"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'frmCreerTrousseau
+        'frmTrousseauxAjout
         '
         Me.AcceptButton = Me.btnValider
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(230, 140)
-        Me.Controls.Add(Me.Label1)
+        Me.ClientSize = New System.Drawing.Size(349, 116)
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.txtName)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmCreerTrousseau"
+        Me.Name = "frmTrousseauxAjout"
         Me.Sizable = False
         Me.Text = "Créer un trousseau..."
         Me.ResumeLayout(False)
@@ -74,7 +80,6 @@ Partial Class frmTrousseauxAjout
 
     End Sub
 
-    Friend WithEvents txtName As TextBox
-    Friend WithEvents btnValider As Button
-    Friend WithEvents Label1 As Label
+    Friend WithEvents txtName As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents btnValider As MaterialSkin.Controls.MaterialButton
 End Class

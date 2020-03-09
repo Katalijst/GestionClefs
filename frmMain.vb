@@ -533,18 +533,20 @@ Public Class frmMain
         Rechercher()
     End Sub
 
-    Public Sub DeleteKey(stgKeyID As String)
+    Public Sub DeleteKey()
         If dgvResultats.SelectedRows.Count > 0 Then
             'Pop-up (message box):
             ' Initializes variables to pass to the MessageBox.Show method.
             Dim Message As String
             Dim Caption As String
             If dgvResultats.SelectedRows.Count > 1 Then
-                Message = "Voulez vous vraiment supprimer les clefs sélectionnées ?"
+                Message = "Voulez vous vraiment supprimer les " & dgvResultats.SelectedRows.Count & " clefs sélectionnées ?"
                 Caption = "Supprimer des clefs"
-            Else
+            ElseIf dgvResultats.SelectedRows.Count = 1 Then
                 Message = "Voulez vous vraiment supprimer la clef sélectionnée ?"
                 Caption = "Supprimer une clef"
+            Else
+                Exit Sub
             End If
             Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
             Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
@@ -747,7 +749,7 @@ Public Class frmMain
             frmClefsEmprunterEtAttribuer.ShowDialog()
         Else
             blnEmprunt = True
-            addToPanier()
+            If dgvResultats.SelectedRows.Count > 0 Then addToPanier()
             frmClefsEmprunterEtAttribuer.ShowDialog()
         End If
     End Sub
@@ -785,10 +787,8 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSupprimer_Click(sender As Object, e As EventArgs) Handles btnSupprimer.Click
-        'Récupération de l'id de la ligne cliquée
-        Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
-        'Sub de suppression de la clef à partir de son ID
-        DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
+        'Sub de suppression des clefs sélectionnées
+        DeleteKey()
     End Sub
 
     Private Sub btnPersonnes_Click(sender As Object, e As EventArgs) Handles btnPersonnes.Click
@@ -852,10 +852,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SupprimerToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem1.Click
-        'Récupération de l'id de la ligne cliquée
-        Dim intIndexNom As Integer = dgvResultats.Columns(strTitleCNom).Index
-        'Sub de suppression de la clef à partir de son ID
-        DeleteKey(dgvResultats.SelectedRows(0).Cells(intIndexNom).Value.ToString())
+        DeleteKey()
     End Sub
 
     Public Sub BrightOrDarkMode()
@@ -1089,5 +1086,14 @@ Public Class frmMain
         'ouverture du menu d'alerte
         AlertesEmpruntPerdu = 3
         frmClefsEmpruntsEtAlertes.ShowDialog()
+    End Sub
+
+    Private Sub btnPanierVersTrousseau_Click(sender As Object, e As EventArgs) Handles btnPanierVersTrousseau.Click
+        If dgvPanier.Rows.Count > 0 Then
+            frmTrousseauCreerOuRemplir.ShowDialog()
+        ElseIf dgvResultats.SelectedRows.Count > 0 Then
+            addToPanier()
+            frmTrousseauCreerOuRemplir.ShowDialog()
+        End If
     End Sub
 End Class

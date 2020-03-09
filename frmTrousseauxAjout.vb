@@ -18,8 +18,8 @@ Public Class frmTrousseauxAjout
                 insert_command.ExecuteNonQuery()
                 connecter().Close()
                 Me.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message)
+            Catch ex As MySqlException
+                MsgBox(ex.ErrorCode & " - " & ex.Message)
             End Try
         Else
             Me.Close()
@@ -30,6 +30,9 @@ Public Class frmTrousseauxAjout
         End If
         If frmClefsAjout.IsHandleCreated Then
             frmClefsAjout.RefreshTrousseau(txtName.Text)
+        End If
+        If frmTrousseauCreerOuRemplir.IsHandleCreated Then
+            frmTrousseauCreerOuRemplir.RefreshTrousseau(txtName.Text)
         End If
     End Sub
     Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click

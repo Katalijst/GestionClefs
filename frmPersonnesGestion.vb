@@ -172,6 +172,9 @@ Public Class frmPersonnesGestion
             If frmTableauxGestion.IsHandleCreated Then
                 frmTableauxGestion.RefreshResponsable(txtNom.Text)
             End If
+            If frmTableauxEditer.IsHandleCreated Then
+                frmTableauxEditer.RefreshResponsable(txtNom.Text)
+            End If
             If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
                 frmClefsEmprunterEtAttribuer.LoadPersonnes(txtNom.Text)
             End If

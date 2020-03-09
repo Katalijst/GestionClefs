@@ -144,7 +144,10 @@ Public Class frmPersonnesEditer
             frmPersonnesGestion.RefreshList()
         End If
         If frmTableauxGestion.IsHandleCreated Then
-            frmTableauxGestion.RefreshResponsable()
+            frmTableauxGestion.RefreshResponsable(txtNom.Text)
+        End If
+        If frmTableauxEditer.IsHandleCreated Then
+            frmTableauxEditer.RefreshResponsable(txtNom.Text)
         End If
     End Sub
 End Class

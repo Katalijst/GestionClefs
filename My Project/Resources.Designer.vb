@@ -183,6 +183,16 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property key_1_() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("key(1)", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property key1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("key1", resourceCulture)
@@ -246,6 +256,16 @@ Namespace My.Resources
         Friend ReadOnly Property name() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("name", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property NouveauTrousseaux() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("NouveauTrousseaux", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -326,6 +346,16 @@ Namespace My.Resources
         Friend ReadOnly Property report_symbol() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("report-symbol", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property retirer_clefs() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("retirer_clefs", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

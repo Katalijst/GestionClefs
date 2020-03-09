@@ -53,69 +53,65 @@ Public Class frmTableauxGestion
             connecter().Close()
         End Try
     End Sub
-    Public Sub RefreshResponsable(ByVal Optional name As String = "Empty")
-        Dim cmd As New MySqlCommand
-        Dim dt As New DataTable
-        Dim da As New MySqlDataAdapter
-        Dim sql As String
 
+    Public Sub RefreshResponsable(ByVal Optional name As String = "Empty")
+        Dim dtNom As New DataTable
+        Dim cmd As New MySqlCommand
+        Dim da As New MySqlDataAdapter
+        Dim CmdSql As String = "Select NNom from NomPersonne where NNom <> 'Personne'"
         Try
-            sql = "Select * from NomPersonne"
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = CmdSql
             End With
             da.SelectCommand = cmd
-            da.Fill(dt)
+            da.Fill(dtNom)
 
-            cbResponsable.DataSource = dt
-            cbResponsable.ValueMember = "NNom"
-            cbResponsable.DisplayMember = "NNom"
-            If cbResponsable.Items.Count > 0 Then
-                cbResponsable.SelectedIndex = 0
-            End If
-
+            Dim strCbPersonne As String() = New String(dtNom.Rows.Count) {}
+            Dim i As Integer = 0
+            For Each r As DataRow In dtNom.Rows
+                strCbPersonne(i) = r.Item(0).ToString
+                i += 1
+            Next
+            cbResponsable.DataSource = strCbPersonne
             If name <> "Empty" Then
                 cbResponsable.Text = name
             End If
-
             connecter().Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.Code & " - " & ex.Message)
         End Try
     End Sub
-    Public Sub RefreshBatiment()
+
+    Public Sub RefreshBatiment(ByVal Optional selected As String = "Empty")
+        Dim dtBatiments As New DataTable
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
-        Dim dtBatiment As New DataTable
-        Dim sql As String
-
+        Dim CmdSql As String = "Select BNom From Batiment where BNum <> '0' order by BNom ASC"
         Try
-
-            sql = "Select BNum, BNom From Batiment where BNum <> '0' order by BNom ASC"
-
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = CmdSql
             End With
             da.SelectCommand = cmd
-            da.Fill(dtBatiment)
+            da.Fill(dtBatiments)
 
-            For i As Integer = 0 To dtBatiment.Columns.Count - 1
-                dtBatiment.Columns(i).ColumnName = dtBatiment.Columns(i).ColumnName.ToString().Remove(0, 1)
+            Dim strCbBatiments As String() = New String(dtBatiments.Rows.Count) {}
+            Dim i As Integer = 0
+            For Each r As DataRow In dtBatiments.Rows
+                strCbBatiments(i) = r.Item(0).ToString
+                i += 1
             Next
-            dgvListBatiment.DataSource = dtBatiment
-
-            For i = 0 To dgvListBatiment.ColumnCount - 2
-                dgvListBatiment.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            Next
-            dgvListBatiment.Columns(dgvListBatiment.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            cbBatiments.DataSource = strCbBatiments
+            If selected <> "Empty" Then
+                cbBatiments.Text = selected
+            End If
             connecter().Close()
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.Code & " - " & ex.Message)
         End Try
     End Sub
+
     Private Sub frmGestionPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
@@ -125,10 +121,15 @@ Public Class frmTableauxGestion
         lblPBatiment.Text = strTitlePBatiment & " :"
         lblPResponsable.Text = strTitlePResponsable & " :"
 
+        txtNom.Hint = strTitlePNom
+        cbBatiments.Hint = strTitlePBatiment
+        cbResponsable.Hint = strTitlePResponsable
+
         RefreshList()
         RefreshResponsable()
         RefreshBatiment()
     End Sub
+
     Private Sub dgvResultats_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvListTableau.CellMouseDown
         If e.RowIndex <> -1 AndAlso e.ColumnIndex <> -1 Then
             If e.Button = MouseButtons.Right Then
@@ -206,12 +207,12 @@ Public Class frmTableauxGestion
             End Try
         End If
     End Sub
+
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            Dim intIndexNom As Integer = dgvListBatiment.Columns(strTitlePNom).Index
-            Dim stgBatNom As String = dgvListBatiment.SelectedRows(0).Cells(intIndexNom).Value.ToString()
+            Dim stgBatNom As String = cbBatiments.Text
 
-            Dim insert_command As New MySqlCommand("INSERT INTO
+            Using insert_command As New MySqlCommand("INSERT INTO
                                                               `Position`(
                                                                 `PNom`,
                                                                 `PResponsable`,
@@ -224,17 +225,18 @@ Public Class frmTableauxGestion
                                                                 @batiment
                                                               )
                                                             ", connecter())
-            If txtNom.Text <> "" Then
-                insert_command.Parameters.Add("@nom", MySqlDbType.VarChar).Value = txtNom.Text
-                insert_command.Parameters.Add("@responsable", MySqlDbType.VarChar).Value = cbResponsable.Text
-                insert_command.Parameters.Add("@batiment", MySqlDbType.VarChar).Value = stgBatNom
-            Else
-                MsgBox("Veuillez remplir tout les champs !")
-                Exit Sub
-            End If
+                If txtNom.Text <> "" Then
+                    insert_command.Parameters.Add("@nom", MySqlDbType.VarChar).Value = txtNom.Text
+                    insert_command.Parameters.Add("@responsable", MySqlDbType.VarChar).Value = cbResponsable.Text
+                    insert_command.Parameters.Add("@batiment", MySqlDbType.VarChar).Value = stgBatNom
+                Else
+                    MsgBox("Veuillez remplir tout les champs !")
+                    Exit Sub
+                End If
 
-            insert_command.ExecuteNonQuery()
-            connecter().Close()
+                insert_command.ExecuteNonQuery()
+                connecter().Close()
+            End Using
             If frmClefsAjout.IsHandleCreated Then
                 frmClefsAjout.RefreshTableau(txtNom.Text)
             End If

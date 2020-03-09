@@ -41,7 +41,7 @@
     <PublisherName>Mairie de Coutras</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -494,14 +494,17 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="BlurElementExtension.vb" />
-    <Compile Include="DropShadow.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="EnumerableEx.vb" />
     <Compile Include="frmAbout.Designer.vb">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </Compile>
     <Compile Include="frmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTrousseauCreerOuRemplir.Designer.vb">
+      <DependentUpon>frmTrousseauCreerOuRemplir.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTrousseauCreerOuRemplir.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmUtilisateursAjouter.Designer.vb">
@@ -660,6 +663,9 @@
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmTrousseauCreerOuRemplir.resx">
+      <DependentUpon>frmTrousseauCreerOuRemplir.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmUtilisateursAjouter.resx">
       <DependentUpon>frmUtilisateursAjouter.vb</DependentUpon>
     </EmbeddedResource>
@@ -756,6 +762,9 @@
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
     <Content Include="LogoICO.ico" />
+    <None Include="Resources\retirer_clefs.png" />
+    <None Include="Resources\key%281%29.png" />
+    <None Include="Resources\NouveauTrousseaux.png" />
     <None Include="Resources\rubbish-bin-delete-button1.png" />
     <None Include="Resources\searching-magnifying-glass.png" />
     <None Include="Resources\PRET_CLE.pdf" />

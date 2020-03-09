@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmTrousseauxGestion
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,263 +20,190 @@ Partial Class frmTrousseauxGestion
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTrousseauxGestion))
-        Me.gbListeClefs = New System.Windows.Forms.GroupBox()
-        Me.dgvListClefs = New System.Windows.Forms.DataGridView()
-        Me.gbTrousseau = New System.Windows.Forms.GroupBox()
-        Me.dgvSelTrousseau = New System.Windows.Forms.DataGridView()
-        Me.gbRechercher = New System.Windows.Forms.GroupBox()
-        Me.txtRechercher = New System.Windows.Forms.TextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.lblTrousseauAfficher = New System.Windows.Forms.Label()
-        Me.btnAfficher = New System.Windows.Forms.Button()
-        Me.cbTrousseau = New System.Windows.Forms.ComboBox()
-        Me.btnSupprimerTrousseau = New System.Windows.Forms.Button()
-        Me.btnCreerTrousseau = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.chkKeepOpen = New System.Windows.Forms.CheckBox()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.pbRemSelBatiment = New System.Windows.Forms.PictureBox()
-        Me.pbAddSelBatiment = New System.Windows.Forms.PictureBox()
-        Me.gbListeClefs.SuspendLayout()
-        CType(Me.dgvListClefs, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.gbTrousseau.SuspendLayout()
-        CType(Me.dgvSelTrousseau, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.gbRechercher.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        CType(Me.pbRemSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbAddSelBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cbTrousseaux = New MaterialSkin.Controls.MaterialComboBox()
+        Me.MaterialCard1 = New MaterialSkin.Controls.MaterialCard()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.MaterialLabel1 = New MaterialSkin.Controls.MaterialLabel()
+        Me.dgvClefs = New System.Windows.Forms.DataGridView()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.RetirerDuTrousseauToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnDeleteTrousseau = New MaterialSkin.Controls.MaterialButton()
+        Me.btnCreerTrousseau = New MaterialSkin.Controls.MaterialButton()
+        Me.btnRetirerClefsTrousseau = New MaterialSkin.Controls.MaterialButton()
+        Me.MaterialCard1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvClefs, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'gbListeClefs
+        'cbTrousseaux
         '
-        Me.gbListeClefs.Controls.Add(Me.dgvListClefs)
-        Me.gbListeClefs.Location = New System.Drawing.Point(3, 155)
-        Me.gbListeClefs.Name = "gbListeClefs"
-        Me.gbListeClefs.Size = New System.Drawing.Size(364, 328)
-        Me.gbListeClefs.TabIndex = 17
-        Me.gbListeClefs.TabStop = False
-        Me.gbListeClefs.Text = "Liste des clefs"
+        Me.cbTrousseaux.AutoResize = False
+        Me.cbTrousseaux.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbTrousseaux.Depth = 0
+        Me.cbTrousseaux.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cbTrousseaux.DropDownHeight = 118
+        Me.cbTrousseaux.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTrousseaux.DropDownWidth = 121
+        Me.cbTrousseaux.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cbTrousseaux.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbTrousseaux.FormattingEnabled = True
+        Me.cbTrousseaux.Hint = "Trousseaux"
+        Me.cbTrousseaux.IntegralHeight = False
+        Me.cbTrousseaux.ItemHeight = 29
+        Me.cbTrousseaux.Location = New System.Drawing.Point(12, 72)
+        Me.cbTrousseaux.MaxDropDownItems = 4
+        Me.cbTrousseaux.MouseState = MaterialSkin.MouseState.OUT
+        Me.cbTrousseaux.Name = "cbTrousseaux"
+        Me.cbTrousseaux.Size = New System.Drawing.Size(352, 35)
+        Me.cbTrousseaux.TabIndex = 0
+        Me.cbTrousseaux.UseTallSize = False
         '
-        'dgvListClefs
+        'MaterialCard1
         '
-        Me.dgvListClefs.AllowUserToAddRows = False
-        Me.dgvListClefs.AllowUserToDeleteRows = False
-        Me.dgvListClefs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.MaterialCard1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.MaterialCard1.Controls.Add(Me.PictureBox1)
+        Me.MaterialCard1.Controls.Add(Me.MaterialLabel1)
+        Me.MaterialCard1.Depth = 0
+        Me.MaterialCard1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.MaterialCard1.Location = New System.Drawing.Point(61, 473)
+        Me.MaterialCard1.Margin = New System.Windows.Forms.Padding(14)
+        Me.MaterialCard1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialCard1.Name = "MaterialCard1"
+        Me.MaterialCard1.Padding = New System.Windows.Forms.Padding(14)
+        Me.MaterialCard1.Size = New System.Drawing.Size(352, 67)
+        Me.MaterialCard1.TabIndex = 1
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.GestionClefs.My.Resources.Resources.key_1_
+        Me.PictureBox1.Location = New System.Drawing.Point(279, 27)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(32, 32)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 2
+        Me.PictureBox1.TabStop = False
+        '
+        'MaterialLabel1
+        '
+        Me.MaterialLabel1.Depth = 0
+        Me.MaterialLabel1.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.MaterialLabel1.Location = New System.Drawing.Point(17, 14)
+        Me.MaterialLabel1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialLabel1.Name = "MaterialLabel1"
+        Me.MaterialLabel1.Size = New System.Drawing.Size(318, 45)
+        Me.MaterialLabel1.TabIndex = 0
+        Me.MaterialLabel1.Text = "Pour créer ou remplir un trousseau, remplisser votre panier et cliquer sur"
+        '
+        'dgvClefs
+        '
+        Me.dgvClefs.AllowUserToAddRows = False
+        Me.dgvClefs.AllowUserToDeleteRows = False
+        Me.dgvClefs.AllowUserToOrderColumns = True
+        Me.dgvClefs.AllowUserToResizeRows = False
+        Me.dgvClefs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvListClefs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvListClefs.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.dgvListClefs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvClefs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvClefs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken
+        Me.dgvClefs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.249999!)
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListClefs.DefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvListClefs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvListClefs.Location = New System.Drawing.Point(6, 19)
-        Me.dgvListClefs.MultiSelect = False
-        Me.dgvListClefs.Name = "dgvListClefs"
-        Me.dgvListClefs.ReadOnly = True
-        Me.dgvListClefs.RowHeadersVisible = False
-        Me.dgvListClefs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgvListClefs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvListClefs.Size = New System.Drawing.Size(352, 299)
-        Me.dgvListClefs.TabIndex = 49
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvClefs.DefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvClefs.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.dgvClefs.Location = New System.Drawing.Point(12, 113)
+        Me.dgvClefs.Name = "dgvClefs"
+        Me.dgvClefs.ReadOnly = True
+        Me.dgvClefs.RowHeadersVisible = False
+        Me.dgvClefs.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvClefs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvClefs.Size = New System.Drawing.Size(451, 307)
+        Me.dgvClefs.TabIndex = 147
         '
-        'gbTrousseau
+        'ContextMenuStrip1
         '
-        Me.gbTrousseau.Controls.Add(Me.dgvSelTrousseau)
-        Me.gbTrousseau.Location = New System.Drawing.Point(421, 155)
-        Me.gbTrousseau.Name = "gbTrousseau"
-        Me.gbTrousseau.Size = New System.Drawing.Size(355, 328)
-        Me.gbTrousseau.TabIndex = 18
-        Me.gbTrousseau.TabStop = False
-        Me.gbTrousseau.Text = "Trousseau"
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RetirerDuTrousseauToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(180, 26)
         '
-        'dgvSelTrousseau
+        'RetirerDuTrousseauToolStripMenuItem
         '
-        Me.dgvSelTrousseau.AllowUserToAddRows = False
-        Me.dgvSelTrousseau.AllowUserToDeleteRows = False
-        Me.dgvSelTrousseau.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvSelTrousseau.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvSelTrousseau.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.dgvSelTrousseau.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSelTrousseau.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvSelTrousseau.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvSelTrousseau.Location = New System.Drawing.Point(6, 19)
-        Me.dgvSelTrousseau.MultiSelect = False
-        Me.dgvSelTrousseau.Name = "dgvSelTrousseau"
-        Me.dgvSelTrousseau.ReadOnly = True
-        Me.dgvSelTrousseau.RowHeadersVisible = False
-        Me.dgvSelTrousseau.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgvSelTrousseau.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSelTrousseau.Size = New System.Drawing.Size(341, 303)
-        Me.dgvSelTrousseau.TabIndex = 50
+        Me.RetirerDuTrousseauToolStripMenuItem.Name = "RetirerDuTrousseauToolStripMenuItem"
+        Me.RetirerDuTrousseauToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RetirerDuTrousseauToolStripMenuItem.Text = "Retirer du trousseau"
         '
-        'gbRechercher
+        'btnDeleteTrousseau
         '
-        Me.gbRechercher.Controls.Add(Me.txtRechercher)
-        Me.gbRechercher.Location = New System.Drawing.Point(3, 70)
-        Me.gbRechercher.Name = "gbRechercher"
-        Me.gbRechercher.Size = New System.Drawing.Size(396, 42)
-        Me.gbRechercher.TabIndex = 23
-        Me.gbRechercher.TabStop = False
-        Me.gbRechercher.Text = "Rechercher une clef"
-        '
-        'txtRechercher
-        '
-        Me.txtRechercher.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtRechercher.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtRechercher.Location = New System.Drawing.Point(6, 17)
-        Me.txtRechercher.MaxLength = 255
-        Me.txtRechercher.Name = "txtRechercher"
-        Me.txtRechercher.Size = New System.Drawing.Size(384, 20)
-        Me.txtRechercher.TabIndex = 0
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.lblTrousseauAfficher)
-        Me.GroupBox3.Controls.Add(Me.btnAfficher)
-        Me.GroupBox3.Controls.Add(Me.cbTrousseau)
-        Me.GroupBox3.Controls.Add(Me.btnSupprimerTrousseau)
-        Me.GroupBox3.Location = New System.Drawing.Point(405, 70)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(371, 79)
-        Me.GroupBox3.TabIndex = 24
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Trousseau"
-        '
-        'lblTrousseauAfficher
-        '
-        Me.lblTrousseauAfficher.AutoSize = True
-        Me.lblTrousseauAfficher.Location = New System.Drawing.Point(7, 48)
-        Me.lblTrousseauAfficher.Name = "lblTrousseauAfficher"
-        Me.lblTrousseauAfficher.Size = New System.Drawing.Size(104, 13)
-        Me.lblTrousseauAfficher.TabIndex = 27
-        Me.lblTrousseauAfficher.Text = "Trousseau afficher : "
-        '
-        'btnAfficher
-        '
-        Me.btnAfficher.Location = New System.Drawing.Point(235, 19)
-        Me.btnAfficher.Name = "btnAfficher"
-        Me.btnAfficher.Size = New System.Drawing.Size(101, 23)
-        Me.btnAfficher.TabIndex = 26
-        Me.btnAfficher.Text = "Afficher"
-        Me.btnAfficher.UseVisualStyleBackColor = True
-        '
-        'cbTrousseau
-        '
-        Me.cbTrousseau.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.cbTrousseau.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTrousseau.FormattingEnabled = True
-        Me.cbTrousseau.Location = New System.Drawing.Point(6, 19)
-        Me.cbTrousseau.Name = "cbTrousseau"
-        Me.cbTrousseau.Size = New System.Drawing.Size(223, 21)
-        Me.cbTrousseau.TabIndex = 23
-        '
-        'btnSupprimerTrousseau
-        '
-        Me.btnSupprimerTrousseau.Location = New System.Drawing.Point(235, 47)
-        Me.btnSupprimerTrousseau.Name = "btnSupprimerTrousseau"
-        Me.btnSupprimerTrousseau.Size = New System.Drawing.Size(101, 23)
-        Me.btnSupprimerTrousseau.TabIndex = 25
-        Me.btnSupprimerTrousseau.Text = "Supprimer"
-        Me.btnSupprimerTrousseau.UseVisualStyleBackColor = True
+        Me.btnDeleteTrousseau.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnDeleteTrousseau.Depth = 0
+        Me.btnDeleteTrousseau.DrawShadows = True
+        Me.btnDeleteTrousseau.HighEmphasis = True
+        Me.btnDeleteTrousseau.Icon = Global.GestionClefs.My.Resources.Resources.rubbish_bin_delete_button
+        Me.btnDeleteTrousseau.Location = New System.Drawing.Point(422, 71)
+        Me.btnDeleteTrousseau.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnDeleteTrousseau.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnDeleteTrousseau.Name = "btnDeleteTrousseau"
+        Me.btnDeleteTrousseau.Size = New System.Drawing.Size(44, 36)
+        Me.btnDeleteTrousseau.TabIndex = 148
+        Me.btnDeleteTrousseau.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnDeleteTrousseau.UseAccentColor = False
+        Me.btnDeleteTrousseau.UseVisualStyleBackColor = True
         '
         'btnCreerTrousseau
         '
-        Me.btnCreerTrousseau.Location = New System.Drawing.Point(9, 118)
+        Me.btnCreerTrousseau.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnCreerTrousseau.Depth = 0
+        Me.btnCreerTrousseau.DrawShadows = True
+        Me.btnCreerTrousseau.HighEmphasis = True
+        Me.btnCreerTrousseau.Icon = Global.GestionClefs.My.Resources.Resources.plus
+        Me.btnCreerTrousseau.Location = New System.Drawing.Point(371, 71)
+        Me.btnCreerTrousseau.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnCreerTrousseau.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnCreerTrousseau.Name = "btnCreerTrousseau"
-        Me.btnCreerTrousseau.Size = New System.Drawing.Size(223, 23)
-        Me.btnCreerTrousseau.TabIndex = 24
-        Me.btnCreerTrousseau.Text = "Créer un nouveau trousseau"
+        Me.btnCreerTrousseau.Size = New System.Drawing.Size(44, 36)
+        Me.btnCreerTrousseau.TabIndex = 149
+        Me.btnCreerTrousseau.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnCreerTrousseau.UseAccentColor = False
         Me.btnCreerTrousseau.UseVisualStyleBackColor = True
         '
-        'btnSave
+        'btnRetirerClefsTrousseau
         '
-        Me.btnSave.Location = New System.Drawing.Point(397, 489)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(243, 32)
-        Me.btnSave.TabIndex = 49
-        Me.btnSave.Text = "Ajouter"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'chkKeepOpen
-        '
-        Me.chkKeepOpen.AutoSize = True
-        Me.chkKeepOpen.Location = New System.Drawing.Point(235, 496)
-        Me.chkKeepOpen.Name = "chkKeepOpen"
-        Me.chkKeepOpen.Size = New System.Drawing.Size(144, 17)
-        Me.chkKeepOpen.TabIndex = 51
-        Me.chkKeepOpen.Text = "Garder la fenêtre ouverte"
-        Me.chkKeepOpen.UseVisualStyleBackColor = True
-        '
-        'btnCancel
-        '
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(646, 489)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(130, 32)
-        Me.btnCancel.TabIndex = 50
-        Me.btnCancel.Text = "Annuler"
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'pbRemSelBatiment
-        '
-        Me.pbRemSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pbRemSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.left_arrow_key
-        Me.pbRemSelBatiment.Location = New System.Drawing.Point(373, 329)
-        Me.pbRemSelBatiment.Name = "pbRemSelBatiment"
-        Me.pbRemSelBatiment.Size = New System.Drawing.Size(42, 42)
-        Me.pbRemSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbRemSelBatiment.TabIndex = 53
-        Me.pbRemSelBatiment.TabStop = False
-        '
-        'pbAddSelBatiment
-        '
-        Me.pbAddSelBatiment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pbAddSelBatiment.Image = Global.GestionClefs.My.Resources.Resources.keyboard_right_arrow_button
-        Me.pbAddSelBatiment.Location = New System.Drawing.Point(373, 278)
-        Me.pbAddSelBatiment.Name = "pbAddSelBatiment"
-        Me.pbAddSelBatiment.Size = New System.Drawing.Size(42, 42)
-        Me.pbAddSelBatiment.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pbAddSelBatiment.TabIndex = 52
-        Me.pbAddSelBatiment.TabStop = False
+        Me.btnRetirerClefsTrousseau.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnRetirerClefsTrousseau.Depth = 0
+        Me.btnRetirerClefsTrousseau.DrawShadows = True
+        Me.btnRetirerClefsTrousseau.HighEmphasis = True
+        Me.btnRetirerClefsTrousseau.Icon = Global.GestionClefs.My.Resources.Resources.retirer_clefs
+        Me.btnRetirerClefsTrousseau.Location = New System.Drawing.Point(32, 429)
+        Me.btnRetirerClefsTrousseau.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnRetirerClefsTrousseau.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnRetirerClefsTrousseau.Name = "btnRetirerClefsTrousseau"
+        Me.btnRetirerClefsTrousseau.Size = New System.Drawing.Size(410, 36)
+        Me.btnRetirerClefsTrousseau.TabIndex = 150
+        Me.btnRetirerClefsTrousseau.Text = "Retirer les clefs séléctionnées du trousseau"
+        Me.btnRetirerClefsTrousseau.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined
+        Me.btnRetirerClefsTrousseau.UseAccentColor = False
+        Me.btnRetirerClefsTrousseau.UseVisualStyleBackColor = True
         '
         'frmTrousseauxGestion
         '
-        Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(780, 527)
-        Me.Controls.Add(Me.pbRemSelBatiment)
-        Me.Controls.Add(Me.pbAddSelBatiment)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.chkKeepOpen)
-        Me.Controls.Add(Me.btnCancel)
+        Me.ClientSize = New System.Drawing.Size(475, 551)
+        Me.Controls.Add(Me.btnRetirerClefsTrousseau)
         Me.Controls.Add(Me.btnCreerTrousseau)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.gbRechercher)
-        Me.Controls.Add(Me.gbTrousseau)
-        Me.Controls.Add(Me.gbListeClefs)
+        Me.Controls.Add(Me.btnDeleteTrousseau)
+        Me.Controls.Add(Me.dgvClefs)
+        Me.Controls.Add(Me.MaterialCard1)
+        Me.Controls.Add(Me.cbTrousseaux)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmTrousseauxGestion"
@@ -285,35 +212,23 @@ Partial Class frmTrousseauxGestion
         Me.Sizable = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Gestions des trousseaux"
-        Me.gbListeClefs.ResumeLayout(False)
-        CType(Me.dgvListClefs, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.gbTrousseau.ResumeLayout(False)
-        CType(Me.dgvSelTrousseau, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.gbRechercher.ResumeLayout(False)
-        Me.gbRechercher.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        CType(Me.pbRemSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbAddSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MaterialCard1.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvClefs, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents gbListeClefs As GroupBox
-    Friend WithEvents gbTrousseau As GroupBox
-    Friend WithEvents gbRechercher As GroupBox
-    Friend WithEvents txtRechercher As TextBox
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents btnSupprimerTrousseau As Button
-    Friend WithEvents btnCreerTrousseau As Button
-    Friend WithEvents cbTrousseau As ComboBox
-    Friend WithEvents btnAfficher As Button
-    Friend WithEvents dgvListClefs As DataGridView
-    Friend WithEvents dgvSelTrousseau As DataGridView
-    Friend WithEvents btnSave As Button
-    Friend WithEvents chkKeepOpen As CheckBox
-    Friend WithEvents btnCancel As Button
-    Friend WithEvents lblTrousseauAfficher As Label
-    Friend WithEvents pbRemSelBatiment As PictureBox
-    Friend WithEvents pbAddSelBatiment As PictureBox
+
+    Friend WithEvents cbTrousseaux As MaterialSkin.Controls.MaterialComboBox
+    Friend WithEvents MaterialCard1 As MaterialSkin.Controls.MaterialCard
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents MaterialLabel1 As MaterialSkin.Controls.MaterialLabel
+    Friend WithEvents dgvClefs As DataGridView
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents btnDeleteTrousseau As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents btnCreerTrousseau As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents RetirerDuTrousseauToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnRetirerClefsTrousseau As MaterialSkin.Controls.MaterialButton
 End Class

@@ -80,32 +80,35 @@ Public Class frmTableauxEditer
         End Try
     End Sub
 
-    Public Sub RefreshResponsable()
+    Public Sub RefreshResponsable(ByVal Optional name As String = "Empty")
+        Dim dtNom As New DataTable
         Dim cmd As New MySqlCommand
-        Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
-        Dim sql As String
-
+        Dim CmdSql As String = "Select NNom from NomPersonne where NNom <> 'Personne'"
         Try
-            sql = "Select * from NomPersonne"
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = CmdSql
             End With
             da.SelectCommand = cmd
-            da.Fill(dt)
+            da.Fill(dtNom)
 
-            cbResponsable.DataSource = dt
-            cbResponsable.ValueMember = "NNom"
-            cbResponsable.DisplayMember = "NNom"
-            If cbResponsable.Items.Count > 0 Then
-                cbResponsable.SelectedIndex = 0
+            Dim strCbPersonne As String() = New String(dtNom.Rows.Count) {}
+            Dim i As Integer = 0
+            For Each r As DataRow In dtNom.Rows
+                strCbPersonne(i) = r.Item(0).ToString
+                i += 1
+            Next
+            cbResponsable.DataSource = strCbPersonne
+            If name <> "Empty" Then
+                cbResponsable.Text = name
             End If
             connecter().Close()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+
     Public Sub RefreshBatiment()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter

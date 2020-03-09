@@ -66,6 +66,7 @@ Partial Class frmMain
         Me.btnRefresh = New MaterialSkin.Controls.MaterialButton()
         Me.pbClearPanier = New System.Windows.Forms.PictureBox()
         Me.lblAlertNotif = New System.Windows.Forms.Label()
+        Me.btnPanierVersTrousseau = New MaterialSkin.Controls.MaterialButton()
         Me.MaterialTabControl1.SuspendLayout()
         Me.tabClefs.SuspendLayout()
         Me.tlytClefs.SuspendLayout()
@@ -144,6 +145,7 @@ Partial Class frmMain
         '
         'tlytClefs
         '
+        Me.tlytClefs.BackColor = System.Drawing.Color.Transparent
         Me.tlytClefs.ColumnCount = 3
         Me.tlytClefs.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.tlytClefs.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
@@ -302,6 +304,7 @@ Partial Class frmMain
         Me.tlytGestion.RowCount = 2
         Me.tlytGestion.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tlytGestion.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlytGestion.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlytGestion.Size = New System.Drawing.Size(555, 96)
         Me.tlytGestion.TabIndex = 160
         '
@@ -654,7 +657,7 @@ Partial Class frmMain
         Me.btnRemoveToPanier.DrawShadows = True
         Me.btnRemoveToPanier.HighEmphasis = True
         Me.btnRemoveToPanier.Icon = Global.GestionClefs.My.Resources.Resources.shopping_cart_remove
-        Me.btnRemoveToPanier.Location = New System.Drawing.Point(478, 219)
+        Me.btnRemoveToPanier.Location = New System.Drawing.Point(491, 219)
         Me.btnRemoveToPanier.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnRemoveToPanier.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnRemoveToPanier.Name = "btnRemoveToPanier"
@@ -671,7 +674,7 @@ Partial Class frmMain
         Me.btnAddToPanier.DrawShadows = True
         Me.btnAddToPanier.HighEmphasis = True
         Me.btnAddToPanier.Icon = Global.GestionClefs.My.Resources.Resources.shopping_cart_add
-        Me.btnAddToPanier.Location = New System.Drawing.Point(525, 219)
+        Me.btnAddToPanier.Location = New System.Drawing.Point(538, 219)
         Me.btnAddToPanier.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnAddToPanier.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnAddToPanier.Name = "btnAddToPanier"
@@ -688,7 +691,7 @@ Partial Class frmMain
         Me.btnRefresh.DrawShadows = True
         Me.btnRefresh.HighEmphasis = True
         Me.btnRefresh.Icon = Global.GestionClefs.My.Resources.Resources.refresh_button
-        Me.btnRefresh.Location = New System.Drawing.Point(415, 220)
+        Me.btnRefresh.Location = New System.Drawing.Point(392, 219)
         Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnRefresh.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnRefresh.Name = "btnRefresh"
@@ -722,11 +725,29 @@ Partial Class frmMain
         Me.lblAlertNotif.Text = "1"
         Me.lblAlertNotif.Visible = False
         '
+        'btnPanierVersTrousseau
+        '
+        Me.btnPanierVersTrousseau.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnPanierVersTrousseau.Depth = 0
+        Me.btnPanierVersTrousseau.DrawShadows = True
+        Me.btnPanierVersTrousseau.HighEmphasis = True
+        Me.btnPanierVersTrousseau.Icon = Global.GestionClefs.My.Resources.Resources.key_1_
+        Me.btnPanierVersTrousseau.Location = New System.Drawing.Point(444, 219)
+        Me.btnPanierVersTrousseau.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnPanierVersTrousseau.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnPanierVersTrousseau.Name = "btnPanierVersTrousseau"
+        Me.btnPanierVersTrousseau.Size = New System.Drawing.Size(44, 36)
+        Me.btnPanierVersTrousseau.TabIndex = 161
+        Me.btnPanierVersTrousseau.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnPanierVersTrousseau.UseAccentColor = False
+        Me.btnPanierVersTrousseau.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.Controls.Add(Me.btnPanierVersTrousseau)
         Me.Controls.Add(Me.MaterialTabSelector1)
         Me.Controls.Add(Me.pbClearPanier)
         Me.Controls.Add(Me.lblNbDeClefs)
@@ -788,7 +809,6 @@ Partial Class frmMain
     Friend WithEvents SupprimerToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents btnRemoveToPanier As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnAddToPanier As MaterialSkin.Controls.MaterialButton
-    Friend WithEvents btnLightMode As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnParametres As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnAlertes As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnRefresh As MaterialSkin.Controls.MaterialButton
@@ -803,4 +823,6 @@ Partial Class frmMain
     Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
     Friend WithEvents pbClearPanier As PictureBox
     Friend WithEvents lblAlertNotif As Label
+    Friend WithEvents btnLightMode As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents btnPanierVersTrousseau As MaterialSkin.Controls.MaterialButton
 End Class

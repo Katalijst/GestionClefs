@@ -11,132 +11,150 @@ Public Class frmTrousseauxGestion
         End Get
     End Property
 
-    Public Sub RefreshTrousseau(ByVal Optional name As String = "Empty")
-        Dim cmd As New MySqlCommand
-        Dim dt As New DataTable
-        Dim da As New MySqlDataAdapter
-        Dim sql As String
-
-        Try
-            sql = "Select TNom from Trousseau"
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dt)
-
-            cbTrousseau.DataSource = dt
-            cbTrousseau.ValueMember = "TNom"
-            cbTrousseau.DisplayMember = strTitleTNom
-            If cbTrousseau.Items.Count > 0 Then
-                cbTrousseau.SelectedIndex = 0
-            End If
-            If name <> "Empty" Then
-                cbTrousseau.Text = name
-            End If
-            connecter().Close()
-        Catch ex As MySqlException
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
     Private Sub frmAjoutTrousseau_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
-        FilldgvListClef()
         RefreshTrousseau()
-        FilldgvSelClefs()
-
     End Sub
-    Public Sub FilldgvListClef()
+
+    Public Sub RefreshTrousseau(ByVal Optional selected As String = "Empty")
+        Dim dtTrousseaux As New DataTable
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
-        Dim dtKeyList As New DataTable
-        Dim sql As String
-
+        Dim CmdSql As String = "Select TNom From Trousseau where TNom <> 'Aucun' order by TNom ASC"
         Try
-
-            sql = "Select CID, CNom, CPosition, CBatiment From Clefs Where CTrousseau='Aucun' order by CNom ASC"
-
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = CmdSql
             End With
             da.SelectCommand = cmd
-            da.Fill(dtKeyList)
+            da.Fill(dtTrousseaux)
 
-            dtKeyList.Columns("CID").ColumnName = strTitleCID
-            dtKeyList.Columns("CNom").ColumnName = strTitleCNom
-            dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
-
-            dgvListClefs.DataSource = dtKeyList
-            dgvListClefs.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            dgvListClefs.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-
-            For Each column In dgvListClefs.Columns
-                column.SortMode = DataGridViewColumnSortMode.NotSortable
+            Dim srcTrousseaux As String() = New String(dtTrousseaux.Rows.Count) {}
+            Dim i As Integer = 0
+            For Each r As DataRow In dtTrousseaux.Rows
+                srcTrousseaux(i) = r.Item(0).ToString
+                i += 1
             Next
-
-            connecter().Close()
-
-            If dgvSelTrousseau.Rows.Count = 0 Then
-                FilldgvSelClefs()
+            cbTrousseaux.DataSource = srcTrousseaux
+            If selected <> "Empty" Then
+                cbTrousseaux.Text = selected
             End If
-
-        Catch ex As MySqlException
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
-    Public Sub FilldgvSelClefs()
-        Dim cmd As New MySqlCommand
-        Dim da As New MySqlDataAdapter
-        Dim dtKeyList As New DataTable
-        Dim sql As String
-
-        gbTrousseau.Text = cbTrousseau.Text
-        lblTrousseauAfficher.Text = "Trousseau afficher : " & cbTrousseau.Text
-
-        Try
-
-            sql = "Select CID, CNom, CPosition, CBatiment From Clefs Where CTrousseau='" & cbTrousseau.Text & "'"
-
-            With cmd
-                .Connection = connecter()
-                .CommandText = sql
-            End With
-            da.SelectCommand = cmd
-            da.Fill(dtKeyList)
-
-            dtKeyList.Columns("CID").ColumnName = strTitleCID
-            dtKeyList.Columns("CNom").ColumnName = strTitleCNom
-            dtKeyList.Columns("CPosition").ColumnName = strTitleCPosition
-            dtKeyList.Columns("CBatiment").ColumnName = strTitleCBatiment
-
-            dgvSelTrousseau.DataSource = dtKeyList
-            dgvSelTrousseau.Columns(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            dgvSelTrousseau.Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
-
-            For Each column In dgvSelTrousseau.Columns
-                column.SortMode = DataGridViewColumnSortMode.NotSortable
-            Next
-
             connecter().Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.Code & " - " & ex.Message)
         End Try
+
     End Sub
 
-    Private Sub btnCreerTrousseau_Click(sender As Object, e As EventArgs) Handles btnCreerTrousseau.Click
-        frmTrousseauxAjout.Show()
+    Private Sub cbTrousseaux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTrousseaux.SelectedIndexChanged
+        RefreshTrousseauContent()
     End Sub
 
-    Private Sub btnSupprimerTrousseau_Click(sender As Object, e As EventArgs) Handles btnSupprimerTrousseau.Click
+    Private Sub RetirerDuTrousseauToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RetirerDuTrousseauToolStripMenuItem.Click
+        RetirerClef()
+    End Sub
+
+    Private Sub RefreshTrousseauContent()
+        If cbTrousseaux.SelectedIndex <> -1 Then
+            Dim dtTrousseaux As New DataTable
+            Dim cmd As New MySqlCommand
+            Dim da As New MySqlDataAdapter
+            Dim CmdSql As String = "Select CID, CNom, CPosition, CStatus, CBatiment From Clefs where CTrousseau = @Trousseau"
+            cmd.Parameters.Add("@Trousseau", MySqlDbType.String)
+            Try
+                With cmd
+                    .Parameters("@Trousseau").Value = cbTrousseaux.Text
+                    .Connection = connecter()
+                    .CommandText = CmdSql
+                End With
+                da.SelectCommand = cmd
+                da.Fill(dtTrousseaux)
+
+                dtTrousseaux.Columns("CID").ColumnName = strTitleCID
+                dtTrousseaux.Columns("CNom").ColumnName = strTitleCNom
+                dtTrousseaux.Columns("CPosition").ColumnName = strTitleCPosition
+                dtTrousseaux.Columns("CStatus").ColumnName = strTitleCStatus
+                dtTrousseaux.Columns("CBatiment").ColumnName = strTitleCBatiment
+
+                For Each r As DataRow In dtTrousseaux.Rows
+                    Dim input As String = r.Item(0)
+                    Dim index As Integer = input.LastIndexOf("-")
+                    If index > 0 Then
+                        r.Item(0) = input.Substring(0, index)
+                    End If
+                Next
+
+                dgvClefs.DataSource = dtTrousseaux
+
+                connecter().Close()
+            Catch ex As MySqlException
+                MsgBox(ex.Code & " - " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub RetirerClef()
+        If dgvClefs.SelectedRows.Count > 0 Then
+            'Pop-up (message box):
+            ' Initializes variables to pass to the MessageBox.Show method.
+            Dim Message As String
+            Dim Caption As String
+            If dgvClefs.SelectedRows.Count > 1 Then
+                Message = "Voulez vous vraiment retirer les " & dgvClefs.SelectedRows.Count & " clefs sélectionnées du trousseau " & cbTrousseaux.Text & " ?"
+                Caption = "Supprimer des clefs"
+            Else
+                Message = "Voulez vous vraiment retirer la clef sélectionnée du trousseau " & cbTrousseaux.Text & " ?"
+                Caption = "Supprimer une clef"
+            End If
+            Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
+            Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+
+            Dim Result As DialogResult
+
+            'Displays the MessageBox
+            Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+
+            ' Gets the result of the MessageBox display.
+            'Si l'utilisateur répond oui
+            If Result = System.Windows.Forms.DialogResult.Yes Then
+                Dim cmdUpdateClef As New MySqlCommand
+                cmdUpdateClef.CommandType = CommandType.Text
+                With cmdUpdateClef
+                    .Parameters.Add("@IDClef", MySqlDbType.String)
+                    .Parameters.Add("@Nom", MySqlDbType.VarChar)
+                    .Parameters.Add("@Tableau", MySqlDbType.VarChar)
+                    .Parameters.Add("@Status", MySqlDbType.VarChar)
+                    .Parameters.Add("@Trousseau", MySqlDbType.VarChar)
+                    .Parameters.Add("@OldTrousseauxClef", MySqlDbType.VarChar)
+                End With
+                Try
+                    For Each selRow As DataGridViewRow In dgvClefs.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
+                        With cmdUpdateClef
+                            .Parameters("@IDClef").Value = selRow.Cells(0).Value & "-%"
+                            .Parameters("@Nom").Value = selRow.Cells(1).Value
+                            .Parameters("@Tableau").Value = selRow.Cells(2).Value
+                            .Parameters("@Status").Value = selRow.Cells(3).Value
+                            .Parameters("@Trousseau").Value = "Aucun"
+                            .Parameters("@OldTrousseauxClef").Value = cbTrousseaux.Text
+                            .Connection = connecter()
+                            .CommandText = "UPDATE Clefs SET CTrousseau=@Trousseau WHERE CID=(SELECT * FROM (SELECT CID FROM Clefs where CNom=@Nom AND CStatus=@Status AND CPosition=@Tableau AND CTrousseau=@OldTrousseauxClef AND CID LIKE @IDClef LIMIT 1) TempTable);"
+                            .ExecuteNonQuery()
+                        End With
+                    Next
+                Catch ex As MySqlException
+                    MsgBox(ex.ErrorCode & " - " & ex.Message)
+                End Try
+                frmMain.FillDataSource()
+                RefreshTrousseauContent()
+            End If
+        End If
+    End Sub
+
+    Private Sub btnDeleteTrousseau_Click(sender As Object, e As EventArgs) Handles btnDeleteTrousseau.Click
         ' Initializes variables to pass to the MessageBox.Show method.
-        Dim Message As String = "Voulez vous vraiment supprimer le trousseau """ & cbTrousseau.Text & """ ?"
-        Dim Caption As String = "Supprimer " & cbTrousseau.Text
+        Dim Message As String = "Voulez vous vraiment supprimer le trousseau """ & cbTrousseaux.Text & """ ?"
+        Dim Caption As String = "Supprimer " & cbTrousseaux.Text
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
         Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
 
@@ -152,178 +170,56 @@ Public Class frmTrousseauxGestion
             Dim dt As New DataTable
             Dim da As New MySqlDataAdapter
             Dim sql As String
-
+            cmd.Parameters.Add("@Trousseau", MySqlDbType.VarChar)
             Try
-                sql = "UPDATE Clefs SET CTrousseau='Aucun' WHERE CTrousseau='" & cbTrousseau.Text & "'"
+                sql = "UPDATE Clefs SET CTrousseau='Aucun' WHERE CTrousseau=@Trousseau"
                 With cmd
+                    .Parameters("@Trousseau").Value = cbTrousseaux.Text
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
                 End With
 
-                sql = "DELETE FROM Trousseau WHERE TNom=""" & cbTrousseau.Text & """"
+                sql = "DELETE FROM Trousseau WHERE TNom=@Trousseau"
                 With cmd
+                    .Parameters("@Trousseau").Value = cbTrousseaux.Text
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
                 End With
-                da.SelectCommand = cmd
-
-                da.Fill(dt)
-                cbTrousseau.DataSource = dt
-                cbTrousseau.ValueMember = "TNom"
-                cbTrousseau.DisplayMember = "TNom"
-
                 connecter().Close()
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
             RefreshTrousseau()
-        End If
-    End Sub
-    Private Sub addToSel()
-        If dgvListClefs.SelectedRows.Count > 0 Then
-            For Each selRow As DataGridViewRow In dgvListClefs.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
-                Dim dt2 As New DataTable
-                Dim gv2r As DataRow = dt2.NewRow()
-                'A finir ! Optimisation pour l'envois entre deux dgv
-
-                Dim intSelIndex As Integer = selRow.Index
-                Dim dtListClef As DataTable = CType(dgvListClefs.DataSource, DataTable)
-                Dim dtSelClef As DataTable = CType(dgvSelTrousseau.DataSource, DataTable)
-                Dim drToAdd As DataRow = dtListClef.Rows(intSelIndex)
-                dtSelClef.ImportRow(drToAdd)
-                dtSelClef.AcceptChanges()
-                dtSelClef.DefaultView.Sort = strTitleCBatiment & " ASC"
-                dtSelClef = dtSelClef.DefaultView.ToTable
-                dgvSelTrousseau.DataSource = dtSelClef
-
-                dtListClef.Rows(intSelIndex).Delete()
-                dtListClef.AcceptChanges()
-                dtListClef.DefaultView.Sort = strTitleCBatiment & " ASC"
-                dtListClef = dtListClef.DefaultView.ToTable
-                dgvListClefs.DataSource = dtListClef
-            Next
+            frmMain.FillDataSource()
+            RefreshTrousseauContent()
         End If
     End Sub
 
-    Private Sub removeFromSel()
-        If dgvSelTrousseau.SelectedRows.Count > 0 Then
-            For Each selRow As DataGridViewRow In dgvSelTrousseau.SelectedRows.OfType(Of DataGridViewRow)().ToArray()
-                Dim intSelIndex As Integer = selRow.Index
-                Dim dtListClef As DataTable = CType(dgvListClefs.DataSource, DataTable)
-                Dim dtSelClef As DataTable = CType(dgvSelTrousseau.DataSource, DataTable)
-                Dim drToAdd As DataRow = dtSelClef.Rows(intSelIndex)
-                dtListClef.ImportRow(drToAdd)
-                dtListClef.AcceptChanges()
-                dtListClef.DefaultView.Sort = strTitleCBatiment & " ASC"
-                dtListClef = dtListClef.DefaultView.ToTable
-                dgvListClefs.DataSource = dtListClef
+    Private Sub btnCreerTrousseau_Click(sender As Object, e As EventArgs) Handles btnCreerTrousseau.Click
+        frmTrousseauxAjout.ShowDialog()
+    End Sub
 
-                dtSelClef.Rows(intSelIndex).Delete()
-                dtSelClef.AcceptChanges()
-                dtSelClef.DefaultView.Sort = strTitleCBatiment & " ASC"
-                dtSelClef = dtSelClef.DefaultView.ToTable
-                dgvSelTrousseau.DataSource = dtSelClef
-            Next
+    Private Sub btnRetirerClefsTrousseau_Click(sender As Object, e As EventArgs) Handles btnRetirerClefsTrousseau.Click
+        RetirerClef()
+    End Sub
+
+    Private Sub dgvResultats_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvClefs.CellMouseDown
+        '--- Evenement de clic droit sur la DataGridView ---
+        'Vérification si le clic a été fait sur une cellule
+        If e.RowIndex <> -1 AndAlso e.ColumnIndex <> -1 Then
+            'Vérification du type de clic
+            If e.Button = MouseButtons.Right Then
+                'Selection d'un row si se n'est pas déjà fait
+                Dim clickedRow As DataGridViewRow = (TryCast(sender, DataGridView)).Rows(e.RowIndex)
+                If Not clickedRow.Selected Then dgvClefs.CurrentCell = clickedRow.Cells(e.ColumnIndex)
+                'récupération de la position du clic
+                Dim mousePosition = dgvClefs.PointToClient(Cursor.Position)
+                'affichage du menu pour editer, supprimer...
+                ContextMenuStrip1.Show(dgvClefs, mousePosition)
+            End If
         End If
     End Sub
 
-    Private Sub dgvListBatiment_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListClefs.CellDoubleClick
-        addToSel()
-    End Sub
-    Private Sub dgvSelBatiment_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSelTrousseau.CellDoubleClick
-        removeFromSel()
-    End Sub
-
-    Public Sub Rechercher()
-        Dim searchValue As String = txtRechercher.Text
-
-        Try
-            For i = 0 To dgvListClefs.RowCount - 1
-                If dgvListClefs.Rows(i).Cells(1).Value.ToString.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
-                    dgvListClefs.Rows(i).Selected = True
-                    dgvListClefs.FirstDisplayedScrollingRowIndex = i
-                    Exit For
-                End If
-            Next
-        Catch exc As Exception
-            MessageBox.Show(exc.Message)
-        End Try
-    End Sub
-
-    Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
-        Rechercher()
-    End Sub
-
-    Private Sub btnAfficher_Click(sender As Object, e As EventArgs) Handles btnAfficher.Click
-        FilldgvSelClefs()
-    End Sub
-
-    Private Sub cmbTrousseauListe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTrousseau.SelectedIndexChanged
-        FilldgvSelClefs()
-    End Sub
-
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim dtSelTrousseau As DataTable = CType(dgvSelTrousseau.DataSource, DataTable)
-        Dim dtListClefs As DataTable = CType(dgvListClefs.DataSource, DataTable)
-
-        If dtSelTrousseau.Rows.Count > 0 Then
-            For Each r In dtSelTrousseau.Rows
-                Dim stgKeyFromTrousseau As String = r.item(strTitleCID).ToString
-                Dim cmd As New MySqlCommand
-                Dim dt As New DataTable
-                Dim da As New MySqlDataAdapter
-                Dim sql As String = "Update Clefs Set CTrousseau='" & gbTrousseau.Text & "' Where CID='" & stgKeyFromTrousseau & "'"
-
-                Try
-                    With cmd
-                        .Connection = connecter()
-                        .CommandText = sql
-                        .ExecuteNonQuery()
-                    End With
-                    connecter().Close()
-
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
-            Next
-        End If
-        If dtListClefs.Rows.Count > 0 Then
-            For Each r In dtListClefs.Rows
-                Dim stgKeyFromTrousseau As String = r.item(strTitleCID).ToString
-                Dim cmd As New MySqlCommand
-                Dim dt As New DataTable
-                Dim da As New MySqlDataAdapter
-                Dim sql As String = "Update Clefs Set CTrousseau='Aucun' Where CID='" & stgKeyFromTrousseau & "'"
-
-                Try
-                    With cmd
-                        .Connection = connecter()
-                        .CommandText = sql
-                        .ExecuteNonQuery()
-                    End With
-                    connecter().Close()
-
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
-            Next
-        End If
-        If chkKeepOpen.Checked = False Then
-            Me.Close()
-        End If
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Close()
-    End Sub
-
-    Private Sub pbAddSelBatiment_Click(sender As Object, e As EventArgs) Handles pbAddSelBatiment.Click
-        addToSel()
-    End Sub
-
-    Private Sub pbRemSelBatiment_Click(sender As Object, e As EventArgs) Handles pbRemSelBatiment.Click
-        removeFromSel()
-    End Sub
 End Class
