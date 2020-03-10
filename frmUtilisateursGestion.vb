@@ -27,7 +27,7 @@ Public Class frmUtilisateursGestion
 
         Try
 
-            sql = "Select LUserName, LUserType From Login where LUserName<>""" & userName & """ order by LUserName ASC"
+            sql = "Select LUserName, LUserType From Login where LUserName<>""" & GlobalUserName & """ order by LUserName ASC"
 
             With cmd
                 .Connection = connecter()

@@ -96,7 +96,7 @@ Public Class frmConnexion
                     Cursor = Cursors.Default
                 Else
                     dt.Reset()
-                    sql = "Select LUserType FROM Login WHERE LCipher=""" & cipherText & """"
+                    sql = "Select LUserType,LUserName,LServices FROM Login WHERE LCipher=""" & cipherText & """"
                     With cmd
                         .Connection = connecter()
                         .CommandText = sql
@@ -104,28 +104,19 @@ Public Class frmConnexion
                     da.SelectCommand = cmd
                     da.Fill(dt)
                     If dt.Rows.Count > 0 Then
-                        userType = dt.Rows(0)(0).ToString
+                        GlobalUserType = dt.Rows(0).Item(0).ToString
+                        GlobalUserName = dt.Rows(0).Item(2).ToString
+                        GlobalServices = dt.Rows(0).Item(3).ToString
                     End If
-                    dt.Reset()
-                    sql = "Select LUserName FROM Login WHERE LCipher=""" & cipherText & """"
-                    With cmd
-                        .Connection = connecter()
-                        .CommandText = sql
-                    End With
-                    da.SelectCommand = cmd
-                    da.Fill(dt)
-                    If dt.Rows.Count > 0 Then
-                        userName = dt.Rows(0)(0).ToString
-                    End If
-                    userID = mtxtID.Text
+                    GlobalUserID = mtxtID.Text
                     connecter().Close()
                     Me.Hide()
                     frmMain.Show()
                 End If
             End If
-        Catch ex As Exception
+        Catch ex As MySqlException
             Me.Show()
-            MsgBox(ex.Message)
+            MsgBox(ex.Number & " - " & ex.Message)
         End Try
 
     End Sub

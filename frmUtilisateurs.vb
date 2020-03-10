@@ -17,11 +17,11 @@ Public Class frmUtilisateursPassword
 
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-        txtID.Text = userID
+        txtID.Text = GlobalUserID
         txtOldPassword.SetWaterMark("Mot de passe actuel")
         txtNewPassword.SetWaterMark("Nouveau mot de passe")
         txtNewPasswordConfirm.SetWaterMark("Confimer le nouveau mot de passe")
-        If userType <> "Administrateur" Then
+        If GlobalUserType <> "Administrateur" Then
             btnAddUser.Enabled = False
             btnUserManager.Enabled = False
         End If
@@ -75,7 +75,7 @@ Public Class frmUtilisateursPassword
 
                     Dim insert_command As New MySqlCommand("INSERT INTO `Login`(`LCipher`,`LUserType`) VALUES (@cipher,@UserType)", connecter())
                     insert_command.Parameters.Add("@cipher", MySqlDbType.VarChar).Value = newCipherText
-                    insert_command.Parameters.Add("@UserType", MySqlDbType.VarChar).Value = userType
+                    insert_command.Parameters.Add("@UserType", MySqlDbType.VarChar).Value = GlobalUserType
                     insert_command.ExecuteNonQuery()
                     connecter().Close()
 

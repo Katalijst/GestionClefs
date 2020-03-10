@@ -79,7 +79,7 @@ Public Class frmMain
         'Sub d'actualisation et de recherche (Ctrl + clic sur le nom pour y accèder rapidement)
         'FillData2()
         'Désactivation des fonctions administrateur
-        If userType <> "Administrateur" Then
+        If GlobalUserType <> "Administrateur" Then
             btnAddKey.Enabled = False
             btnTrousseaux.Enabled = False
             btnBatiments.Enabled = False

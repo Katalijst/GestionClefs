@@ -15,7 +15,7 @@ Public Class frmPersonnesGestion
         SkinManager.AddFormToManage(Me)
         RefreshFonction()
         RefreshList()
-        If userType <> "Administrateur" Then
+        If GlobalUserType <> "Administrateur" Then
             btnDelType.Enabled = False
             SupprimerToolStripMenuItem.Enabled = False
         End If

@@ -17,7 +17,7 @@ Public Class frmUtilisateursAjouter
         txtID.SetWaterMark("Identifiant")
         txtPassword.SetWaterMark("Mot de passe")
         txtPasswordConfirm.SetWaterMark("Confimer le nouveau mot de passe")
-        If userID = "" Then
+        If GlobalUserID = "" Then
             cbUserType.Text = "Administrateur"
             cbUserType.Enabled = False
         Else

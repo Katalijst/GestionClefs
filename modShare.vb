@@ -1,8 +1,9 @@
 ﻿'Module pour les variable partagées sur tout le logiciel
 Module modShare
-    Public userType As String
-    Public userID As String
-    Public userName As String
+    Public GlobalUserType As String
+    Public GlobalUserID As String
+    Public GlobalUserName As String
+    Public GlobalServices As String
     'Table Clefs
     Public strTitleCID As String = "N° de Clef"
     Public strTitleCNom As String = "Accès"

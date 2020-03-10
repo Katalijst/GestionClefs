@@ -11,7 +11,7 @@ Public Class frmParametres
     End Property
 
     Private Sub frmParametres_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If userType <> "Administrateur" Then
+        If GlobalUserType <> "Administrateur" Then
             btnGestionUtilisateurs.Enabled = False
             btnMySQL.Enabled = False
         End If
