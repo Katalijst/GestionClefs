@@ -427,7 +427,7 @@ Public Class frmClefsAjout
         Dim sql As String
 
         Try
-            sql = "Select * from Position"
+            sql = "Select * from Position where PNom <> 'Aucun'"
             With cmd
                 .Connection = connecter()
                 .CommandText = sql

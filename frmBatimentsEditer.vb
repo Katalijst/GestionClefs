@@ -92,8 +92,14 @@ Public Class frmBatimentsEditer
                 MsgBox("Veuillez remplir tout les champs !")
                 Exit Sub
             End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            Me.Close()
+            If ex.Number = 1062 Then
+                MsgBox("Un batiment existe déjà avec cette dénomination ou ce numéro.", MsgBoxStyle.Critical, "Le batiment existe déjà !")
+            Else
+                MsgBox(ex.Number & " - " & ex.Message)
+            End If
+            Exit Sub
         End Try
         If frmPersonnesGestion.IsHandleCreated Then
             frmPersonnesGestion.RefreshList()

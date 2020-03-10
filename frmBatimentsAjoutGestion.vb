@@ -171,6 +171,14 @@ Public Class frmBatimentsAjoutGestion
             End If
 
             insert_command.ExecuteNonQuery()
+        Catch ex As MySqlException
+            If ex.Number = 1062 Then
+                MsgBox("Un batiment existe déjà avec cette dénomination ou ce numéro.", MsgBoxStyle.Critical, "Le batiment existe déjà !")
+            Else
+                MsgBox(ex.Number & " - " & ex.Message)
+                Exit Sub
+            End If
+        Finally
             connecter().Close()
             If frmClefsAjout.IsHandleCreated Then
                 frmClefsAjout.RefreshBatiment()
@@ -180,8 +188,6 @@ Public Class frmBatimentsAjoutGestion
             Else
                 RefreshList()
             End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
         End Try
     End Sub
 

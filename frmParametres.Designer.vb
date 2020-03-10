@@ -22,6 +22,7 @@ Partial Class frmParametres
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmParametres))
         Me.swtDarkMode = New MaterialSkin.Controls.MaterialSwitch()
         Me.swtAlertPopUp = New MaterialSkin.Controls.MaterialSwitch()
         Me.btnOK = New MaterialSkin.Controls.MaterialButton()
@@ -167,6 +168,8 @@ Partial Class frmParametres
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.btnAbout)
         Me.Controls.Add(Me.btnMySQL)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "frmParametres"
         Me.Sizable = False
         Me.Text = "Paramètres"

@@ -18,7 +18,7 @@ Public Class frmTableauxGestion
 
         Try
 
-            sql = "Select * From Position "
+            sql = "Select * From Position WHERE PNom <> 'Aucun'"
 
             With cmd
                 .Connection = connecter()
@@ -170,12 +170,11 @@ Public Class frmTableauxGestion
         frmTableauxEditer.ShowDialog()
     End Sub
 
-    Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
-        Dim intIndexNom As Integer = dgvListTableau.Columns(strTitlePNom).Index
-        Dim stgToDelete As String = dgvListTableau.SelectedRows(0).Cells(intIndexNom).Value.ToString()
+    Private Sub SupprimerTableau()
+        Dim TableauASupprimer As String = dgvListTableau.SelectedRows(0).Cells(strTitlePNom).Value.ToString
         ' Initializes variables to pass to the MessageBox.Show method.
-        Dim Message As String = "Voulez vous vraiment supprimer """ & stgToDelete & """ ?"
-        Dim Caption As String = "Supprimer " & stgToDelete
+        Dim Message As String = "Voulez vous vraiment supprimer le tableau """ & TableauASupprimer & """ ?" & Environment.NewLine & "Cela retirera toutes les clefs du tableau sans les supprimer."
+        Dim Caption As String = "Supprimer " & TableauASupprimer
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
         Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
 
@@ -191,27 +190,42 @@ Public Class frmTableauxGestion
             Dim dt As New DataTable
             Dim da As New MySqlDataAdapter
             Dim sql As String
-
+            cmd.Parameters.Add("@Tableau", MySqlDbType.VarChar)
             Try
-                sql = "DELETE FROM Position WHERE PNom=""" & stgToDelete & """"
+                sql = "UPDATE Clefs SET CPosition='Aucun' WHERE CPosition=@Tableau"
                 With cmd
+                    .Parameters("@Tableau").Value = TableauASupprimer
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
                 End With
-                da.SelectCommand = cmd
-                connecter().Close()
-                RefreshList()
-            Catch ex As Exception
+
+                sql = "DELETE FROM Position WHERE PNom=@Tableau"
+                With cmd
+                    .Parameters("@Tableau").Value = TableauASupprimer
+                    .Connection = connecter()
+                    .CommandText = sql
+                    .ExecuteNonQuery()
+                End With
+            Catch ex As MySqlException
                 MsgBox(ex.Message)
+                connecter().Close()
+                Exit Sub
+            Finally
+                connecter.close
+                frmMain.FillDataSource()
             End Try
+            RefreshList()
         End If
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Try
-            Dim stgBatNom As String = cbBatiments.Text
+    Private Sub SupprimerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SupprimerToolStripMenuItem.Click
+        SupprimerTableau()
+    End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim stgBatNom As String = cbBatiments.Text
+        Try
             Using insert_command As New MySqlCommand("INSERT INTO
                                                               `Position`(
                                                                 `PNom`,
@@ -225,7 +239,7 @@ Public Class frmTableauxGestion
                                                                 @batiment
                                                               )
                                                             ", connecter())
-                If txtNom.Text <> "" Then
+                If txtNom.Text.Replace(" ", "") <> "" Then
                     insert_command.Parameters.Add("@nom", MySqlDbType.VarChar).Value = txtNom.Text
                     insert_command.Parameters.Add("@responsable", MySqlDbType.VarChar).Value = cbResponsable.Text
                     insert_command.Parameters.Add("@batiment", MySqlDbType.VarChar).Value = stgBatNom
@@ -233,21 +247,29 @@ Public Class frmTableauxGestion
                     MsgBox("Veuillez remplir tout les champs !")
                     Exit Sub
                 End If
-
                 insert_command.ExecuteNonQuery()
-                connecter().Close()
             End Using
-            If frmClefsAjout.IsHandleCreated Then
-                frmClefsAjout.RefreshTableau(txtNom.Text)
-            End If
-            If chkKeepOpen.Checked = False Then
-                Me.Close()
+
+        Catch ex As MySqlException
+            If ex.Number = 1062 Then
+                MsgBox("Un tableau existe déjà avec cette dénomination.", MsgBoxStyle.Critical, "Tableau existant")
             Else
-                RefreshList()
+                MsgBox(ex.Number & " - " & ex.Message)
             End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
+            connecter().Close()
+            Exit Sub
+        Finally
+            connecter().Close()
         End Try
+
+        If frmClefsAjout.IsHandleCreated Then
+            frmClefsAjout.RefreshTableau(txtNom.Text)
+        End If
+        If chkKeepOpen.Checked = False Then
+            Me.Close()
+        Else
+            RefreshList()
+        End If
     End Sub
 
     Private Sub frmGestionPosition_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed

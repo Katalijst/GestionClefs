@@ -295,6 +295,7 @@ Partial Class frmTableauxGestion
         '
         'TabAjouter
         '
+        Me.TabAjouter.BackColor = System.Drawing.Color.Transparent
         Me.TabAjouter.Controls.Add(Me.MaterialDivider1)
         Me.TabAjouter.Controls.Add(Me.lblPResponsable)
         Me.TabAjouter.Controls.Add(Me.cbBatiments)
@@ -312,7 +313,6 @@ Partial Class frmTableauxGestion
         Me.TabAjouter.Size = New System.Drawing.Size(428, 319)
         Me.TabAjouter.TabIndex = 0
         Me.TabAjouter.Text = "Ajouter"
-        Me.TabAjouter.UseVisualStyleBackColor = True
         '
         'MaterialDivider1
         '

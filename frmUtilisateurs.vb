@@ -47,8 +47,9 @@ Public Class frmUtilisateursPassword
                 Dim da As New MySqlDataAdapter
                 Dim sql As String
 
-                sql = "Select LCipher FROM Login WHERE LCipher=""" & oldCipherText & """"
+                sql = "Select LCipher FROM Login WHERE LCipher=@cipher"
                 With cmd
+                    .Parameters.Add("@cipher", MySqlDbType.VarChar).Value = oldCipherText
                     .Connection = connecter()
                     .CommandText = sql
                 End With
@@ -64,8 +65,9 @@ Public Class frmUtilisateursPassword
                     Dim newCipherText As String = newWrapper.EncryptData(stgID)
 
                     dt.Reset()
-                    sql = "DELETE FROM Login WHERE LCipher='" & oldCipherText & "'"
+                    sql = "DELETE FROM Login WHERE LCipher=@cipher"
                     With cmd
+                        .Parameters.Add("@cipher", MySqlDbType.VarChar).Value = oldCipherText
                         .Connection = connecter()
                         .CommandText = sql
                         .ExecuteNonQuery()

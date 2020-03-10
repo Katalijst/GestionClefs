@@ -66,7 +66,7 @@ Public Class frmTrousseauCreerOuRemplir
         If chkAjouter.Checked = True Then
             If cbTrousseaux.SelectedIndex < 0 Then Exit Sub Else Ajouter()
         ElseIf chkCreer.Checked = True Then
-            If txtNomTrousseau.Text.Replace(" ", "") <> "" Then Exit Sub Else CreerTrousseau()
+            If txtNomTrousseau.Text.Replace(" ", "") <> "" Then CreerTrousseau() Else Exit Sub
         End If
     End Sub
     Private Sub Ajouter()
@@ -106,7 +106,7 @@ Public Class frmTrousseauCreerOuRemplir
                     End If
                 Next
             Catch ex As MySqlException
-                MsgBox(ex.ErrorCode & " - " & ex.Message)
+                MsgBox(ex.Code & " - " & ex.Message)
             End Try
             frmMain.FillDataSource()
         End If
@@ -125,18 +125,24 @@ Public Class frmTrousseauCreerOuRemplir
     End Sub
 
     Private Sub CreerTrousseau()
-        If txtNomTrousseau.Text <> "" And txtNomTrousseau.Text <> "Aucun" Then
+        If txtNomTrousseau.Text.Replace(" ", "") <> "" And txtNomTrousseau.Text.Replace(" ", "") <> "Aucun" Then
             Try
                 Dim insert_command As New MySqlCommand("INSERT INTO `Trousseau`(`TNom`) VALUES (@name)", connecter())
                 insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtNomTrousseau.Text
                 insert_command.ExecuteNonQuery()
-                connecter().Close()
-                Me.Close()
             Catch ex As MySqlException
-                MsgBox(ex.ErrorCode & " - " & ex.Message)
+                If ex.Number = 1062 Then
+                    MsgBox("Un trousseau existe déjà avec ce nom.", MsgBoxStyle.Critical, "Trousseau existant")
+                Else
+                    MsgBox(ex.Number & " - " & ex.Message)
+                    Exit Sub
+                End If
+            Finally
+                connecter().Close()
             End Try
         Else
-            Me.Close()
+            MsgBox("Le nom du trousseau entré n'est pas valide, veuillez le changer.", MsgBoxStyle.Critical, "Nom de trousseau incorrect")
+            Exit Sub
         End If
 
         If frmTrousseauxGestion.IsHandleCreated Then
@@ -145,6 +151,7 @@ Public Class frmTrousseauCreerOuRemplir
         If frmClefsAjout.IsHandleCreated Then
             frmClefsAjout.RefreshTrousseau(txtNomTrousseau.Text)
         End If
+
         Ajouter()
     End Sub
 

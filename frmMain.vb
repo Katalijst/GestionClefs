@@ -176,6 +176,7 @@ Public Class frmMain
         Dim da As New MySqlDataAdapter
         Dim dtKeyListByOwner As DataTable = New DataTable()
         Dim dtEmpty As DataTable = New DataTable()
+        Dim dtAmount As DataTable = New DataTable()
         Dim sql As String
 
         dtKeyListSansGBat.Reset()
@@ -186,6 +187,18 @@ Public Class frmMain
         dtOwner.Reset()
 
         Try
+            sql = "SELECT COUNT(CID) FROM Clefs "
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtAmount)
+            If dtAmount.Rows.Count > 0 Then
+                intKeyAmount = dtAmount.Rows(0).Item(0)
+            End If
+
             sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment <> 'Groupe de Batiments'"
             With cmd
                 .Connection = connecter()
@@ -256,8 +269,8 @@ Public Class frmMain
             dgvPanier.DataSource = srcPanier
             dgvPanier.Columns("Quantité").Visible = False
             connecter().Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.Number & " - " & ex.Message)
         Finally
             Rechercher()
         End Try
@@ -301,7 +314,6 @@ Public Class frmMain
 
         dtResultats.Clear()
         dtResultats = dtTempDistinct.Copy
-        intKeyAmount = dtResultats.Rows.Count
         dtResultats.Columns.Add("Quantité")
 
         For Each r As DataRow In dtResultats.Rows
@@ -641,7 +653,7 @@ Public Class frmMain
                                         dtPanier.AcceptChanges()
                                     End If
                                 Next
-                            Else
+                            ElseIf Result = DialogResult.No Then
                                 listADetacher.Add(selRow.Cells(strTitleCTrousseau).Value & selRow.Cells(strTitleCID).Value)
                                 If selRow.Cells(strTitleCStatus).Value = "Disponible" Then
                                     If selRow.Index >= 0 Then
@@ -651,6 +663,8 @@ Public Class frmMain
                                         dtPanier.AcceptChanges()
                                     End If
                                 End If
+                            Else
+                                Exit Sub
                             End If
                         Else
                             If selRow.Cells(strTitleCStatus).Value = "Disponible" Then

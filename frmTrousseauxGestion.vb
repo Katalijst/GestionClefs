@@ -153,7 +153,7 @@ Public Class frmTrousseauxGestion
 
     Private Sub btnDeleteTrousseau_Click(sender As Object, e As EventArgs) Handles btnDeleteTrousseau.Click
         ' Initializes variables to pass to the MessageBox.Show method.
-        Dim Message As String = "Voulez vous vraiment supprimer le trousseau """ & cbTrousseaux.Text & """ ?"
+        Dim Message As String = "Voulez vous vraiment supprimer le trousseau """ & cbTrousseaux.Text & """ ?" & Environment.NewLine & "Cela retirera toutes les clefs du trousseau sans les supprimer."
         Dim Caption As String = "Supprimer " & cbTrousseaux.Text
         Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
         Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning

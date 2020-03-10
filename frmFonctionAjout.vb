@@ -12,18 +12,25 @@ Public Class frmFonctionAjout
     End Property
 
     Private Sub valider()
-        If txtType.Text <> "" Then
+        If txtType.Text.Replace(" ", "") <> "" Then
             Try
                 Dim insert_command As New MySqlCommand("INSERT INTO `Genre`(`GGenre`) VALUES (@name)", connecter())
                 insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtType.Text
                 insert_command.ExecuteNonQuery()
+            Catch ex As MySqlException
+                If ex.Number = 1062 Then
+                    MsgBox("Une fonction avec ce nom existe déjà.", MsgBoxStyle.Critical, "Fonction existante")
+                Else
+                    MsgBox(ex.Number & " - " & ex.Message)
+                End If
                 connecter().Close()
-                Me.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message)
+                Exit Sub
+            Finally
+                connecter().Close()
             End Try
         Else
-            Me.Close()
+            MsgBox("Le nom de la fonction n'est pas correct.", MsgBoxStyle.Critical, "Nom de fonction incorrect")
+            Exit Sub
         End If
 
         If frmPersonnesGestion.IsHandleCreated Then
@@ -32,6 +39,8 @@ Public Class frmFonctionAjout
         If frmPersonnesEditer.IsHandleCreated Then
             frmPersonnesEditer.RefreshGenre()
         End If
+
+        Me.Close()
     End Sub
     Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click
         valider()

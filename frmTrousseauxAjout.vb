@@ -11,18 +11,25 @@ Public Class frmTrousseauxAjout
     End Property
 
     Private Sub Valider()
-        If txtName.Text <> "" And txtName.Text <> "Aucun" Then
+        If txtName.Text.Replace(" ", "") <> "" And txtName.Text.Replace(" ", "") <> "Aucun" Then
             Try
                 Dim insert_command As New MySqlCommand("INSERT INTO `Trousseau`(`TNom`) VALUES (@name)", connecter())
                 insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtName.Text
                 insert_command.ExecuteNonQuery()
-                connecter().Close()
-                Me.Close()
             Catch ex As MySqlException
-                MsgBox(ex.ErrorCode & " - " & ex.Message)
+                If ex.Number = 1062 Then
+                    MsgBox("Un trousseau existe déjà avec ce nom.", MsgBoxStyle.Critical, "Trousseau existant")
+                Else
+                    MsgBox(ex.Number & " - " & ex.Message)
+                End If
+                connecter().Close()
+                Exit Sub
+            Finally
+                connecter().Close()
             End Try
         Else
-            Me.Close()
+            MsgBox("Le nom du trousseau entré n'est pas valide, veuillez le changer.", MsgBoxStyle.Critical, "Nom de trousseau incorrect")
+            Exit Sub
         End If
 
         If frmTrousseauxGestion.IsHandleCreated Then
@@ -34,6 +41,7 @@ Public Class frmTrousseauxAjout
         If frmTrousseauCreerOuRemplir.IsHandleCreated Then
             frmTrousseauCreerOuRemplir.RefreshTrousseau(txtName.Text)
         End If
+        Me.Close()
     End Sub
     Private Sub btnValider_Click(sender As Object, e As EventArgs) Handles btnValider.Click
         Valider()

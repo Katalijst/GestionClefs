@@ -122,23 +122,32 @@ Public Class frmPersonnesEditer
         Dim sql As String
 
         Try
-            If txtNom.Text <> "" And txtTel.Text <> "" Then
+            If txtNom.Text.Replace(" ", "") <> "" And txtTel.Text.Replace(" ", "") <> "" Then
                 sql = "UPDATE NomPersonne SET NNom = '" & txtNom.Text & "', NGenre = '" & cbType.Text & "', NTelephone = '" & txtTel.Text & "', NAutre = '" & txtAutre.Text & "' WHERE NNom = '" & stgPersonne & "'"
                 With cmd
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
                 End With
-                connecter().Close()
-                frmMain.FillDataSource()
-                Me.Close()
             Else
-                MsgBox("Veuillez remplir tout les champs !")
+                MsgBox("Veuillez remplir tout les champs !", MsgBoxStyle.Critical)
                 Exit Sub
             End If
         Catch ex As MySqlException
-            MsgBox(ex.ErrorCode & " - " & ex.Message)
+            If ex.Number = 1062 Then
+                MsgBox("Une personne existe déjà avec ce nom.", MsgBoxStyle.Critical, "Personne existante")
+            Else
+                MsgBox(ex.Number & " - " & ex.Message)
+            End If
+            connecter().Close()
+            Exit Sub
+        Finally
+            connecter().Close()
         End Try
+
+        If frmMain.IsHandleCreated Then
+            frmMain.FillDataSource()
+        End If
         If frmPersonnesGestion.IsHandleCreated Then
             frmPersonnesGestion.RefreshList()
         End If
@@ -148,5 +157,6 @@ Public Class frmPersonnesEditer
         If frmTableauxEditer.IsHandleCreated Then
             frmTableauxEditer.RefreshResponsable(txtNom.Text)
         End If
+        Me.Close()
     End Sub
 End Class

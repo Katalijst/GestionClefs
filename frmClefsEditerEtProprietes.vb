@@ -38,10 +38,7 @@ Public Class frmClefsEditerEtProprietes
         txtNom.Hint = strTitleCNom
         cmbLoc.Hint = strTitleCPosition
         'txtStatus.Hint = strTitleCStatus
-        If frmMain.blnProperties = False Then
-            AddHandler btnSave.Click, AddressOf Edit_btnSave_Click
-        Else
-            AddHandler btnSave.Click, AddressOf Properties_btnSave_Click
+        If frmMain.blnProperties = True Then
             btnSave.Text = "OK"
             swtEditOneKey.Visible = False
             txtID.Enabled = False
@@ -236,9 +233,9 @@ Public Class frmClefsEditerEtProprietes
         Me.Dispose()
     End Sub
 
-    Private Sub Edit_btnSave_Click(sender As Object, e As EventArgs)
+    Private Sub Edit_btnSave_Click()
         Try
-            If cmbStatus.SelectedText = "Disponible" Then
+            If cmbStatus.Text = "Disponible" Then
                 If txtQuantity.Text = "0" Or txtQuantity.Text = "" Then
                     MsgBox("La quantité ne peut être nul !")
                     Exit Sub
@@ -273,195 +270,195 @@ Public Class frmClefsEditerEtProprietes
                         .Parameters.Add("@CanonExte", MySqlDbType.Int16)
                         .Parameters.Add("@CanonOpt", MySqlDbType.VarChar)
                         .CommandText = "INSERT INTO InfosTechniques(IDClef, RefOrg, CanonInte, CanonExte, CanonOpt) VALUES (@IDClef,@RefOrg,@CanonInte,@CanonExte,@CanonOpt)
-                                ON DUPLICATE KEY UPDATE IDClef = @IDClef, RefOrg = @RefOrg, CanonInte = @CanonInte, CanonExte = @CanonExte, CanonOpt = @CanonOpt;"
+                                    ON DUPLICATE KEY UPDATE IDClef = @IDClef, RefOrg = @RefOrg, CanonInte = @CanonInte, CanonExte = @CanonExte, CanonOpt = @CanonOpt;"
                     End With
                 End If
 
-                If swtEditOneKey.Checked = False Then 'Editer toutes les clefs
-                    sql = "UPDATE Clefs SET CNom = @Nom, CPosition = @Tableau, CDate = @Date, CTrousseau = @Trousseau WHERE CID LIKE @IDClef AND CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef;"
-                    With cmdUpdateClef
-                        .Parameters("@IDClef").Value = txtID.Text & "-%"
-                        .Parameters("@Nom").Value = txtNom.Text
-                        .Parameters("@Tableau").Value = cmbLoc.Text
-                        .Parameters("@Date").Value = dtpDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
-                        .Parameters("@Trousseau").Value = lblTrousseauInfo.Text
-                        .Parameters("@OldStatusClef").Value = stgStatus
-                        .Parameters("@OldTableauClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
-                        .Parameters("@OldTrousseauxClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
-                        .Connection = connecter()
-                        .CommandText = sql
-                        .ExecuteNonQuery()
+                ' If swtEditOneKey.Checked = False Then 'Editer toutes les clefs
+                sql = "UPDATE Clefs SET CNom = @Nom, CPosition = @Tableau, CDate = @Date, CTrousseau = @Trousseau WHERE CID LIKE @IDClef AND CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef;"
+                With cmdUpdateClef
+                    .Parameters("@IDClef").Value = txtID.Text & "-%"
+                    .Parameters("@Nom").Value = txtNom.Text
+                    .Parameters("@Tableau").Value = cmbLoc.Text
+                    .Parameters("@Date").Value = dtpDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                    .Parameters("@Trousseau").Value = lblTrousseauInfo.Text
+                    .Parameters("@OldStatusClef").Value = stgStatus
+                    .Parameters("@OldTableauClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
+                    .Parameters("@OldTrousseauxClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
+                    .Connection = connecter()
+                    .CommandText = sql
+                    .ExecuteNonQuery()
+                End With
+
+
+                cmdUpdateInfosTechniques.Parameters("@IDClef").Value = txtID.Text
+                If blnInfTech = True Then
+                    Dim intCnInt As Integer
+                    Dim intCnExt As Integer
+
+                    With cmdUpdateInfosTechniques
+                        .Parameters("@RefOrg").Value = txtRefOrg.Text
+                        If Not Integer.TryParse(txtCnInt.Text, intCnInt) Then
+                            .Parameters("@CanonInte").Value = DBNull.Value
+                        Else
+                            .Parameters("@CanonInte").Value = intCnInt
+                        End If
+                        If Not Integer.TryParse(txtCnExt.Text, intCnExt) Then
+                            .Parameters("@CanonExte").Value = DBNull.Value
+                        Else
+                            .Parameters("@CanonExte").Value = intCnExt
+                        End If
+                        .Parameters("@CanonOpt").Value = txtCnOpt.Text
                     End With
+                End If
+                cmdUpdateInfosTechniques.Connection = connecter()
+                cmdUpdateInfosTechniques.ExecuteNonQuery()
 
+                '
+                ' AJOUTER LE CHANGEMENT POUR LA QUANTITÉ
+                '
+                Dim LastKeyID As Integer = 0
+                Dim cmd As String = "Select CID, CNom, CBatiment from Clefs Where CID like @IDClef;"
+                Dim dtListClefs As DataTable = New DataTable()
+                Dim getKeyID_command As New MySqlCommand(cmd, connecter())
+                getKeyID_command.CommandType = CommandType.Text
+                da.InsertCommand = getKeyID_command
 
-                    cmdUpdateInfosTechniques.Parameters("@IDClef").Value = txtID.Text
-                    If blnInfTech = True Then
-                        Dim intCnInt As Integer
-                        Dim intCnExt As Integer
+                With getKeyID_command
+                    .Parameters.Add("@IDClef", MySqlDbType.String)
+                End With
+                connecter()
 
-                        With cmdUpdateInfosTechniques
-                            .Parameters("@RefOrg").Value = txtRefOrg.Text
-                            If Not Integer.TryParse(txtCnInt.Text, intCnInt) Then
-                                .Parameters("@CanonInte").Value = DBNull.Value
-                            Else
-                                .Parameters("@CanonInte").Value = intCnInt
+                Try
+                    getKeyID_command.Parameters("@IDClef").Value = IDToLookFor
+                    getKeyID_command.ExecuteNonQuery()
+                Catch ex As MySqlException
+                    'Retour d'une erreur my MySQL si connection impossible
+                    MsgBox((ex.Number & " - " & ex.Message))
+                End Try
+                da.SelectCommand = getKeyID_command
+                da.Fill(dtListClefs)
+                If dtListClefs.Rows.Count > 0 Then
+                    For Each r As DataRow In dtListClefs.Rows
+                        Dim input As String = r.Item("CID")
+                        Dim index As Integer = input.LastIndexOf("-")
+                        If index > 0 Then
+                            Dim TempInt As Integer
+                            Integer.TryParse(input.Substring(index + 1), TempInt)
+                            If TempInt > LastKeyID Then
+                                LastKeyID = TempInt
                             End If
-                            If Not Integer.TryParse(txtCnExt.Text, intCnExt) Then
-                                .Parameters("@CanonExte").Value = DBNull.Value
-                            Else
-                                .Parameters("@CanonExte").Value = intCnExt
+                        End If
+                    Next
+                    Dim intQuantity As Integer = CUInt(txtQuantity.Text)
+
+                    If intQuantity > intOldQuantity Then
+                        Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
+                        Dim cmdinsert As String = "INSERT INTO
+                                                                  `Clefs`(
+                                                                    `CID`,
+                                                                    `CNom`,
+                                                                    `CPosition`,
+                                                                    `CStatus`,
+                                                                    `CDate`,
+                                                                    `CTrousseau`,
+                                                                    `CBatiment`
+                                                                  )
+                                                                VALUES
+                                                                  (
+                                                                    @id,
+                                                                    @name,
+                                                                    @pos,
+                                                                    @status,
+                                                                    @date,
+                                                                    @trousseau,
+                                                                    @batiment
+                                                                  );"
+                        Dim insert_command As New MySqlCommand(cmdinsert, connecter())
+                        insert_command.CommandType = CommandType.Text
+                        daSql.InsertCommand = insert_command
+
+                        With insert_command
+                            .Parameters.Add("@id", MySqlDbType.VarChar)
+                            .Parameters.Add("@name", MySqlDbType.VarChar)
+                            .Parameters.Add("@pos", MySqlDbType.VarChar)
+                            .Parameters.Add("@status", MySqlDbType.VarChar)
+                            .Parameters.Add("@date", MySqlDbType.DateTime)
+                            .Parameters.Add("@trousseau", MySqlDbType.VarChar)
+                            .Parameters.Add("@batiment", MySqlDbType.VarChar)
+                        End With
+
+                        'Récupération des index de clef utilisé par les id de la clef
+                        Dim GetIDsNo As New MySqlCommand()
+                        Dim daNb As MySqlDataAdapter = New MySqlDataAdapter()
+                        Dim dtNb As New DataTable()
+                        GetIDsNo.Parameters.Add("@KeyID", MySqlDbType.String)
+
+                        With GetIDsNo
+                            .Parameters("@KeyID").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-%"
+                            .CommandText = "SELECT SUBSTRING(CID, INSTR(CID,'-')+1) From Clefs Where CID Like @KeyID"
+                            .CommandType = CommandType.Text
+                            .Connection = connecter()
+                            .ExecuteNonQuery()
+                        End With
+                        daNb.SelectCommand() = GetIDsNo
+                        daNb.Fill(dtNb)
+                        Dim IndexIDClef As Integer = 1
+                        Dim nbAvailable As New List(Of Integer)
+                        Dim nbTaken As New List(Of Integer)
+                        For Each r As DataRow In dtNb.Rows
+                            nbTaken.Add(r.Item(0))
+                        Next
+                        While nbAvailable.Count < (intQuantity - intOldQuantity)
+                            If nbTaken.Contains(IndexIDClef) = False Then
+                                nbAvailable.Add(IndexIDClef)
                             End If
-                            .Parameters("@CanonOpt").Value = txtCnOpt.Text
+                            IndexIDClef += 1
+                        End While
+
+                        For Each int As Integer In nbAvailable
+                            With insert_command
+                                .Parameters("@id").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-" & int
+                                .Parameters("@name").Value = txtNom.Text
+                                .Parameters("@pos").Value = cmbLoc.Text
+                                .Parameters("@status").Value = cmbStatus.Text
+                                .Parameters("@date").Value = dtpDate.Value
+                                .Parameters("@trousseau").Value = lblTrousseauInfo.Text
+                                If lblBatiment.Visible = True Then
+                                    .Parameters("@batiment").Value = lblBatiment.Text
+                                Else
+                                    .Parameters("@batiment").Value = "Groupe de Batiments"
+                                End If
+                                .ExecuteNonQuery()
+                            End With
+                        Next
+                    ElseIf intQuantity < intOldQuantity Then
+                        Dim AmountToDelete As Integer = intOldQuantity - intQuantity
+                        Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
+                        Dim DeleteQuery As String = "DELETE FROM Clefs WHERE CID LIKE @IDClef AND CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef LIMIT " & AmountToDelete & ";"
+                        Dim Delete_command As New MySqlCommand(DeleteQuery, connecter)
+                        Delete_command.CommandType = CommandType.Text
+                        daSql.InsertCommand = Delete_command
+
+                        With Delete_command
+                            .Parameters.Add("@IDClef", MySqlDbType.String)
+                            .Parameters.Add("@StatusClef", MySqlDbType.VarChar)
+                            .Parameters.Add("@TableauClef", MySqlDbType.VarChar)
+                            .Parameters.Add("@TrousseauxClef", MySqlDbType.VarChar)
+                        End With
+                        With Delete_command
+                            .Parameters("@IDClef").Value = txtID.Text & "-%"
+                            .Parameters("@StatusClef").Value = cmbStatus.Text
+                            .Parameters("@TableauClef").Value = cmbLoc.Text
+                            .Parameters("@TrousseauxClef").Value = lblTrousseauInfo.Text
+                            .ExecuteNonQuery()
                         End With
                     End If
-                    cmdUpdateInfosTechniques.Connection = connecter()
-                    cmdUpdateInfosTechniques.ExecuteNonQuery()
-
-                    '
-                    ' AJOUTER LE CHANGEMENT POUR LA QUANTITÉ
-                    '
-                    Dim LastKeyID As Integer = 0
-                    Dim cmd As String = "Select CID, CNom, CBatiment from Clefs Where CID like @IDClef;"
-                    Dim dtListClefs As DataTable = New DataTable()
-                    Dim getKeyID_command As New MySqlCommand(cmd, connecter())
-                    getKeyID_command.CommandType = CommandType.Text
-                    da.InsertCommand = getKeyID_command
-
-                    With getKeyID_command
-                        .Parameters.Add("@IDClef", MySqlDbType.String)
-                    End With
-                    connecter()
-
-                    Try
-                        getKeyID_command.Parameters("@IDClef").Value = IDToLookFor
-                        getKeyID_command.ExecuteNonQuery()
-                    Catch ex As MySqlException
-                        'Retour d'une erreur my MySQL si connection impossible
-                        MsgBox((ex.Number & " - " & ex.Message))
-                    End Try
-                    da.SelectCommand = getKeyID_command
-                    da.Fill(dtListClefs)
-                    If dtListClefs.Rows.Count > 0 Then
-                        For Each r As DataRow In dtListClefs.Rows
-                            Dim input As String = r.Item("CID")
-                            Dim index As Integer = input.LastIndexOf("-")
-                            If index > 0 Then
-                                Dim TempInt As Integer
-                                Integer.TryParse(input.Substring(index + 1), TempInt)
-                                If TempInt > LastKeyID Then
-                                    LastKeyID = TempInt
-                                End If
-                            End If
-                        Next
-                        Dim intQuantity As Integer = CUInt(txtQuantity.Text)
-
-                        If intQuantity > intOldQuantity Then
-                            Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
-                            Dim cmdinsert As String = "INSERT INTO
-                                                              `Clefs`(
-                                                                `CID`,
-                                                                `CNom`,
-                                                                `CPosition`,
-                                                                `CStatus`,
-                                                                `CDate`,
-                                                                `CTrousseau`,
-                                                                `CBatiment`
-                                                              )
-                                                            VALUES
-                                                              (
-                                                                @id,
-                                                                @name,
-                                                                @pos,
-                                                                @status,
-                                                                @date,
-                                                                @trousseau,
-                                                                @batiment
-                                                              );"
-                            Dim insert_command As New MySqlCommand(cmdinsert, connecter())
-                            insert_command.CommandType = CommandType.Text
-                            daSql.InsertCommand = insert_command
-
-                            With insert_command
-                                .Parameters.Add("@id", MySqlDbType.VarChar)
-                                .Parameters.Add("@name", MySqlDbType.VarChar)
-                                .Parameters.Add("@pos", MySqlDbType.VarChar)
-                                .Parameters.Add("@status", MySqlDbType.VarChar)
-                                .Parameters.Add("@date", MySqlDbType.DateTime)
-                                .Parameters.Add("@trousseau", MySqlDbType.VarChar)
-                                .Parameters.Add("@batiment", MySqlDbType.VarChar)
-                            End With
-
-                            'Récupération des index de clef utilisé par les id de la clef
-                            Dim GetIDsNo As New MySqlCommand()
-                            Dim daNb As MySqlDataAdapter = New MySqlDataAdapter()
-                            Dim dtNb As New DataTable()
-                            GetIDsNo.Parameters.Add("@KeyID", MySqlDbType.String)
-
-                            With GetIDsNo
-                                .Parameters("@KeyID").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-%"
-                                .CommandText = "SELECT SUBSTRING(CID, INSTR(CID,'-')+1) From Clefs Where CID Like @KeyID"
-                                .CommandType = CommandType.Text
-                                .Connection = connecter()
-                                .ExecuteNonQuery()
-                            End With
-                            daNb.SelectCommand() = GetIDsNo
-                            daNb.Fill(dtNb)
-                            Dim IndexIDClef As Integer = 1
-                            Dim nbAvailable As New List(Of Integer)
-                            Dim nbTaken As New List(Of Integer)
-                            For Each r As DataRow In dtNb.Rows
-                                nbTaken.Add(r.Item(0))
-                            Next
-                            While nbAvailable.Count < (intQuantity - intOldQuantity)
-                                If nbTaken.Contains(IndexIDClef) = False Then
-                                    nbAvailable.Add(IndexIDClef)
-                                End If
-                                IndexIDClef += 1
-                            End While
-
-                            For Each int As Integer In nbAvailable
-                                With insert_command
-                                    .Parameters("@id").Value = txtID.Text.ToUpper(CultureInfo.InvariantCulture) & "-" & int
-                                    .Parameters("@name").Value = txtNom.Text
-                                    .Parameters("@pos").Value = cmbLoc.Text
-                                    .Parameters("@status").Value = cmbStatus.Text
-                                    .Parameters("@date").Value = dtpDate.Value
-                                    .Parameters("@trousseau").Value = lblTrousseauInfo.Text
-                                    If lblBatiment.Visible = True Then
-                                        .Parameters("@batiment").Value = lblBatiment.Text
-                                    Else
-                                        .Parameters("@batiment").Value = "Groupe de Batiments"
-                                    End If
-                                    .ExecuteNonQuery()
-                                End With
-                            Next
-                        ElseIf intQuantity < intOldQuantity Then
-                            Dim AmountToDelete As Integer = intOldQuantity - intQuantity
-                            Dim daSql As MySqlDataAdapter = New MySqlDataAdapter()
-                            Dim DeleteQuery As String = "DELETE FROM Clefs WHERE CID LIKE @IDClef AND CStatus=@StatusClef AND CPosition=@TableauClef AND CTrousseau=@TrousseauxClef LIMIT " & AmountToDelete & ";"
-                            Dim Delete_command As New MySqlCommand(DeleteQuery, connecter)
-                            Delete_command.CommandType = CommandType.Text
-                            daSql.InsertCommand = Delete_command
-
-                            With Delete_command
-                                .Parameters.Add("@IDClef", MySqlDbType.String)
-                                .Parameters.Add("@StatusClef", MySqlDbType.VarChar)
-                                .Parameters.Add("@TableauClef", MySqlDbType.VarChar)
-                                .Parameters.Add("@TrousseauxClef", MySqlDbType.VarChar)
-                            End With
-                            With Delete_command
-                                .Parameters("@IDClef").Value = txtID.Text & "-%"
-                                .Parameters("@StatusClef").Value = cmbStatus.Text
-                                .Parameters("@TableauClef").Value = cmbLoc.Text
-                                .Parameters("@TrousseauxClef").Value = lblTrousseauInfo.Text
-                                .ExecuteNonQuery()
-                            End With
-                        End If
-                    End If
-
-                Else 'Editer une seule clef
-                    ' A FAIRE
                 End If
+
+                ' Else 'Editer une seule clef
+                ' A FAIRE
+                'End If
             Else
                 Dim stgTrousseaux As String = lblTrousseauInfo.Text
 
@@ -538,9 +535,7 @@ Public Class frmClefsEditerEtProprietes
             Me.Dispose()
         End Try
     End Sub
-    Private Sub Properties_btnSave_Click(sender As Object, e As EventArgs)
-        Me.Dispose()
-    End Sub
+
     Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
@@ -611,8 +606,15 @@ Public Class frmClefsEditerEtProprietes
         If control IsNot Nothing Then
             Dim toolTipString As String = ToolTip1.GetToolTip(control)
             ToolTip1.ShowAlways = True
-                ToolTip1.Show(toolTipString, control, control.Width / 2, control.Height / 2)
-            End If
+            ToolTip1.Show(toolTipString, control, control.Width / 2, control.Height / 2)
+        End If
     End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If frmMain.blnProperties = False Then
+            Edit_btnSave_Click()
+        Else
+            Me.Dispose()
+        End If
+    End Sub
 End Class

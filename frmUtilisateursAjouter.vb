@@ -34,29 +34,40 @@ Public Class frmUtilisateursAjouter
             MsgBox("Le mot de passe doit être composé d'au moins 6 caractères !")
             Exit Sub
         Else
-            Try
+            If txtID.Text.Replace(" ", "") <> "" And txtUsername.Text.Replace(" ", "") <> "" Then
                 Dim stgID As String = txtID.Text
                 Dim stgPassword As String = txtPassword.Text
                 Dim stgUsername As String = txtUsername.Text
-                Dim wrapper As New Simple3Des(stgPassword)
-                Dim cipherText As String = wrapper.EncryptData(stgID)
+                Try
+                    Dim wrapper As New Simple3Des(stgPassword)
+                    Dim cipherText As String = wrapper.EncryptData(stgID)
 
-                Dim insert_command As New MySqlCommand("INSERT INTO `Login`(`LCipher`,`LUserType`,`LUserName`) VALUES (@cipher,@UserType,@username)", connecter())
-                insert_command.Parameters.Add("@cipher", MySqlDbType.VarChar).Value = cipherText
-                insert_command.Parameters.Add("@UserType", MySqlDbType.VarChar).Value = cbUserType.Text
-                insert_command.Parameters.Add("@username", MySqlDbType.VarChar).Value = stgUsername
-                insert_command.ExecuteNonQuery()
-                connecter().Close()
-                MsgBox("Compte " & stgUsername & " avec l'ID " & stgID & " créé avec succès !")
-                txtUsername.Text = String.Empty
-                txtID.Text = String.Empty
-                txtPassword.Text = String.Empty
-                txtPasswordConfirm.Text = String.Empty
-                Me.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+                    Dim insert_command As New MySqlCommand("INSERT INTO `Login`(`LCipher`,`LUserType`,`LUserName`) VALUES (@cipher,@UserType,@username)", connecter())
+                    insert_command.Parameters.Add("@cipher", MySqlDbType.VarChar).Value = cipherText
+                    insert_command.Parameters.Add("@UserType", MySqlDbType.VarChar).Value = cbUserType.Text
+                    insert_command.Parameters.Add("@username", MySqlDbType.VarChar).Value = stgUsername
+                    insert_command.ExecuteNonQuery()
 
+                Catch ex As MySqlException
+                    If ex.Number = 1062 Then
+                        MsgBox("Cette utilisateur existe déjà.", MsgBoxStyle.Critical, "Utilisateur existant")
+                    Else
+                        MsgBox(ex.Number & " - " & ex.Message)
+                    End If
+                    connecter().Close()
+                    Exit Sub
+                Finally
+                    connecter().Close()
+                    MsgBox("Compte " & stgUsername & " avec l'ID " & stgID & " créé avec succès !")
+                    txtUsername.Text = String.Empty
+                    txtID.Text = String.Empty
+                    txtPassword.Text = String.Empty
+                    txtPasswordConfirm.Text = String.Empty
+                    Me.Close()
+                End Try
+            Else
+                MsgBox("Veuillez remplir tout les champs.", MsgBoxStyle.Critical, "Erreur")
+            End If
         End If
     End Sub
 End Class

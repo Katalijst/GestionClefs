@@ -22,9 +22,7 @@ Partial Class frmTableauxEditer
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTableauxEditer))
-        Me.dgvListBatiment = New System.Windows.Forms.DataGridView()
         Me.MaterialDivider1 = New MaterialSkin.Controls.MaterialDivider()
         Me.btnAddPersonne = New MaterialSkin.Controls.MaterialButton()
         Me.btnCancel = New MaterialSkin.Controls.MaterialButton()
@@ -34,43 +32,17 @@ Partial Class frmTableauxEditer
         Me.lblPNom = New MaterialSkin.Controls.MaterialLabel()
         Me.lblPResponsable = New MaterialSkin.Controls.MaterialLabel()
         Me.cbResponsable = New MaterialSkin.Controls.MaterialComboBox()
-        CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cbBatiments = New MaterialSkin.Controls.MaterialComboBox()
         Me.SuspendLayout()
-        '
-        'dgvListBatiment
-        '
-        Me.dgvListBatiment.AllowUserToAddRows = False
-        Me.dgvListBatiment.AllowUserToDeleteRows = False
-        Me.dgvListBatiment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvListBatiment.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.dgvListBatiment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvListBatiment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvListBatiment.Location = New System.Drawing.Point(15, 212)
-        Me.dgvListBatiment.MultiSelect = False
-        Me.dgvListBatiment.Name = "dgvListBatiment"
-        Me.dgvListBatiment.ReadOnly = True
-        Me.dgvListBatiment.RowHeadersVisible = False
-        Me.dgvListBatiment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgvListBatiment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvListBatiment.Size = New System.Drawing.Size(324, 189)
-        Me.dgvListBatiment.TabIndex = 45
         '
         'MaterialDivider1
         '
         Me.MaterialDivider1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.MaterialDivider1.Depth = 0
-        Me.MaterialDivider1.Location = New System.Drawing.Point(15, 407)
+        Me.MaterialDivider1.Location = New System.Drawing.Point(12, 253)
         Me.MaterialDivider1.MouseState = MaterialSkin.MouseState.HOVER
         Me.MaterialDivider1.Name = "MaterialDivider1"
-        Me.MaterialDivider1.Size = New System.Drawing.Size(324, 1)
+        Me.MaterialDivider1.Size = New System.Drawing.Size(330, 1)
         Me.MaterialDivider1.TabIndex = 87
         Me.MaterialDivider1.Text = "MaterialDivider1"
         '
@@ -99,7 +71,7 @@ Partial Class frmTableauxEditer
         Me.btnCancel.DrawShadows = True
         Me.btnCancel.HighEmphasis = True
         Me.btnCancel.Icon = Nothing
-        Me.btnCancel.Location = New System.Drawing.Point(15, 417)
+        Me.btnCancel.Location = New System.Drawing.Point(12, 263)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnCancel.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnCancel.Name = "btnCancel"
@@ -117,7 +89,7 @@ Partial Class frmTableauxEditer
         Me.btnSave.DrawShadows = True
         Me.btnSave.HighEmphasis = True
         Me.btnSave.Icon = Nothing
-        Me.btnSave.Location = New System.Drawing.Point(222, 417)
+        Me.btnSave.Location = New System.Drawing.Point(225, 263)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnSave.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnSave.Name = "btnSave"
@@ -201,15 +173,37 @@ Partial Class frmTableauxEditer
         Me.cbResponsable.TabIndex = 76
         Me.cbResponsable.UseTallSize = False
         '
+        'cbBatiments
+        '
+        Me.cbBatiments.AutoResize = False
+        Me.cbBatiments.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbBatiments.Depth = 0
+        Me.cbBatiments.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cbBatiments.DropDownHeight = 118
+        Me.cbBatiments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbBatiments.DropDownWidth = 121
+        Me.cbBatiments.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cbBatiments.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbBatiments.FormattingEnabled = True
+        Me.cbBatiments.IntegralHeight = False
+        Me.cbBatiments.ItemHeight = 29
+        Me.cbBatiments.Location = New System.Drawing.Point(15, 212)
+        Me.cbBatiments.MaxDropDownItems = 4
+        Me.cbBatiments.MouseState = MaterialSkin.MouseState.OUT
+        Me.cbBatiments.Name = "cbBatiments"
+        Me.cbBatiments.Size = New System.Drawing.Size(324, 35)
+        Me.cbBatiments.TabIndex = 88
+        Me.cbBatiments.UseTallSize = False
+        '
         'frmTableauxEditer
         '
         Me.AcceptButton = Me.btnSave
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(354, 463)
+        Me.ClientSize = New System.Drawing.Size(354, 314)
+        Me.Controls.Add(Me.cbBatiments)
         Me.Controls.Add(Me.MaterialDivider1)
-        Me.Controls.Add(Me.dgvListBatiment)
         Me.Controls.Add(Me.btnAddPersonne)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -225,12 +219,10 @@ Partial Class frmTableauxEditer
         Me.ShowIcon = False
         Me.Sizable = False
         Me.Text = "Editer un tableau..."
-        CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents dgvListBatiment As DataGridView
     Friend WithEvents MaterialDivider1 As MaterialSkin.Controls.MaterialDivider
     Friend WithEvents btnAddPersonne As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnCancel As MaterialSkin.Controls.MaterialButton
@@ -240,12 +232,5 @@ Partial Class frmTableauxEditer
     Friend WithEvents lblPNom As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents lblPResponsable As MaterialSkin.Controls.MaterialLabel
     Friend WithEvents cbResponsable As MaterialSkin.Controls.MaterialComboBox
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-
-    End Sub
-
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
-    End Sub
+    Friend WithEvents cbBatiments As MaterialSkin.Controls.MaterialComboBox
 End Class

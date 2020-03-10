@@ -36,10 +36,12 @@ Public Class frmTableauxEditer
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         Dim sql As String
+        cmd.Parameters.Add("@Tableau", MySqlDbType.VarChar)
         Try
             dt.Reset()
-            sql = "Select PResponsable FROM Position WHERE PNom=""" & stgPosID & """"
+            sql = "Select PResponsable FROM Position WHERE PNom=@Tableau"
             With cmd
+                .Parameters("@Tableau").Value = stgPosID
                 .Connection = connecter()
                 .CommandText = sql
             End With
@@ -54,25 +56,17 @@ Public Class frmTableauxEditer
             connecter().Close()
 
             dt.Reset()
-            sql = "Select PBatiment FROM Position WHERE PNom=""" & stgPosID & """"
+            sql = "Select PBatiment FROM Position WHERE PNom=@Tableau"
             With cmd
+                .Parameters("@Tableau").Value = stgPosID
                 .Connection = connecter()
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
             da.Fill(dt)
-            Try
-                Dim intIndexNomBat As Integer = dgvListBatiment.Columns("Nom").Index
-                For i = 0 To dgvListBatiment.RowCount - 1
-                    If dgvListBatiment.Rows(i).Cells(intIndexNomBat).Value.ToString.IndexOf(dt.Rows(0)(0).ToString, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
-                        dgvListBatiment.Rows(i).Selected = True
-                        dgvListBatiment.FirstDisplayedScrollingRowIndex = i
-                        Exit For
-                    End If
-                Next
-            Catch exc As Exception
-                MessageBox.Show(exc.Message)
-            End Try
+            If dt.Rows.Count > 0 Then
+                cbBatiments.Text = dt.Rows(0).Item(0)
+            End If
             connecter().Close()
 
         Catch ex As Exception
@@ -109,40 +103,36 @@ Public Class frmTableauxEditer
         End Try
     End Sub
 
-    Public Sub RefreshBatiment()
+    Public Sub RefreshBatiment(ByVal Optional selected As String = "Empty")
+        Dim dtBatiments As New DataTable
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
-        Dim dtBatiment As New DataTable
-        Dim sql As String
-
+        Dim CmdSql As String = "Select BNom From Batiment where BNum <> '0' order by BNom ASC"
         Try
-
-            sql = "Select BNum, BNom From Batiment where BNum <> '0' order by BNom ASC"
-
             With cmd
                 .Connection = connecter()
-                .CommandText = sql
+                .CommandText = CmdSql
             End With
             da.SelectCommand = cmd
-            da.Fill(dtBatiment)
+            da.Fill(dtBatiments)
 
-            For i As Integer = 0 To dtBatiment.Columns.Count - 1
-                dtBatiment.Columns(i).ColumnName = dtBatiment.Columns(i).ColumnName.ToString().Remove(0, 1)
+            Dim strCbBatiments As String() = New String(dtBatiments.Rows.Count) {}
+            Dim i As Integer = 0
+            For Each r As DataRow In dtBatiments.Rows
+                strCbBatiments(i) = r.Item(0).ToString
+                i += 1
             Next
-            dgvListBatiment.DataSource = dtBatiment
-
-            For i = 0 To dgvListBatiment.ColumnCount - 2
-                dgvListBatiment.Columns(i).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
-            Next
-            dgvListBatiment.Columns(dgvListBatiment.ColumnCount - 1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            cbBatiments.DataSource = strCbBatiments
+            If selected <> "Empty" Then
+                cbBatiments.Text = selected
+            End If
             connecter().Close()
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.Code & " - " & ex.Message)
         End Try
     End Sub
 
-    Private Sub btnCancel_Click2(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 
@@ -150,39 +140,56 @@ Public Class frmTableauxEditer
         frmPersonnesEditer.ShowDialog()
     End Sub
 
-    Private Sub btnSave_Click2(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         Dim sql As String
+        Dim stgBatNom As String = cbBatiments.Text
 
-        Dim intIndexNom As Integer = dgvListBatiment.Columns("Nom").Index
-        Dim stgBatNom As String = dgvListBatiment.SelectedRows(0).Cells(intIndexNom).Value.ToString()
+        cmd.Parameters.Add("@OldTableau", MySqlDbType.VarChar)
+        cmd.Parameters.Add("@Tableau", MySqlDbType.VarChar)
+        cmd.Parameters.Add("@Responsable", MySqlDbType.VarChar)
+        cmd.Parameters.Add("@Batiment", MySqlDbType.VarChar)
 
         Try
-            If txtNom.Text <> "" Then
-                sql = "UPDATE Position SET PNom = '" & txtNom.Text & "', PResponsable = '" & cbResponsable.Text & "', PBatiment = '" & stgBatNom & "' WHERE PNom = '" & stgPosID & "'"
+            If txtNom.Text.Replace(" ", "") <> "" Then
+                sql = "UPDATE Position SET PNom=@Tableau, PResponsable=@Responsable, PBatiment=@Batiment WHERE PNom=@OldTableau"
                 With cmd
+                    .Parameters("@Tableau").Value = txtNom.Text
+                    .Parameters("@Responsable").Value = cbResponsable.Text
+                    .Parameters("@Batiment").Value = stgBatNom
+                    .Parameters("@OldTableau").Value = stgPosID
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
                 End With
-                connecter().Close()
-                frmMain.FillDataSource()
-                Me.Close()
             Else
                 MsgBox("Veuillez remplir tout les champs !")
                 Exit Sub
             End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            If ex.Number = 1062 Then
+                MsgBox("Un tableau existe déjà avec cette dénomination.", MsgBoxStyle.Critical, "Tableau existant")
+            Else
+                MsgBox(ex.Number & " - " & ex.Message)
+            End If
+            connecter().Close()
+            Exit Sub
+        Finally
+            connecter().Close()
         End Try
+
         If frmClefsAjout.IsHandleCreated Then
             frmClefsAjout.RefreshTableau()
         End If
         If frmTableauxGestion.IsHandleCreated Then
             frmTableauxGestion.RefreshList()
         End If
+        If frmMain.IsHandleCreated Then
+            frmMain.FillDataSource()
+        End If
+        Me.Close()
     End Sub
 
 End Class

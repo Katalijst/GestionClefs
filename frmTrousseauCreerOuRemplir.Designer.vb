@@ -22,6 +22,7 @@ Partial Class frmTrousseauCreerOuRemplir
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTrousseauCreerOuRemplir))
         Me.chkAjouter = New MaterialSkin.Controls.MaterialRadioButton()
         Me.chkCreer = New MaterialSkin.Controls.MaterialRadioButton()
         Me.btnValider = New MaterialSkin.Controls.MaterialButton()
@@ -130,7 +131,12 @@ Partial Class frmTrousseauCreerOuRemplir
         Me.Controls.Add(Me.btnValider)
         Me.Controls.Add(Me.chkCreer)
         Me.Controls.Add(Me.chkAjouter)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmTrousseauCreerOuRemplir"
+        Me.ShowInTaskbar = False
+        Me.Sizable = False
         Me.Text = "Trousseau"
         Me.ResumeLayout(False)
         Me.PerformLayout()

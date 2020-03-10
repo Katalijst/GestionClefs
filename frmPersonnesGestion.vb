@@ -153,36 +153,44 @@ Public Class frmPersonnesGestion
                                                                 @autre
                                                               )
                                                             ", connecter())
-                If txtNom.Text <> "" And mtxtTel.Text <> "" Then
+                If txtNom.Text.Replace(" ", "") <> "" And mtxtTel.Text.Replace(" ", "") <> "" Then
                     insert_command.Parameters.Add("@name", MySqlDbType.VarChar).Value = txtNom.Text
                     insert_command.Parameters.Add("@genre", MySqlDbType.VarChar).Value = cbFonction.Text
                     insert_command.Parameters.Add("@tel", MySqlDbType.VarChar).Value = mtxtTel.Text
                     insert_command.Parameters.Add("@autre", MySqlDbType.VarChar).Value = txtAutre.Text
+                    insert_command.ExecuteNonQuery()
                 Else
-                    MsgBox("Veuillez remplir tout les champs !")
+                    MsgBox("Veuillez remplir tout les champs !", MsgBoxStyle.Critical)
                     Exit Sub
                 End If
-
-
-                insert_command.ExecuteNonQuery()
-                connecter().Close()
-                If frmTableauxGestion.IsHandleCreated Then
-                    frmTableauxGestion.RefreshResponsable(txtNom.Text)
-                End If
-                If frmTableauxEditer.IsHandleCreated Then
-                    frmTableauxEditer.RefreshResponsable(txtNom.Text)
-                End If
-                If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
-                    frmClefsEmprunterEtAttribuer.LoadPersonnes(txtNom.Text)
-                End If
-                If chkKeepOpen.Checked = False Then
-                    Me.Close()
+            Catch ex As MySqlException
+                If ex.Number = 1062 Then
+                    MsgBox("Une personne existe déjà avec ce nom.", MsgBoxStyle.Critical, "Personne existante")
                 Else
-                    RefreshList()
+                    MsgBox(ex.Number & " - " & ex.Message)
                 End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
+                connecter().Close()
+                Exit Sub
+            Finally
+                connecter().Close()
             End Try
+
+            If frmTableauxGestion.IsHandleCreated Then
+                frmTableauxGestion.RefreshResponsable(txtNom.Text)
+            End If
+            If frmTableauxEditer.IsHandleCreated Then
+                frmTableauxEditer.RefreshResponsable(txtNom.Text)
+            End If
+            If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
+                frmClefsEmprunterEtAttribuer.LoadPersonnes(txtNom.Text)
+            End If
+
+            If chkKeepOpen.Checked = False Then
+                Me.Close()
+            Else
+                RefreshList()
+            End If
+
         Else
             MsgBox("Attention", MessageBoxButtons.OK, "Vous devez entrer le nom de la personne ainsi que sa fonction.")
         End If
