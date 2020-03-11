@@ -57,15 +57,19 @@ Public Class frmClefsEmpruntsEtAlertes
         Dim dt As New DataTable
         Dim dtAlertes As New DataTable
         Dim da As New MySqlDataAdapter
+        Dim SqlCommand As String
 
-
-        Dim sql As String = "Select EIDClef, EDateFin From Emprunts Where EDateFin IS NOT NULL"
+        If GlobalServices <> "Global" Then
+            SqlCommand = "SELECT EIDClef, EDateFin from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE EDateFin < DATE(NOW())"
+        Else
+            SqlCommand = "Select EIDClef, EDateFin From Emprunts Where EDateFin < DATE(NOW())"
+        End If
 
         Try
             dt.Reset()
             With cmd
                 .Connection = connecter()
-                .CommandText = "Select EIDClef, EDateFin From Emprunts Where EDateFin < DATE(NOW())"
+                .CommandText = SqlCommand
             End With
             da.SelectCommand = cmd
             da.Fill(dt)
@@ -73,30 +77,31 @@ Public Class frmClefsEmpruntsEtAlertes
             nbNonRendues = dt.Rows.Count
             dtAlertes.Reset()
                 cmd.Parameters.Add("@IDClef", MySqlDbType.VarChar)
-                For i = 0 To dt.Rows.Count - 1
-                    With cmd
-                        .Connection = connecter()
-                        .Parameters("@IDClef").Value = dt.Rows(i)(0).ToString
-                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef=@IDClef AND CID=EIDClef AND EDatefin < DATE(NOW());"
-                    End With
-                    da.SelectCommand = cmd
-                    Dim dtTemp As New DataTable
-                    da.Fill(dtTemp)
-                    dtTemp.Columns.Add("ID")
-                    For Each dr As DataRow In dtTemp.Rows
-                        Dim input As String = dr.Item("EIDClef")
-                        Dim index As Integer = input.LastIndexOf("-")
-                        If index > 0 Then
-                            dr.Item("EIDClef") = input.Substring(0, index)
-                            dr.Item("ID") = input.Substring(index + 1)
-                        End If
-                        If dtAlertes.Rows.Count < 1 Then
-                            dtAlertes = dtTemp
-                        Else
-                            dtAlertes.Rows.Add(dr.ItemArray)
-                        End If
-                    Next
+            For i = 0 To dt.Rows.Count - 1
+                With cmd
+                    .Connection = connecter()
+                    .Parameters("@IDClef").Value = dt.Rows(i)(0).ToString
+                    .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef=@IDClef AND CID=EIDClef AND EDatefin < DATE(NOW());"
+                End With
+                da.SelectCommand = cmd
+                Dim dtTemp As New DataTable
+                da.Fill(dtTemp)
+                dtTemp.Columns.Add("ID")
+                For Each dr As DataRow In dtTemp.Rows
+                    Dim input As String = dr.Item("EIDClef")
+                    Dim index As Integer = input.LastIndexOf("-")
+                    If index > 0 Then
+                        dr.Item("EIDClef") = input.Substring(0, index)
+                        dr.Item("ID") = input.Substring(index + 1)
+                    End If
+                    If dtAlertes.Rows.Count < 1 Then
+                        dtAlertes = dtTemp
+                    Else
+                        dtAlertes.Rows.Add(dr.ItemArray)
+                    End If
                 Next
+            Next
+            If dt.Rows.Count > 0 Then
                 dtAlertes.Columns("EIDClef").ColumnName = strTitleCID
                 dtAlertes.Columns("CNom").ColumnName = strTitleCNom
                 dtAlertes.Columns("EIDGenre").ColumnName = strTitleEGenre
@@ -107,7 +112,7 @@ Public Class frmClefsEmpruntsEtAlertes
                 dgvAlertes.DataSource = dtAlertes
                 dgvAlertes.Columns("ID").Visible = False
                 dgvAlertes.Refresh()
-
+            End If
         Catch ex As MySQLException
             MessageBox.Show(ex.Message)
         Finally

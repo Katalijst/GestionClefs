@@ -36,6 +36,7 @@ Partial Class frmServicesGestion
         Me.btnAddService = New MaterialSkin.Controls.MaterialButton()
         Me.cbServices = New MaterialSkin.Controls.MaterialComboBox()
         Me.btnSave = New MaterialSkin.Controls.MaterialButton()
+        Me.btnSupprimerService = New MaterialSkin.Controls.MaterialButton()
         CType(Me.dgvSelTableaux, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvListTableaux, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -168,7 +169,7 @@ Partial Class frmServicesGestion
         Me.txtRechercher.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.txtRechercher.Hint = "Rechercher un tableau"
         Me.txtRechercher.Location = New System.Drawing.Point(12, 73)
-        Me.txtRechercher.MaxLength = 50
+        Me.txtRechercher.MaxLength = 144
         Me.txtRechercher.MouseState = MaterialSkin.MouseState.OUT
         Me.txtRechercher.Multiline = False
         Me.txtRechercher.Name = "txtRechercher"
@@ -184,7 +185,7 @@ Partial Class frmServicesGestion
         Me.btnAddService.DrawShadows = True
         Me.btnAddService.HighEmphasis = True
         Me.btnAddService.Icon = Global.GestionClefs.My.Resources.Resources.plus
-        Me.btnAddService.Location = New System.Drawing.Point(666, 71)
+        Me.btnAddService.Location = New System.Drawing.Point(625, 71)
         Me.btnAddService.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnAddService.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnAddService.Name = "btnAddService"
@@ -213,7 +214,7 @@ Partial Class frmServicesGestion
         Me.cbServices.MaxDropDownItems = 4
         Me.cbServices.MouseState = MaterialSkin.MouseState.OUT
         Me.cbServices.Name = "cbServices"
-        Me.cbServices.Size = New System.Drawing.Size(272, 35)
+        Me.cbServices.Size = New System.Drawing.Size(232, 35)
         Me.cbServices.TabIndex = 69
         Me.cbServices.UseTallSize = False
         '
@@ -235,11 +236,29 @@ Partial Class frmServicesGestion
         Me.btnSave.UseAccentColor = False
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'btnSupprimerService
+        '
+        Me.btnSupprimerService.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnSupprimerService.Depth = 0
+        Me.btnSupprimerService.DrawShadows = True
+        Me.btnSupprimerService.HighEmphasis = True
+        Me.btnSupprimerService.Icon = Global.GestionClefs.My.Resources.Resources.rubbish_bin_delete_button
+        Me.btnSupprimerService.Location = New System.Drawing.Point(669, 71)
+        Me.btnSupprimerService.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnSupprimerService.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnSupprimerService.Name = "btnSupprimerService"
+        Me.btnSupprimerService.Size = New System.Drawing.Size(44, 36)
+        Me.btnSupprimerService.TabIndex = 71
+        Me.btnSupprimerService.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnSupprimerService.UseAccentColor = False
+        Me.btnSupprimerService.UseVisualStyleBackColor = True
+        '
         'frmServicesGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(725, 398)
+        Me.Controls.Add(Me.btnSupprimerService)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.cbServices)
         Me.Controls.Add(Me.MaterialLabel8)
@@ -276,4 +295,5 @@ Partial Class frmServicesGestion
     Friend WithEvents btnAddService As MaterialSkin.Controls.MaterialButton
     Friend WithEvents cbServices As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents btnSave As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents btnSupprimerService As MaterialSkin.Controls.MaterialButton
 End Class

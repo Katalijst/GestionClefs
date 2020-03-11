@@ -23,11 +23,15 @@ Partial Class frmUtilisateursGestion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUtilisateursGestion))
         Me.dgvListUser = New System.Windows.Forms.DataGridView()
         Me.MenuListe = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ChangerLeTypeDutilisateurToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UtilisateurToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChefDeServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdministrateurToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangerLeServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RéinitialiserLeMotDePasseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SupprimerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.txtRechercher = New MaterialSkin.Controls.MaterialTextBox()
@@ -46,14 +50,14 @@ Partial Class frmUtilisateursGestion
         Me.dgvListUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListUser.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListUser.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListUser.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvListUser.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListUser.Location = New System.Drawing.Point(12, 121)
         Me.dgvListUser.MultiSelect = False
@@ -67,15 +71,40 @@ Partial Class frmUtilisateursGestion
         '
         'MenuListe
         '
-        Me.MenuListe.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangerLeTypeDutilisateurToolStripMenuItem, Me.RéinitialiserLeMotDePasseToolStripMenuItem, Me.SupprimerToolStripMenuItem})
+        Me.MenuListe.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangerLeTypeDutilisateurToolStripMenuItem, Me.ChangerLeServiceToolStripMenuItem, Me.RéinitialiserLeMotDePasseToolStripMenuItem, Me.SupprimerToolStripMenuItem})
         Me.MenuListe.Name = "MenuListe"
-        Me.MenuListe.Size = New System.Drawing.Size(223, 70)
+        Me.MenuListe.Size = New System.Drawing.Size(223, 114)
         '
         'ChangerLeTypeDutilisateurToolStripMenuItem
         '
+        Me.ChangerLeTypeDutilisateurToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UtilisateurToolStripMenuItem, Me.ChefDeServiceToolStripMenuItem, Me.AdministrateurToolStripMenuItem})
         Me.ChangerLeTypeDutilisateurToolStripMenuItem.Name = "ChangerLeTypeDutilisateurToolStripMenuItem"
         Me.ChangerLeTypeDutilisateurToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
         Me.ChangerLeTypeDutilisateurToolStripMenuItem.Text = "Changer le type d'utilisateur"
+        '
+        'UtilisateurToolStripMenuItem
+        '
+        Me.UtilisateurToolStripMenuItem.Name = "UtilisateurToolStripMenuItem"
+        Me.UtilisateurToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.UtilisateurToolStripMenuItem.Text = "Utilisateur"
+        '
+        'ChefDeServiceToolStripMenuItem
+        '
+        Me.ChefDeServiceToolStripMenuItem.Name = "ChefDeServiceToolStripMenuItem"
+        Me.ChefDeServiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChefDeServiceToolStripMenuItem.Text = "Chef de service"
+        '
+        'AdministrateurToolStripMenuItem
+        '
+        Me.AdministrateurToolStripMenuItem.Name = "AdministrateurToolStripMenuItem"
+        Me.AdministrateurToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AdministrateurToolStripMenuItem.Text = "Administrateur"
+        '
+        'ChangerLeServiceToolStripMenuItem
+        '
+        Me.ChangerLeServiceToolStripMenuItem.Name = "ChangerLeServiceToolStripMenuItem"
+        Me.ChangerLeServiceToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.ChangerLeServiceToolStripMenuItem.Text = "Changer le service"
         '
         'RéinitialiserLeMotDePasseToolStripMenuItem
         '
@@ -152,4 +181,8 @@ Partial Class frmUtilisateursGestion
     Friend WithEvents txtRechercher As MaterialSkin.Controls.MaterialTextBox
     Friend WithEvents MaterialButton1 As MaterialSkin.Controls.MaterialButton
     Friend WithEvents RéinitialiserLeMotDePasseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChangerLeServiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UtilisateurToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChefDeServiceToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AdministrateurToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -80,7 +80,7 @@ Partial Class frmConnexion
         Me.mtxtID.ForeColor = System.Drawing.SystemColors.ControlText
         Me.mtxtID.Hint = "Identifiant"
         Me.mtxtID.Location = New System.Drawing.Point(13, 74)
-        Me.mtxtID.MaxLength = 32767
+        Me.mtxtID.MaxLength = 50
         Me.mtxtID.MouseState = MaterialSkin.MouseState.OUT
         Me.mtxtID.Multiline = False
         Me.mtxtID.Name = "mtxtID"
@@ -96,7 +96,7 @@ Partial Class frmConnexion
         Me.mtxtPassword.Font = New System.Drawing.Font("Roboto", 12.0!)
         Me.mtxtPassword.Hint = "Mot de passe"
         Me.mtxtPassword.Location = New System.Drawing.Point(13, 116)
-        Me.mtxtPassword.MaxLength = 32767
+        Me.mtxtPassword.MaxLength = 50
         Me.mtxtPassword.MouseState = MaterialSkin.MouseState.OUT
         Me.mtxtPassword.Multiline = False
         Me.mtxtPassword.Name = "mtxtPassword"

@@ -55,7 +55,10 @@ Public Class frmServicesAjouter
         End If
 
         If frmServicesGestion.IsHandleCreated Then
-            frmServicesGestion.LoadTableaux(txtName.Text)
+            frmServicesGestion.LoadServices(txtName.Text)
+        End If
+        If frmServicesGestion.IsHandleCreated Then
+            frmUtilisateursAjouter.LoadServices(txtName.Text)
         End If
         Me.Close()
     End Sub

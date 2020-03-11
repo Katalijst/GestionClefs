@@ -14,8 +14,17 @@ Public Class frmUtilisateursGestion
     Private Sub frmGestionUtilisateur_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
+
+        If GlobalUserType = "Chef de service" Then
+            ChangerLeServiceToolStripMenuItem.Enabled = False
+
+        End If
         dgvListUser.Focus()
         RefreshList()
+    End Sub
+
+    Private Sub frmGestionUtilisateur_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
+        Me.Dispose()
     End Sub
 
     Public Sub RefreshList()
@@ -25,19 +34,24 @@ Public Class frmUtilisateursGestion
         Dim sql As String
 
         Try
-
-            sql = "Select LUserName, LUserType From Login where LUserName<>""" & GlobalUserName & """ order by LUserName ASC"
-
+            If GlobalUserType = "Chef de service" Then
+                sql = "Select LUserName, LUserType From Login where LUserName <> @Username AND LServices = @Service order by LUserName ASC"
+                cmd.Parameters.Add("@Service", MySqlDbType.VarChar).Value = GlobalServices
+            Else
+                sql = "Select LUserName, LUserType, LServices From Login where LUserName <> @Username order by LUserName ASC"
+            End If
             With cmd
+                .Parameters.Add("@Username", MySqlDbType.VarChar).Value = GlobalUserName
                 .Connection = connecter()
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
             da.Fill(dtUser)
-
-            For i As Integer = 0 To dtUser.Columns.Count - 1
-                dtUser.Columns(i).ColumnName = dtUser.Columns(i).ColumnName.ToString().Remove(0, 1)
-            Next
+            dtUser.Columns("LUserName").ColumnName = "Identifiant"
+            dtUser.Columns("LUserType").ColumnName = "Type de compte"
+            If GlobalUserType <> "Chef de service" Then
+                dtUser.Columns("LServices").ColumnName = "Service"
+            End If
             dgvListUser.DataSource = dtUser
 
             For i = 0 To dgvListUser.ColumnCount - 2
@@ -53,18 +67,19 @@ Public Class frmUtilisateursGestion
     Private Sub txtRechercher_TextChanged(sender As Object, e As EventArgs) Handles txtRechercher.TextChanged
         Dim searchValue As String = txtRechercher.Text
         Dim intIndexNom As Integer = dgvListUser.Columns("UserName").Index
-
-        Try
-            For i = 0 To dgvListUser.RowCount - 1
-                If dgvListUser.Rows(i).Cells(intIndexNom).Value.ToString.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
-                    dgvListUser.Rows(i).Selected = True
-                    dgvListUser.FirstDisplayedScrollingRowIndex = i
-                    Exit For
-                End If
-            Next
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+        If dgvListUser.Rows.Count > 0 Then
+            Try
+                For i = 0 To dgvListUser.RowCount - 1
+                    If dgvListUser.Rows(i).Cells(intIndexNom).Value.ToString.IndexOf(searchValue, 0, StringComparison.CurrentCultureIgnoreCase) > -1 Then
+                        dgvListUser.Rows(i).Selected = True
+                        dgvListUser.FirstDisplayedScrollingRowIndex = i
+                        Exit For
+                    End If
+                Next
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
     End Sub
     Private Sub dgvListUser_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvListUser.CellMouseDown
         If e.RowIndex <> -1 AndAlso e.ColumnIndex <> -1 Then
@@ -117,19 +132,63 @@ Public Class frmUtilisateursGestion
         End If
     End Sub
 
-    Private Sub ChangerLeTypeDutilisateurToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangerLeTypeDutilisateurToolStripMenuItem.Click
+    Private Sub SetAdmin()
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
         Dim sql As String
 
         Dim UserToSwitch As String = dgvListUser.SelectedRows(0).Cells(0).Value.ToString()
-        Dim UserToSwitchType As String = dgvListUser.SelectedRows(0).Cells(1).Value.ToString()
-        Dim NewType As String
-        If UserToSwitchType = "Administrateur" Then
-            NewType = "Utilisateur"
-        Else
-            NewType = "Administrateur"
-        End If
+        Dim NewType As String = "Administrateur"
+
+        Try
+            sql = "UPDATE Login SET LUserType=@NewType WHERE LUserName=@Username"
+            With cmd
+                .Parameters.Add("@Username", MySqlDbType.VarChar).Value = UserToSwitch
+                .Parameters.Add("@NewType", MySqlDbType.VarChar).Value = NewType
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+            da.SelectCommand = cmd
+            connecter().Close()
+            RefreshList()
+        Catch ex As MySqlException
+            MsgBox(ex.Number & " - " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub SetChefDeService()
+        Dim cmd As New MySqlCommand
+        Dim da As New MySqlDataAdapter
+        Dim sql As String
+
+        Dim UserToSwitch As String = dgvListUser.SelectedRows(0).Cells(0).Value.ToString()
+        Dim NewType As String = "Chef de service"
+
+        Try
+            sql = "UPDATE Login SET LUserType=@NewType WHERE LUserName=@Username"
+            With cmd
+                .Parameters.Add("@Username", MySqlDbType.VarChar).Value = UserToSwitch
+                .Parameters.Add("@NewType", MySqlDbType.VarChar).Value = NewType
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+            da.SelectCommand = cmd
+            connecter().Close()
+            RefreshList()
+        Catch ex As MySqlException
+            MsgBox(ex.Number & " - " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub SetUtilisateur()
+        Dim cmd As New MySqlCommand
+        Dim da As New MySqlDataAdapter
+        Dim sql As String
+
+        Dim UserToSwitch As String = dgvListUser.SelectedRows(0).Cells(0).Value.ToString()
+        Dim NewType As String = "Utilisateur"
 
         Try
             sql = "UPDATE Login SET LUserType=@NewType WHERE LUserName=@Username"
@@ -191,5 +250,21 @@ Public Class frmUtilisateursGestion
 
     Private Sub RéinitialiserLeMotDePasseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RéinitialiserLeMotDePasseToolStripMenuItem.Click
         ResetPassword()
+    End Sub
+
+    Private Sub AdministrateurToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdministrateurToolStripMenuItem.Click
+        SetAdmin()
+    End Sub
+
+    Private Sub ChefDeServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChefDeServiceToolStripMenuItem.Click
+        SetChefDeService()
+    End Sub
+
+    Private Sub UtilisateurToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UtilisateurToolStripMenuItem.Click
+        SetUtilisateur()
+    End Sub
+
+    Private Sub ChangerLeServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangerLeServiceToolStripMenuItem.Click
+        frmUtilisateurChangerService.ShowDialog()
     End Sub
 End Class

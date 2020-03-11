@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmServicesAjouter
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class frmUtilisateurChangerService
     Inherits MaterialSkin.Controls.MaterialForm
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class frmServicesAjouter
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmServicesAjouter))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUtilisateurChangerService))
         Me.btnValider = New MaterialSkin.Controls.MaterialButton()
-        Me.txtName = New MaterialSkin.Controls.MaterialTextBox()
+        Me.cbServices = New MaterialSkin.Controls.MaterialComboBox()
         Me.SuspendLayout()
         '
         'btnValider
@@ -39,47 +39,54 @@ Partial Class frmServicesAjouter
         Me.btnValider.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnValider.Name = "btnValider"
         Me.btnValider.Size = New System.Drawing.Size(41, 36)
-        Me.btnValider.TabIndex = 5
+        Me.btnValider.TabIndex = 7
         Me.btnValider.Text = "OK"
         Me.btnValider.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained
         Me.btnValider.UseAccentColor = False
         Me.btnValider.UseVisualStyleBackColor = True
         '
-        'txtName
+        'cbServices
         '
-        Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtName.Depth = 0
-        Me.txtName.Font = New System.Drawing.Font("Roboto", 12.0!)
-        Me.txtName.Hint = "Nom du services..."
-        Me.txtName.Location = New System.Drawing.Point(12, 72)
-        Me.txtName.MaxLength = 255
-        Me.txtName.MouseState = MaterialSkin.MouseState.OUT
-        Me.txtName.Multiline = False
-        Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(276, 36)
-        Me.txtName.TabIndex = 4
-        Me.txtName.Text = ""
-        Me.txtName.UseTallSize = False
+        Me.cbServices.AutoResize = False
+        Me.cbServices.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbServices.Depth = 0
+        Me.cbServices.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cbServices.DropDownHeight = 118
+        Me.cbServices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbServices.DropDownWidth = 121
+        Me.cbServices.Font = New System.Drawing.Font("Roboto Medium", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel)
+        Me.cbServices.ForeColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbServices.FormattingEnabled = True
+        Me.cbServices.Hint = "Services"
+        Me.cbServices.IntegralHeight = False
+        Me.cbServices.ItemHeight = 29
+        Me.cbServices.Location = New System.Drawing.Point(12, 73)
+        Me.cbServices.MaxDropDownItems = 4
+        Me.cbServices.MouseState = MaterialSkin.MouseState.OUT
+        Me.cbServices.Name = "cbServices"
+        Me.cbServices.Size = New System.Drawing.Size(276, 35)
+        Me.cbServices.TabIndex = 8
+        Me.cbServices.UseTallSize = False
         '
-        'frmServicesAjouter
+        'frmUtilisateurChangerService
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(349, 116)
+        Me.Controls.Add(Me.cbServices)
         Me.Controls.Add(Me.btnValider)
-        Me.Controls.Add(Me.txtName)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmServicesAjouter"
+        Me.Name = "frmUtilisateurChangerService"
         Me.Sizable = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Nouveau service"
+        Me.Text = "Changer de service"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents btnValider As MaterialSkin.Controls.MaterialButton
-    Friend WithEvents txtName As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents cbServices As MaterialSkin.Controls.MaterialComboBox
 End Class

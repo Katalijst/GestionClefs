@@ -41,7 +41,7 @@
     <PublisherName>Mairie de Coutras</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -627,10 +627,10 @@
     <Compile Include="frmClefsEditerEtProprietesGroupeBat.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUtilisateurChangePassword.Designer.vb">
-      <DependentUpon>frmUtilisateurChangePassword.vb</DependentUpon>
+    <Compile Include="frmUtilisateurChangerPassword.Designer.vb">
+      <DependentUpon>frmUtilisateurChangerPassword.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmUtilisateurChangePassword.vb">
+    <Compile Include="frmUtilisateurChangerPassword.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="modAES.vb" />
@@ -676,6 +676,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Simple3Des.vb" />
+    <Compile Include="frmUtilisateurChangerService.Designer.vb">
+      <DependentUpon>frmUtilisateurChangerService.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUtilisateurChangerService.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAbout.resx">
@@ -689,6 +695,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTrousseauCreerOuRemplir.resx">
       <DependentUpon>frmTrousseauCreerOuRemplir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUtilisateurChangerService.resx">
+      <DependentUpon>frmUtilisateurChangerService.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUtilisateursAjouter.resx">
       <DependentUpon>frmUtilisateursAjouter.vb</DependentUpon>
@@ -747,8 +756,8 @@
     <EmbeddedResource Include="frmClefsEditerEtProprietesGroupeBat.resx">
       <DependentUpon>frmClefsEditerEtProprietesGroupeBat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUtilisateurChangePassword.resx">
-      <DependentUpon>frmUtilisateurChangePassword.vb</DependentUpon>
+    <EmbeddedResource Include="frmUtilisateurChangerPassword.resx">
+      <DependentUpon>frmUtilisateurChangerPassword.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -773,7 +782,6 @@
     <None Include="bin\Debug\PRET_CLE_P1.pdf" />
     <None Include="bin\Debug\PRET_CLE_PX.pdf" />
     <None Include="GestionClefsKey.pfx" />
-    <None Include="GestionClefs_1_TemporaryKey.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

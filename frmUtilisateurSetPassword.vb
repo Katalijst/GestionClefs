@@ -45,8 +45,8 @@ Public Class frmUtilisateurSetPassword
                     Exit Sub
                 Finally
                     connecter().Close()
-                    frmMain.Show()
                     Me.Hide()
+                    frmMain.Show()
                 End Try
             Else
                 MsgBox("Veuillez remplir tout les champs.", MsgBoxStyle.Critical, "Erreur")

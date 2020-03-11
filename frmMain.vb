@@ -103,8 +103,13 @@ Public Class frmMain
         Dim cmd As New MySqlCommand
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
+        Dim SqlCommand As String
         'Déclaration de la requète
-        Dim SqlCommand As String = "Select EIDClef From Emprunts Where EDateFin < DATE(NOW())"
+        If GlobalServices <> "Global" Then
+            SqlCommand = "SELECT EIDClef from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE EDateFin < DATE(NOW())"
+        Else
+            SqlCommand = "Select EIDClef From Emprunts Where EDateFin < DATE(NOW())"
+        End If
         'Try permet de renvoyer l'erreur si la requète échoue au lieu de freeze le logiciel
         Try
             'reset de la datatable, pas nécessaire à l'initialisation, mais pour les refresh oui
@@ -192,116 +197,116 @@ Public Class frmMain
         dtKeyList.Reset()
         dtOwner.Reset()
 
-        'Try
-        If GlobalServices <> "Global" Then
-            sql = "SELECT COUNT(CID) from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau"
-        Else
-            sql = "SELECT COUNT(CID) FROM Clefs "
-        End If
-        With cmd
-            .Connection = connecter()
-            .CommandText = sql
-            .ExecuteNonQuery()
-        End With
-        da.SelectCommand = cmd
-        da.Fill(dtAmount)
-        If dtAmount.Rows.Count > 0 Then
-            intKeyAmount = dtAmount.Rows(0).Item(0)
-        End If
+        Try
+            If GlobalServices <> "Global" Then
+                sql = "SELECT COUNT(CID) from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau"
+            Else
+                sql = "SELECT COUNT(CID) FROM Clefs "
+            End If
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtAmount)
+            If dtAmount.Rows.Count > 0 Then
+                intKeyAmount = dtAmount.Rows(0).Item(0)
+            End If
 
-        If GlobalServices <> "Global" Then
-            sql = "SELECT CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment <> 'Groupe de Batiments'"
-        Else
-            sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment <> 'Groupe de Batiments'"
-        End If
-        With cmd
-            .Connection = connecter()
-            .CommandText = sql
-            .ExecuteNonQuery()
-        End With
-        da.SelectCommand = cmd
-        da.Fill(dtKeyListSansGBat)
+            If GlobalServices <> "Global" Then
+                sql = "SELECT CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment <> 'Groupe de Batiments'"
+            Else
+                sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment <> 'Groupe de Batiments'"
+            End If
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtKeyListSansGBat)
 
-        If GlobalServices <> "Global" Then
-            sql = "SELECT CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment = 'Groupe de Batiments'"
-        Else
-            sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment = 'Groupe de Batiments'"
-        End If
-        With cmd
-            .Connection = connecter()
-            .CommandText = sql
-            .ExecuteNonQuery()
-        End With
-        da.SelectCommand = cmd
-        da.Fill(dtKeyListAvecGBat)
-        If GlobalServices <> "Global" Then
-            sql = "SELECT GIDClef, GIDBat from GroupeBat INNER JOIN (SELECT CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment = 'Groupe de Batiments') temp0 ON temp0.CID like CONCAT(GroupeBat.GIDClef, '-%')"
-        Else
-            sql = "Select GIDClef, GIDBat FROM GroupeBat"
-        End If
-        With cmd
-            .Connection = connecter()
-            .CommandText = sql
-            .ExecuteNonQuery()
-        End With
-        da.SelectCommand = cmd
-        da.Fill(dtGBat)
-        If GlobalServices <> "Global" Then
-            sql = "SELECT CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE Clefs.CID = Emprunts.EIDClef And CStatus <> 'Perdue' And CID <> '0'"
-        Else
-            sql = "Select CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef And CStatus <> 'Perdue' And CID <> '0'"
-        End If
-        With cmd
-            .Connection = connecter()
-            .CommandText = sql
-        End With
-        da.SelectCommand = cmd
-        da.Fill(dtKeyListByOwner)
+            If GlobalServices <> "Global" Then
+                sql = "SELECT CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment = 'Groupe de Batiments'"
+            Else
+                sql = "Select CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment = 'Groupe de Batiments'"
+            End If
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtKeyListAvecGBat)
+            If GlobalServices <> "Global" Then
+                sql = "SELECT GIDClef, GIDBat from GroupeBat INNER JOIN (SELECT CID, CNom, CPosition, CStatus, CTrousseau, CBatiment from Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau Where CID <> '0' AND CStatus <> 'Perdue' AND CBatiment = 'Groupe de Batiments') temp0 ON temp0.CID like CONCAT(GroupeBat.GIDClef, '-%')"
+            Else
+                sql = "Select GIDClef, GIDBat FROM GroupeBat"
+            End If
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+                .ExecuteNonQuery()
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtGBat)
+            If GlobalServices <> "Global" Then
+                sql = "SELECT CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE Clefs.CID = Emprunts.EIDClef And CStatus <> 'Perdue' And CID <> '0'"
+            Else
+                sql = "Select CTrousseau, CID, CNom, CPosition, CStatus, ENomPersonne, EDateDebut, EDateFin FROM Clefs, Emprunts WHERE Clefs.CID = Emprunts.EIDClef And CStatus <> 'Perdue' And CID <> '0'"
+            End If
+            With cmd
+                .Connection = connecter()
+                .CommandText = sql
+            End With
+            da.SelectCommand = cmd
+            da.Fill(dtKeyListByOwner)
 
-        dtKeyListByOwner.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-        dtKeyListByOwner.Columns("CID").ColumnName = strTitleCID
-        dtKeyListByOwner.Columns("CNom").ColumnName = strTitleCNom
-        dtKeyListByOwner.Columns("CPosition").ColumnName = strTitleCPosition
-        dtKeyListByOwner.Columns("CStatus").ColumnName = strTitleCStatus
-        dtKeyListByOwner.Columns("ENomPersonne").ColumnName = "Emprunteur"
-        dtKeyListByOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
-        dtKeyListByOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
+            dtKeyListByOwner.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtKeyListByOwner.Columns("CID").ColumnName = strTitleCID
+            dtKeyListByOwner.Columns("CNom").ColumnName = strTitleCNom
+            dtKeyListByOwner.Columns("CPosition").ColumnName = strTitleCPosition
+            dtKeyListByOwner.Columns("CStatus").ColumnName = strTitleCStatus
+            dtKeyListByOwner.Columns("ENomPersonne").ColumnName = "Emprunteur"
+            dtKeyListByOwner.Columns("EDateDebut").ColumnName = strTitleEDateDebut
+            dtKeyListByOwner.Columns("EDateFin").ColumnName = strTitleEDateFin
 
-        dtOwner = dtKeyListByOwner.Copy
-        srcOwner.DataSource = dtOwner
+            dtOwner = dtKeyListByOwner.Copy
+            srcOwner.DataSource = dtOwner
 
 
-        If cbRechercher.Text <> "Emprunteur" Then
-            dgvResultats.DataSource = srcKeyList
-            dtEmpty = dtKeyListSansGBat.Copy
-            dtEmpty.Columns.Add("Quantité")
-            dtEmpty.Rows.Clear()
-            dtEmpty.Columns("CID").ColumnName = strTitleCID
-            dtEmpty.Columns("CNom").ColumnName = strTitleCNom
-            dtEmpty.Columns("CPosition").ColumnName = strTitleCPosition
-            dtEmpty.Columns("CStatus").ColumnName = strTitleCStatus
-            dtEmpty.Columns("CTrousseau").ColumnName = strTitleCTrousseau
-            dtEmpty.Columns("CBatiment").ColumnName = strTitleCBatiment
-        Else
-            dgvResultats.RowHeadersVisible = False
-            dgvResultats.DataSource = srcOwner
-            dtEmpty = dtOwner.Copy
-            dtEmpty.Rows.Clear()
-        End If
-        dtPanier = dtEmpty.Copy
-        srcPanier.DataSource = dtPanier
-        dgvPanier.DataSource = srcPanier
-        dgvPanier.Columns("Quantité").Visible = False
-        connecter().Close()
-        '  Catch ex As MySqlException
-        'MsgBox(ex.Number & " - " & ex.Message)
-        'Finally
-        Rechercher()
-        'End Try
+            If cbRechercher.Text <> "Emprunteur" Then
+                dgvResultats.DataSource = srcKeyList
+                dtEmpty = dtKeyListSansGBat.Copy
+                dtEmpty.Columns.Add("Quantité")
+                dtEmpty.Rows.Clear()
+                dtEmpty.Columns("CID").ColumnName = strTitleCID
+                dtEmpty.Columns("CNom").ColumnName = strTitleCNom
+                dtEmpty.Columns("CPosition").ColumnName = strTitleCPosition
+                dtEmpty.Columns("CStatus").ColumnName = strTitleCStatus
+                dtEmpty.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+                dtEmpty.Columns("CBatiment").ColumnName = strTitleCBatiment
+            Else
+                dgvResultats.RowHeadersVisible = False
+                dgvResultats.DataSource = srcOwner
+                dtEmpty = dtOwner.Copy
+                dtEmpty.Rows.Clear()
+            End If
+            dtPanier = dtEmpty.Copy
+            srcPanier.DataSource = dtPanier
+            dgvPanier.DataSource = srcPanier
+            dgvPanier.Columns("Quantité").Visible = False
+            connecter().Close()
+        Catch ex As MySqlException
+            MsgBox(ex.Number & " - " & ex.Message)
+        Finally
+            Rechercher()
+        End Try
     End Sub
 
     Private Sub Rechercher()
-        If dtKeyListSansGBat.Rows.Count < 1 Or dtGBat.Rows.Count < 1 Then
+        If dtKeyListSansGBat.Rows.Count < 1 And dtGBat.Rows.Count < 1 Then
             Exit Sub
         End If
         Dim dtResultats As DataTable = dtKeyListSansGBat.Copy
@@ -315,15 +320,17 @@ Public Class frmMain
         End If
         Dim rClefSansGroupFiltrees() As DataRow = dtKeyListSansGBat.Select("CBatiment LIKE '" & stgRechercheBat & "'")
         Dim rIDClefGroupBatFiltres() As DataRow = dtGBat.Select("GIDBat LIKE '" & stgRechercheBat & "'")
-        If rClefSansGroupFiltrees.Count > 0 Then
+        If rClefSansGroupFiltrees.Length > 0 Then
             dtResultats.Merge(rClefSansGroupFiltrees.CopyToDataTable)
         End If
 
-        For Each r As DataRow In rIDClefGroupBatFiltres
-            For Each dr As DataRow In dtKeyListAvecGBat.Select("CID LIKE '" & r.Item("GIDClef") & "-%'").CopyToDataTable.Rows()
-                dtResultats.ImportRow(dr)
+        If rIDClefGroupBatFiltres.Length > 0 Then
+            For Each r As DataRow In rIDClefGroupBatFiltres
+                For Each dr As DataRow In dtKeyListAvecGBat.Select("CID LIKE '" & r.Item("GIDClef") & "-%'").CopyToDataTable.Rows()
+                    dtResultats.ImportRow(dr)
+                Next
             Next
-        Next
+        End If
 
         Dim CheckIDClef As New StringCollection()
         Dim dtTempDistinct As DataTable = dtResultats.Copy

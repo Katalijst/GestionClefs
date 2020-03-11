@@ -14,6 +14,10 @@ Public Class frmUtilisateursAjouter
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
         LoadServices()
+        If GlobalUserType = "Chef de service" Then
+            cbUserType.Text = "Utilisateur"
+            cbUserType.Enabled = False
+        End If
     End Sub
 
     Private Sub frmAddUser_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
@@ -39,9 +43,15 @@ Public Class frmUtilisateursAjouter
             For Each r As DataRow In dt.Rows
                 cbServices.Items.Add(r.Item(0).ToString)
             Next
+
             If name <> "Empty" Then
                 cbServices.Text = name
             End If
+            If GlobalUserType = "Chef de service" Then
+                cbServices.Text = GlobalUserType
+                cbServices.Enabled = False
+            End If
+
             connecter().Close()
         Catch ex As MySqlException
             MsgBox(ex.Number & " - " & ex.Message)
@@ -56,7 +66,7 @@ Public Class frmUtilisateursAjouter
         ElseIf txtPassword.Text.Length < 6 Then
             MsgBox("Le mot de passe doit être composé d'au moins 6 caractères !")
             Exit Sub
-        ElseIf cbServices.SelectedIndex <> -1 Then
+        ElseIf cbServices.SelectedIndex <> -1 Or GlobalUserType = "Chef de service" Then
             If txtID.Text.Replace(" ", "") <> "" Then
                 Dim stgID As String = txtID.Text
                 Dim stgPassword As String = txtPassword.Text
@@ -100,5 +110,9 @@ Public Class frmUtilisateursAjouter
 
     Private Sub btnAnnuler_Click(sender As Object, e As EventArgs) Handles btnAnnuler.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnAddServices_Click(sender As Object, e As EventArgs) Handles btnAddServices.Click
+        frmServicesAjouter.ShowDialog()
     End Sub
 End Class

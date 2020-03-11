@@ -15,6 +15,9 @@ Public Class frmParametres
             btnGestionUtilisateurs.Enabled = False
             btnMySQL.Enabled = False
             btnServices.Enabled = False
+            If GlobalUserType = "Chef de service" Then
+                btnGestionUtilisateurs.Enabled = True
+            End If
         End If
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)

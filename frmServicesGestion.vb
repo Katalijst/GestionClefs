@@ -111,7 +111,6 @@ Public Class frmServicesGestion
         End Try
     End Sub
 
-
     Private Sub addToSel()
         If cbServices.SelectedIndex <> -1 Then
             If dgvListTableaux.SelectedRows.Count > 0 Then
@@ -206,6 +205,44 @@ Public Class frmServicesGestion
 
     End Sub
 
+    Private Sub SupprimerService()
+        If cbServices.SelectedIndex > -1 Then
+            ' Initializes variables to pass to the MessageBox.Show method.
+            Dim Message As String = "Voulez vous vraiment supprimer le service " & cbServices.Text & " ?"
+            Dim Caption As String = "Supprimer un service"
+            Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
+            Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+            Dim Result As DialogResult
+            'Displays the MessageBox
+            Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+            ' Gets the result of the MessageBox display.
+            If Result = System.Windows.Forms.DialogResult.Yes Then
+                Dim cmdDelete As New MySqlCommand
+                Dim cmdInsert As New MySqlCommand
+                Dim da As New MySqlDataAdapter
+                Dim sql As String
+
+                Try
+                    sql = "DELETE FROM Services WHERE SNom=@Service"
+                    With cmdDelete
+                        .Parameters.Add("@Service", MySqlDbType.VarChar).Value = cbServices.Text
+                        .Connection = connecter()
+                        .CommandText = sql
+                        .CommandType = CommandType.Text
+                        .Connection = connecter()
+                        .ExecuteNonQuery()
+                    End With
+                    connecter.close
+                Catch ex As MySqlException
+                    MsgBox(ex.Number & " - " & ex.Message)
+                    connecter().Close()
+                Finally
+                    hasModificationBeenDone = False
+                End Try
+            End If
+        End If
+    End Sub
+
     Private Sub cbServices_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServices.SelectedIndexChanged
         If cbServices.SelectedIndex <> indexServices Then
             If hasModificationBeenDone = True Then
@@ -248,11 +285,11 @@ Public Class frmServicesGestion
         SaveChanges()
     End Sub
 
-    Private Sub dgvListTableaux_DoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListTableaux.DoubleClick
+    Private Sub dgvListTableaux_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvListTableaux.CellDoubleClick
         addToSel()
     End Sub
 
-    Private Sub dgvSelTableaux_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSelTableaux.CellContentDoubleClick
+    Private Sub dgvSelTableaux_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSelTableaux.CellDoubleClick
         removeFromSel()
     End Sub
 
