@@ -274,31 +274,31 @@ Partial Class frmClefsEmpruntsEtAlertes
         'ClefRetrouvéePerduesStripMenuItem
         '
         Me.ClefRetrouvéePerduesStripMenuItem.Name = "ClefRetrouvéePerduesStripMenuItem"
-        Me.ClefRetrouvéePerduesStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ClefRetrouvéePerduesStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.ClefRetrouvéePerduesStripMenuItem.Text = "Clef retrouvée"
         '
         'InformationsPerduesStripMenuItem
         '
         Me.InformationsPerduesStripMenuItem.Name = "InformationsPerduesStripMenuItem"
-        Me.InformationsPerduesStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.InformationsPerduesStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.InformationsPerduesStripMenuItem.Text = "Informations"
         '
         'menuEmprunt
         '
         Me.menuEmprunt.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RetourEmpruntStripMenuItem, Me.InformationsEmpruntStripMenuItem2})
         Me.menuEmprunt.Name = "menuGrid"
-        Me.menuEmprunt.Size = New System.Drawing.Size(181, 70)
+        Me.menuEmprunt.Size = New System.Drawing.Size(146, 48)
         '
         'RetourEmpruntStripMenuItem
         '
         Me.RetourEmpruntStripMenuItem.Name = "RetourEmpruntStripMenuItem"
-        Me.RetourEmpruntStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.RetourEmpruntStripMenuItem.Size = New System.Drawing.Size(145, 22)
         Me.RetourEmpruntStripMenuItem.Text = "Rendre la clef"
         '
         'InformationsEmpruntStripMenuItem2
         '
         Me.InformationsEmpruntStripMenuItem2.Name = "InformationsEmpruntStripMenuItem2"
-        Me.InformationsEmpruntStripMenuItem2.Size = New System.Drawing.Size(180, 22)
+        Me.InformationsEmpruntStripMenuItem2.Size = New System.Drawing.Size(145, 22)
         Me.InformationsEmpruntStripMenuItem2.Text = "Informations"
         '
         'frmClefsEmpruntsEtAlertes
@@ -316,6 +316,7 @@ Partial Class frmClefsEmpruntsEtAlertes
         Me.Name = "frmClefsEmpruntsEtAlertes"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Emprunts et alertes"
         CType(Me.dgvAlertes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.menuAlertes.ResumeLayout(False)

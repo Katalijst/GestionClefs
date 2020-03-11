@@ -243,6 +243,7 @@ Partial Class frmPersonnesEditer
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Editer une personne..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

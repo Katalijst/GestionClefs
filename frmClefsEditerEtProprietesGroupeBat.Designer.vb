@@ -87,6 +87,7 @@ Partial Class frmClefsEditerEtProprietesGroupeBat
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "frmPropGpBat"
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

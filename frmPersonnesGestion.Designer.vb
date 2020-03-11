@@ -414,6 +414,7 @@ Partial Class frmPersonnesGestion
         Me.Name = "frmPersonnesGestion"
         Me.ShowIcon = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Gérer les personnes"
         Me.gbRechercher.ResumeLayout(False)
         Me.gbRechercher.PerformLayout()

@@ -30,28 +30,31 @@ Partial Class frmParametres
         Me.btnMySQL = New MaterialSkin.Controls.MaterialButton()
         Me.btnGestionUtilisateurs = New MaterialSkin.Controls.MaterialButton()
         Me.btnChangerMotDePasse = New MaterialSkin.Controls.MaterialButton()
+        Me.btnServices = New MaterialSkin.Controls.MaterialButton()
+        Me.MaterialDivider1 = New MaterialSkin.Controls.MaterialDivider()
+        Me.MaterialDivider2 = New MaterialSkin.Controls.MaterialDivider()
         Me.SuspendLayout()
         '
         'swtDarkMode
         '
         Me.swtDarkMode.AutoSize = True
         Me.swtDarkMode.Depth = 0
-        Me.swtDarkMode.Location = New System.Drawing.Point(13, 246)
+        Me.swtDarkMode.Location = New System.Drawing.Point(13, 259)
         Me.swtDarkMode.Margin = New System.Windows.Forms.Padding(0)
         Me.swtDarkMode.MouseLocation = New System.Drawing.Point(-1, -1)
         Me.swtDarkMode.MouseState = MaterialSkin.MouseState.HOVER
         Me.swtDarkMode.Name = "swtDarkMode"
         Me.swtDarkMode.Ripple = True
-        Me.swtDarkMode.Size = New System.Drawing.Size(155, 37)
+        Me.swtDarkMode.Size = New System.Drawing.Size(201, 37)
         Me.swtDarkMode.TabIndex = 13
-        Me.swtDarkMode.Text = "Mode sombre"
+        Me.swtDarkMode.Text = "Mode sombre (bêta)"
         Me.swtDarkMode.UseVisualStyleBackColor = True
         '
         'swtAlertPopUp
         '
         Me.swtAlertPopUp.AutoSize = True
         Me.swtAlertPopUp.Depth = 0
-        Me.swtAlertPopUp.Location = New System.Drawing.Point(13, 206)
+        Me.swtAlertPopUp.Location = New System.Drawing.Point(13, 219)
         Me.swtAlertPopUp.Margin = New System.Windows.Forms.Padding(0)
         Me.swtAlertPopUp.MouseLocation = New System.Drawing.Point(-1, -1)
         Me.swtAlertPopUp.MouseState = MaterialSkin.MouseState.HOVER
@@ -70,7 +73,7 @@ Partial Class frmParametres
         Me.btnOK.DrawShadows = True
         Me.btnOK.HighEmphasis = True
         Me.btnOK.Icon = Nothing
-        Me.btnOK.Location = New System.Drawing.Point(243, 289)
+        Me.btnOK.Location = New System.Drawing.Point(243, 309)
         Me.btnOK.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnOK.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnOK.Name = "btnOK"
@@ -88,7 +91,7 @@ Partial Class frmParametres
         Me.btnAbout.DrawShadows = True
         Me.btnAbout.HighEmphasis = True
         Me.btnAbout.Icon = Nothing
-        Me.btnAbout.Location = New System.Drawing.Point(13, 289)
+        Me.btnAbout.Location = New System.Drawing.Point(13, 309)
         Me.btnAbout.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnAbout.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnAbout.Name = "btnAbout"
@@ -106,7 +109,7 @@ Partial Class frmParametres
         Me.btnMySQL.DrawShadows = True
         Me.btnMySQL.HighEmphasis = True
         Me.btnMySQL.Icon = Nothing
-        Me.btnMySQL.Location = New System.Drawing.Point(13, 164)
+        Me.btnMySQL.Location = New System.Drawing.Point(13, 170)
         Me.btnMySQL.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnMySQL.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnMySQL.Name = "btnMySQL"
@@ -124,7 +127,7 @@ Partial Class frmParametres
         Me.btnGestionUtilisateurs.DrawShadows = True
         Me.btnGestionUtilisateurs.HighEmphasis = True
         Me.btnGestionUtilisateurs.Icon = Nothing
-        Me.btnGestionUtilisateurs.Location = New System.Drawing.Point(13, 116)
+        Me.btnGestionUtilisateurs.Location = New System.Drawing.Point(13, 74)
         Me.btnGestionUtilisateurs.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnGestionUtilisateurs.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnGestionUtilisateurs.Name = "btnGestionUtilisateurs"
@@ -142,7 +145,7 @@ Partial Class frmParametres
         Me.btnChangerMotDePasse.DrawShadows = True
         Me.btnChangerMotDePasse.HighEmphasis = True
         Me.btnChangerMotDePasse.Icon = Nothing
-        Me.btnChangerMotDePasse.Location = New System.Drawing.Point(13, 70)
+        Me.btnChangerMotDePasse.Location = New System.Drawing.Point(13, 122)
         Me.btnChangerMotDePasse.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
         Me.btnChangerMotDePasse.MouseState = MaterialSkin.MouseState.HOVER
         Me.btnChangerMotDePasse.Name = "btnChangerMotDePasse"
@@ -154,13 +157,56 @@ Partial Class frmParametres
         Me.btnChangerMotDePasse.UseAccentColor = False
         Me.btnChangerMotDePasse.UseVisualStyleBackColor = True
         '
+        'btnServices
+        '
+        Me.btnServices.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnServices.Depth = 0
+        Me.btnServices.DrawShadows = True
+        Me.btnServices.HighEmphasis = True
+        Me.btnServices.Icon = Nothing
+        Me.btnServices.Location = New System.Drawing.Point(147, 74)
+        Me.btnServices.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnServices.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnServices.Name = "btnServices"
+        Me.btnServices.Size = New System.Drawing.Size(88, 36)
+        Me.btnServices.TabIndex = 16
+        Me.btnServices.Text = "Services"
+        Me.btnServices.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Outlined
+        Me.btnServices.UseAccentColor = False
+        Me.btnServices.UseVisualStyleBackColor = True
+        '
+        'MaterialDivider1
+        '
+        Me.MaterialDivider1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.MaterialDivider1.Depth = 0
+        Me.MaterialDivider1.Location = New System.Drawing.Point(13, 215)
+        Me.MaterialDivider1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialDivider1.Name = "MaterialDivider1"
+        Me.MaterialDivider1.Size = New System.Drawing.Size(271, 1)
+        Me.MaterialDivider1.TabIndex = 17
+        Me.MaterialDivider1.Text = "MaterialDivider1"
+        '
+        'MaterialDivider2
+        '
+        Me.MaterialDivider2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.MaterialDivider2.Depth = 0
+        Me.MaterialDivider2.Location = New System.Drawing.Point(7, 299)
+        Me.MaterialDivider2.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialDivider2.Name = "MaterialDivider2"
+        Me.MaterialDivider2.Size = New System.Drawing.Size(271, 1)
+        Me.MaterialDivider2.TabIndex = 18
+        Me.MaterialDivider2.Text = "MaterialDivider2"
+        '
         'frmParametres
         '
         Me.AcceptButton = Me.btnOK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnOK
-        Me.ClientSize = New System.Drawing.Size(296, 338)
+        Me.ClientSize = New System.Drawing.Size(296, 356)
+        Me.Controls.Add(Me.MaterialDivider2)
+        Me.Controls.Add(Me.MaterialDivider1)
+        Me.Controls.Add(Me.btnServices)
         Me.Controls.Add(Me.btnChangerMotDePasse)
         Me.Controls.Add(Me.btnGestionUtilisateurs)
         Me.Controls.Add(Me.swtDarkMode)
@@ -172,6 +218,7 @@ Partial Class frmParametres
         Me.MaximizeBox = False
         Me.Name = "frmParametres"
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Paramètres"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -185,4 +232,7 @@ Partial Class frmParametres
     Friend WithEvents btnMySQL As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnGestionUtilisateurs As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnChangerMotDePasse As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents btnServices As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents MaterialDivider1 As MaterialSkin.Controls.MaterialDivider
+    Friend WithEvents MaterialDivider2 As MaterialSkin.Controls.MaterialDivider
 End Class

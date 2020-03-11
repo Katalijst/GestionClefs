@@ -84,7 +84,7 @@ Partial Class frmBatimentsAjoutGestion
         '
         'TabAjouterBat
         '
-        Me.TabAjouterBat.BackColor = System.Drawing.Color.White
+        Me.TabAjouterBat.BackColor = System.Drawing.Color.Transparent
         Me.TabAjouterBat.Controls.Add(Me.btnSave)
         Me.TabAjouterBat.Controls.Add(Me.btnCancel)
         Me.TabAjouterBat.Controls.Add(Me.chkKeepOpen)
@@ -347,6 +347,7 @@ Partial Class frmBatimentsAjoutGestion
         Me.Name = "frmBatimentsAjoutGestion"
         Me.ShowIcon = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Gérer les bâtiments"
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.MaterialTabControl1.ResumeLayout(False)

@@ -218,6 +218,7 @@ Partial Class frmTableauxEditer
         Me.Name = "frmTableauxEditer"
         Me.ShowIcon = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Editer un tableau..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -14,7 +14,6 @@ Public Class frmUtilisateursGestion
     Private Sub frmGestionUtilisateur_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
-        txtRechercher.SetWaterMark("Rechercher...")
         dgvListUser.Focus()
         RefreshList()
     End Sub
@@ -102,8 +101,9 @@ Public Class frmUtilisateursGestion
             Dim sql As String
 
             Try
-                sql = "DELETE FROM Login WHERE LUserName=""" & stgUsername & """"
+                sql = "DELETE FROM Login WHERE LUserName=@Username"
                 With cmd
+                    .Parameters.Add("@Username", MySqlDbType.VarChar).Value = stgUsername
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
@@ -111,8 +111,8 @@ Public Class frmUtilisateursGestion
                 da.SelectCommand = cmd
                 connecter().Close()
                 RefreshList()
-            Catch ex As Exception
-                MsgBox(ex.Message)
+            Catch ex As MySqlException
+                MsgBox(ex.Number & " - " & ex.Message)
             End Try
         End If
     End Sub
@@ -132,8 +132,10 @@ Public Class frmUtilisateursGestion
         End If
 
         Try
-            sql = "UPDATE Login SET LUserType=""" & NewType & """ WHERE LUserName=""" & UserToSwitch & """"
+            sql = "UPDATE Login SET LUserType=@NewType WHERE LUserName=@Username"
             With cmd
+                .Parameters.Add("@Username", MySqlDbType.VarChar).Value = UserToSwitch
+                .Parameters.Add("@NewType", MySqlDbType.VarChar).Value = NewType
                 .Connection = connecter()
                 .CommandText = sql
                 .ExecuteNonQuery()
@@ -141,8 +143,53 @@ Public Class frmUtilisateursGestion
             da.SelectCommand = cmd
             connecter().Close()
             RefreshList()
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.Number & " - " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub ResetPassword()
+        Dim cmd As New MySqlCommand
+        Dim da As New MySqlDataAdapter
+        Dim sql As String
+
+        Dim UserName As String = dgvListUser.SelectedRows(0).Cells(0).Value.ToString()
+        ' Initializes variables to pass to the MessageBox.Show method.
+        Dim Message As String = "Voulez vous vraiment réinitialiser le mot de passe pour """ & UserName & """ ?"
+        Dim Caption As String = "Réinitialisation mot de passe"
+        Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
+        Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+
+        Dim Result As DialogResult
+
+        'Displays the MessageBox
+        Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+
+        ' Gets the result of the MessageBox display.
+        If Result = System.Windows.Forms.DialogResult.Yes Then
+            Try
+                sql = "UPDATE Login SET LCipher=@cipher WHERE LUserName=@Username"
+                With cmd
+                    .Parameters.Add("@cipher", MySqlDbType.VarChar).Value = DBNull.Value
+                    .Parameters.Add("@Username", MySqlDbType.VarChar).Value = UserName
+                    .Connection = connecter()
+                    .CommandText = sql
+                    .ExecuteNonQuery()
+                End With
+                da.SelectCommand = cmd
+                connecter().Close()
+                RefreshList()
+            Catch ex As MySqlException
+                MsgBox(ex.Number & " - " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub MaterialButton1_Click(sender As Object, e As EventArgs) Handles MaterialButton1.Click
+        frmUtilisateursAjouter.ShowDialog()
+    End Sub
+
+    Private Sub RéinitialiserLeMotDePasseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RéinitialiserLeMotDePasseToolStripMenuItem.Click
+        ResetPassword()
     End Sub
 End Class

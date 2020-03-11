@@ -210,7 +210,7 @@ Partial Class frmTrousseauxGestion
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Gestions des trousseaux"
         Me.MaterialCard1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

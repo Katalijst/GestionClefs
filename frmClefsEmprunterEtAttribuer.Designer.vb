@@ -298,6 +298,7 @@ Partial Class frmClefsEmprunterEtAttribuer
         Me.MinimumSize = New System.Drawing.Size(501, 561)
         Me.Name = "frmClefsEmprunterEtAttribuer"
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Emprunter"
         Me.ResumeLayout(False)
         Me.PerformLayout()

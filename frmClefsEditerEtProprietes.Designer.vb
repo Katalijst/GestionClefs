@@ -705,6 +705,7 @@ Partial Class frmClefsEditerEtProprietes
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Editer une clef..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

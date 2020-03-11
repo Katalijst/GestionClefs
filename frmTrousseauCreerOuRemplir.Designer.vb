@@ -137,6 +137,7 @@ Partial Class frmTrousseauCreerOuRemplir
         Me.Name = "frmTrousseauCreerOuRemplir"
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Trousseau"
         Me.ResumeLayout(False)
         Me.PerformLayout()

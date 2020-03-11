@@ -501,6 +501,12 @@
     <Compile Include="frmAbout.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmServicesAjouter.Designer.vb">
+      <DependentUpon>frmServicesAjouter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmServicesAjouter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmTrousseauCreerOuRemplir.Designer.vb">
       <DependentUpon>frmTrousseauCreerOuRemplir.vb</DependentUpon>
     </Compile>
@@ -591,6 +597,12 @@
     <Compile Include="frmTrousseauxAjout.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUtilisateurSetPassword.Designer.vb">
+      <DependentUpon>frmUtilisateurSetPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUtilisateurSetPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUtilisateursGestion.Designer.vb">
       <DependentUpon>frmUtilisateursGestion.vb</DependentUpon>
     </Compile>
@@ -615,10 +627,10 @@
     <Compile Include="frmClefsEditerEtProprietesGroupeBat.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUtilisateurs.Designer.vb">
-      <DependentUpon>frmUtilisateurs.vb</DependentUpon>
+    <Compile Include="frmUtilisateurChangePassword.Designer.vb">
+      <DependentUpon>frmUtilisateurChangePassword.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmUtilisateurs.vb">
+    <Compile Include="frmUtilisateurChangePassword.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="modAES.vb" />
@@ -657,11 +669,23 @@
     <Compile Include="frmParametres.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmServicesGestion.Designer.vb">
+      <DependentUpon>frmServicesGestion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmServicesGestion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Simple3Des.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServicesAjouter.resx">
+      <DependentUpon>frmServicesAjouter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServicesGestion.resx">
+      <DependentUpon>frmServicesGestion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTrousseauCreerOuRemplir.resx">
       <DependentUpon>frmTrousseauCreerOuRemplir.vb</DependentUpon>
@@ -708,6 +732,9 @@
     <EmbeddedResource Include="frmTrousseauxAjout.resx">
       <DependentUpon>frmTrousseauxAjout.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmUtilisateurSetPassword.resx">
+      <DependentUpon>frmUtilisateurSetPassword.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmUtilisateursGestion.resx">
       <DependentUpon>frmUtilisateursGestion.vb</DependentUpon>
     </EmbeddedResource>
@@ -720,8 +747,8 @@
     <EmbeddedResource Include="frmClefsEditerEtProprietesGroupeBat.resx">
       <DependentUpon>frmClefsEditerEtProprietesGroupeBat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUtilisateurs.resx">
-      <DependentUpon>frmUtilisateurs.vb</DependentUpon>
+    <EmbeddedResource Include="frmUtilisateurChangePassword.resx">
+      <DependentUpon>frmUtilisateurChangePassword.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

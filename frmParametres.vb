@@ -14,6 +14,7 @@ Public Class frmParametres
         If GlobalUserType <> "Administrateur" Then
             btnGestionUtilisateurs.Enabled = False
             btnMySQL.Enabled = False
+            btnServices.Enabled = False
         End If
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
@@ -70,4 +71,7 @@ Public Class frmParametres
         My.Settings.Save()
     End Sub
 
+    Private Sub btnServices_Click(sender As Object, e As EventArgs) Handles btnServices.Click
+        frmServicesGestion.ShowDialog()
+    End Sub
 End Class

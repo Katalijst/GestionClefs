@@ -767,6 +767,7 @@ Partial Class frmMain
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "frmMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "GestionClefs"
         Me.MaterialTabControl1.ResumeLayout(False)
         Me.tabClefs.ResumeLayout(False)

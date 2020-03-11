@@ -441,13 +441,10 @@ Public Class frmClefsAjout
             If name <> "Empty" Then
                 cbTableau.Text = name
             End If
-            'cmbLoc.DataSource = dt
-            'cmbLoc.ValueMember = dt.Columns(0).ToString
-            'cmbLoc.DisplayMember = strTitlePNom
 
             connecter().Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
+        Catch ex As MySqlException
+            MsgBox(ex.Number & " - " & ex.Message)
         End Try
     End Sub
     Public Sub LoadAndRefresh()

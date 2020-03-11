@@ -64,40 +64,68 @@ Public Class frmConnexion
         Dim dt As New DataTable
         Dim da As New MySqlDataAdapter
         Dim sql As String
+        cmd.Parameters.Add("@UserName", MySqlDbType.VarChar)
+        cmd.Parameters.Add("@Cipher", MySqlDbType.VarChar)
 
         Try
             dt.Reset()
-            sql = "Select LCipher FROM Login"
+            sql = "Select COUNT(LUserName) FROM Login"
             With cmd
+                .Parameters("@UserName").Value = stgID
                 .Connection = connecter()
                 .CommandText = sql
             End With
             da.SelectCommand = cmd
             da.Fill(dt)
-            If dt.Rows.Count < 1 Then
+            If dt.Rows(0).Item(0) < 1 Then
                 MsgBox("Aucun utilisateur enregistré ! Veuillez choisir un nom d'utilisateur et un mot de passe.")
                 frmUtilisateursAjouter.ShowDialog()
             Else
                 Cursor = Cursors.WaitCursor
                 Application.DoEvents()
-                Dim wrapper As New Simple3Des(stgPassword)
-                Dim cipherText As String = wrapper.EncryptData(stgID)
                 dt.Reset()
-                sql = "Select LCipher FROM Login WHERE LCipher=""" & cipherText & """"
+                sql = "Select LUserName, LCipher, LUserType, LServices FROM Login WHERE LUserName = @UserName"
                 With cmd
+                    .Parameters("@UserName").Value = stgID
+                    .Connection = connecter()
+                    .CommandText = sql
+                End With
+                da.SelectCommand = cmd
+                da.Fill(dt)
+                If dt.Rows.Count > 0 Then
+                    If IsDBNull(dt.Rows(0).Item(1)) Then
+                        MsgBox("Mot de passe réinitialisé, veuillez choisir un nouveau mot de passe.", MsgBoxStyle.Critical)
+                        GlobalUserName = dt.Rows(0).Item(0)
+                        GlobalUserType = dt.Rows(0).Item(2)
+                        GlobalServices = dt.Rows(0).Item(3)
+                        frmUtilisateurSetPassword.Show()
+                        Me.Hide()
+                        Exit Sub
+                    End If
+                Else
+                    MsgBox("Nom d'utilisateur ou mot de passe invalide !", MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
+                Dim wrapper As New Simple3Des(stgPassword)
+                Dim cipherText As String = wrapper.EncryptData(GetHash(stgID))
+                dt.Reset()
+                sql = "Select LCipher FROM Login WHERE LCipher=@Cipher"
+                With cmd
+                    .Parameters("@Cipher").Value = cipherText
                     .Connection = connecter()
                     .CommandText = sql
                 End With
                 da.SelectCommand = cmd
                 da.Fill(dt)
                 If dt.Rows.Count < 1 Then
-                    MsgBox("Nom d'utilisateur ou mot de passe invalide !")
+                    MsgBox("Nom d'utilisateur ou mot de passe invalide !", MsgBoxStyle.Critical)
                     connecter().Close()
                     Cursor = Cursors.Default
                 Else
                     dt.Reset()
-                    sql = "Select LUserType,LUserName,LServices FROM Login WHERE LCipher=""" & cipherText & """"
+                    sql = "Select LUserType,LUserName,LServices FROM Login WHERE LCipher=@Cipher"
                     With cmd
+                        .Parameters("@Cipher").Value = cipherText
                         .Connection = connecter()
                         .CommandText = sql
                     End With
@@ -105,10 +133,9 @@ Public Class frmConnexion
                     da.Fill(dt)
                     If dt.Rows.Count > 0 Then
                         GlobalUserType = dt.Rows(0).Item(0).ToString
-                        GlobalUserName = dt.Rows(0).Item(2).ToString
-                        GlobalServices = dt.Rows(0).Item(3).ToString
+                        GlobalUserName = dt.Rows(0).Item(1).ToString
+                        GlobalServices = dt.Rows(0).Item(2).ToString
                     End If
-                    GlobalUserID = mtxtID.Text
                     connecter().Close()
                     Me.Hide()
                     frmMain.Show()

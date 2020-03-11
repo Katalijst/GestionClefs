@@ -17,14 +17,12 @@ Public Class frmUtilisateursPassword
 
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-        txtID.Text = GlobalUserID
-        txtOldPassword.SetWaterMark("Mot de passe actuel")
-        txtNewPassword.SetWaterMark("Nouveau mot de passe")
-        txtNewPasswordConfirm.SetWaterMark("Confimer le nouveau mot de passe")
-        If GlobalUserType <> "Administrateur" Then
-            btnAddUser.Enabled = False
-            btnUserManager.Enabled = False
-        End If
+        SkinManager.AddFormToManage(Me)
+        lblID.Text = GlobalUserName
+    End Sub
+
+    Private Sub frmSettings_Closed(sender As Object, e As EventArgs) Handles MyBase.Closed
+        Me.Dispose()
     End Sub
 
     Private Sub btnChangePassword_Click(sender As Object, e As EventArgs) Handles btnChangePassword.Click
@@ -36,7 +34,7 @@ Public Class frmUtilisateursPassword
             Exit Sub
         Else
             Try
-                Dim stgID As String = txtID.Text
+                Dim stgID As String = GlobalUserName
                 Dim stgOldPassword As String = txtOldPassword.Text
                 Dim oldWrapper As New Simple3Des(stgOldPassword)
                 Dim oldCipherText As String = oldWrapper.EncryptData(stgID)
@@ -93,7 +91,7 @@ Public Class frmUtilisateursPassword
 
     End Sub
 
-    Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
+    Private Sub btnAddUser_Click(sender As Object, e As EventArgs)
         frmUtilisateursAjouter.ShowDialog()
     End Sub
 
@@ -101,7 +99,11 @@ Public Class frmUtilisateursPassword
         Me.Close()
     End Sub
 
-    Private Sub btnUserManager_Click(sender As Object, e As EventArgs) Handles btnUserManager.Click
+    Private Sub btnUserManager_Click(sender As Object, e As EventArgs)
         frmUtilisateursGestion.ShowDialog()
+    End Sub
+
+    Private Sub btnAnnuler_Click(sender As Object, e As EventArgs) Handles btnAnnuler.Click
+        Me.Close()
     End Sub
 End Class

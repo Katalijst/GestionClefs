@@ -254,6 +254,7 @@ Partial Class frmParametresBDD
         Me.Name = "frmParametresBDD"
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Paramètres"
         Me.TopMost = True
         Me.GroupBox1.ResumeLayout(False)

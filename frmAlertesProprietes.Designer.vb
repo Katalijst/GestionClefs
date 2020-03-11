@@ -475,6 +475,7 @@ Partial Class frmAlertesProprietes
         Me.Name = "frmAlertesProprietes"
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Propriétés de :"
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

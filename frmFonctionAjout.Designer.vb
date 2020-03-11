@@ -75,6 +75,7 @@ Partial Class frmFonctionAjout
         Me.Name = "frmFonctionAjout"
         Me.ShowIcon = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Ajouter un type..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

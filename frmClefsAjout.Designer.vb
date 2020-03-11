@@ -636,6 +636,7 @@ Partial Class frmClefsAjout
         Me.MinimumSize = New System.Drawing.Size(817, 460)
         Me.Name = "frmClefsAjout"
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Ajouter une clef au gestionnaire"
         CType(Me.dgvListBatiment, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvSelBatiment, System.ComponentModel.ISupportInitialize).EndInit()

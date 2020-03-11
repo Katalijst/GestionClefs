@@ -214,6 +214,7 @@ Partial Class frmBatimentsEditer
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Editer un batiment..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

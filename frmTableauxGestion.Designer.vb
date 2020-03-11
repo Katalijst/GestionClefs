@@ -364,6 +364,7 @@ Partial Class frmTableauxGestion
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Tableaux de clefs"
         CType(Me.dgvListTableau, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)

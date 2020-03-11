@@ -23,6 +23,11 @@ Public Class frmBatimentsAjoutGestion
         lblNom.Text = strTitleBNom & " :"
         txtNom.Hint = strTitleBNom
 
+        If GlobalUserType <> "Administrateur" Then
+            TabAjouterBat.Enabled = False
+            MaterialTabControl1.SelectTab(tabRechercher)
+        End If
+
         RefreshList()
     End Sub
     Public Sub RefreshList()

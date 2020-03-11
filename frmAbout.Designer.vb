@@ -253,6 +253,7 @@ Partial Class frmAbout
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "A propos de GestionClefs..."
         Me.ResumeLayout(False)
         Me.PerformLayout()

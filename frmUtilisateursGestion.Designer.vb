@@ -23,28 +23,18 @@ Partial Class frmUtilisateursGestion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUtilisateursGestion))
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dgvListUser = New System.Windows.Forms.DataGridView()
-        Me.txtRechercher = New System.Windows.Forms.TextBox()
         Me.MenuListe = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ChangerLeTypeDutilisateurToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RéinitialiserLeMotDePasseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SupprimerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GroupBox1.SuspendLayout()
+        Me.txtRechercher = New MaterialSkin.Controls.MaterialTextBox()
+        Me.MaterialButton1 = New MaterialSkin.Controls.MaterialButton()
         CType(Me.dgvListUser, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuListe.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.dgvListUser)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 98)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(328, 298)
-        Me.GroupBox1.TabIndex = 40
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Liste des utilisateurs"
         '
         'dgvListUser
         '
@@ -56,16 +46,16 @@ Partial Class frmUtilisateursGestion
         Me.dgvListUser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvListUser.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvListUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvListUser.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvListUser.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvListUser.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.dgvListUser.Location = New System.Drawing.Point(6, 21)
+        Me.dgvListUser.Location = New System.Drawing.Point(12, 121)
         Me.dgvListUser.MultiSelect = False
         Me.dgvListUser.Name = "dgvListUser"
         Me.dgvListUser.ReadOnly = True
@@ -75,21 +65,11 @@ Partial Class frmUtilisateursGestion
         Me.dgvListUser.Size = New System.Drawing.Size(316, 271)
         Me.dgvListUser.TabIndex = 45
         '
-        'txtRechercher
-        '
-        Me.txtRechercher.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.txtRechercher.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtRechercher.Location = New System.Drawing.Point(12, 72)
-        Me.txtRechercher.MaxLength = 255
-        Me.txtRechercher.Name = "txtRechercher"
-        Me.txtRechercher.Size = New System.Drawing.Size(316, 20)
-        Me.txtRechercher.TabIndex = 0
-        '
         'MenuListe
         '
-        Me.MenuListe.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangerLeTypeDutilisateurToolStripMenuItem, Me.SupprimerToolStripMenuItem})
+        Me.MenuListe.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangerLeTypeDutilisateurToolStripMenuItem, Me.RéinitialiserLeMotDePasseToolStripMenuItem, Me.SupprimerToolStripMenuItem})
         Me.MenuListe.Name = "MenuListe"
-        Me.MenuListe.Size = New System.Drawing.Size(223, 48)
+        Me.MenuListe.Size = New System.Drawing.Size(223, 70)
         '
         'ChangerLeTypeDutilisateurToolStripMenuItem
         '
@@ -97,38 +77,79 @@ Partial Class frmUtilisateursGestion
         Me.ChangerLeTypeDutilisateurToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
         Me.ChangerLeTypeDutilisateurToolStripMenuItem.Text = "Changer le type d'utilisateur"
         '
+        'RéinitialiserLeMotDePasseToolStripMenuItem
+        '
+        Me.RéinitialiserLeMotDePasseToolStripMenuItem.Name = "RéinitialiserLeMotDePasseToolStripMenuItem"
+        Me.RéinitialiserLeMotDePasseToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.RéinitialiserLeMotDePasseToolStripMenuItem.Text = "Réinitialiser le mot de passe"
+        '
         'SupprimerToolStripMenuItem
         '
         Me.SupprimerToolStripMenuItem.Name = "SupprimerToolStripMenuItem"
         Me.SupprimerToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
         Me.SupprimerToolStripMenuItem.Text = "Supprimer"
         '
-        'frmGestionUtilisateur
+        'txtRechercher
+        '
+        Me.txtRechercher.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtRechercher.Depth = 0
+        Me.txtRechercher.Font = New System.Drawing.Font("Roboto", 12.0!)
+        Me.txtRechercher.Hint = "Rechercher..."
+        Me.txtRechercher.Location = New System.Drawing.Point(12, 79)
+        Me.txtRechercher.MaxLength = 50
+        Me.txtRechercher.MouseState = MaterialSkin.MouseState.OUT
+        Me.txtRechercher.Multiline = False
+        Me.txtRechercher.Name = "txtRechercher"
+        Me.txtRechercher.Size = New System.Drawing.Size(263, 36)
+        Me.txtRechercher.TabIndex = 46
+        Me.txtRechercher.Text = ""
+        Me.txtRechercher.UseTallSize = False
+        '
+        'MaterialButton1
+        '
+        Me.MaterialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MaterialButton1.Depth = 0
+        Me.MaterialButton1.DrawShadows = True
+        Me.MaterialButton1.HighEmphasis = True
+        Me.MaterialButton1.Icon = Global.GestionClefs.My.Resources.Resources.add_user_button
+        Me.MaterialButton1.Location = New System.Drawing.Point(282, 79)
+        Me.MaterialButton1.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.MaterialButton1.MouseState = MaterialSkin.MouseState.HOVER
+        Me.MaterialButton1.Name = "MaterialButton1"
+        Me.MaterialButton1.Size = New System.Drawing.Size(44, 36)
+        Me.MaterialButton1.TabIndex = 47
+        Me.MaterialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.MaterialButton1.UseAccentColor = False
+        Me.MaterialButton1.UseVisualStyleBackColor = True
+        '
+        'frmUtilisateursGestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(341, 404)
+        Me.Controls.Add(Me.MaterialButton1)
         Me.Controls.Add(Me.txtRechercher)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.dgvListUser)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmGestionUtilisateur"
+        Me.Name = "frmUtilisateursGestion"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Sizable = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Gestion des utilisateurs..."
-        Me.GroupBox1.ResumeLayout(False)
         CType(Me.dgvListUser, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuListe.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents dgvListUser As DataGridView
-    Friend WithEvents txtRechercher As TextBox
     Friend WithEvents MenuListe As ContextMenuStrip
     Friend WithEvents ChangerLeTypeDutilisateurToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SupprimerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents txtRechercher As MaterialSkin.Controls.MaterialTextBox
+    Friend WithEvents MaterialButton1 As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents RéinitialiserLeMotDePasseToolStripMenuItem As ToolStripMenuItem
 End Class
