@@ -106,9 +106,11 @@ Public Class frmMain
         Dim SqlCommand As String
         'Déclaration de la requète
         If GlobalServices <> "Global" Then
-            SqlCommand = "SELECT EIDClef from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE EDateFin < DATE(NOW())"
+            SqlCommand = "SELECT COUNT(DISTINCT EIDClef) from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE EDateFin < DATE(NOW()) AND CID=EIDClef;"
+            cmd.Parameters.Add("@Username", MySqlDbType.VarChar)
+            cmd.Parameters("@Username").Value = GlobalUserName
         Else
-            SqlCommand = "Select EIDClef From Emprunts Where EDateFin < DATE(NOW())"
+            SqlCommand = "Select COUNT(EIDClef) From Emprunts Where EDateFin < DATE(NOW())"
         End If
         'Try permet de renvoyer l'erreur si la requète échoue au lieu de freeze le logiciel
         Try
@@ -132,7 +134,7 @@ Public Class frmMain
                     'Si c'est la première pop up depuis le lancement du logiciel
                     If blnAlertes = True Then
                         'Création de la messagebox
-                        Dim Message As String = "Il y a " & dt.Rows.Count & " clefs non rendues !"
+                        Dim Message As String = "Il y a " & dt.Rows(0).Item(0) & " clefs non rendues !"
                         Dim Caption As String = "Alertes"
                         Dim Buttons As MessageBoxButtons = MessageBoxButtons.OKCancel
                         Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
@@ -145,12 +147,12 @@ Public Class frmMain
                     End If
                 End If
                 'Mise en forme du menu alertes suivant le nombre d'alerte
-                btnAlertes.Text = "Alertes (" & dt.Rows.Count & ")"
+                btnAlertes.Text = "Alertes (" & dt.Rows(0).Item(0) & ")"
                 btnAlertes.ForeColor = Color.Red
                 btnAlertes.Font = New Font(btnAlertes.Font, FontStyle.Bold)
                 Dim b As Bitmap = New Bitmap(My.Resources.round_error_symbol)
                 btnAlertes.Icon = TintBitmap(b, Color.Red, 1)
-                lblAlertNotif.Text = "" & dt.Rows.Count
+                lblAlertNotif.Text = "" & dt.Rows(0).Item(0)
                 lblAlertNotif.Visible = True
                 CorlorNotifLabel()
             Else
@@ -1001,7 +1003,7 @@ Public Class frmMain
         Me.lblAlertNotif.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
     End Sub
 
-    Private Sub btnLightMode_Click(sender As Object, e As EventArgs) Handles btnLightMode.Click
+    Private Sub btnLightMode_Click(sender As Object, e As EventArgs)
         If My.Settings.DarkMode = True Then
             My.Settings.DarkMode = False
             My.Settings.Save()
@@ -1129,6 +1131,12 @@ Public Class frmMain
     Private Sub btnClefsPerdues_Click(sender As Object, e As EventArgs) Handles btnClefsPerdues.Click
         'ouverture du menu d'alerte
         AlertesEmpruntPerdu = 3
+        frmClefsEmpruntsEtAlertes.ShowDialog()
+    End Sub
+
+    Private Sub btnEmprunts_Click(sender As Object, e As EventArgs) Handles btnEmprunts.Click
+        'ouverture du menu d'alerte
+        AlertesEmpruntPerdu = 2
         frmClefsEmpruntsEtAlertes.ShowDialog()
     End Sub
 

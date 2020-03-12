@@ -51,55 +51,64 @@ Public Class frmClefsEmpruntsEtAlertes
     End Sub
 
     Public Sub RefreshAlertes()
-        Dim dateNow As Date = Now
-
         Dim cmd As New MySqlCommand
+        Dim cmdCount As New MySqlCommand
         Dim dt As New DataTable
         Dim dtAlertes As New DataTable
         Dim da As New MySqlDataAdapter
         Dim SqlCommand As String
 
         If GlobalServices <> "Global" Then
-            SqlCommand = "SELECT EIDClef, EDateFin from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE EDateFin < DATE(NOW())"
+            SqlCommand = "SELECT COUNT(DISTINCT EIDClef) from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE EDateFin < DATE(NOW()) AND CID=EIDClef;"
+            cmdCount.Parameters.Add("@Username", MySqlDbType.VarChar).Value = GlobalUserName
         Else
-            SqlCommand = "Select EIDClef, EDateFin From Emprunts Where EDateFin < DATE(NOW())"
+            SqlCommand = "Select COUNT(EIDClef) From Emprunts Where EDateFin < DATE(NOW());"
         End If
 
         Try
             dt.Reset()
-            With cmd
+            With cmdCount
                 .Connection = connecter()
                 .CommandText = SqlCommand
             End With
-            da.SelectCommand = cmd
+            da.SelectCommand = cmdCount
             da.Fill(dt)
-            lblInfoRecherche.Text = "Aucune alerte."
-            nbNonRendues = dt.Rows.Count
+            nbNonRendues = dt.Rows(0).Item(0)
+            If nbNonRendues < 1 Then
+                lblInfoRecherche.Text = "Aucune alerte."
+            ElseIf nbNonRendues > 1 Then
+                lblInfoRecherche.Text = nbNonRendues & " alertes."
+            Else
+                lblInfoRecherche.Text = "1 alerte."
+            End If
+
             dtAlertes.Reset()
                 cmd.Parameters.Add("@IDClef", MySqlDbType.VarChar)
             For i = 0 To dt.Rows.Count - 1
                 With cmd
                     .Connection = connecter()
                     .Parameters("@IDClef").Value = dt.Rows(i)(0).ToString
-                    .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where EIDClef=@IDClef AND CID=EIDClef AND EDatefin < DATE(NOW());"
+                    If GlobalServices <> "Global" Then
+                        .CommandText = "Select DISTINCT EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE EDateFin < DATE(NOW()) AND CID=EIDClef;"
+                        .Parameters.Add("@Username", MySqlDbType.VarChar).Value = GlobalUserName
+                    Else
+                        .CommandText = "Select EIDClef, CNom, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where CID=EIDClef AND EDatefin < DATE(NOW());"
+                    End If
                 End With
                 da.SelectCommand = cmd
-                Dim dtTemp As New DataTable
-                da.Fill(dtTemp)
-                dtTemp.Columns.Add("ID")
-                For Each dr As DataRow In dtTemp.Rows
+                da.Fill(dtAlertes)
+
+                dtAlertes.Columns.Add("ID")
+
+                For Each dr As DataRow In dtAlertes.Rows
                     Dim input As String = dr.Item("EIDClef")
                     Dim index As Integer = input.LastIndexOf("-")
                     If index > 0 Then
                         dr.Item("EIDClef") = input.Substring(0, index)
                         dr.Item("ID") = input.Substring(index + 1)
                     End If
-                    If dtAlertes.Rows.Count < 1 Then
-                        dtAlertes = dtTemp
-                    Else
-                        dtAlertes.Rows.Add(dr.ItemArray)
-                    End If
                 Next
+
             Next
             If dt.Rows.Count > 0 Then
                 dtAlertes.Columns("EIDClef").ColumnName = strTitleCID
@@ -112,6 +121,7 @@ Public Class frmClefsEmpruntsEtAlertes
                 dgvAlertes.DataSource = dtAlertes
                 dgvAlertes.Columns("ID").Visible = False
                 dgvAlertes.Refresh()
+
             End If
         Catch ex As MySQLException
             MessageBox.Show(ex.Message)
@@ -131,7 +141,13 @@ Public Class frmClefsEmpruntsEtAlertes
             dtEmprunt.Reset()
             With cmd
                 .Connection = connecter()
-                .CommandText = "Select EIDClef, CNom, CStatus, CTrousseau, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where CID=EIDClef"
+                If GlobalServices <> "Global" Then
+                    .CommandText = "Select EIDClef, CNom, CStatus, CTrousseau, EIDGenre, ENomPersonne, EDateDebut, EDateFin from Emprunts, Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE CID=EIDClef;"
+                    .Parameters.Add("@Username", MySqlDbType.VarChar)
+                    .Parameters("@Username").Value = GlobalUserName
+                Else
+                    .CommandText = "Select EIDClef, CNom, CStatus, CTrousseau, EIDGenre, ENomPersonne, EDateDebut, EDateFin From Emprunts, Clefs Where CID=EIDClef"
+                End If
             End With
             da.SelectCommand = cmd
             da.Fill(dtEmprunt)
@@ -178,7 +194,13 @@ Public Class frmClefsEmpruntsEtAlertes
             dtPerdues.Reset()
             With cmd
                 .Connection = connecter()
-                .CommandText = "Select CID, CNom, CTrousseau, CPosition, CBatiment From Clefs Where CStatus='Perdue'"
+                If GlobalServices <> "Global" Then
+                    .CommandText = "Select CID, CNom, CTrousseau, CPosition, CBatiment From Clefs INNER JOIN (SELECT STableau FROM Services, Login where SNom = LServices AND LUserName = @Username) temp ON Clefs.CPosition = temp.STableau WHERE CStatus='Perdue'"
+                    .Parameters.Add("@Username", MySqlDbType.VarChar)
+                    .Parameters("@Username").Value = GlobalUserName
+                Else
+                    .CommandText = "Select CID, CNom, CTrousseau, CPosition, CBatiment From Clefs Where CStatus='Perdue'"
+                End If
             End With
             da.SelectCommand = cmd
             da.Fill(dtPerdues)

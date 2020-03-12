@@ -23,8 +23,8 @@ Public Class frmUtilisateurChangerService
         Try
             sql = "UPDATE Login SET LServices=@Services WHERE LUserName=@Username"
             With cmd
-                .Parameters.Add("@Services", MySqlDbType.VarChar).Value = frmUtilisateursGestion.dgvListUser.SelectedRows(0).Cells(2).Value
-                .Parameters.Add("@Username", MySqlDbType.VarChar).Value = cbServices.Text
+                .Parameters.Add("@Services", MySqlDbType.VarChar).Value = cbServices.Text
+                .Parameters.Add("@Username", MySqlDbType.VarChar).Value = frmUtilisateursGestion.dgvListUser.SelectedRows(0).Cells(0).Value
                 .Connection = connecter()
                 .CommandText = sql
                 .ExecuteNonQuery()

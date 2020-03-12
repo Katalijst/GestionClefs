@@ -40,14 +40,14 @@ Partial Class frmMain
         Me.btnInformations = New MaterialSkin.Controls.MaterialButton()
         Me.tabGestion = New System.Windows.Forms.TabPage()
         Me.tlytGestion = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnClefsPerdues = New MaterialSkin.Controls.MaterialButton()
         Me.btnBatiments = New MaterialSkin.Controls.MaterialButton()
         Me.btnAlertes = New MaterialSkin.Controls.MaterialButton()
         Me.btnTableaux = New MaterialSkin.Controls.MaterialButton()
         Me.btnTrousseaux = New MaterialSkin.Controls.MaterialButton()
         Me.btnParametres = New MaterialSkin.Controls.MaterialButton()
-        Me.btnLightMode = New MaterialSkin.Controls.MaterialButton()
         Me.btnPersonnes = New MaterialSkin.Controls.MaterialButton()
-        Me.btnClefsPerdues = New MaterialSkin.Controls.MaterialButton()
+        Me.btnEmprunts = New MaterialSkin.Controls.MaterialButton()
         Me.menuGrid = New MaterialSkin.Controls.MaterialContextMenuStrip()
         Me.EmprunterToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.AttribuerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -291,14 +291,14 @@ Partial Class frmMain
         Me.tlytGestion.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.tlytGestion.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.tlytGestion.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.tlytGestion.Controls.Add(Me.btnClefsPerdues, 0, 1)
         Me.tlytGestion.Controls.Add(Me.btnBatiments, 3, 0)
         Me.tlytGestion.Controls.Add(Me.btnAlertes, 0, 1)
         Me.tlytGestion.Controls.Add(Me.btnTableaux, 2, 0)
         Me.tlytGestion.Controls.Add(Me.btnTrousseaux, 1, 0)
         Me.tlytGestion.Controls.Add(Me.btnParametres, 3, 1)
-        Me.tlytGestion.Controls.Add(Me.btnLightMode, 2, 1)
         Me.tlytGestion.Controls.Add(Me.btnPersonnes, 0, 0)
-        Me.tlytGestion.Controls.Add(Me.btnClefsPerdues, 1, 1)
+        Me.tlytGestion.Controls.Add(Me.btnEmprunts, 2, 1)
         Me.tlytGestion.Location = New System.Drawing.Point(6, 6)
         Me.tlytGestion.Name = "tlytGestion"
         Me.tlytGestion.RowCount = 2
@@ -307,6 +307,24 @@ Partial Class frmMain
         Me.tlytGestion.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlytGestion.Size = New System.Drawing.Size(555, 96)
         Me.tlytGestion.TabIndex = 160
+        '
+        'btnClefsPerdues
+        '
+        Me.btnClefsPerdues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnClefsPerdues.Depth = 0
+        Me.btnClefsPerdues.DrawShadows = True
+        Me.btnClefsPerdues.HighEmphasis = False
+        Me.btnClefsPerdues.Icon = Global.GestionClefs.My.Resources.Resources.clefperdue
+        Me.btnClefsPerdues.Location = New System.Drawing.Point(142, 54)
+        Me.btnClefsPerdues.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnClefsPerdues.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnClefsPerdues.Name = "btnClefsPerdues"
+        Me.btnClefsPerdues.Size = New System.Drawing.Size(113, 36)
+        Me.btnClefsPerdues.TabIndex = 156
+        Me.btnClefsPerdues.Text = "Perdues"
+        Me.btnClefsPerdues.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnClefsPerdues.UseAccentColor = False
+        Me.btnClefsPerdues.UseVisualStyleBackColor = True
         '
         'btnBatiments
         '
@@ -399,24 +417,6 @@ Partial Class frmMain
         Me.btnParametres.UseAccentColor = False
         Me.btnParametres.UseVisualStyleBackColor = True
         '
-        'btnLightMode
-        '
-        Me.btnLightMode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnLightMode.Depth = 0
-        Me.btnLightMode.DrawShadows = True
-        Me.btnLightMode.HighEmphasis = False
-        Me.btnLightMode.Icon = Global.GestionClefs.My.Resources.Resources.light_bulb_on
-        Me.btnLightMode.Location = New System.Drawing.Point(280, 54)
-        Me.btnLightMode.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.btnLightMode.MouseState = MaterialSkin.MouseState.HOVER
-        Me.btnLightMode.Name = "btnLightMode"
-        Me.btnLightMode.Size = New System.Drawing.Size(98, 36)
-        Me.btnLightMode.TabIndex = 154
-        Me.btnLightMode.Text = "Theme"
-        Me.btnLightMode.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
-        Me.btnLightMode.UseAccentColor = False
-        Me.btnLightMode.UseVisualStyleBackColor = True
-        '
         'btnPersonnes
         '
         Me.btnPersonnes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -435,23 +435,23 @@ Partial Class frmMain
         Me.btnPersonnes.UseAccentColor = False
         Me.btnPersonnes.UseVisualStyleBackColor = True
         '
-        'btnClefsPerdues
+        'btnEmprunts
         '
-        Me.btnClefsPerdues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnClefsPerdues.Depth = 0
-        Me.btnClefsPerdues.DrawShadows = True
-        Me.btnClefsPerdues.HighEmphasis = False
-        Me.btnClefsPerdues.Icon = Global.GestionClefs.My.Resources.Resources.clefperdue
-        Me.btnClefsPerdues.Location = New System.Drawing.Point(142, 54)
-        Me.btnClefsPerdues.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
-        Me.btnClefsPerdues.MouseState = MaterialSkin.MouseState.HOVER
-        Me.btnClefsPerdues.Name = "btnClefsPerdues"
-        Me.btnClefsPerdues.Size = New System.Drawing.Size(113, 36)
-        Me.btnClefsPerdues.TabIndex = 155
-        Me.btnClefsPerdues.Text = "Perdues"
-        Me.btnClefsPerdues.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
-        Me.btnClefsPerdues.UseAccentColor = False
-        Me.btnClefsPerdues.UseVisualStyleBackColor = True
+        Me.btnEmprunts.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnEmprunts.Depth = 0
+        Me.btnEmprunts.DrawShadows = True
+        Me.btnEmprunts.HighEmphasis = False
+        Me.btnEmprunts.Icon = Global.GestionClefs.My.Resources.Resources.emprunt
+        Me.btnEmprunts.Location = New System.Drawing.Point(280, 54)
+        Me.btnEmprunts.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnEmprunts.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnEmprunts.Name = "btnEmprunts"
+        Me.btnEmprunts.Size = New System.Drawing.Size(127, 36)
+        Me.btnEmprunts.TabIndex = 155
+        Me.btnEmprunts.Text = "Emprunts"
+        Me.btnEmprunts.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnEmprunts.UseAccentColor = False
+        Me.btnEmprunts.UseVisualStyleBackColor = True
         '
         'menuGrid
         '
@@ -821,9 +821,9 @@ Partial Class frmMain
     Friend WithEvents cbRechercher As MaterialSkin.Controls.MaterialComboBox
     Friend WithEvents tlytGestion As TableLayoutPanel
     Friend WithEvents lblNbDeClefs As MaterialSkin.Controls.MaterialLabel
-    Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents btnEmprunts As MaterialSkin.Controls.MaterialButton
     Friend WithEvents pbClearPanier As PictureBox
     Friend WithEvents lblAlertNotif As Label
-    Friend WithEvents btnLightMode As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnPanierVersTrousseau As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
 End Class
