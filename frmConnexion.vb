@@ -167,7 +167,12 @@ Public Class frmConnexion
             SkinManager.Theme = MaterialSkinManager.Themes.DARK
             SkinManager.ColorScheme = New ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.Blue200, TextShade.WHITE)
         End If
+    End Sub
 
+    Public Sub Reset()
+        Cursor = Cursors.Default
+        mtxtID.Text = ""
+        mtxtPassword.Text = ""
     End Sub
 
 End Class

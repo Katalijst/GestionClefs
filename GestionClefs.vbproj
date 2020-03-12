@@ -41,7 +41,7 @@
     <PublisherName>Mairie de Coutras</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -797,6 +797,7 @@
   <ItemGroup>
     <Content Include="icons8-key-64.ico" />
     <Content Include="LogoICO.ico" />
+    <None Include="Resources\logout.png" />
     <None Include="Resources\warning-sign.png" />
     <None Include="Resources\clefnoir.png" />
     <None Include="Resources\retirer_clefs.png" />

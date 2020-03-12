@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableaux" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tableaux.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="round-error-symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\round-error-symbol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,14 +127,8 @@
   <data name="left-arrow-key" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\left-arrow-key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="clefnoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clefnoir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Roboto_BoldItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-BoldItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PRET_CLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PRET_CLE.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Roboto_Medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-Medium.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -163,6 +154,9 @@
   <data name="light-bulb-on" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\light-bulb-on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="key1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\key1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -172,11 +166,20 @@
   <data name="Roboto_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-Black.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="ajouter_clefs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ajouter_clefs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warning-sign" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warning-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LogoICO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LogoICO.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="two-men" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\two-men.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Roboto_Regular" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-Regular.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PRET_CLE_PX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\PRET_CLE_PX.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Roboto_Italic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-Italic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -190,8 +193,8 @@
   <data name="shopping-cart-remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shopping-cart-remove1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="name" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\name.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Roboto_MediumItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Roboto-MediumItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="key__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\key (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,11 +214,14 @@
   <data name="shopping-cart-clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shopping-cart-clear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="clear-icon-0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clear-icon-0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Roboto_LightItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-LightItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="key1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\key1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PRET_CLE_PX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\PRET_CLE_PX.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="clefperdue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\clefperdue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,8 +229,8 @@
   <data name="settings-cogwheel-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\settings-cogwheel-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Roboto_MediumItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Roboto-MediumItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="clefnoir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clefnoir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Roboto_Bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-Bold.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -244,11 +250,11 @@
   <data name="ATTRIBUTION_CLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ATTRIBUTION_CLE.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="key(1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\key(1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Roboto_ThinItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-ThinItalic.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="play-arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play-arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="printer-printing-document" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\printer-printing-document.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,14 +262,11 @@
   <data name="searching-magnifying-glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\searching-magnifying-glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LogoICO" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LogoICO.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="tableaux" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tableaux.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="city-buildings-silhouette" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\city-buildings-silhouette.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ajouter_clefs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ajouter_clefs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="key(1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\key(1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="user-shape" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user-shape.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -274,11 +277,11 @@
   <data name="shopping-cart-add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shopping-cart-add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="two-men" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\two-men.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="name" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\name.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="play-arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play-arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="city-buildings-silhouette" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\city-buildings-silhouette.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Roboto_Light" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Roboto-Light.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -286,13 +289,13 @@
   <data name="web-server" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\web-server.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="clear-icon-0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clear-icon-0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PRET_CLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PRET_CLE.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="rubbish-bin-delete-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rubbish-bin-delete-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="warning-sign" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\warning-sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

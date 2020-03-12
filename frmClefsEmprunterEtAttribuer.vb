@@ -30,7 +30,6 @@ Public Class frmClefsEmprunterEtAttribuer
     Private Sub frmEmprunterEtAttribuer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
-
         SkinManager.AddFormToManage(Me)
 
         If frmMain.blnEmprunt = False Then

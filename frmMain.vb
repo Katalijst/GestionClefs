@@ -35,10 +35,6 @@ Public Class frmMain
         End Get
     End Property
 
-    Private Shared Function Split(ByVal str As String, ByVal chunkSize As Integer) As IEnumerable(Of String)
-        Return Enumerable.Range(0, str.Length / chunkSize).[Select](Function(i) str.Substring(i * chunkSize, chunkSize))
-    End Function
-
     Private Sub dgvResultats_CellMouseDown(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles dgvResultats.CellMouseDown
         '--- Evenement de clic droit sur la DataGridView ---
         'Vérification si le clic a été fait sur une cellule
@@ -56,6 +52,7 @@ Public Class frmMain
         End If
     End Sub
     Private Sub main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblUsername.Text = GlobalUserName
         Dim bmp As Bitmap = My.Resources.clear_button
         pbClearPanier.Image = setColorToBitmap(bmp, Color.Black, Color.Red)
 
@@ -990,6 +987,11 @@ Public Class frmMain
             PropriétésToolStripMenuItem1.Image = setColorToBitmap(b, Color.Black, Color.RoyalBlue)
         End If
         CorlorNotifLabel()
+        pbLogout.BackColor = System.Drawing.Color.Transparent
+        lblUsername.BackColor = System.Drawing.Color.Transparent
+        lblUsername.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        lblUsername.ForeColor = System.Drawing.Color.White
+        lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleRight
     End Sub
 
     Public Sub CorlorNotifLabel()
@@ -1217,4 +1219,9 @@ Public Class frmMain
         LostKeys()
     End Sub
 
+    Private Sub pbLogout_Click(sender As Object, e As EventArgs) Handles pbLogout.Click
+        frmConnexion.Reset()
+        frmConnexion.Show()
+        Me.Dispose()
+    End Sub
 End Class

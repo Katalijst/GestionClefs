@@ -68,6 +68,8 @@ Partial Class frmMain
         Me.pbClearPanier = New System.Windows.Forms.PictureBox()
         Me.lblAlertNotif = New System.Windows.Forms.Label()
         Me.btnPanierVersTrousseau = New MaterialSkin.Controls.MaterialButton()
+        Me.pbLogout = New System.Windows.Forms.PictureBox()
+        Me.lblUsername = New System.Windows.Forms.Label()
         Me.MaterialTabControl1.SuspendLayout()
         Me.tabClefs.SuspendLayout()
         Me.tlytClefs.SuspendLayout()
@@ -77,6 +79,7 @@ Partial Class frmMain
         CType(Me.dgvPanier, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbClearPanier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbLogout, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtRechercher
@@ -654,9 +657,9 @@ Partial Class frmMain
         Me.lblNbDeClefs.Location = New System.Drawing.Point(9, 746)
         Me.lblNbDeClefs.MouseState = MaterialSkin.MouseState.HOVER
         Me.lblNbDeClefs.Name = "lblNbDeClefs"
-        Me.lblNbDeClefs.Size = New System.Drawing.Size(274, 19)
+        Me.lblNbDeClefs.Size = New System.Drawing.Size(527, 19)
         Me.lblNbDeClefs.TabIndex = 158
-        Me.lblNbDeClefs.Text = "25 clefs trouvées, 135 clefs enregistrés"
+        Me.lblNbDeClefs.Text = "Aucune clef trouvée, la connexion à la base de donnée à peut être échouée."
         '
         'btnRemoveToPanier
         '
@@ -750,11 +753,38 @@ Partial Class frmMain
         Me.btnPanierVersTrousseau.UseAccentColor = False
         Me.btnPanierVersTrousseau.UseVisualStyleBackColor = True
         '
+        'pbLogout
+        '
+        Me.pbLogout.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pbLogout.BackColor = System.Drawing.Color.Transparent
+        Me.pbLogout.Image = Global.GestionClefs.My.Resources.Resources.logout
+        Me.pbLogout.Location = New System.Drawing.Point(980, 27)
+        Me.pbLogout.Name = "pbLogout"
+        Me.pbLogout.Size = New System.Drawing.Size(32, 32)
+        Me.pbLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pbLogout.TabIndex = 162
+        Me.pbLogout.TabStop = False
+        '
+        'lblUsername
+        '
+        Me.lblUsername.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblUsername.BackColor = System.Drawing.Color.Transparent
+        Me.lblUsername.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUsername.ForeColor = System.Drawing.Color.White
+        Me.lblUsername.Location = New System.Drawing.Point(778, 27)
+        Me.lblUsername.Name = "lblUsername"
+        Me.lblUsername.Size = New System.Drawing.Size(195, 32)
+        Me.lblUsername.TabIndex = 164
+        Me.lblUsername.Text = "Username"
+        Me.lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1024, 768)
+        Me.Controls.Add(Me.lblUsername)
+        Me.Controls.Add(Me.pbLogout)
         Me.Controls.Add(Me.btnPanierVersTrousseau)
         Me.Controls.Add(Me.MaterialTabSelector1)
         Me.Controls.Add(Me.pbClearPanier)
@@ -788,6 +818,7 @@ Partial Class frmMain
         CType(Me.dgvPanier, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvResultats, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbClearPanier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbLogout, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -835,4 +866,6 @@ Partial Class frmMain
     Friend WithEvents btnPanierVersTrousseau As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
     Friend WithEvents ClefsPerduesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents pbLogout As PictureBox
+    Friend WithEvents lblUsername As Label
 End Class
