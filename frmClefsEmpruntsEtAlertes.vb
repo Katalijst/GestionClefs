@@ -169,9 +169,10 @@ Public Class frmClefsEmpruntsEtAlertes
 
                 dtEmprunt.Columns("EIDClef").ColumnName = strTitleCID
                 dtEmprunt.Columns("CNom").ColumnName = strTitleCNom
-                dtEmprunt.Columns("CStatus").ColumnName = strTitleCStatus
-                dtEmprunt.Columns("EIDGenre").ColumnName = strTitleEGenre
-                dtEmprunt.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
+            dtEmprunt.Columns("CStatus").ColumnName = strTitleCStatus
+            dtEmprunt.Columns("CTrousseau").ColumnName = strTitleCTrousseau
+            dtEmprunt.Columns("EIDGenre").ColumnName = strTitleEGenre
+            dtEmprunt.Columns("ENomPersonne").ColumnName = strTitleENomPersonne
                 dtEmprunt.Columns("EDateDebut").ColumnName = strTitleEDateDebut
                 dtEmprunt.Columns("EDateFin").ColumnName = strTitleEDateFin
 
@@ -218,6 +219,7 @@ Public Class frmClefsEmpruntsEtAlertes
 
             dtPerdues.Columns("CID").ColumnName = strTitleCID
             dtPerdues.Columns("CNom").ColumnName = strTitleCNom
+            dtPerdues.Columns("CTrousseau").ColumnName = strTitleCTrousseau
             dtPerdues.Columns("CPosition").ColumnName = strTitleCPosition
             dtPerdues.Columns("CBatiment").ColumnName = strTitleCBatiment
 
@@ -661,14 +663,46 @@ Public Class frmClefsEmpruntsEtAlertes
         If TabCtrlAlertesPerduesEmprunts.SelectedTab Is tabAlertes Then 'Index Alertes = 2
             lblInfoRecherche.Text = nbNonRendues & " clefs non rendues !"
             chkAlertPopUp.Visible = True
+            btnRenduRetrouve.Text = "Retour clef"
+            btnRenduRetrouve.Size = New System.Drawing.Size(169, 36)
         Else
             chkAlertPopUp.Visible = False
             If TabCtrlAlertesPerduesEmprunts.SelectedTab Is tabEnCours Then 'Index Emprunt en cours = 0
                 lblInfoRecherche.Text = nbEmprunts & " emprunts en cours, dont " & nbAttribuees & " attributions."
+                btnRenduRetrouve.Text = "Retour clef"
+                btnRenduRetrouve.Size = New System.Drawing.Size(169, 36)
             Else
                 lblInfoRecherche.Text = nbPerdues & " clefs perdues."
+                btnRenduRetrouve.Text = "Clef retrouvée"
+                btnRenduRetrouve.Size = New System.Drawing.Size(169, 36)
             End If
         End If
     End Sub
 
+    Private Sub btnInfo_Click(sender As Object, e As EventArgs) Handles btnInfo.Click
+        If TabCtrlAlertesPerduesEmprunts.SelectedTab Is tabAlertes Then
+            If dgvAlertes.SelectedRows.Count < 1 Then Exit Sub
+        ElseIf TabCtrlAlertesPerduesEmprunts.SelectedTab Is tabEnCours Then
+            If dgvEmpruntsEnCours.SelectedRows.Count < 1 Then Exit Sub
+        Else
+            If dgvClefsPerdues.SelectedRows.Count < 1 Then Exit Sub
+        End If
+        frmAlertesProprietes.ShowDialog()
+    End Sub
+
+    Private Sub btnRenduRetrouve_Click(sender As Object, e As EventArgs) Handles btnRenduRetrouve.Click
+        If TabCtrlAlertesPerduesEmprunts.SelectedTab Is tabAlertes Then
+            If dgvAlertes.SelectedRows.Count > 0 Then
+                RetourClef(dgvAlertes.SelectedRows(0).Cells(strTitleCID).Value.ToString() & "-" & dgvAlertes.SelectedRows(0).Cells("ID").Value.ToString())
+            End If
+        ElseIf TabCtrlAlertesPerduesEmprunts.SelectedTab Is tabEnCours Then
+            If dgvEmpruntsEnCours.SelectedRows.Count > 0 Then
+                RetourClef(dgvEmpruntsEnCours.SelectedRows(0).Cells(strTitleCID).Value.ToString() & "-" & dgvEmpruntsEnCours.SelectedRows(0).Cells("ID").Value.ToString())
+            End If
+        Else
+            If dgvClefsPerdues.SelectedRows.Count > 0 Then
+                ClefRetrouvee(dgvClefsPerdues.SelectedRows(0).Cells(strTitleCID).Value.ToString() & "-" & dgvClefsPerdues.SelectedRows(0).Cells("ID").Value.ToString())
+            End If
+        End If
+    End Sub
 End Class

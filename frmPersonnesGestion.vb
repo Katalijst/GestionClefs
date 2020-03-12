@@ -13,6 +13,13 @@ Public Class frmPersonnesGestion
     Private Sub frmAjouterPersonne_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
+        If frmClefsEmprunterEtAttribuer.IsHandleCreated Then
+            If frmClefsEmprunterEtAttribuer.AjoutRechercherPersonne = 1 Then
+                MaterialTabControl1.SelectedTab = tabAjouter
+            ElseIf frmClefsEmprunterEtAttribuer.AjoutRechercherPersonne = 2 Then
+                MaterialTabControl1.SelectedTab = tabRechercher
+            End If
+        End If
         RefreshFonction()
         RefreshList()
         If GlobalUserType <> "Administrateur" Then

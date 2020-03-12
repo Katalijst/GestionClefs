@@ -45,6 +45,8 @@ Partial Class frmClefsEmpruntsEtAlertes
         Me.menuEmprunt = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RetourEmpruntStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InformationsEmpruntStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRenduRetrouve = New MaterialSkin.Controls.MaterialButton()
+        Me.btnInfo = New MaterialSkin.Controls.MaterialButton()
         CType(Me.dgvAlertes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.menuAlertes.SuspendLayout()
         Me.TabCtrlAlertesPerduesEmprunts.SuspendLayout()
@@ -106,7 +108,7 @@ Partial Class frmClefsEmpruntsEtAlertes
         Me.txtRechercher.MouseState = MaterialSkin.MouseState.OUT
         Me.txtRechercher.Multiline = False
         Me.txtRechercher.Name = "txtRechercher"
-        Me.txtRechercher.Size = New System.Drawing.Size(347, 36)
+        Me.txtRechercher.Size = New System.Drawing.Size(282, 36)
         Me.txtRechercher.TabIndex = 2
         Me.txtRechercher.Text = ""
         Me.txtRechercher.UseTallSize = False
@@ -128,7 +130,7 @@ Partial Class frmClefsEmpruntsEtAlertes
         Me.cbRechercher.IntegralHeight = False
         Me.cbRechercher.ItemHeight = 29
         Me.cbRechercher.Items.AddRange(New Object() {"ID", "Nom", "Emprunteur", "Lieu"})
-        Me.cbRechercher.Location = New System.Drawing.Point(365, 70)
+        Me.cbRechercher.Location = New System.Drawing.Point(300, 70)
         Me.cbRechercher.MaxDropDownItems = 4
         Me.cbRechercher.MouseState = MaterialSkin.MouseState.OUT
         Me.cbRechercher.Name = "cbRechercher"
@@ -155,7 +157,7 @@ Partial Class frmClefsEmpruntsEtAlertes
         Me.chkAlertPopUp.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.chkAlertPopUp.AutoSize = True
         Me.chkAlertPopUp.Depth = 0
-        Me.chkAlertPopUp.Location = New System.Drawing.Point(549, 70)
+        Me.chkAlertPopUp.Location = New System.Drawing.Point(484, 65)
         Me.chkAlertPopUp.Margin = New System.Windows.Forms.Padding(0)
         Me.chkAlertPopUp.MouseLocation = New System.Drawing.Point(-1, -1)
         Me.chkAlertPopUp.MouseState = MaterialSkin.MouseState.HOVER
@@ -301,11 +303,48 @@ Partial Class frmClefsEmpruntsEtAlertes
         Me.InformationsEmpruntStripMenuItem2.Size = New System.Drawing.Size(145, 22)
         Me.InformationsEmpruntStripMenuItem2.Text = "Informations"
         '
+        'btnRenduRetrouve
+        '
+        Me.btnRenduRetrouve.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnRenduRetrouve.Depth = 0
+        Me.btnRenduRetrouve.DrawShadows = True
+        Me.btnRenduRetrouve.HighEmphasis = True
+        Me.btnRenduRetrouve.Icon = Global.GestionClefs.My.Resources.Resources.clefnoir
+        Me.btnRenduRetrouve.Location = New System.Drawing.Point(651, 94)
+        Me.btnRenduRetrouve.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnRenduRetrouve.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnRenduRetrouve.Name = "btnRenduRetrouve"
+        Me.btnRenduRetrouve.Size = New System.Drawing.Size(169, 36)
+        Me.btnRenduRetrouve.TabIndex = 17
+        Me.btnRenduRetrouve.Text = "Clef retrouvée"
+        Me.btnRenduRetrouve.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnRenduRetrouve.UseAccentColor = False
+        Me.btnRenduRetrouve.UseVisualStyleBackColor = True
+        '
+        'btnInfo
+        '
+        Me.btnInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnInfo.Depth = 0
+        Me.btnInfo.DrawShadows = True
+        Me.btnInfo.HighEmphasis = True
+        Me.btnInfo.Icon = Global.GestionClefs.My.Resources.Resources.round_info_button
+        Me.btnInfo.Location = New System.Drawing.Point(602, 94)
+        Me.btnInfo.Margin = New System.Windows.Forms.Padding(4, 6, 4, 6)
+        Me.btnInfo.MouseState = MaterialSkin.MouseState.HOVER
+        Me.btnInfo.Name = "btnInfo"
+        Me.btnInfo.Size = New System.Drawing.Size(44, 36)
+        Me.btnInfo.TabIndex = 18
+        Me.btnInfo.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text
+        Me.btnInfo.UseAccentColor = False
+        Me.btnInfo.UseVisualStyleBackColor = True
+        '
         'frmClefsEmpruntsEtAlertes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(826, 497)
+        Me.Controls.Add(Me.btnInfo)
+        Me.Controls.Add(Me.btnRenduRetrouve)
         Me.Controls.Add(Me.txtRechercher)
         Me.Controls.Add(Me.chkAlertPopUp)
         Me.Controls.Add(Me.MaterialTabSelector1)
@@ -354,4 +393,6 @@ Partial Class frmClefsEmpruntsEtAlertes
     Friend WithEvents menuEmprunt As ContextMenuStrip
     Friend WithEvents RetourEmpruntStripMenuItem As ToolStripMenuItem
     Friend WithEvents InformationsEmpruntStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents btnRenduRetrouve As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents btnInfo As MaterialSkin.Controls.MaterialButton
 End Class

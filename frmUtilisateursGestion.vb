@@ -17,7 +17,11 @@ Public Class frmUtilisateursGestion
 
         If GlobalUserType = "Chef de service" Then
             ChangerLeServiceToolStripMenuItem.Enabled = False
-
+            ChangerLeServiceToolStripMenuItem.Visible = False
+            ChangerLeTypeDutilisateurToolStripMenuItem.Enabled = False
+            ChangerLeTypeDutilisateurToolStripMenuItem.Visible = False
+            RéinitialiserLeMotDePasseToolStripMenuItem.Enabled = False
+            RéinitialiserLeMotDePasseToolStripMenuItem.Visible = False
         End If
         dgvListUser.Focus()
         RefreshList()

@@ -143,6 +143,16 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property clefnoir() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("clefnoir", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property clefperdue() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("clefperdue", resourceCulture)
@@ -606,6 +616,16 @@ Namespace My.Resources
         Friend ReadOnly Property user_shape() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("user-shape", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property warning_sign() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("warning-sign", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

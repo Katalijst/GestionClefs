@@ -35,6 +35,7 @@ Partial Class frmUtilisateursAjouter
         Me.MaterialDivider4 = New MaterialSkin.Controls.MaterialDivider()
         Me.btnAnnuler = New MaterialSkin.Controls.MaterialButton()
         Me.btnAddServices = New MaterialSkin.Controls.MaterialButton()
+        Me.lblService = New MaterialSkin.Controls.MaterialLabel()
         Me.SuspendLayout()
         '
         'txtPasswordConfirm
@@ -232,6 +233,18 @@ Partial Class frmUtilisateursAjouter
         Me.btnAddServices.UseAccentColor = False
         Me.btnAddServices.UseVisualStyleBackColor = True
         '
+        'lblService
+        '
+        Me.lblService.AutoSize = True
+        Me.lblService.Depth = 0
+        Me.lblService.Font = New System.Drawing.Font("Roboto", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.lblService.Location = New System.Drawing.Point(27, 273)
+        Me.lblService.MouseState = MaterialSkin.MouseState.HOVER
+        Me.lblService.Name = "lblService"
+        Me.lblService.Size = New System.Drawing.Size(52, 19)
+        Me.lblService.TabIndex = 46
+        Me.lblService.Text = "Service"
+        '
         'frmUtilisateursAjouter
         '
         Me.AcceptButton = Me.btnValider
@@ -239,6 +252,7 @@ Partial Class frmUtilisateursAjouter
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnAnnuler
         Me.ClientSize = New System.Drawing.Size(300, 364)
+        Me.Controls.Add(Me.lblService)
         Me.Controls.Add(Me.btnAddServices)
         Me.Controls.Add(Me.btnAnnuler)
         Me.Controls.Add(Me.MaterialDivider4)
@@ -276,4 +290,5 @@ Partial Class frmUtilisateursAjouter
     Friend WithEvents MaterialDivider4 As MaterialSkin.Controls.MaterialDivider
     Friend WithEvents btnAnnuler As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnAddServices As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents lblService As MaterialSkin.Controls.MaterialLabel
 End Class

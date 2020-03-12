@@ -22,7 +22,7 @@ Public Class frmAlertesProprietes
         lblCTrousseau.Text = strTitleCTrousseau & " :"
         lblCDate.Text = strTitleCDate & " :"
         lblENomPersonne.Text = strTitleENomPersonne & " :"
-        lblNTelephone.Text = strTitleNNom & " :"
+        lblNTelephone.Text = strTitleNTelephone & " :"
         'lblNAutre.Text = strTitleNAutre & " :"
 
         Dim cmd As New MySqlCommand

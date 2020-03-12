@@ -13,10 +13,19 @@ Public Class frmUtilisateursAjouter
     Private Sub frmAddUser_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
-        LoadServices()
         If GlobalUserType = "Chef de service" Then
             cbUserType.Text = "Utilisateur"
             cbUserType.Enabled = False
+            cbServices.Text = GlobalServices
+            cbServices.Enabled = False
+            cbServices.Visible = False
+            btnAddServices.Enabled = False
+            btnAddServices.Visible = False
+            lblService.Visible = True
+            lblService.Text = GlobalServices
+        Else
+            lblService.Visible = False
+            LoadServices()
         End If
     End Sub
 
@@ -78,7 +87,11 @@ Public Class frmUtilisateursAjouter
                     insert_command.Parameters.Add("@cipher", MySqlDbType.VarChar).Value = cipherText
                     insert_command.Parameters.Add("@UserType", MySqlDbType.VarChar).Value = cbUserType.Text
                     insert_command.Parameters.Add("@username", MySqlDbType.VarChar).Value = stgID
-                    insert_command.Parameters.Add("@service", MySqlDbType.VarChar).Value = cbServices.Text
+                    If GlobalUserType = "Chef de service" Then
+                        insert_command.Parameters.Add("@service", MySqlDbType.VarChar).Value = GlobalServices
+                    Else
+                        insert_command.Parameters.Add("@service", MySqlDbType.VarChar).Value = cbServices.Text
+                    End If
                     insert_command.ExecuteNonQuery()
 
                 Catch ex As MySqlException

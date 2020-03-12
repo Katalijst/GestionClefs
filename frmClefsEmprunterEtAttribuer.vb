@@ -16,6 +16,7 @@ Public Class frmClefsEmprunterEtAttribuer
     Dim nbPages As Integer = 1
     Dim nbLignePremièrePage As Integer = 15
     Dim nbLigneAutresPages As Integer = 19
+    Public AjoutRechercherPersonne As Integer = 1
 
     Protected Overrides ReadOnly Property CreateParams As CreateParams
         Get
@@ -31,6 +32,13 @@ Public Class frmClefsEmprunterEtAttribuer
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
 
         SkinManager.AddFormToManage(Me)
+
+        If frmMain.blnEmprunt = False Then
+            Me.Text = "Attribuer"
+        Else
+            Me.Text = "Emprunter"
+        End If
+
         ChkTemplatesExists()
         CreateKeyControls()
 
@@ -244,7 +252,6 @@ Public Class frmClefsEmprunterEtAttribuer
         Dim cmd As New MySqlCommand
         Dim da As New MySqlDataAdapter
 
-        'sql = "Select NomPersonne from NomPersonne Where NNom like ""%" & txtRechercher.Text & "%"""
         Dim CmdSql As String = "Select NNom, NTelephone from NomPersonne where NNom <> 'Personne'"
         Try
             With cmd
@@ -272,8 +279,8 @@ Public Class frmClefsEmprunterEtAttribuer
     End Sub
 
     Private Sub btnAddUser_Click(sender As Object, e As EventArgs) Handles btnAddUser.Click
+        AjoutRechercherPersonne = 1
         frmPersonnesGestion.ShowDialog()
-        frmPersonnesGestion.MaterialTabControl1.SelectTab(frmPersonnesGestion.tabAjouter)
     End Sub
 
     Private Sub swtReglageIndividuelle_CheckedChanged(sender As Object, e As EventArgs) Handles swtReglageIndividuelle.CheckedChanged
@@ -970,6 +977,7 @@ Public Class frmClefsEmprunterEtAttribuer
     End Sub
 
     Private Sub btnSearchPeople_Click(sender As Object, e As EventArgs) Handles btnSearchPeople.Click
+        AjoutRechercherPersonne = 2
         frmPersonnesGestion.ShowDialog()
     End Sub
 End Class

@@ -53,6 +53,7 @@ Partial Class frmMain
         Me.AttribuerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropriétésToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClefsPerduesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SupprimerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.chkAttribuees = New MaterialSkin.Controls.MaterialCheckbox()
         Me.chkEmpruntees = New MaterialSkin.Controls.MaterialCheckbox()
@@ -457,44 +458,51 @@ Partial Class frmMain
         '
         Me.menuGrid.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.menuGrid.Depth = 0
-        Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmprunterToolStripMenuItem1, Me.AttribuerToolStripMenuItem1, Me.EditerToolStripMenuItem1, Me.PropriétésToolStripMenuItem1, Me.SupprimerToolStripMenuItem1})
+        Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmprunterToolStripMenuItem1, Me.AttribuerToolStripMenuItem1, Me.EditerToolStripMenuItem1, Me.PropriétésToolStripMenuItem1, Me.ClefsPerduesToolStripMenuItem, Me.SupprimerToolStripMenuItem1})
         Me.menuGrid.MouseState = MaterialSkin.MouseState.HOVER
         Me.menuGrid.Name = "MaterialContextMenuStrip1"
-        Me.menuGrid.Size = New System.Drawing.Size(140, 114)
+        Me.menuGrid.Size = New System.Drawing.Size(162, 136)
         '
         'EmprunterToolStripMenuItem1
         '
         Me.EmprunterToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.emprunt
         Me.EmprunterToolStripMenuItem1.Name = "EmprunterToolStripMenuItem1"
-        Me.EmprunterToolStripMenuItem1.Size = New System.Drawing.Size(139, 22)
+        Me.EmprunterToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
         Me.EmprunterToolStripMenuItem1.Text = "Emprunter..."
         '
         'AttribuerToolStripMenuItem1
         '
         Me.AttribuerToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.login
         Me.AttribuerToolStripMenuItem1.Name = "AttribuerToolStripMenuItem1"
-        Me.AttribuerToolStripMenuItem1.Size = New System.Drawing.Size(139, 22)
+        Me.AttribuerToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
         Me.AttribuerToolStripMenuItem1.Text = "Attribuer..."
         '
         'EditerToolStripMenuItem1
         '
         Me.EditerToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.writing
         Me.EditerToolStripMenuItem1.Name = "EditerToolStripMenuItem1"
-        Me.EditerToolStripMenuItem1.Size = New System.Drawing.Size(139, 22)
+        Me.EditerToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
         Me.EditerToolStripMenuItem1.Text = "Editer"
         '
         'PropriétésToolStripMenuItem1
         '
         Me.PropriétésToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.round_info_button
         Me.PropriétésToolStripMenuItem1.Name = "PropriétésToolStripMenuItem1"
-        Me.PropriétésToolStripMenuItem1.Size = New System.Drawing.Size(139, 22)
+        Me.PropriétésToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
         Me.PropriétésToolStripMenuItem1.Text = "Propriétés"
+        '
+        'ClefsPerduesToolStripMenuItem
+        '
+        Me.ClefsPerduesToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.warning_sign
+        Me.ClefsPerduesToolStripMenuItem.Name = "ClefsPerduesToolStripMenuItem"
+        Me.ClefsPerduesToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.ClefsPerduesToolStripMenuItem.Text = "Clef(s) perdue(s)"
         '
         'SupprimerToolStripMenuItem1
         '
         Me.SupprimerToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.clear_button
         Me.SupprimerToolStripMenuItem1.Name = "SupprimerToolStripMenuItem1"
-        Me.SupprimerToolStripMenuItem1.Size = New System.Drawing.Size(139, 22)
+        Me.SupprimerToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
         Me.SupprimerToolStripMenuItem1.Text = "Supprimer"
         '
         'chkAttribuees
@@ -826,4 +834,5 @@ Partial Class frmMain
     Friend WithEvents lblAlertNotif As Label
     Friend WithEvents btnPanierVersTrousseau As MaterialSkin.Controls.MaterialButton
     Friend WithEvents btnClefsPerdues As MaterialSkin.Controls.MaterialButton
+    Friend WithEvents ClefsPerduesToolStripMenuItem As ToolStripMenuItem
 End Class

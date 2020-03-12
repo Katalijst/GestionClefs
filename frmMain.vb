@@ -1149,4 +1149,72 @@ Public Class frmMain
         End If
     End Sub
 
+    Public Sub LostKeys()
+        If dgvResultats.SelectedRows.Count > 0 Then
+            'Pop-up (message box):
+            ' Initializes variables to pass to the MessageBox.Show method.
+            Dim Message As String
+            Dim Caption As String
+            If dgvResultats.SelectedRows.Count > 1 Then
+                Message = "Voulez vous vraiment passez les " & dgvResultats.SelectedRows.Count & " clefs sélectionnées au status ""Perdue"" ?" & Environment.NewLine & "Cela changera le status d'une clef pour chaque clef sélectionnée."
+                Caption = "Clefs perdues"
+            ElseIf dgvResultats.SelectedRows.Count = 1 Then
+                Message = "Voulez vous vraiment passez la clef sélectionnée au status ""Perdue"" ?" & Environment.NewLine & "Cela changera le status d'une clef de ce type."
+                Caption = "Clef perdue"
+            Else
+                Exit Sub
+            End If
+            Dim Buttons As MessageBoxButtons = MessageBoxButtons.YesNo
+            Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
+
+            Dim Result As DialogResult
+
+            'Displays the MessageBox
+            Result = MessageBox.Show(Message, Caption, Buttons, Icon)
+
+            ' Gets the result of the MessageBox display.
+            'Si l'utilisateur répond oui
+            If Result = System.Windows.Forms.DialogResult.Yes Then
+                Try
+                    Dim sql As String
+                    Dim cmdUpdateClef As New MySqlCommand
+                    cmdUpdateClef.CommandType = CommandType.Text
+                    sql = "UPDATE Clefs SET CStatus=@Status WHERE CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef AND CID LIKE @IDClef;"
+
+                    With cmdUpdateClef
+                        .Parameters.Add("@Status", MySqlDbType.VarChar)
+                        .Parameters.Add("@OldStatusClef", MySqlDbType.VarChar)
+                        .Parameters.Add("@OldTableauClef", MySqlDbType.VarChar)
+                        .Parameters.Add("@OldTrousseauxClef", MySqlDbType.VarChar)
+                        .Parameters.Add("@IDClef", MySqlDbType.String)
+                        .Connection = connecter()
+                        .CommandText = sql
+                    End With
+
+                    For Each r As DataGridViewRow In dgvResultats.SelectedRows
+                        With cmdUpdateClef
+                            .Parameters("@Status").Value = "Perdue"
+                            .Parameters("@OldStatusClef").Value = r.Cells(strTitleCStatus).Value
+                            .Parameters("@OldTableauClef").Value = r.Cells(strTitleCPosition).Value
+                            .Parameters("@OldTrousseauxClef").Value = r.Cells(strTitleCTrousseau).Value
+                            .Parameters("@IDClef").Value = r.Cells(strTitleCID).Value & "-%"
+                            .ExecuteNonQuery()
+                        End With
+                    Next
+
+                Catch ex As MySqlException
+                    MsgBox(ex.Number & " - " & ex.Message)
+                    connecter.close
+                Finally
+                    connecter().Close()
+                    FillDataSource()
+                End Try
+            End If
+        End If
+    End Sub
+
+    Private Sub ClefsPerduesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClefsPerduesToolStripMenuItem.Click
+        LostKeys()
+    End Sub
+
 End Class
