@@ -235,6 +235,40 @@ Public Class frmClefsEditerEtProprietes
 
     Private Sub Edit_btnSave_Click()
         Try
+            If cmbLoc.Text <> frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value Then
+                Dim sql As String
+                Dim cmdUpdateClef As New MySqlCommand
+                With cmdUpdateClef
+                    .Parameters.Add("@Status", MySqlDbType.VarChar)
+                    .Parameters.Add("@IDClef", MySqlDbType.String)
+                    .Parameters.Add("@Nom", MySqlDbType.VarChar)
+                    .Parameters.Add("@Tableau", MySqlDbType.VarChar)
+                    .Parameters.Add("@Date", MySqlDbType.Date)
+                    .Parameters.Add("@Trousseau", MySqlDbType.VarChar)
+                    .Parameters.Add("@OldStatusClef", MySqlDbType.VarChar)
+                    .Parameters.Add("@OldTableauClef", MySqlDbType.VarChar)
+                    .Parameters.Add("@OldTrousseauxClef", MySqlDbType.VarChar)
+                End With
+
+                sql = "UPDATE Clefs SET CPosition=@Tableau WHERE CID=(SELECT * FROM (SELECT CID FROM Clefs where CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef AND CID LIKE @IDClef LIMIT 1) TempTable);"
+                With cmdUpdateClef
+                    .Parameters("@Status").Value = cmbStatus.Text
+                    .Parameters("@IDClef").Value = txtID.Text & "-%"
+                    .Parameters("@Nom").Value = txtNom.Text
+                    .Parameters("@Tableau").Value = cmbLoc.Text
+                    .Parameters("@Date").Value = dtpDate.Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                    .Parameters("@Trousseau").Value = lblTrousseauInfo.Text
+                    .Parameters("@OldStatusClef").Value = stgStatus
+                    .Parameters("@OldTableauClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
+                    .Parameters("@OldTrousseauxClef").Value = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCTrousseau).Value
+                    .Connection = connecter()
+                    .CommandText = sql
+                    .ExecuteNonQuery()
+                End With
+                Me.Dispose()
+                Exit Sub
+            End If
+
             If cmbStatus.Text = "Disponible" Then
                 If txtQuantity.Text = "0" Or txtQuantity.Text = "" Then
                     MsgBox("La quantité ne peut être nul !")
@@ -576,17 +610,20 @@ Public Class frmClefsEditerEtProprietes
 
     Private Sub cmbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStatus.SelectedIndexChanged
         If cmbStatus.Text = "Disponible" Then
-            If frmMain.blnProperties = False Then
-                txtQuantity.Enabled = True
+            If cmbLoc.Text = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value Then
+                If frmMain.blnProperties = False Then
+                    txtQuantity.Enabled = True
+                End If
             End If
         Else
+            cmbLoc.Text = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value
+            cmbLoc.Enabled = False
             txtQuantity.Text = 1
             swtEditOneKey.Visible = False
             txtID.Enabled = False
             txtQuantity.Enabled = False
             txtNom.Enabled = False
-            cmbLoc.Enabled = False
-            cmbStatus.Enabled = False
+            'cmbStatus.Enabled = False
             dtpDate.Enabled = False
             txtRefOrg.Enabled = False
             txtCnInt.Enabled = False
@@ -616,5 +653,20 @@ Public Class frmClefsEditerEtProprietes
         Else
             Me.Dispose()
         End If
+    End Sub
+
+    Private Sub cmbLoc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLoc.SelectedIndexChanged
+        If cmbLoc.Text = frmMain.dgvResultats.SelectedRows(0).Cells(strTitleCPosition).Value Then
+            If cmbStatus.Text = "Disponible" Then
+                txtQuantity.Enabled = True
+            End If
+            cmbStatus.Enabled = True
+        Else
+            cmbStatus.Text = "Disponible"
+            cmbStatus.Enabled = False
+            txtQuantity.Text = 1
+            txtQuantity.Enabled = False
+        End If
+
     End Sub
 End Class

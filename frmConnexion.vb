@@ -46,18 +46,49 @@ Public Class frmConnexion
             da.SelectCommand = cmd
             da.Fill(dt)
             If dt.Rows.Count < 1 Then
-                MsgBox("Aucun utilisateur enregistré ! Veuillez choisir un nom d'utilisateur et un mot de passe.")
-                frmUtilisateursAjouter.ShowDialog()
+                MsgBox("Aucun utilisateur enregistré ! Création du compte ""Admin"", veuillez choisir un mot de passe.")
+                CreateAdmin()
             End If
         Catch ex As Exception
-
+            MsgBox("Impossible de se connecter à la base de données !", MsgBoxStyle.Critical, MsgBoxStyle.OkOnly)
+            frmParametresBDD.ShowDialog()
         End Try
 
     End Sub
 
-    Public Sub Valider()
+    Private Sub CreateAdmin()
+        Dim stgID As String = "Admin"
+        Try
+            Dim insert_command As New MySqlCommand("INSERT INTO `Login`(`LCipher`,`LUserType`,`LUserName`,`LServices`) VALUES (@cipher,@UserType,@username,@service)", connecter())
+            insert_command.Parameters.Add("@cipher", MySqlDbType.VarChar).Value = DBNull.Value
+            insert_command.Parameters.Add("@UserType", MySqlDbType.VarChar).Value = "Administrateur"
+            insert_command.Parameters.Add("@username", MySqlDbType.VarChar).Value = stgID
+            insert_command.Parameters.Add("@service", MySqlDbType.VarChar).Value = "Global"
+            insert_command.ExecuteNonQuery()
+        Catch ex As MySqlException
+            If ex.Number = 1062 Then
+                MsgBox("Cette utilisateur existe déjà.", MsgBoxStyle.Critical, "Utilisateur existant")
+            Else
+                MsgBox(ex.Number & " - " & ex.Message)
+            End If
+            connecter().Close()
+            Exit Sub
+        Finally
+            connecter().Close()
+            Valider(stgID, "password")
+        End Try
+    End Sub
+
+    Public Sub Valider(ByVal Optional ID As String = "", ByVal Optional Password As String = "")
         Dim stgID As String = mtxtID.Text
         Dim stgPassword As String = mtxtPassword.Text
+        If ID = "" And Password = "" Then
+            stgID = mtxtID.Text
+            stgPassword = mtxtPassword.Text
+        Else
+            stgID = ID
+            stgPassword = Password
+        End If
 
         'Vérifier si compte admin existe
         Dim cmd As New MySqlCommand
@@ -81,7 +112,7 @@ Public Class frmConnexion
                 MsgBox("Aucun utilisateur enregistré ! Veuillez choisir un nom d'utilisateur et un mot de passe.")
                 frmUtilisateursAjouter.ShowDialog()
             Else
-                Cursor = Cursors.WaitCursor
+                    Cursor = Cursors.WaitCursor
                 Application.DoEvents()
                 dt.Reset()
                 sql = "Select LUserName, LCipher, LUserType, LServices FROM Login WHERE LUserName = @UserName"
@@ -94,15 +125,17 @@ Public Class frmConnexion
                 da.Fill(dt)
                 If dt.Rows.Count > 0 Then
                     If IsDBNull(dt.Rows(0).Item(1)) Then
-                        MsgBox("Mot de passe réinitialisé, veuillez choisir un nouveau mot de passe.", MsgBoxStyle.Critical)
+                        If ID = "" And Password = "" Then
+                            MsgBox("Mot de passe réinitialisé, veuillez choisir un nouveau mot de passe.", MsgBoxStyle.Critical)
+                        End If
                         GlobalUserName = dt.Rows(0).Item(0)
-                        GlobalUserType = dt.Rows(0).Item(2)
-                        GlobalServices = dt.Rows(0).Item(3)
-                        frmUtilisateurSetPassword.Show()
-                        Me.Hide()
-                        Exit Sub
-                    End If
-                Else
+                            GlobalUserType = dt.Rows(0).Item(2)
+                            GlobalServices = dt.Rows(0).Item(3)
+                            frmUtilisateurSetPassword.Show()
+                            Me.Hide()
+                            Exit Sub
+                        End If
+                    Else
                     MsgBox("Nom d'utilisateur ou mot de passe invalide !", MsgBoxStyle.Critical)
                     Exit Sub
                 End If

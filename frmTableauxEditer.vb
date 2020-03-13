@@ -16,12 +16,13 @@ Public Class frmTableauxEditer
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SkinManager.AddFormToManage(Me)
 
-        lblPNom.Text = strTitlePNom & " :"
+        lblPNom.Text = "Nom du tableau :"
         lblPBatiment.Text = strTitlePBatiment & " :"
         lblPResponsable.Text = strTitlePResponsable & " :"
 
         cbResponsable.Hint = strTitlePResponsable
-        txtNom.Hint = strTitlePNom
+        txtNom.Hint = "Nom du tableau"
+        cbBatiments.Hint = strTitlePBatiment
 
         RefreshResponsable()
         RefreshBatiment()

@@ -296,7 +296,7 @@ Partial Class frmBatimentsAjoutGestion
         Me.dgvListBatiment.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvListBatiment.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgvListBatiment.Location = New System.Drawing.Point(6, 48)
-        Me.dgvListBatiment.MaximumSize = New System.Drawing.Size(3840, 277)
+        Me.dgvListBatiment.MaximumSize = New System.Drawing.Size(574, 277)
         Me.dgvListBatiment.MultiSelect = False
         Me.dgvListBatiment.Name = "dgvListBatiment"
         Me.dgvListBatiment.ReadOnly = True

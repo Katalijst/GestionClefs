@@ -122,24 +122,82 @@ Public Class frmBatimentsAjoutGestion
 
         ' Gets the result of the MessageBox display.
         If Result = System.Windows.Forms.DialogResult.Yes Then
-
             Dim cmd As New MySqlCommand
+            Dim cmdRetrieveData As New MySqlCommand
             Dim dt As New DataTable
             Dim da As New MySqlDataAdapter
             Dim sql As String
-
+            cmd.Parameters.Add("@Batiment", MySqlDbType.VarChar)
             Try
-                sql = "DELETE FROM Batiment WHERE BNum=""" & stgToDelete & """"
+                sql = "SELECT (SELECT COUNT(CID) FROM `Clefs` WHERE CBatiment = @Batiment) + (SELECT COUNT(GIDClef) FROM `GroupeBat` WHERE GIDBat = @Batiment) AS SumCount"
                 With cmd
+                    .Parameters("@Batiment").Value = stgNameToDelete
                     .Connection = connecter()
                     .CommandText = sql
                     .ExecuteNonQuery()
                 End With
                 da.SelectCommand = cmd
+                da.Fill(dt)
+                If dt.Rows(0).Item(0) > 0 Then
+                    ' Initializes variables to pass to the MessageBox.Show method.
+                    Dim Message1 As String = dt.Rows(0).Item(0) & " clefs sont associées à ce bâtiment, elles seront supprimer si elle n'ont pas d'autre bâtiments associés." & Environment.NewLine & "Voulez vous les supprimer ?"
+                    Dim Caption1 As String = "Supprimer un bâtiment"
+                    Dim Buttons1 As MessageBoxButtons = MessageBoxButtons.YesNo
+                    Dim Icon1 As MessageBoxIcon = MessageBoxIcon.Warning
+                    Dim Result1 As DialogResult
+                    'Displays the MessageBox
+                    Result1 = MessageBox.Show(Message1, Caption1, Buttons1, Icon1)
+                    ' Gets the result of the MessageBox display.
+                    If Result1 = System.Windows.Forms.DialogResult.Yes Then
+                        dt.Clear()
+                        sql = "DELETE FROM Clefs WHERE CBatiment = @Batiment"
+                        With cmd
+                            .Parameters("@Batiment").Value = stgNameToDelete
+                            .Connection = connecter()
+                            .CommandText = sql
+                            .ExecuteNonQuery()
+                        End With
+                        sql = "DELETE FROM Batiment WHERE BNom=@Batiment"
+                        With cmd
+                            .Parameters("@Batiment").Value = stgNameToDelete
+                            .Connection = connecter()
+                            .CommandText = sql
+                            .ExecuteNonQuery()
+                        End With
+                        sql = "DELETE FROM GroupeBat WHERE GIDBat=@Batiment"
+                        With cmd
+                            .Parameters("@Batiment").Value = stgNameToDelete
+                            .Connection = connecter()
+                            .CommandText = sql
+                            .ExecuteNonQuery()
+                        End With
+                        sql = "Delete from Clefs where CID NOT IN (SELECT CID FROM (SELECT Clefs.CID FROM Clefs, GroupeBat where CID like CONCAT(GIDClef, '-%')) as temp) AND CBatiment = 'Groupe de Batiments'"
+                        With cmd
+                            .Parameters("@Batiment").Value = stgNameToDelete
+                            .Connection = connecter()
+                            .CommandText = sql
+                            .ExecuteNonQuery()
+                        End With
+                    End If
+                Else
+                    sql = "DELETE FROM Batiment WHERE BNom=@Batiment"
+                    With cmd
+                        .Parameters("@Batiment").Value = stgNameToDelete
+                        .Connection = connecter()
+                        .CommandText = sql
+                        .ExecuteNonQuery()
+                    End With
+                End If
+            Catch ex As MySqlException
+                MsgBox(ex.Number & " - " & ex.Message)
+                connecter().Close()
+                Exit Sub
+            Finally
                 connecter().Close()
                 RefreshList()
-            Catch ex As Exception
-                MsgBox(ex.Message)
+                If frmMain.IsHandleCreated Then
+                    frmMain.FillDataSource()
+                End If
             End Try
         End If
     End Sub

@@ -117,11 +117,11 @@ Public Class frmTableauxGestion
         SkinManager.AddFormToManage(Me)
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
         SetStyle(ControlStyles.UserPaint, True)
-        lblPNom.Text = strTitlePNom & " :"
+        lblPNom.Text = "Nom du tableau :"
         lblPBatiment.Text = strTitlePBatiment & " :"
         lblPResponsable.Text = strTitlePResponsable & " :"
 
-        txtNom.Hint = strTitlePNom
+        txtNom.Hint = "Nom du tableau"
         cbBatiments.Hint = strTitlePBatiment
         cbResponsable.Hint = strTitlePResponsable
 

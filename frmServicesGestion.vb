@@ -238,6 +238,7 @@ Public Class frmServicesGestion
                     connecter().Close()
                 Finally
                     hasModificationBeenDone = False
+                    LoadServices()
                 End Try
             End If
         End If
@@ -295,5 +296,9 @@ Public Class frmServicesGestion
 
     Private Sub btnAddService_Click(sender As Object, e As EventArgs) Handles btnAddService.Click
         frmServicesAjouter.ShowDialog()
+    End Sub
+
+    Private Sub btnSupprimerService_Click(sender As Object, e As EventArgs) Handles btnSupprimerService.Click
+        SupprimerService()
     End Sub
 End Class

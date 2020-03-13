@@ -125,7 +125,7 @@ Public Class frmMain
 
             'Si il y a des données retournées par la requètes
             'et donc s'il y a des alertes
-            If dt.Rows.Count > 0 Then
+            If dt.Rows(0).Item(0) > 0 Then
                 'Si l'utilisateur à les pop up d'alertes activées
                 If My.Settings.ShowAlert = True Then
                     'Si c'est la première pop up depuis le lancement du logiciel
@@ -133,7 +133,7 @@ Public Class frmMain
                         'Création de la messagebox
                         Dim Message As String = "Il y a " & dt.Rows(0).Item(0) & " clefs non rendues !"
                         Dim Caption As String = "Alertes"
-                        Dim Buttons As MessageBoxButtons = MessageBoxButtons.OKCancel
+                        Dim Buttons As MessageBoxButtons = MessageBoxButtons.OK
                         Dim Icon As MessageBoxIcon = MessageBoxIcon.Warning
                         Dim Result As DialogResult
                         'Affichage de la message box
@@ -1181,7 +1181,8 @@ Public Class frmMain
                     Dim sql As String
                     Dim cmdUpdateClef As New MySqlCommand
                     cmdUpdateClef.CommandType = CommandType.Text
-                    sql = "UPDATE Clefs SET CStatus=@Status WHERE CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef AND CID LIKE @IDClef;"
+                    sql = "UPDATE Clefs SET CStatus=@Status WHERE CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef AND CID LIKE @IDClef LIMIT 1;"
+                    'sql = "UPDATE Clefs SET CStatus=@Status WHERE CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef AND CID = (SELECT CID WHERE CStatus=@OldStatusClef AND CPosition=@OldTableauClef AND CTrousseau=@OldTrousseauxClef AND CID LIKE @IDClef LIMIT 1);"
 
                     With cmdUpdateClef
                         .Parameters.Add("@Status", MySqlDbType.VarChar)

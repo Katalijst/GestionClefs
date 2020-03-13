@@ -464,48 +464,48 @@ Partial Class frmMain
         Me.menuGrid.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmprunterToolStripMenuItem1, Me.AttribuerToolStripMenuItem1, Me.EditerToolStripMenuItem1, Me.PropriétésToolStripMenuItem1, Me.ClefsPerduesToolStripMenuItem, Me.SupprimerToolStripMenuItem1})
         Me.menuGrid.MouseState = MaterialSkin.MouseState.HOVER
         Me.menuGrid.Name = "MaterialContextMenuStrip1"
-        Me.menuGrid.Size = New System.Drawing.Size(162, 136)
+        Me.menuGrid.Size = New System.Drawing.Size(181, 158)
         '
         'EmprunterToolStripMenuItem1
         '
         Me.EmprunterToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.emprunt
         Me.EmprunterToolStripMenuItem1.Name = "EmprunterToolStripMenuItem1"
-        Me.EmprunterToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
+        Me.EmprunterToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.EmprunterToolStripMenuItem1.Text = "Emprunter..."
         '
         'AttribuerToolStripMenuItem1
         '
         Me.AttribuerToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.login
         Me.AttribuerToolStripMenuItem1.Name = "AttribuerToolStripMenuItem1"
-        Me.AttribuerToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
+        Me.AttribuerToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.AttribuerToolStripMenuItem1.Text = "Attribuer..."
         '
         'EditerToolStripMenuItem1
         '
         Me.EditerToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.writing
         Me.EditerToolStripMenuItem1.Name = "EditerToolStripMenuItem1"
-        Me.EditerToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
-        Me.EditerToolStripMenuItem1.Text = "Editer"
+        Me.EditerToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.EditerToolStripMenuItem1.Text = "Modifier"
         '
         'PropriétésToolStripMenuItem1
         '
         Me.PropriétésToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.round_info_button
         Me.PropriétésToolStripMenuItem1.Name = "PropriétésToolStripMenuItem1"
-        Me.PropriétésToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
+        Me.PropriétésToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.PropriétésToolStripMenuItem1.Text = "Propriétés"
         '
         'ClefsPerduesToolStripMenuItem
         '
         Me.ClefsPerduesToolStripMenuItem.Image = Global.GestionClefs.My.Resources.Resources.warning_sign
         Me.ClefsPerduesToolStripMenuItem.Name = "ClefsPerduesToolStripMenuItem"
-        Me.ClefsPerduesToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
+        Me.ClefsPerduesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ClefsPerduesToolStripMenuItem.Text = "Clef(s) perdue(s)"
         '
         'SupprimerToolStripMenuItem1
         '
         Me.SupprimerToolStripMenuItem1.Image = Global.GestionClefs.My.Resources.Resources.clear_button
         Me.SupprimerToolStripMenuItem1.Name = "SupprimerToolStripMenuItem1"
-        Me.SupprimerToolStripMenuItem1.Size = New System.Drawing.Size(161, 22)
+        Me.SupprimerToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.SupprimerToolStripMenuItem1.Text = "Supprimer"
         '
         'chkAttribuees
@@ -758,9 +758,9 @@ Partial Class frmMain
         Me.pbLogout.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pbLogout.BackColor = System.Drawing.Color.Transparent
         Me.pbLogout.Image = Global.GestionClefs.My.Resources.Resources.logout
-        Me.pbLogout.Location = New System.Drawing.Point(980, 27)
+        Me.pbLogout.Location = New System.Drawing.Point(988, 29)
         Me.pbLogout.Name = "pbLogout"
-        Me.pbLogout.Size = New System.Drawing.Size(32, 32)
+        Me.pbLogout.Size = New System.Drawing.Size(29, 29)
         Me.pbLogout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.pbLogout.TabIndex = 162
         Me.pbLogout.TabStop = False
@@ -771,7 +771,7 @@ Partial Class frmMain
         Me.lblUsername.BackColor = System.Drawing.Color.Transparent
         Me.lblUsername.Font = New System.Drawing.Font("Roboto", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUsername.ForeColor = System.Drawing.Color.White
-        Me.lblUsername.Location = New System.Drawing.Point(778, 27)
+        Me.lblUsername.Location = New System.Drawing.Point(787, 27)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(195, 32)
         Me.lblUsername.TabIndex = 164

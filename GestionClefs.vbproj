@@ -41,7 +41,7 @@
     <PublisherName>Mairie de Coutras</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -102,7 +102,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GestionClefsKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -781,7 +782,6 @@
     <None Include="bin\Debug\ATTRIBUTION_CLE_PX.pdf" />
     <None Include="bin\Debug\PRET_CLE_P1.pdf" />
     <None Include="bin\Debug\PRET_CLE_PX.pdf" />
-    <None Include="GestionClefsKey.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -795,7 +795,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons8-key-64.ico" />
     <Content Include="LogoICO.ico" />
     <None Include="Resources\logout.png" />
     <None Include="Resources\warning-sign.png" />
